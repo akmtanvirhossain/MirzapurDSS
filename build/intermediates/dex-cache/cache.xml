@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="E:\AndroidStudioProject\MirzapurDSS\app\libs\gson-2.5.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.1"
+        sha1="686c608d1805b6d4d425ec4459e88164ffc85870">
+        <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\gson-2.5_03208ff3962fb473885280adc64eb042a034528b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\8.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.1"
+        sha1="fef2b3e4b6b1b0e5fe7b69fa137a5fa55a3182ab">
+        <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-base-8.4.0_5e95f078e40fbbd0959c34b2e01d377d0c9b2bbe.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.3.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.1"
+        sha1="debf30ce0a7560396b6235edef77e447006454c2">
+        <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\com.android.support-recyclerview-v7-23.3.0_c7d8c20092df236e30d93c181143b44eb1cb6889.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.1"
+        sha1="8e673cdfadd8f2d98fdb2fda2285c30f6e449782">
+        <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-basement-8.4.0_00d81b5064ba1b2b4e261918fa8ac272e08a5527.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\User\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.3.0\support-annotations-23.3.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.1"
+        sha1="db7791d75a07fef9844d06236c1c59ba7bf6997c">
+        <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\support-annotations-23.3.0_dbe8237707094f632f7ae137baf11ca40e4db85d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.3.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.1"
+        sha1="1b8e03daaa43fb0a4cd57e378167c2fd70454c1e">
+        <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-23.3.0_29d4554e06b5d5018b14c98c4ac03c16fb62ec63.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\8.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.1"
+        sha1="04de44f90606c77f3b28cf44861f306290505aac">
+        <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-maps-8.4.0_e8ebff366b04fb995923028d6006e09d6a25890c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\jars\libs\internal_impl-23.3.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.1"
+        sha1="4da5a4d697d32497c6f85567a5112e62fdfd0676">
+        <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\internal_impl-23.3.0_5a359d4d75233b6b304084174d0420af89087628.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.android.support\design\23.3.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.1"
+        sha1="f0001e71cea6ae432a00021c6f727f5ef0f3d27e">
+        <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\com.android.support-design-23.3.0_ad588db8d3c60e483e721d418c6079afd2c8ee99.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.3.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.1"
+        sha1="a0b5d60246cd9d4f3f2443611b3b4c25265840b5">
+        <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-23.3.0_9ca15cd85277f3c74d37e0ca5e51e4cfd25a11ff.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.3.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.1"
+        sha1="23be6993826b8fd88bbc8d14928bb3b8960d3d4e">
+        <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-23.3.0_3d0f049c7a3d4ecc325781e5a855e5642258d9c2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.1"
+        sha1="a256e7589f88db0dc199cb70ef19a6d671d0f24d">
+        <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\instant-run-bootstrap_1ac1a118c6287328a7edcce9d622846639cb332a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.1"
+        sha1="cc2363f7e58b43e852119afd6baf18c392a25977">
+        <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\instant-run_0a3264ec1b652de5364c86a04ca40536e8e35f37.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.1"
+        sha1="8a034dd16c0dfd75fe86c52c2cd581592acc684a">
+        <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-23.3.0_6b45a375b5c85087d391a2fd3d2fd7b9169d26fd.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidStudioProject\MirzapurDSS\app\libs\ksoap2-android-assembly-2.4-jar-with-dependencies.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.1"
+        sha1="e8796346a9191a019e936210a2dc50662c57594b">
+        <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\ksoap2-android-assembly-2.4-jar-with-dependencies_d7465b6e2ce6739648f7f6d48b386bb42dcca8ee.jar" />
+    </item>
+
+</items>

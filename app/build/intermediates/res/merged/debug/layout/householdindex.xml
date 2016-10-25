@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:id="@+id/preglist"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical"  android:paddingTop="0sp">
+
+    <TableLayout
+        android:id="@+id/firsttab"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:paddingLeft="10sp"
+        android:paddingRight="10sp"
+        android:stretchColumns="1" >
+
+        <TableRow android:gravity="left" android:background="#f3f3f3" android:visibility="gone">
+		
+			<TextView android:id="@+id/lblBlock"
+				android:layout_column="0" android:layout_marginBottom="5sp"
+				android:layout_marginTop="5sp" 				
+				android:textSize="25sp" android:gravity="left"
+				android:textColor="#000000"
+				android:text="" android:layout_height="40sp" android:layout_width="0sp"/>            
+	
+			<TextView android:id="@+id/lblVillageName" android:layout_column="1" android:layout_span="2" 
+			    android:layout_marginBottom="5sp"
+				android:layout_marginTop="5sp" android:layout_marginRight="25sp"
+				android:textSize="25sp" android:gravity="right"
+				android:textColor="#000000"	android:text="lblVillage"/>		
+		</TableRow>	 
+        <TableRow android:gravity="left" android:background="#F3F3F3">
+		
+			<TextView android:id="@+id/lblTotalHH"
+				android:layout_column="0" android:layout_marginBottom="5sp"
+				android:layout_marginTop="5sp" 				
+				android:textSize="20sp"
+				android:textColor="#006699"
+				android:text="" android:layout_height="40sp"/>            
+	
+			<TextView android:id="@+id/lblHHVisited" android:layout_marginLeft="50sp" android:layout_column="1"
+				android:layout_marginBottom="5sp"
+				android:layout_marginTop="5sp" android:layout_marginRight="25sp"
+				android:textSize="20sp"
+				android:textColor="#006699"	android:text=""
+				android:layout_width="wrap_content" />
+
+		</TableRow>		   
+        <TableRow android:gravity="left" android:background="#ffffff">
+		
+			<TextView
+			    android:layout_height="40sp"
+			    android:layout_column="0"
+			    android:layout_marginBottom="5sp"
+			    android:layout_marginTop="5sp"
+			    android:gravity="left"
+			    android:text=" Bari"
+			    android:textColor="#000000"
+			    android:textSize="25sp" />
+            
+			<Spinner
+			    android:id="@+id/BariList" android:layout_column="1"
+			    android:layout_width="300dp"
+			    android:layout_height="wrap_content"
+			    android:layout_marginBottom="20sp"
+			    android:layout_marginRight="10sp"
+			    android:drawSelectorOnTop="true"
+			    android:prompt="@string/planet_prompt"
+			    android:textSize="25sp" />	
+			<Button android:id="@+id/cmdBariUpdate" android:layout_column="2"
+			    android:layout_width="85sp"  android:textSize="14sp"
+			    android:layout_height="40sp"
+			    android:text="Update"/>
+			<Button android:id="@+id/cmdBariGPS" android:layout_column="3"
+				android:layout_width="85sp"  android:textSize="14sp"
+				android:layout_height="40sp"
+				android:text="GPS"/>
+
+		</TableRow>			    
+		<View android:layout_height="2dip" android:background="#00CD00" />	
+        <TableRow android:gravity="left" >
+
+            <ListView
+                android:layout_column="0"
+                android:id="@+id/listHHIndex" android:layout_span="3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:divider="#006699"
+                android:fadeScrollbars="false"
+                android:scrollX="0px"
+                android:scrollY="0px"
+                android:scrollbarAlwaysDrawVerticalTrack="true"
+                android:scrollbarSize="150dip"
+                android:scrollbarStyle="outsideOverlay"
+                android:scrollbars="vertical" >
+            </ListView>
+        </TableRow>
+    </TableLayout>
+
+</RelativeLayout>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    
+    	<LinearLayout  style="@style/rowStyle1"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal">
+	        
+	        <TextView android:text="Event List:" android:layout_width="250sp" android:layout_height="wrap_content" android:textSize="20sp" />
+					<RadioGroup
+				        android:id="@+id/roEventList" android:layout_gravity="right"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content" android:orientation="horizontal">
+				 
+				        <RadioButton
+				            android:id="@+id/roCurrentEvent"
+				            android:layout_width="wrap_content"
+				            android:layout_height="wrap_content"
+				            android:text="Current Events" 
+				            android:checked="true" />
+				 
+				        <RadioButton
+				            android:id="@+id/roAllEvent"
+				            android:layout_width="wrap_content"
+				            android:layout_height="wrap_content"
+				            android:text="Old Events" />				 
+				    </RadioGroup>	        
+	    </LinearLayout>
+	    <LinearLayout	        
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal">
+					<HorizontalScrollView  
+		         		android:id="@android:id/tabcontent"
+		         		android:layout_height="fill_parent"
+		         		android:layout_width="fill_parent">
+					    	
+					<ListView
+				        android:id="@+id/lstEvent"
+				        android:layout_width="match_parent"
+				        android:layout_height="400sp"
+				        android:divider="#000000"
+				        android:dividerHeight="1px"
+				        android:clickable="true">
+		    		</ListView>	
+		    						    
+					</HorizontalScrollView>	        
+	    </LinearLayout>
+    	
+		<LinearLayout	        
+	        android:layout_width="fill_parent" android:paddingLeft="20sp" android:paddingTop="10dp" android:paddingBottom="10sp"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal">
+				    <Button
+				        android:id="@+id/cmdEvListClose"
+				        android:layout_width="150sp"
+				        android:layout_height="wrap_content"
+				        android:layout_gravity="right"				        
+				        android:text="Close" />					
+		</LinearLayout>
+ </LinearLayout>

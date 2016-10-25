@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="listReligion">
+        <item></item>
+		<item>1 – মুসলিম</item>
+		<item>2 - হিন্দু</item>
+		<item>3 - খৃষ্টান</item>
+		<item>4 - বৌদ্ধ</item>
+		<item>5 - অন্যান্য</item>       
+	</string-array>
+   <!-- SES Form -->
+      <string-array name="listVisitStatus">
+        <item></item>
+        <item>1-Completed</item>
+        <item>3-Absent</item>      
+	    <item>7-Incomplete</item>        
+	</string-array>
+    <string-array name="listQ015a">
+         <item></item>   
+	    <item>বাড়ির ভিতরে ট্র্যাপের (পাইপের)পানি</item>        
+		<item>বাড়ির বাহিরে ট্র্যাপের (পাইপের)পানি</item>
+		<item>নল কুপ / টিউবওয়েল</item>
+		<item>গভীর নলকুপ/ ডিপ টিউবওয়েল</item>    
+		<item>কুয়া</item>  
+		<item>পুকুর/ বদ্ধজলাশয় /ডোবা/হ্রদ/ঝিল</item>
+		<item>নদী/খাল/ঝর্নার পানি</item>		
+		<item>বৃষ্টির পানি</item>
+		<item>বোতলের পানি</item>
+		<item>ফিল্টার করা পানি</item>
+		<item>অন্যান্য</item> 	    		
+	</string-array>   
+     	
+	<string-array name="listQ017">
+         <item></item>   
+	    <item>সেপটিক  ট্রাংক/আধুনিক ল্যাট্রিন(কমোড/প্যান)</item>        
+		<item>ওয়াটার সিল্ড/স্লাব ল্যাট্রিন(স্যানিটারি)</item>
+		<item>গর্তের (পিট)ল্যাট্রিন</item>
+		<item>খোলা ল্যাট্রিন</item>    
+		<item>ঝুলন্ত ল্যাট্রিন</item>  
+		<item>ল্যাট্রিন নাই/ঝোপ/ঝাড়/মাঠ</item>
+		<item>অনন্যা</item>		    		
+	</string-array>   
+	
+	<string-array name="listQ022a">
+	    <item></item>
+	    <item>মাটি</item>
+	    <item>পাঠখড়ি</item>
+	    <item>বাঁশ</item>
+	    <item>কাঠ</item>
+	    <item>টিন</item>
+	    <item>সিমেন্ট/ইট/ বালি</item>    
+		<item>অন্যান্য</item> 
+	</string-array>    
+		
+	
+	<string-array name="listQ031">        
+		<item></item>
+		<item>হ্যাঁ, এবং এখনও মেয়াদ আছে</item>   	
+		<item>হ্যাঁ, তবে মেয়াদ উত্তীর্ণ</item>   	
+		<item>না</item>
+		<item>জানিনা</item>		
+	</string-array> 	
+	<string-array name="RHQlistQ103">        
+		<item></item>
+		<item>1-Completed</item>   	
+		<item>2-Refused</item>   	
+		<item>3-Absent</item>
+		<item>4-Others</item>		
+	</string-array> 	
+	<string-array name="MeMlistRth">        
+		<item></item>
+		<item>00-খানা প্রধানের সাথে সম্পর্ক নেই</item>   	
+		<item>01-নিজেই খানা প্রধান</item>   	
+		<item>02-খানা প্রধানের স্বামী/স্ত্রী</item>
+		<item>03-খানা প্রধানের ছেলে মেয়ে</item>		
+		<item>04-খানা প্রধানের বাবা মা</item>
+		<item>05-খানা প্রধানের ভাই বোন</item>		
+		<item>06-খানা প্রধানের চাচা/ফুপু/মামা/খালা</item>
+		<item>07-খানা প্রধানের দাদা/দাদি/নানা/নানি</item>
+		<item>08-খানা প্রধানের নাতি/নাতনী</item>
+		<item>09-খানা প্রধানের শ্যালক/শ্যালিকা/দেবর/ননদ</item>
+		<item>10-খানা প্রধানের শ্বশুর/শাশুড়ি</item>
+		<item>11-খানা প্রধানের সৎ বাবা মা</item>
+		<item>12-খানা প্রধানের সৎ ছেলে মেয়ে</item>
+		<item>13-খানা প্রধানের পালিত ছেলে মেয়ে</item>
+		<item>14-খানা প্রধানের সৎ ভাই/বোন</item>
+		<item>15-খানা প্রধানের ছেলের বউ/মেয়ের জামাই</item>
+		<item>16-খানা প্রধানের ভাতিজা/ভাতিজী/ভাগ্নে/ভাগ্নি</item>
+		<item>17-খানা প্রধানের বোন জামাই/ভাবি</item>
+		<item>18-চাকর/চাকরানী</item>
+		<item>77-অন্য সম্পর্ক যা উপরের তালিকায় নাই</item>
+		<item>99-জানিনা</item>
+	</string-array> 	
+	
+	<string-array name="MeMlistMs">        
+		<item></item>
+		<item>30-কখনও বিয়ে হয়নি</item>   	
+		<item>31-বর্তমানে বিবাহিত</item>   	
+		<item>32-তালাক প্রাপ্ত</item>
+		<item>33-বিধবা/স্বামী মারা গিয়েছে</item>		
+		<item>34-বিচ্ছিন্ন/পরিতাক্ত</item>		
+	</string-array> 		
+	
+	<string-array name="MeMlistEdu">        
+		<item></item>
+		<item>00-কোন শিক্ষাগত যোগ্যতা নাই</item>   	
+		<item>01-প্রথম শ্রেণী পাশ</item>   	
+		<item>02-২য় শ্রেণী পাশ</item>
+		<item>03-৩য়  শ্রেণী পাশ</item>		
+		<item>04-চতুর্থ  শ্রেণী পাশ</item>		
+		<item>05-পঞ্চম  শ্রেণী পাশ</item>		
+		<item>06-ষষ্ট  শ্রেণী পাশ</item>		
+		<item>07-সপ্তম  শ্রেণী পাশ</item>		
+		<item>08-অষ্টম  শ্রেণী পাশ</item>		
+		<item>09-নবম  শ্রেণী পাশ</item>		
+		<item>10-S.S.C  শ্রেণী পাশ</item>		
+		<item>12-H.S.C  শ্রেণী পাশ</item>		
+		<item>14-B.A/B.Com/B.Sc/B.S.S পাশ</item>
+		<item>16-B.A/B.Com/BSc(Hons)or B.Sc-Engineering পাশ</item>		
+		<item>17-M.A/M.Sc/M.Com/M.S.S/M.B.B.S পাশ</item>	
+		<item>18-ডিপ্লোমা পাশ (৪ বছরের কোর্স):Diploma passed (4-years course)</item>
+		<item>30–ব্রাক শিশু শ্রেণী পাশ:Class 0 passed </item>
+		<item>31–ব্রাক প্রথম শ্রেণী পাশ:Class 1 passed </item>
+		<item>32–ব্রাক দ্বিতীয় শ্রেণী পাশ:Class 2 passed </item>
+		<item>33–ব্রাক তৃতীয় শ্রেণী পাশ:Class 3 passed </item>
+		<item>34–ব্রাক চতুর্থ শ্রেণী পাশ:Class 4 passed </item>
+		<item>35–ব্রাক পঞ্চম শ্রেণী পাশ:Class 5 passed </item>				
+		<item>99-জানিনা</item>		
+	</string-array> 		
+	
+	<string-array name="MeMlistOcp">        
+		<item></item>
+		<item>01-বেকার</item>   	
+		<item>02-ছাত্র</item>   	
+		<item>03-গৃহবধূ</item>
+		<item>04-ভিক্ষুক</item>	
+		<item>05-বিকলাঙ্গ</item>	
+		<item>06-অবসরপ্রাপ্ত</item>	
+		<item>11-অদক্ষ শারীরিক কাজ(চাক্রানি/আয়া/গার্মেন্টস শ্রমিক)</item>	
+		<item>17-অন্যান্য অদক্ষ শারীরিক কাজ(চাক্রানি/আয়া/গার্মেন্টস শ্রমিক)</item>	
+		<item>21-দক্ষ শারীরিক কাজ(কুক,নির্মাণ শ্রমিক,গাড়ী চালক)</item>	
+		<item>22-অন্যান্য দক্ষ শারীরিক কাজ(নাপিত,দর্জি,মুচী)</item>	
+		<item>27অন্যান্য দক্ষ শারীরিক কাজ</item>	
+		<item>31-মেধাসম্পন্ন</item>	
+		<item>32-মাঠ পর্যায়ের স্বাস্থ্যকর্মী</item>	
+		<item>33-ব্যবসায়ী,নিজস্ব ব্যবসা(মেধাসম্পন্ন-হাতের কাজ নয়)</item>	
+		<item>34-পেশাদার-ডাক্তার,কৃষি-কর্মকর্তা,শিক্ষক,ইঞ্জিনিয়ার</item>	
+		<item>37-অন্যান্য মেধা সম্পন্ন-হাতের কাজ নয়</item>	
+		<item>77-অন্যান্য</item>	
+		<item>88-প্রযোজ্য নয়</item>	
+		<item>99-জানিনা</item>		
+	</string-array> 	
+	
+	<string-array name="TreatmentListUnit">    
+	    <item></item>    
+		<item>mg</item>
+		<item>ml</item>  			
+	</string-array> 	
+	<string-array name="TreatmentListRoute">   
+	     <item></item>      
+		<item>IV</item>
+		<item>IM</item> 
+		<item>Oral</item> 
+		<item>Tropical</item> 
+		<item>PR</item>  			
+	</string-array> 
+	<string-array name="TreatmentListFormulation"> 
+	     <item></item>        
+		<item>Injection</item>
+		<item>Tablet</item> 
+		<item>Capsule</item> 
+		<item>Syrup</item> 
+		<item>Suspension</item>  
+		<item>Cream/Oinment</item> 
+		<item>Drop</item> 			
+	</string-array> 	
+	
+	<string-array name = "listVaccine">
+       <item></item>
+       <item>01-BCG</item>
+	   <item>02-Penta-1(DPT-Hep B-Hib)</item>
+	   <item>03-Penta-2</item>
+	   <item>04-Penta-3</item>
+	   <item>05-PCV-1</item>
+	   <item>06-PCV-2</item>
+	   <item>07-PCV-3</item>
+	   <item>08-OPV-0</item>
+	   <item>09-OPV-1</item>
+	   <item>10-OPV-2</item>
+	   <item>11-OPV-3</item>
+	   <item>12-OPV-4</item>
+	   <item>13-Measles</item>
+	   <item>14-MR(Measles, Rubella)</item>
+	   
+	   <item>15-Rota</item>
+	   <item>16-MMR</item>
+	   <item>17-Typhoid</item>
+	   <item>18-Influenza</item>
+	   <item>19-Hepatitis A</item>
+	   <item>20-Chicken pox</item>
+	   <item>21-Rabies</item>
+    </string-array>	
+
+	<string-array name = "listVaccineCenter">
+       <item></item>
+       <item>01-Satellite clinic/EPI outreach center</item>
+       <item>02-Community clinic</item>
+       <item>03-Family Welfare Center(FWC)</item>
+       <item>04-Upazila Health Complex(UHC)</item>
+       <item>05-NGO clinic</item>
+       <item>06-Kumudini hospital</item>
+       <item>07-Private(GP/Pharmacy)</item>
+       <item>08-Do not Know</item>
+       <item>09-Other sources</item>
+	</string-array>   
+
+	<string-array name = "listVaccineStatus">
+       <item></item>
+       <item>01-Have Vaccine Card</item>
+       <item>02-Vaccine Card Missing</item>
+       <item>03-No Vaccine Taken</item>
+	</string-array>		
+
+
+
+			  				  	
+</resources>
+

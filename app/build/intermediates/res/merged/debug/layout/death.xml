@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"        android:layout_width="fill_parent"         android:layout_height="fill_parent"         android:overScrollMode="always"         android:isScrollContainer="true"         android:scrollbarAlwaysDrawVerticalTrack="true"         android:scrollbarStyle="outsideInset"         android:scrollbars="vertical">
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent"    android:layout_marginLeft="10sp" android:layout_marginRight="0sp"    android:layout_height="wrap_content" android:scrollbars="vertical">
+    <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowHeading">       
+        <TextView android:text="Household No" android:layout_width="130sp" android:layout_height="wrap_content" android:textSize="20sp"  android:textColor="#FFFFFF"/>
+        <TextView android:id="@+id/txtHHNo" android:maxLength="9" android:layout_width="150sp" android:inputType="text" android:layout_height="wrap_content" style="@style/customEdit" android:layout_marginRight="10sp" android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="100sp"
+            android:layout_height="wrap_content"
+            android:text="Serial"
+            android:textSize="20sp"  android:textColor="#FFFFFF"/>
+
+        <TextView android:id="@+id/txtSNo" android:maxLength="2" android:layout_width="50sp" android:inputType="text" android:layout_height="wrap_content" style="@style/customEdit" android:layout_marginRight="10sp" android:textSize="20sp"/>
+        
+    </LinearLayout>
+    <View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />
+	    <LinearLayout
+	        android:id="@+id/secStatus" style="@style/rowStyle0"
+	        android:layout_width="fill_parent" 
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal" >
+	    	    
+	        <TextView android:id="@+id/lblResp" android:text="Visit Status" android:layout_width="150sp" android:layout_height="wrap_content" android:textSize="20sp" />
+			<Spinner
+			    android:id="@+id/spnVisitStatus"
+			    android:layout_marginRight="10sp"
+			    android:layout_width="250dp"
+			    android:layout_height="wrap_content"
+			    android:drawSelectorOnTop="true"
+			    android:prompt="@string/planet_prompt"
+			    android:textSize="20sp" />	        	        
+	    </LinearLayout>	    
+		
+    
+    <View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />
+
+
+
+
+<LinearLayout android:id="@+id/secVisitStatus" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="vertical" style="@style/rowStyle0">    
+    <LinearLayout android:id="@+id/secDthPlace" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">      
+        <TextView android:id="@+id/VlblDthPlace" android:text="কোথায় মারা গিয়েছে" android:layout_width="300sp" android:layout_height="wrap_content" android:textSize="20sp" />
+        <Spinner android:id="@+id/spnDthPlace" android:drawSelectorOnTop="true" android:layout_width="200sp" android:layout_height="wrap_content" android:layout_weight="0" android:prompt="@string/planet_prompt" android:textSize="20sp" />
+    </LinearLayout>
+    <View android:visibility="gone" android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />
+    <LinearLayout android:visibility="gone" android:id="@+id/secFacName" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+      
+        <TextView android:id="@+id/VlblFacName" android:text="বাচ্চা/ব্যাক্তি যেই হাসপাতাল/ক্লিনিকে মারা গিয়েছে সেটির নাম" android:layout_width="300sp" android:layout_height="wrap_content" android:textSize="20sp" />
+        <Spinner android:id="@+id/spnFacName" android:drawSelectorOnTop="true" android:layout_width="200sp" android:layout_height="wrap_content" android:layout_weight="0" android:prompt="@string/planet_prompt" android:textSize="20sp" />
+    </LinearLayout>
+    <View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />
+    <LinearLayout android:visibility="gone" android:id="@+id/secFacOther" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">      
+        <TextView  android:id="@+id/VlblFacOther" android:text="অন্যান্য" android:layout_width="300sp" android:layout_height="wrap_content" android:textSize="20sp" />
+        <EditText android:id="@+id/txtFacOther" android:maxLength="50" android:layout_width="200sp" android:inputType="text" android:layout_height="wrap_content" style="@style/customEdit" android:layout_marginRight="10sp" android:textSize="20sp" />
+    </LinearLayout>
+    <View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />
+    <LinearLayout android:id="@+id/secTreatment" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+       
+        <TextView android:id="@+id/VlblTreatment" android:text="বাচ্চা/ব্যাক্তি মৃত্যুর পূর্বে ১৪ দিনের মধ্যে কোন ধরনের চিকিৎসা সেবা নিয়েছিল কিনা?" android:layout_width="300sp" android:layout_height="wrap_content" android:textSize="20sp" />
+        <RadioGroup android:id="@+id/rdogrpTreatment" android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="20sp">
+         
+           <RadioButton android:paddingRight="10dp" android:textSize="20sp" android:id="@+id/rdoTreatment1" android:text="1-Yes"/>
+           <RadioButton android:paddingRight="10dp" android:textSize="20sp" android:id="@+id/rdoTreatment2" android:text="2-No"/>
+           <RadioButton android:paddingRight="10dp" android:textSize="20sp" android:id="@+id/rdoTreatment3" android:text="3-Don't Know"/>
+        </RadioGroup>
+    </LinearLayout>
+    <View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />
+    <LinearLayout android:id="@+id/secWhenTreat" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+       
+        <TextView android:id="@+id/VlblWhenTreat" android:text="যদি সেবা নিয়ে থাকে তাহলে মৃত্যুর কত দিন পূর্বে সেবা নিয়েছিল?" android:layout_width="300sp" android:layout_height="wrap_content" android:textSize="20sp" />
+         <EditText android:id="@+id/txtWhenTreat" android:maxLength="3" android:layout_width="60sp" android:inputType="number" android:layout_height="wrap_content" style="@style/customEdit" android:layout_marginRight="10sp" android:textSize="20sp" />
+    </LinearLayout>
+    <View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />
+    <LinearLayout android:id="@+id/secFacility" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+       
+        <TextView android:id="@+id/VlblFacility" android:text="মৃত্যুর পূর্বে কোথা থেকে স্বাস্থ্যসেবা নিয়েছিল?" android:layout_width="300sp" android:layout_height="wrap_content" android:textSize="20sp" />
+        <Spinner android:id="@+id/spnFacility" android:drawSelectorOnTop="true" android:layout_width="200sp" android:layout_height="wrap_content" android:layout_weight="0" android:prompt="@string/planet_prompt" android:textSize="20sp" />
+    </LinearLayout>
+    <View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />
+    <LinearLayout android:id="@+id/secDisp" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+      
+        <TextView android:id="@+id/VlblDisp" android:text="কোথায় সমাধিস্থ/শেষকৃত্ব সম্পন্ন করা হয়েছে" android:layout_width="300sp" android:layout_height="wrap_content" android:textSize="20sp" />
+        <Spinner android:id="@+id/spnDisp" android:drawSelectorOnTop="true" android:layout_width="200sp" android:layout_height="wrap_content" android:layout_weight="0" android:prompt="@string/planet_prompt" android:textSize="20sp" />        
+    </LinearLayout>
+    <View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />
+    <LinearLayout android:id="@+id/secType" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+       
+        <TextView android:id="@+id/VlblType" android:text="মৃত ব্যাক্তিকে  সমাধিস্থ/শেষকৃত্ব করার সময় ধর্মীয় কার্যাদি কে সম্পন্ন করেছে?" android:layout_width="300sp" android:layout_height="wrap_content" android:textSize="20sp" />
+        <Spinner android:id="@+id/spnType" android:drawSelectorOnTop="true" android:layout_width="200sp" android:layout_height="wrap_content" android:layout_weight="0" android:prompt="@string/planet_prompt" android:textSize="20sp" />
+    </LinearLayout>
+    <View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />
+    <LinearLayout android:id="@+id/secWhoDisp" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+      
+        <TextView android:id="@+id/VlblWhoDisp" android:text="যেই ব্যাক্তি মৃত ব্যাক্তিকে  সমাধিস্থ/শেষকৃত্ব করেছে তার নাম কি" android:layout_width="300sp" android:layout_height="wrap_content" android:textSize="20sp" />
+        <EditText android:id="@+id/txtWhoDisp" android:maxLength="50" android:layout_width="200sp" android:inputType="text" android:layout_height="wrap_content" style="@style/customEdit" android:layout_marginRight="10sp" android:textSize="20sp" />
+    </LinearLayout>
+    
+    <View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />
+    <LinearLayout android:id="@+id/secTime" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+      
+        <TextView android:id="@+id/VlblTime" android:text="মৃত্যুর কত সময়(ঘণ্টায়) পরে মৃত ব্যাক্তিকে  সমাধিস্থ/শেষকৃত্ব সম্পন্ন করা হয়েছে" android:layout_width="300sp" android:layout_height="wrap_content" android:textSize="20sp" />
+        <EditText android:id="@+id/txtTime" android:maxLength="2" android:layout_width="60sp" android:inputType="number" android:layout_height="wrap_content" style="@style/customEdit" android:layout_marginRight="10sp" android:textSize="20sp" />
+    </LinearLayout>
+    <View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />
+    <LinearLayout android:id="@+id/secPreg" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+       
+        <TextView android:id="@+id/VlblPreg" android:text="মহিলা কি জীবনে কখনো গর্ভবতী হয়েছিল?" android:layout_width="300sp" android:layout_height="wrap_content" android:textSize="20sp" />
+        <RadioGroup android:id="@+id/rdogrpPreg" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="20sp">
+         
+           <RadioButton android:paddingRight="10dp" android:textSize="20sp" android:id="@+id/rdoPreg1" android:text="1-Yes"/>
+           <RadioButton android:paddingRight="10dp" android:textSize="20sp" android:id="@+id/rdoPreg2" android:text="2-No"/>
+        </RadioGroup>
+    </LinearLayout>
+    <View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />
+    <LinearLayout android:id="@+id/secPregDeath" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+       
+        <TextView android:id="@+id/VlblPregDeath" android:text="মৃত্যুর সময় মহিলা কি গর্ভবতী ছিল?" android:layout_width="300sp" android:layout_height="wrap_content" android:textSize="20sp" />
+        <RadioGroup android:id="@+id/rdogrpPregDeath" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="20sp">
+         
+           <RadioButton android:paddingRight="10dp" android:textSize="20sp" android:id="@+id/rdoPregDeath1" android:text="1-Yes"/>
+           <RadioButton android:paddingRight="10dp" android:textSize="20sp" android:id="@+id/rdoPregDeath2" android:text="2-No"/>
+        </RadioGroup>
+    </LinearLayout>
+    <View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />
+    <LinearLayout android:id="@+id/secPergTime" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+      
+        <TextView android:id="@+id/VlblPergTime" android:text="মৃত্যুর সময় মহিলা গর্ভবতী না হয়ে থাকলে কত দিন/মাস/বছর পূর্বে শেষ গর্ভ(জীবিত/মৃত/গর্ভপাত) সম্পন্ন হয়েছিল?" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="20sp" />
+    </LinearLayout>
+    <View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />
+    <LinearLayout android:id="@+id/secPergTime1" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">       
+         <EditText android:id="@+id/txtPregTime" android:maxLength="2" android:layout_width="60sp" android:inputType="text" android:layout_height="wrap_content" style="@style/customEdit" android:layout_marginRight="10sp" android:textSize="20sp" android:layout_marginLeft="10sp"/>
+        <RadioGroup android:id="@+id/rdogrpTimeType" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="20sp">
+         
+           <RadioButton android:paddingRight="10dp" android:textSize="20sp" android:id="@+id/rdoTimeType1" android:text="1-Days"/>
+           <RadioButton android:paddingRight="10dp" android:textSize="20sp" android:id="@+id/rdoTimeType2" android:text="2-Month"/>
+           <RadioButton android:paddingRight="10dp" android:textSize="20sp" android:id="@+id/rdoTimeType3" android:text="3-Years"/>
+        </RadioGroup>
+    </LinearLayout>
+    <View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />
+    <LinearLayout android:id="@+id/secCause" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+       
+        <TextView android:id="@+id/VlblCause" android:text="কি কারনে মারা গিয়েছে?" android:layout_width="300sp" android:layout_height="wrap_content" android:textSize="20sp" />
+        <Spinner android:id="@+id/spnCause" android:drawSelectorOnTop="true" android:layout_width="200sp" android:layout_height="wrap_content" android:layout_weight="0" android:prompt="@string/planet_prompt" android:textSize="20sp" />
+    </LinearLayout>
+</LinearLayout>
+
+
+    <View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />
+       <LinearLayout android:layout_width="fill_parent" android:paddingTop="20sp" android:layout_height="wrap_content" android:orientation="horizontal">
+       	<Button android:id="@+id/cmdSave" android:layout_width="150sp" android:layout_height="wrap_content"
+       			android:textSize="16sp" android:text=" Save "  android:layout_marginBottom="10sp"/>
+       </LinearLayout>
+</LinearLayout>
+</ScrollView>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@+id/rowlay" xmlns:android="http://schemas.android.com/apk/res/android"
+ android:orientation="vertical" android:layout_width="fill_parent"
+ android:layout_height="fill_parent" android:paddingTop="5sp" android:paddingBottom="5sp" android:layout_marginRight="10sp"
+ >
+    		<TableLayout
+				android:id="@+id/secHHIndex"
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent">
+
+				<TableRow android:gravity="center_vertical" android:background="#C2E0EC">
+				    <TextView
+				        android:layout_width="50sp"
+				        android:layout_height="wrap_content"
+				        android:text="Bari"
+				        android:textSize="18sp" />
+
+				    <TextView android:text="Bari Name"
+				         android:layout_width="200sp" android:textSize="18sp"
+				         android:layout_height="wrap_content"/>	
+
+					<TextView android:text="HH"
+					         android:layout_width="50sp"
+					         android:layout_height="wrap_content"/>									    
+					<TextView android:text="Household Head"
+					         android:layout_width="200sp" android:textSize="18sp"
+					         android:layout_height="wrap_content"/>	
+					<TextView 
+					        android:layout_width="85sp"  android:textSize="18sp"
+					        android:layout_height="40sp"
+					        android:text=""/>		
+				</TableRow>
+				<View android:layout_height="2dip" android:background="#CCCCCC" />
+			</TableLayout>	
+</RelativeLayout>		         									

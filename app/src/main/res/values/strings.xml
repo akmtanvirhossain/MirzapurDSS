@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, IronFolateActivity!</string>
+    <string name="app_name">Mirzapur DSS</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">MainActivity</string>
+    
+    <string name="planet_prompt">Choose a planet</string>
+	<string name="str_cnt_mnu_edit">Edit</string>
+    <string name="str_cnt_mnu_delete">Delete</string>
+    <string name="rth_prompt">সম্পর্কের তালিকা</string>
+    <string name="edu_prompt">শিক্ষার তালিকা</string>
+    <string name="ocp_prompt">পেশার তালিকা</string>
+    <string name="pop_prompt">Del. Place</string>
+
+        <string-array name="spinnerItemsLandmark">
+        <item>  </item>
+        <item>01-Medical college hospital</item>
+        <item>02-UH&amp;FPC</item>
+        <item>03-Union Sub-center</item>
+        <item>04-FWC</item>
+        <item>05-CC</item>
+        <item>06-Private clinic/Hospital</item>
+        <item>07-NGO Clinic</item>
+        <item>08-Charitable / Trust Run Hospital</item>
+        <item>09-School</item>
+        <item>10-College</item>
+        <item>11-Madrasa</item>
+        <item>12-Mosque</item>
+        <item>13-Grave yard</item>
+        <item>14-Temple</item>
+        <item>15-Bridge/culvert</item>
+        <item>16-Bazar</item>
+        <item>17Pharmacy</item>
+        <item>18-Shop</item>
+        <item>19-Filling station</item>
+        <item>20-Bus stand</item>
+        <item>21-Tempo stand</item>
+        <item>22-Rail station</item>
+        <item>77-Other</item>
+    </string-array>
+</resources>

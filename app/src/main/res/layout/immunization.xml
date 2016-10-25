@@ -1,0 +1,676 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"   android:orientation="vertical" android:layout_width="fill_parent"    android:layout_marginLeft="0sp" android:layout_marginRight="0sp"    android:layout_height="wrap_content">
+    <LinearLayout android:paddingLeft="10sp" android:layout_width="fill_parent" android:layout_gravity="center" android:layout_height="60sp" android:orientation="horizontal" style="@style/rowStyle1">
+        	<TextView android:text="Member:"
+        	    android:layout_width="130sp" 
+        	    android:layout_height="40sp" 
+        	    android:textSize="20sp" />
+					 <Spinner android:id="@+id/spnMemList" 
+					     android:drawSelectorOnTop="true" 
+					     android:layout_width="400sp" 
+					     android:layout_height="40sp"  
+					     android:prompt="@string/planet_prompt" android:textSize="20sp" />		    	        	                
+	</LinearLayout>	
+   <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+	    <TextView android:text="Vaccine Card:" android:layout_width="130sp"
+			    android:layout_height="wrap_content"/>    
+       
+		<Spinner android:id="@+id/spnVaccineStatus" android:drawSelectorOnTop="true" 
+		    android:layout_width="200sp" android:layout_height="wrap_content" android:layout_weight="0" 
+		    android:prompt="@string/planet_prompt" android:textSize="20sp" />
+   </LinearLayout>
+   <View android:layout_height="2dip" android:layout_width="fill_parent" android:background="#006699" />     
+    
+
+<LinearLayout
+		    android:id="@+id/secVaccine" android:paddingLeft="10sp"  android:background="#ffffff"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal" >
+   	
+	<ScrollView  android:layout_width="fill_parent" android:layout_height="480sp" android:overScrollMode="always" android:isScrollContainer="true"         android:scrollbarAlwaysDrawVerticalTrack="true"         android:scrollbarStyle="outsideInset"         android:scrollbars="vertical">
+	    
+	<LinearLayout android:id="@+id/secVaccine1"  android:orientation="vertical" android:layout_width="fill_parent"    android:layout_marginLeft="10sp" android:layout_marginRight="10sp"    android:layout_height="wrap_content" android:scrollbars="vertical">  
+ 
+
+   <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+       <CheckBox android:id="@+id/chkBCG"
+           android:layout_width="200sp" android:layout_height="wrap_content" android:text="01. BCG" />
+   </LinearLayout>
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+	    <TextView android:text="Date" android:layout_width="80sp" android:paddingLeft="30sp"
+			    android:layout_height="wrap_content"/>    
+ 		<EditText
+			    android:id="@+id/BCGDT" style="@style/customEdit"
+			    android:layout_width="150sp"
+			    android:layout_height="wrap_content"
+			    android:ems="10"
+			    android:maxLength="10"
+			    android:inputType="text"  android:digits="0123456789/"/>
+	    <TextView android:text="Source" android:layout_width="80sp" android:paddingLeft="10sp"
+			    android:layout_height="wrap_content"/>    
+ 				                
+		<Spinner android:id="@+id/spnBCG" android:drawSelectorOnTop="true" 
+		    android:layout_width="200sp" android:layout_height="wrap_content" android:layout_weight="0" 
+		    android:prompt="@string/planet_prompt" android:textSize="20sp" />
+   </LinearLayout>     					
+   <View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />
+
+   
+   <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+       <CheckBox android:id="@+id/chkPenta1"
+           android:layout_width="400sp" android:layout_height="wrap_content" android:text="02. Penta-1 (DPT -Hep B-Hib)" />
+   </LinearLayout>
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+	    <TextView android:text="Date" android:layout_width="80sp" android:paddingLeft="30sp"
+			    android:layout_height="wrap_content"/>    
+ 		<EditText
+			    android:id="@+id/Penta1DT" style="@style/customEdit"
+			    android:layout_width="150sp"
+			    android:layout_height="wrap_content"
+			    android:ems="10"
+			    android:maxLength="10"
+			    android:inputType="text"  android:digits="0123456789/"/>
+	    <TextView android:text="Source" android:layout_width="80sp" android:paddingLeft="10sp"
+			    android:layout_height="wrap_content"/>    
+ 				                
+		<Spinner android:id="@+id/spnPenta1" android:drawSelectorOnTop="true" 
+		    android:layout_width="200sp" android:layout_height="wrap_content" android:layout_weight="0" 
+		    android:prompt="@string/planet_prompt" android:textSize="20sp" />
+   </LinearLayout>     					
+   <View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />
+
+   
+   <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+       <CheckBox android:id="@+id/chkPenta2"
+           android:layout_width="200sp" android:layout_height="wrap_content" android:text="03. Penta-2" />
+   </LinearLayout>
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+	    <TextView android:text="Date" android:layout_width="80sp" android:paddingLeft="30sp"
+			    android:layout_height="wrap_content"/>    
+ 		<EditText
+			    android:id="@+id/Penta2DT" style="@style/customEdit"
+			    android:layout_width="150sp"
+			    android:layout_height="wrap_content"
+			    android:ems="10"
+			    android:maxLength="10"
+			    android:inputType="text"  android:digits="0123456789/"/>
+	    <TextView android:text="Source" android:layout_width="80sp" android:paddingLeft="10sp"
+			    android:layout_height="wrap_content"/>    
+ 				                
+		<Spinner android:id="@+id/spnPenta2" android:drawSelectorOnTop="true" 
+		    android:layout_width="200sp" android:layout_height="wrap_content" android:layout_weight="0" 
+		    android:prompt="@string/planet_prompt" android:textSize="20sp" />
+   </LinearLayout>     					
+   <View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />   
+
+   
+   <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+       <CheckBox android:id="@+id/chkPenta3"
+           android:layout_width="200sp" android:layout_height="wrap_content" android:text="04. Penta-3" />
+   </LinearLayout>
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+	    <TextView android:text="Date" android:layout_width="80sp" android:paddingLeft="30sp"
+			    android:layout_height="wrap_content"/>    
+ 		<EditText
+			    android:id="@+id/Penta3DT" style="@style/customEdit"
+			    android:layout_width="150sp"
+			    android:layout_height="wrap_content"
+			    android:ems="10"
+			    android:maxLength="10"
+			    android:inputType="text"  android:digits="0123456789/"/>
+	    <TextView android:text="Source" android:layout_width="80sp" android:paddingLeft="10sp"
+			    android:layout_height="wrap_content"/>    
+ 				                
+		<Spinner android:id="@+id/spnPenta3" android:drawSelectorOnTop="true" 
+		    android:layout_width="200sp" android:layout_height="wrap_content" android:layout_weight="0" 
+		    android:prompt="@string/planet_prompt" android:textSize="20sp" />
+   </LinearLayout>     					
+   <View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" /> 
+
+   
+   <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+       <CheckBox android:id="@+id/chkPCV1"
+           android:layout_width="200sp" android:layout_height="wrap_content" android:text="05. PCV-1" />
+   </LinearLayout>
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+	    <TextView android:text="Date" android:layout_width="80sp" android:paddingLeft="30sp"
+			    android:layout_height="wrap_content"/>    
+ 		<EditText
+			    android:id="@+id/PCV1DT" style="@style/customEdit"
+			    android:layout_width="150sp"
+			    android:layout_height="wrap_content"
+			    android:ems="10"
+			    android:maxLength="10"
+			    android:inputType="text"  android:digits="0123456789/"/>
+	    <TextView android:text="Source" android:layout_width="80sp" android:paddingLeft="10sp"
+			    android:layout_height="wrap_content"/>    
+ 				                
+		<Spinner android:id="@+id/spnPCV1" android:drawSelectorOnTop="true" 
+		    android:layout_width="200sp" android:layout_height="wrap_content" android:layout_weight="0" 
+		    android:prompt="@string/planet_prompt" android:textSize="20sp" />
+   </LinearLayout>     					
+   <View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />    
+   
+   
+   <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+       <CheckBox android:id="@+id/chkPCV2"
+           android:layout_width="200sp" android:layout_height="wrap_content" android:text="06. PCV-2" />
+   </LinearLayout>
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+	    <TextView android:text="Date" android:layout_width="80sp" android:paddingLeft="30sp"
+			    android:layout_height="wrap_content"/>    
+ 		<EditText
+			    android:id="@+id/PCV2DT" style="@style/customEdit"
+			    android:layout_width="150sp"
+			    android:layout_height="wrap_content"
+			    android:ems="10"
+			    android:maxLength="10"
+			    android:inputType="text"  android:digits="0123456789/"/>
+	    <TextView android:text="Source" android:layout_width="80sp" android:paddingLeft="10sp"
+			    android:layout_height="wrap_content"/>    
+ 				                
+		<Spinner android:id="@+id/spnPCV2" android:drawSelectorOnTop="true" 
+		    android:layout_width="200sp" android:layout_height="wrap_content" android:layout_weight="0" 
+		    android:prompt="@string/planet_prompt" android:textSize="20sp" />
+   </LinearLayout>     					
+   <View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" /> 
+
+   
+   <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+       <CheckBox android:id="@+id/chkPCV3"
+           android:layout_width="200sp" android:layout_height="wrap_content" android:text="07. PCV-3" />
+   </LinearLayout>
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+	    <TextView android:text="Date" android:layout_width="80sp" android:paddingLeft="30sp"
+			    android:layout_height="wrap_content"/>    
+ 		<EditText
+			    android:id="@+id/PCV3DT" style="@style/customEdit"
+			    android:layout_width="150sp"
+			    android:layout_height="wrap_content"
+			    android:ems="10"
+			    android:maxLength="10"
+			    android:inputType="text"  android:digits="0123456789/"/>
+	    <TextView android:text="Source" android:layout_width="80sp" android:paddingLeft="10sp"
+			    android:layout_height="wrap_content"/>    
+ 				                
+		<Spinner android:id="@+id/spnPCV3" android:drawSelectorOnTop="true" 
+		    android:layout_width="200sp" android:layout_height="wrap_content" android:layout_weight="0" 
+		    android:prompt="@string/planet_prompt" android:textSize="20sp" />
+   </LinearLayout>     					
+   <View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />  
+
+   
+   <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+       <CheckBox android:id="@+id/chkOPV0"
+           android:layout_width="200sp" android:layout_height="wrap_content" android:text="08. OPV-0" />
+   </LinearLayout>
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+	    <TextView android:text="Date" android:layout_width="80sp" android:paddingLeft="30sp"
+			    android:layout_height="wrap_content"/>    
+ 		<EditText
+			    android:id="@+id/OPV0DT" style="@style/customEdit"
+			    android:layout_width="150sp"
+			    android:layout_height="wrap_content"
+			    android:ems="10"
+			    android:maxLength="10"
+			    android:inputType="text"  android:digits="0123456789/"/>
+	    <TextView android:text="Source" android:layout_width="80sp" android:paddingLeft="10sp"
+			    android:layout_height="wrap_content"/>    
+ 				                
+		<Spinner android:id="@+id/spnOPV0" android:drawSelectorOnTop="true" 
+		    android:layout_width="200sp" android:layout_height="wrap_content" android:layout_weight="0" 
+		    android:prompt="@string/planet_prompt" android:textSize="20sp" />
+   </LinearLayout>     					
+   <View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />    
+
+   
+   <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+       <CheckBox android:id="@+id/chkOPV1"
+           android:layout_width="200sp" android:layout_height="wrap_content" android:text="09. OPV-1" />
+   </LinearLayout>
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+	    <TextView android:text="Date" android:layout_width="80sp" android:paddingLeft="30sp"
+			    android:layout_height="wrap_content"/>    
+ 		<EditText
+			    android:id="@+id/OPV1DT" style="@style/customEdit"
+			    android:layout_width="150sp"
+			    android:layout_height="wrap_content"
+			    android:ems="10"
+			    android:maxLength="10"
+			    android:inputType="text"  android:digits="0123456789/"/>
+	    <TextView android:text="Source" android:layout_width="80sp" android:paddingLeft="10sp"
+			    android:layout_height="wrap_content"/>    
+ 				                
+		<Spinner android:id="@+id/spnOPV1" android:drawSelectorOnTop="true" 
+		    android:layout_width="200sp" android:layout_height="wrap_content" android:layout_weight="0" 
+		    android:prompt="@string/planet_prompt" android:textSize="20sp" />
+   </LinearLayout>     					
+   <View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />     
+
+   
+   <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+       <CheckBox android:id="@+id/chkOPV2"
+           android:layout_width="200sp" android:layout_height="wrap_content" android:text="10. OPV-2" />
+   </LinearLayout>
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+	    <TextView android:text="Date" android:layout_width="80sp" android:paddingLeft="30sp"
+			    android:layout_height="wrap_content"/>    
+ 		<EditText
+			    android:id="@+id/OPV2DT" style="@style/customEdit"
+			    android:layout_width="150sp"
+			    android:layout_height="wrap_content"
+			    android:ems="10"
+			    android:maxLength="10"
+			    android:inputType="text"  android:digits="0123456789/"/>
+	    <TextView android:text="Source" android:layout_width="80sp" android:paddingLeft="10sp"
+			    android:layout_height="wrap_content"/>    
+ 				                
+		<Spinner android:id="@+id/spnOPV2" android:drawSelectorOnTop="true" 
+		    android:layout_width="200sp" android:layout_height="wrap_content" android:layout_weight="0" 
+		    android:prompt="@string/planet_prompt" android:textSize="20sp" />
+   </LinearLayout>     					
+   <View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />   
+
+   
+   <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+       <CheckBox android:id="@+id/chkOPV3"
+           android:layout_width="200sp" android:layout_height="wrap_content" android:text="11. OPV-3" />
+   </LinearLayout>
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+	    <TextView android:text="Date" android:layout_width="80sp" android:paddingLeft="30sp"
+			    android:layout_height="wrap_content"/>    
+ 		<EditText
+			    android:id="@+id/OPV3DT" style="@style/customEdit"
+			    android:layout_width="150sp"
+			    android:layout_height="wrap_content"
+			    android:ems="10"
+			    android:maxLength="10"
+			    android:inputType="text"  android:digits="0123456789/"/>
+	    <TextView android:text="Source" android:layout_width="80sp" android:paddingLeft="10sp"
+			    android:layout_height="wrap_content"/>    
+ 				                
+		<Spinner android:id="@+id/spnOPV3" android:drawSelectorOnTop="true" 
+		    android:layout_width="200sp" android:layout_height="wrap_content" android:layout_weight="0" 
+		    android:prompt="@string/planet_prompt" android:textSize="20sp" />
+   </LinearLayout>     					
+   <View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />  
+
+   
+   <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+       <CheckBox android:id="@+id/chkOPV4"
+           android:layout_width="200sp" android:layout_height="wrap_content" android:text="12. OPV-4" />
+   </LinearLayout>
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+	    <TextView android:text="Date" android:layout_width="80sp" android:paddingLeft="30sp"
+			    android:layout_height="wrap_content"/>    
+ 		<EditText
+			    android:id="@+id/OPV4DT" style="@style/customEdit"
+			    android:layout_width="150sp"
+			    android:layout_height="wrap_content"
+			    android:ems="10"
+			    android:maxLength="10"
+			    android:inputType="text"  android:digits="0123456789/"/>
+	    <TextView android:text="Source" android:layout_width="80sp" android:paddingLeft="10sp"
+			    android:layout_height="wrap_content"/>    
+ 				                
+		<Spinner android:id="@+id/spnOPV4" android:drawSelectorOnTop="true" 
+		    android:layout_width="200sp" android:layout_height="wrap_content" android:layout_weight="0" 
+		    android:prompt="@string/planet_prompt" android:textSize="20sp" />
+   </LinearLayout>     					
+   <View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" /> 
+
+   
+   <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+       <CheckBox android:id="@+id/chkMeasles"
+           android:layout_width="200sp" android:layout_height="wrap_content" android:text="13. Measles" />
+   </LinearLayout>
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+	    <TextView android:text="Date" android:layout_width="80sp" android:paddingLeft="30sp"
+			    android:layout_height="wrap_content"/>    
+ 		<EditText
+			    android:id="@+id/MeaslesDT" style="@style/customEdit"
+			    android:layout_width="150sp"
+			    android:layout_height="wrap_content"
+			    android:ems="10"
+			    android:maxLength="10"
+			    android:inputType="text"  android:digits="0123456789/"/>
+	    <TextView android:text="Source" android:layout_width="80sp" android:paddingLeft="10sp"
+			    android:layout_height="wrap_content"/>    
+ 				                
+		<Spinner android:id="@+id/spnMeasles" android:drawSelectorOnTop="true" 
+		    android:layout_width="200sp" android:layout_height="wrap_content" android:layout_weight="0" 
+		    android:prompt="@string/planet_prompt" android:textSize="20sp" />
+   </LinearLayout>     					
+   <View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />      
+
+   
+   <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+       <CheckBox android:id="@+id/chkMR"
+           android:layout_width="400sp" android:layout_height="wrap_content" android:text="14. MR (Measles, Rubella)" />
+   </LinearLayout>
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+	    <TextView android:text="Date" android:layout_width="80sp" android:paddingLeft="30sp"
+			    android:layout_height="wrap_content"/>    
+ 		<EditText
+			    android:id="@+id/MRDT" style="@style/customEdit"
+			    android:layout_width="150sp"
+			    android:layout_height="wrap_content"
+			    android:ems="10"
+			    android:maxLength="10"
+			    android:inputType="text"  android:digits="0123456789/"/>
+	    <TextView android:text="Source" android:layout_width="80sp" android:paddingLeft="10sp"
+			    android:layout_height="wrap_content"/>    
+ 				                
+		<Spinner android:id="@+id/spnMR" android:drawSelectorOnTop="true" 
+		    android:layout_width="200sp" android:layout_height="wrap_content" android:layout_weight="0" 
+		    android:prompt="@string/planet_prompt" android:textSize="20sp" />
+   </LinearLayout>     					
+   <View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />  
+   
+
+   
+   <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+       <CheckBox android:id="@+id/chkRota"
+           android:layout_width="400sp" android:layout_height="wrap_content" android:text="15. Rota" />
+   </LinearLayout>
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+	    <TextView android:text="Date" android:layout_width="80sp" android:paddingLeft="30sp"
+			    android:layout_height="wrap_content"/>    
+ 		<EditText
+			    android:id="@+id/RotaDT" style="@style/customEdit"
+			    android:layout_width="150sp"
+			    android:layout_height="wrap_content"
+			    android:ems="10"
+			    android:maxLength="10"
+			    android:inputType="text"  android:digits="0123456789/"/>
+	    <TextView android:text="Source" android:layout_width="80sp" android:paddingLeft="10sp"
+			    android:layout_height="wrap_content"/>    
+ 				                
+		<Spinner android:id="@+id/spnRota" android:drawSelectorOnTop="true" 
+		    android:layout_width="200sp" android:layout_height="wrap_content" android:layout_weight="0" 
+		    android:prompt="@string/planet_prompt" android:textSize="20sp" />
+   </LinearLayout>     					
+   <View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />  
+   
+   
+   <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+       <CheckBox android:id="@+id/chkMMR"
+           android:layout_width="400sp" android:layout_height="wrap_content" android:text="16. MMR" />
+   </LinearLayout>
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+	    <TextView android:text="Date" android:layout_width="80sp" android:paddingLeft="30sp"
+			    android:layout_height="wrap_content"/>    
+ 		<EditText
+			    android:id="@+id/MMRDT" style="@style/customEdit"
+			    android:layout_width="150sp"
+			    android:layout_height="wrap_content"
+			    android:ems="10"
+			    android:maxLength="10"
+			    android:inputType="text"  android:digits="0123456789/"/>
+	    <TextView android:text="Source" android:layout_width="80sp" android:paddingLeft="10sp"
+			    android:layout_height="wrap_content"/>    
+ 				                
+		<Spinner android:id="@+id/spnMMR" android:drawSelectorOnTop="true" 
+		    android:layout_width="200sp" android:layout_height="wrap_content" android:layout_weight="0" 
+		    android:prompt="@string/planet_prompt" android:textSize="20sp" />
+   </LinearLayout>     					
+   <View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />  
+   
+   
+   <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+       <CheckBox android:id="@+id/chkTyphoid"
+           android:layout_width="400sp" android:layout_height="wrap_content" android:text="17. Typhoid" />
+   </LinearLayout>
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+	    <TextView android:text="Date" android:layout_width="80sp" android:paddingLeft="30sp"
+			    android:layout_height="wrap_content"/>    
+ 		<EditText
+			    android:id="@+id/TyphoidDT" style="@style/customEdit"
+			    android:layout_width="150sp"
+			    android:layout_height="wrap_content"
+			    android:ems="10"
+			    android:maxLength="10"
+			    android:inputType="text"  android:digits="0123456789/"/>
+	    <TextView android:text="Source" android:layout_width="80sp" android:paddingLeft="10sp"
+			    android:layout_height="wrap_content"/>    
+ 				                
+		<Spinner android:id="@+id/spnTyphoid" android:drawSelectorOnTop="true" 
+		    android:layout_width="200sp" android:layout_height="wrap_content" android:layout_weight="0" 
+		    android:prompt="@string/planet_prompt" android:textSize="20sp" />
+   </LinearLayout>     					
+   <View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />  
+   
+   
+   
+   <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+       <CheckBox android:id="@+id/chkInflu"
+           android:layout_width="400sp" android:layout_height="wrap_content" android:text="18. Influenza" />
+   </LinearLayout>
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+	    <TextView android:text="Date" android:layout_width="80sp" android:paddingLeft="30sp"
+			    android:layout_height="wrap_content"/>    
+ 		<EditText
+			    android:id="@+id/InfluDT" style="@style/customEdit"
+			    android:layout_width="150sp"
+			    android:layout_height="wrap_content"
+			    android:ems="10"
+			    android:maxLength="10"
+			    android:inputType="text"  android:digits="0123456789/"/>
+	    <TextView android:text="Source" android:layout_width="80sp" android:paddingLeft="10sp"
+			    android:layout_height="wrap_content"/>    
+ 				                
+		<Spinner android:id="@+id/spnInflu" android:drawSelectorOnTop="true" 
+		    android:layout_width="200sp" android:layout_height="wrap_content" android:layout_weight="0" 
+		    android:prompt="@string/planet_prompt" android:textSize="20sp" />
+   </LinearLayout>     					
+   <View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />  
+   
+   
+   <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+       <CheckBox android:id="@+id/chkHepaA"
+           android:layout_width="400sp" android:layout_height="wrap_content" android:text="19. Hepatitis A" />
+   </LinearLayout>
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+	    <TextView android:text="Date" android:layout_width="80sp" android:paddingLeft="30sp"
+			    android:layout_height="wrap_content"/>    
+ 		<EditText
+			    android:id="@+id/HepaADT" style="@style/customEdit"
+			    android:layout_width="150sp"
+			    android:layout_height="wrap_content"
+			    android:ems="10"
+			    android:maxLength="10"
+			    android:inputType="text"  android:digits="0123456789/"/>
+	    <TextView android:text="Source" android:layout_width="80sp" android:paddingLeft="10sp"
+			    android:layout_height="wrap_content"/>    
+ 				                
+		<Spinner android:id="@+id/spnHepaA" android:drawSelectorOnTop="true" 
+		    android:layout_width="200sp" android:layout_height="wrap_content" android:layout_weight="0" 
+		    android:prompt="@string/planet_prompt" android:textSize="20sp" />
+   </LinearLayout>     					
+   <View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />  
+   
+   
+   <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+       <CheckBox android:id="@+id/chkChickenPox"
+           android:layout_width="400sp" android:layout_height="wrap_content" android:text="20. Chicken Pox" />
+   </LinearLayout>
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+	    <TextView android:text="Date" android:layout_width="80sp" android:paddingLeft="30sp"
+			    android:layout_height="wrap_content"/>    
+ 		<EditText
+			    android:id="@+id/ChickenPoxDT" style="@style/customEdit"
+			    android:layout_width="150sp"
+			    android:layout_height="wrap_content"
+			    android:ems="10"
+			    android:maxLength="10"
+			    android:inputType="text"  android:digits="0123456789/"/>
+	    <TextView android:text="Source" android:layout_width="80sp" android:paddingLeft="10sp"
+			    android:layout_height="wrap_content"/>    
+ 				                
+		<Spinner android:id="@+id/spnChickenPox" android:drawSelectorOnTop="true" 
+		    android:layout_width="200sp" android:layout_height="wrap_content" android:layout_weight="0" 
+		    android:prompt="@string/planet_prompt" android:textSize="20sp" />
+   </LinearLayout>     					
+   <View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />  
+   
+   
+   
+   <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+       <CheckBox android:id="@+id/chkRabies"
+           android:layout_width="400sp" android:layout_height="wrap_content" android:text="21. Rabies" />
+   </LinearLayout>
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+	    <TextView android:text="Date" android:layout_width="80sp" android:paddingLeft="30sp"
+			    android:layout_height="wrap_content"/>    
+ 		<EditText
+			    android:id="@+id/RabiesDT" style="@style/customEdit"
+			    android:layout_width="150sp"
+			    android:layout_height="wrap_content"
+			    android:ems="10"
+			    android:maxLength="10"
+			    android:inputType="text"  android:digits="0123456789/"/>
+	    <TextView android:text="Source" android:layout_width="80sp" android:paddingLeft="10sp"
+			    android:layout_height="wrap_content"/>    
+ 				                
+		<Spinner android:id="@+id/spnRabies" android:drawSelectorOnTop="true" 
+		    android:layout_width="200sp" android:layout_height="wrap_content" android:layout_weight="0" 
+		    android:prompt="@string/planet_prompt" android:textSize="20sp" />
+   </LinearLayout>     					
+   <View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />
+   
+   <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+       <CheckBox android:id="@+id/chkIPV"
+           android:layout_width="200sp" android:layout_height="wrap_content" android:text="22. IPV" />
+   </LinearLayout>
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+	    <TextView android:text="Date" android:layout_width="80sp" android:paddingLeft="30sp"
+			    android:layout_height="wrap_content"/>    
+ 		<EditText
+			    android:id="@+id/IPVDT" style="@style/customEdit"
+			    android:layout_width="150sp"
+			    android:layout_height="wrap_content"
+			    android:ems="10"
+			    android:maxLength="10"
+			    android:inputType="text"  android:digits="0123456789/"/>
+	    <TextView android:text="Source" android:layout_width="80sp" android:paddingLeft="10sp"
+			    android:layout_height="wrap_content"/>    
+ 				                
+		<Spinner android:id="@+id/spnIPV" android:drawSelectorOnTop="true" 
+		    android:layout_width="200sp" android:layout_height="wrap_content" android:layout_weight="0" 
+		    android:prompt="@string/planet_prompt" android:textSize="20sp" />
+   </LinearLayout>     					
+
+   <View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />
+   
+   <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+       <CheckBox android:id="@+id/chkVitaminA"
+           android:layout_width="200sp" android:layout_height="wrap_content" android:text="23. Vitamin A" />
+   </LinearLayout>
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+	    <TextView android:text="Date" android:layout_width="80sp" android:paddingLeft="30sp"
+			    android:layout_height="wrap_content"/>    
+ 		<EditText
+			    android:id="@+id/VitaminADT" style="@style/customEdit"
+			    android:layout_width="150sp"
+			    android:layout_height="wrap_content"
+			    android:ems="10"
+			    android:maxLength="10"
+			    android:inputType="text"  android:digits="0123456789/"/>
+	    <TextView android:text="Source" android:layout_width="80sp" android:paddingLeft="10sp"
+			    android:layout_height="wrap_content"/>    
+ 				                
+		<Spinner android:id="@+id/spnVitaminA" android:drawSelectorOnTop="true" 
+		    android:layout_width="200sp" android:layout_height="wrap_content" android:layout_weight="0" 
+		    android:prompt="@string/planet_prompt" android:textSize="20sp" />
+   </LinearLayout>     					
+		
+	<View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />     
+   
+</LinearLayout>
+</ScrollView>              
+</LinearLayout>
+
+       <LinearLayout android:layout_width="fill_parent" android:paddingTop="20sp" android:layout_height="wrap_content" android:orientation="horizontal">
+       	<Button
+       	    android:id="@+id/cmdPhoto1" android:paddingRight="5sp"
+       	    android:layout_width="100sp"
+       	    android:layout_height="wrap_content"
+       	    android:layout_marginBottom="10sp"
+       	    android:text="Photo-1"
+       	    android:textSize="14sp" />
+       	<Button
+       	    android:id="@+id/cmdPhoto2" android:paddingRight="5sp"
+       	    android:layout_width="100sp"
+       	    android:layout_height="wrap_content"
+       	    android:layout_marginBottom="10sp"
+       	    android:text="Photo-2"
+       	    android:textSize="14sp" />
+       	<Button
+       	    android:id="@+id/cmdPhoto3" android:paddingRight="5sp"
+       	    android:layout_width="100sp"
+       	    android:layout_height="wrap_content"
+       	    android:layout_marginBottom="10sp"
+       	    android:text="Photo-3"
+       	    android:textSize="14sp" />
+       	<Button
+       	    android:id="@+id/cmdPhoto4" android:paddingRight="5sp"
+       	    android:layout_width="100sp"
+       	    android:layout_height="wrap_content"
+       	    android:layout_marginBottom="10sp"
+       	    android:text="Photo-4"
+       	    android:textSize="14sp" />
+       	<Button
+       	    android:id="@+id/cmdPhoto5" android:paddingRight="5sp"
+       	    android:layout_width="100sp"
+       	    android:layout_height="wrap_content"
+       	    android:layout_marginBottom="10sp"
+       	    android:text="Photo-5"
+       	    android:textSize="14sp" />       			
+       	<Button
+       	    android:id="@+id/cmdShow"
+       	    android:layout_width="wrap_content"
+       	    android:layout_height="wrap_content"
+       	    android:layout_marginBottom="10sp"
+       	    android:text="Show"
+       	    android:textSize="14sp" />
+       		
+       </LinearLayout>
+
+
+		
+<View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />
+		
+<LinearLayout android:layout_width="fill_parent" android:paddingTop="20sp" android:layout_height="120sp" android:orientation="horizontal">
+	        <ImageButton android:contentDescription="" android:layout_height="100sp" android:layout_width="100sp" android:visibility="visible" android:id="@+id/imgForm1" android:paddingRight="5sp" />
+	        <ImageButton android:contentDescription="" android:layout_height="100sp" android:layout_width="100sp" android:visibility="visible" android:id="@+id/imgForm2" android:paddingRight="5sp" />
+	        <ImageButton android:contentDescription="" android:layout_height="100sp" android:layout_width="100sp" android:visibility="visible" android:id="@+id/imgForm3" android:paddingRight="5sp" />
+	        <ImageButton android:contentDescription="" android:layout_height="100sp" android:layout_width="100sp" android:visibility="visible" android:id="@+id/imgForm4" android:paddingRight="5sp" />
+	        <ImageButton android:contentDescription="" android:layout_height="100sp" android:layout_width="100sp" android:visibility="visible" android:id="@+id/imgForm5" />
+</LinearLayout>
+<View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />
+    		
+		<LinearLayout android:background="#f3f3f3"
+		    android:id="@+id/secButton" android:paddingLeft="30sp"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content" android:paddingTop="20sp"
+		    android:orientation="horizontal" android:layout_gravity="center">
+		    	<Button
+		        android:id="@+id/cmdImmSave"
+		        android:layout_width="150sp"
+		        android:layout_height="wrap_content"
+		        android:layout_gravity="left"
+		        android:layout_marginTop="10dp"
+		        android:text="Save" />		
+
+		    			    					    
+				<Button
+		        android:id="@+id/cmdImmClose"
+		        android:layout_width="150sp"
+		        android:layout_height="wrap_content"
+		        android:layout_gravity="right"
+		        android:layout_marginTop="10dp"
+		        android:text="Close" />		
+	        
+		</LinearLayout>
+</LinearLayout>

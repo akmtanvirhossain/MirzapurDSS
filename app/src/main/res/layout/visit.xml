@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/popup"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+	<LinearLayout android:orientation="vertical" android:layout_width="fill_parent"    android:layout_marginLeft="10sp" android:layout_marginRight="10sp"    android:layout_height="wrap_content" android:scrollbars="vertical">
+	    <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle1">        
+	        <TextView android:id="@+id/lblHH" android:text="Household:" android:layout_width="150sp" android:layout_height="wrap_content" android:textSize="20sp" />
+	        <EditText android:id="@+id/txtHH" android:enabled="false" android:layout_gravity="center" android:layout_width="150sp" android:inputType="text" android:layout_height="wrap_content" style="@style/customEdit" android:layout_marginRight="10sp" android:textSize="20sp" />
+	        
+	        <TextView android:id="@+id/lblRnd" android:text="     Round No:" android:layout_width="150sp" android:layout_height="wrap_content" android:textSize="20sp" />
+	        <EditText android:id="@+id/txtRnd" android:enabled="false" android:maxLength="2" android:layout_width="50sp" android:inputType="text" android:layout_height="wrap_content" style="@style/customEdit" android:layout_marginRight="10sp" android:textSize="20sp" />
+	    </LinearLayout>
+	    <View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />
+	    <LinearLayout
+	        android:id="@+id/secRel" style="@style/rowStyle0"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal" >
+			<TextView
+			    android:id="@+id/lblRel"
+			    android:layout_width="150sp"			    
+			    android:layout_height="wrap_content"
+			    android:text="Religion" />
+	
+			<Spinner
+			    android:id="@+id/spnRel"
+			    android:layout_marginRight="10sp"
+			    android:layout_width="250dp"
+			    android:layout_height="wrap_content"
+			    android:drawSelectorOnTop="true"
+			    android:prompt="@string/planet_prompt"
+			    android:textSize="20sp" />
+
+	    </LinearLayout>	
+	    <View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />    	    
+	    <LinearLayout
+	        android:id="@+id/secVDate" style="@style/rowStyle0"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal" >
+			<TextView
+			    android:id="@+id/lblVDate"
+			    android:layout_width="150sp"			    
+			    android:layout_height="wrap_content"
+			    android:text="Visit Date" />
+	
+			<EditText
+			    android:id="@+id/VisitDate"
+			    android:layout_marginRight="10sp"
+			    android:layout_width="150sp"
+			    android:layout_height="wrap_content"
+			    android:ems="10"
+			    android:maxLength="10" style="@style/customEdit"
+			    android:inputType="date" android:digits="0123456789/">
+			</EditText>
+			<ImageButton android:id="@+id/btnVDate" android:layout_width="40sp" android:layout_height="40sp" android:src="@drawable/calender" android:layout_gravity="center" />
+						
+	    </LinearLayout>
+	    <View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />
+	    <LinearLayout
+	        android:id="@+id/secResp" style="@style/rowStyle0"
+	        android:layout_width="fill_parent" 
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal" >
+	    	    
+	        <TextView android:id="@+id/lblResp" android:text="Respondent" android:layout_width="150sp" android:layout_height="wrap_content" android:textSize="20sp" />
+			<Spinner
+			    android:id="@+id/spnResp"
+			    android:layout_marginRight="10sp"
+			    android:layout_width="250dp"
+			    android:layout_height="wrap_content"
+			    android:drawSelectorOnTop="true"
+			    android:prompt="@string/planet_prompt"
+			    android:textSize="20sp" />	        	        
+	    </LinearLayout>	    
+		<View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />
+		<LinearLayout
+	        android:id="@+id/secNote" style="@style/rowStyle0" android:visibility="gone"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal" >
+			<TextView
+			    android:id="@+id/lblNote"
+			    android:layout_width="150sp"			    
+			    android:layout_height="wrap_content"
+			    android:text="Visit Note" />
+	
+			<EditText
+			    android:id="@+id/VisitNote"
+			    android:layout_marginRight="10sp"
+			    android:layout_width="350sp"
+			    android:layout_height="wrap_content"  android:layout_marginBottom="20sp"
+			    android:maxLength="150" style="@style/customEdit"
+			    android:inputType="text">
+			</EditText>
+	    </LinearLayout>
+	    <View android:layout_height="1dip" android:layout_width="fill_parent" android:background="#CCCCCC" />
+		<LinearLayout android:background="#f3f3f3"
+		    android:id="@+id/secButton" style="@style/rowStyle0" 
+		    android:layout_width="fill_parent" 
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal" >
+		    	<Button
+		        android:id="@+id/cmdVisitSave"
+		        android:layout_width="150sp"
+		        android:layout_height="wrap_content"
+		        android:layout_gravity="left"
+		        android:layout_marginTop="10dp"
+		        android:text="Save" />		
+	
+		    			    					    
+				<Button
+		        android:id="@+id/cmdVisitClose"
+		        android:layout_width="150sp"
+		        android:layout_height="wrap_content"
+		        android:layout_gravity="right"
+		        android:layout_marginTop="10dp"
+		        android:text="Close" />		
+		</LinearLayout>
+	</LinearLayout>	
+</LinearLayout>

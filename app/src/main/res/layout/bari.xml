@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"        android:layout_width="fill_parent"         android:layout_height="fill_parent"         android:overScrollMode="always"         android:isScrollContainer="true"         android:scrollbarAlwaysDrawVerticalTrack="true"         android:scrollbarStyle="outsideInset"         android:scrollbars="vertical">
+    <LinearLayout  android:orientation="vertical" android:layout_width="fill_parent"    android:layout_marginLeft="10sp" android:layout_marginRight="10sp"    android:layout_height="wrap_content" android:scrollbars="vertical">
+
+    <LinearLayout android:id="@+id/secQCluster" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle1">
+       <TextView android:id="@+id/VlblQCluster" android:text="Clusster:" android:layout_width="100sp" android:layout_height="wrap_content" android:textSize="20sp" />
+       <TextView android:id="@+id/txtCluster" android:layout_width="150sp" android:layout_height="wrap_content" android:textSize="20sp" />
+              
+       <TextView android:id="@+id/VlblQBlock" android:text="Block:" android:layout_width="100sp" android:layout_height="wrap_content" android:textSize="20sp" />
+       <!--<TextView android:id="@+id/txtBlock" android:text="05" android:layout_width="100sp" android:layout_height="wrap_content" android:textSize="20sp" />-->
+        <Spinner
+            android:id="@+id/txtBlock"
+            android:layout_width="60sp"
+            android:layout_height="wrap_content"
+            android:drawSelectorOnTop="true"
+            android:prompt="@string/planet_prompt"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+    <View android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
+    
+    
+    <LinearLayout android:id="@+id/secQVill" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">        
+        <TextView android:id="@+id/VlblQVill" android:text="Village" android:layout_width="100sp" android:layout_height="wrap_content" android:textSize="20sp" />
+        <TextView android:id="@+id/txtVill" android:text=" 005, Sarikandi" android:layout_width="200sp" android:layout_height="wrap_content" android:textSize="20sp" />
+    </LinearLayout>
+<View android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
+   
+
+    <LinearLayout android:id="@+id/secQBari" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+        <TextView android:id="@+id/VlblQBari" android:text="Bari"  android:layout_width="100sp" android:layout_height="wrap_content" android:textSize="20sp" />
+        <EditText android:id="@+id/txtBari" android:maxLength="4" android:enabled="false" android:layout_width="100sp" android:inputType="text" android:layout_height="wrap_content" style="@style/customEdit" android:layout_marginRight="10sp" android:textSize="20sp" />
+    </LinearLayout>
+<View android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
+    <LinearLayout android:id="@+id/secQBName" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+        <TextView android:id="@+id/VlblQBName" android:text="Bari Name" android:layout_width="100sp" android:layout_height="wrap_content" android:textSize="20sp" />
+        <EditText android:id="@+id/txtBName" android:maxLength="60" android:layout_width="280sp" android:inputType="text" android:layout_height="wrap_content" style="@style/customEdit" android:layout_marginRight="10sp" android:textSize="20sp" />
+    </LinearLayout>
+    <View android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
+    <LinearLayout android:id="@+id/secQBLoc" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+        <TextView android:id="@+id/VlblQBLoc" android:text="Bari Location" android:layout_width="100sp" android:layout_height="wrap_content" android:textSize="20sp" />
+        <EditText android:id="@+id/txtBLoc" android:maxLength="100" android:layout_width="280sp" android:inputType="text" android:layout_height="wrap_content" style="@style/customEdit" android:layout_marginRight="10sp" android:textSize="20sp" />
+    </LinearLayout>
+    <View android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
+       <LinearLayout android:layout_width="fill_parent" android:paddingTop="20sp" android:layout_height="wrap_content" android:orientation="horizontal">
+       	<Button android:id="@+id/cmdBariSave" android:layout_width="200sp" android:layout_height="wrap_content"
+       			android:text="Save"  android:layout_marginBottom="10sp"/>
+       	<Button android:id="@+id/cmdBariClose" android:layout_width="200sp" android:layout_height="wrap_content"
+       			android:text="Close"  android:layout_marginBottom="10sp"/>
+       	
+       	</LinearLayout>
+</LinearLayout>
+</ScrollView>

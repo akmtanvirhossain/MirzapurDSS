@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ android:orientation="vertical" android:layout_width="fill_parent"
+ android:layout_height="fill_parent" 
+     android:paddingTop="0dp"
+    android:paddingBottom="0dp">
+    		<TableLayout
+				android:id="@+id/memtab"
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent" android:layout_marginRight="10sp">
+
+				<TableRow>
+					<Button android:id="@+id/cmdDel" 
+					        android:layout_width="50sp"  android:textSize="14sp"
+					        android:layout_height="wrap_content"
+					        android:text="del"/>
+					<Button android:id="@+id/cmdEdit" 
+					        android:layout_width="50sp"  android:textSize="14sp"
+					        android:layout_height="wrap_content"
+					        android:text="edit"/>
+					<ImageView android:id="@+id/imgPreg" android:visibility="invisible" android:background="@drawable/preg" />
+				    <TextView android:id="@+id/sno" 
+				         android:layout_width="50sp"
+				         android:gravity="center"
+				         android:layout_column="0"
+				         android:layout_height="wrap_content"/>
+				    <TextView android:id="@+id/pno" 
+				         android:layout_width="120sp"
+				         android:gravity="center"
+				         android:layout_column="1"
+				         android:layout_height="wrap_content"/>
+				    <TextView android:id="@+id/name" 
+				         android:layout_width="200sp"
+				         android:gravity="left"
+				         android:layout_column="2"
+				         android:layout_height="wrap_content"/>
+				    <TextView android:id="@+id/rth" 
+				         android:layout_width="50sp"
+				         android:gravity="center"
+				         android:layout_column="3"
+				         android:layout_height="wrap_content"/>	
+				     <TextView android:id="@+id/sex" 
+				         android:layout_width="50sp"
+				         android:gravity="center"
+				         android:layout_column="4"
+				         android:layout_height="wrap_content"/>
+				    <TextView android:id="@+id/bdate" 
+				         android:layout_width="110sp"
+				         android:gravity="center"
+				         android:layout_column="5"
+				         android:layout_height="wrap_content"/>	
+				    <TextView android:id="@+id/mono" 
+				         android:layout_width="60sp"
+				         android:gravity="center"
+				         android:layout_column="6"
+				         android:layout_height="wrap_content"/>	
+				    <TextView android:id="@+id/fano" 
+				         android:layout_width="60sp"
+				         android:gravity="center"
+				         android:layout_column="7"
+				         android:layout_height="wrap_content"/>		
+				    <TextView android:id="@+id/edu" 
+				         android:layout_width="50sp"
+				         android:gravity="center"
+				         android:layout_column="8"
+				         android:layout_height="wrap_content"/>	
+				    <TextView android:id="@+id/ms" 
+				         android:layout_width="50sp"
+				         android:gravity="center"
+				         android:layout_column="9"
+				         android:layout_height="wrap_content"/>	
+				    <TextView android:id="@+id/pstat" 
+				         android:layout_width="50sp"
+				         android:gravity="center"
+				         android:layout_column="10"
+				         android:layout_height="wrap_content"/>
+				    <TextView android:id="@+id/lmpdt" 
+				         android:layout_width="120sp"
+				         android:gravity="center"
+				         android:layout_column="11"
+				         android:layout_height="wrap_content"/>
+				    <TextView android:id="@+id/sp1" 
+				         android:layout_width="50sp"
+				         android:gravity="center"
+				         android:layout_column="12"
+				         android:layout_height="wrap_content"/>
+				    <TextView android:id="@+id/sp2" 
+				         android:layout_width="50sp"
+				         android:gravity="center"
+				         android:layout_column="13"
+				         android:layout_height="wrap_content"/>	
+				    <TextView android:id="@+id/sp3" 
+				         android:layout_width="50sp"
+				         android:gravity="center"
+				         android:layout_column="14"
+				         android:layout_height="wrap_content"/>	
+				    <TextView android:id="@+id/sp4" 
+				         android:layout_width="50sp"
+				         android:gravity="center"
+				         android:layout_column="15"
+				         android:layout_height="wrap_content"/>
+				    <TextView android:id="@+id/ocp" 
+				         android:layout_width="50sp"
+				         android:gravity="center"
+				         android:layout_column="16"
+				         android:layout_height="wrap_content"/>
+				    <TextView android:id="@+id/entype" 
+				         android:layout_width="80sp"
+				         android:gravity="center"
+				         android:layout_column="17"
+				         android:layout_height="wrap_content"/>
+				    <TextView android:id="@+id/endate" 
+				         android:layout_width="130sp"
+				         android:gravity="center"
+				         android:layout_column="18"
+				         android:layout_height="wrap_content"/>
+				    <TextView android:id="@+id/extype" 
+				         android:layout_width="80sp"
+				         android:gravity="center"
+				         android:layout_column="19"
+				         android:layout_height="wrap_content"/>	
+				    <TextView android:id="@+id/exdate" 
+				         android:layout_width="130sp"
+				         android:gravity="center"
+				         android:layout_column="20"
+				         android:layout_height="wrap_content"/>	
+				    <TextView android:id="@+id/posmig" 
+				         android:layout_width="80sp"
+				         android:gravity="center"
+				         android:layout_column="21"
+				         android:layout_height="wrap_content"/>	
+				    <TextView android:id="@+id/posmigdate" 
+				         android:layout_width="130sp"
+				         android:gravity="center"
+				         android:layout_column="22"
+				         android:layout_height="wrap_content"/>					         				    					    					    					    					         				         				    				    				    				         			         			         		         			         			     
+				    				         				         				    					    					    					    					         				         				    				    				    				         			         			         		         			         			     
+				</TableRow>  				
+		</TableLayout>
+			
+			
+			  						
+ </RelativeLayout>
+ 

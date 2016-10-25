@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ android:orientation="vertical" android:layout_width="fill_parent"
+ android:layout_height="fill_parent" android:paddingLeft="10dip" android:paddingRight="10dip">
+
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+	<TableLayout
+		android:id="@+id/firsttab"
+		android:layout_width="match_parent"
+		android:layout_height="fill_parent" 
+		android:stretchColumns="2">
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+            android:weightSum="1">
+
+            <TableRow android:paddingTop="5dp" android:background="#59fee8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:paddingBottom="5dp"
+                android:gravity="center_vertical">
+                <TextView android:id="@+id/lblQ102" android:text="Q102" android:layout_width="60sp" android:layout_height="wrap_content" android:textSize="20sp" />
+                <TextView android:id="@+id/VlblQ102" android:text="মহিলার সিরিয়াল নাম্বারঃ " android:layout_width="200dp" android:layout_height="wrap_content" android:textSize="20sp" />
+                <Spinner android:id="@+id/txtQ102SL" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="10sp" android:textSize="20sp" android:drawSelectorOnTop="true"/>
+
+            </TableRow>
+            <TableRow android:paddingTop="5dp"
+                android:background="#59fee8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:paddingBottom="5dp"
+                android:gravity="center_vertical">
+                <TextView android:id="@+id/lblQ103" android:text="Q103" android:layout_width="60sp" android:layout_height="wrap_content" android:textSize="20sp" />
+                <TextView android:id="@+id/VlblQ103" android:text="সাক্ষাতের অবস্থা" android:layout_width="200dp" android:layout_height="wrap_content" android:textSize="20sp" />
+                <Spinner android:id="@+id/spnQ103" android:drawSelectorOnTop="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="0" android:prompt="@string/planet_prompt" android:textSize="20sp" />
+
+            </TableRow>
+            <TableRow android:paddingTop="5dp"  android:background="#b5fcbc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:gravity="center_vertical">
+                <TextView android:id="@+id/lblHQ104" android:text="Q104  আপনি কবে বিয়ে করেছেন (জানা না থাকলে ৯৯ রেকর্ড করুন)"  android:layout_span="3" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="20sp" />
+
+            </TableRow>
+            <TableRow android:paddingTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:weightSum="1"
+                android:layout_gravity="center"
+                android:gravity="center_vertical">
+
+                <TextView android:id="@+id/VlblQ104MM" android:text="মাস" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="20sp"
+                    android:paddingRight="20dp" />
+                <EditText android:id="@+id/txtQ104MM" android:maxLength="2" android:layout_width="80dp" android:inputType="number" android:layout_height="wrap_content" style="@style/customEdit" android:layout_marginRight="10sp" android:textSize="20sp"
+                    android:layout_weight="2.92" />
+
+                <TextView android:id="@+id/VlblQ104YY" android:text="বছর" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="20sp"
+                    android:paddingRight="20dp"
+                    android:paddingLeft="40dp" />
+
+                <EditText android:id="@+id/txtQ104YY" android:maxLength="4" android:layout_width="80dp" android:inputType="number" android:layout_height="wrap_content" style="@style/customEdit" android:layout_marginRight="10sp" android:textSize="20sp" />
+
+            </TableRow>
+
+            <TableRow android:paddingTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#a9f6ff"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:paddingBottom="5dp"
+                android:gravity="center_vertical">
+                <TextView android:id="@+id/lblQ105" android:text="Q105" android:layout_width="60sp" android:layout_height="wrap_content" android:textSize="20sp" />
+                <TextView android:id="@+id/VlblQ105" android:text="আপনার কি কখনো  ছেলে মেয়ে হয়েছে" android:layout_width="220dp" android:layout_height="wrap_content" android:textSize="20sp" />
+                <RadioGroup android:id="@+id/rdogrpQ105" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="20sp"
+                    android:layout_marginLeft="20dp">
+                    <RadioButton android:paddingLeft="32dp" android:paddingRight="32dp" android:textSize="20sp" android:id="@+id/rdoYQ105" android:text="হ্যাঁ"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <RadioButton android:paddingLeft="32dp" android:paddingRight="32dp" android:textSize="20sp" android:id="@+id/rdoNQ105" android:text="না"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" /></RadioGroup>
+
+            </TableRow>
+            <TableRow android:paddingTop="5dp" android:background="#b5fcbc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:paddingBottom="5dp"
+                android:gravity="center_vertical">
+                <TextView android:id="@+id/lblQ106" android:text="Q106 " android:layout_width="60sp" android:layout_height="wrap_content" android:textSize="20sp" />
+                <TextView android:id="@+id/VlblQ106" android:text="আপনি জন্ম দিয়েছেন, এমন ছেলে বা মেয়ে কি এখন আপনার সাথে থাকে" android:layout_width="220dp" android:layout_height="wrap_content" android:textSize="20sp" />
+                <RadioGroup android:id="@+id/rdogrpQ106" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="20sp"
+                    android:layout_marginLeft="20dp">
+                    <RadioButton android:paddingLeft="32dp" android:paddingRight="32dp" android:textSize="20sp" android:id="@+id/rdoYQ106" android:text="হ্যাঁ"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <RadioButton android:paddingLeft="32dp" android:paddingRight="32dp" android:textSize="20sp" android:id="@+id/rdoNQ106" android:text="না"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" /></RadioGroup>
+
+            </TableRow>
+            <TableRow android:paddingTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#a9f6ff"
+                android:paddingBottom="5dp"
+                android:gravity="center_vertical">
+                <TextView android:id="@+id/lblQ107" android:text="Q107 " android:layout_width="60sp" android:layout_height="wrap_content" android:textSize="20sp" />
+                <TextView android:id="@+id/lblHQ107" android:text="কতজন ছেলে ও মেয়ে আপনার সাথে থাকে(না থাকলে ০০ রেকর্ড করুন)" android:layout_span="3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="20sp"/>
+
+            </TableRow>
+            <TableRow android:paddingTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.28"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_marginBottom="5dp"
+                android:paddingBottom="5dp">
+
+                <TextView android:id="@+id/VlblQ107A" android:text="ছেলে" android:layout_width="100sp" android:layout_height="wrap_content" android:textSize="20sp" />
+                <EditText android:id="@+id/txtQ107A" android:maxLength="2" android:layout_width="60sp" android:inputType="number" android:layout_height="wrap_content" style="@style/customEdit" android:layout_marginRight="10sp" android:textSize="20sp" />
+
+                <TextView android:id="@+id/VlblQ107B" android:text="মেয়ে" android:layout_width="100sp" android:layout_height="wrap_content" android:textSize="20sp"
+                    android:layout_marginLeft="50dp" />
+
+                <EditText android:id="@+id/txtQ107B" android:maxLength="2" android:layout_width="60sp" android:inputType="number" android:layout_height="wrap_content" style="@style/customEdit" android:layout_marginRight="10sp" android:textSize="20sp" />
+
+            </TableRow>
+
+            <TableRow android:paddingTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#b5fcbc"
+                android:layout_marginBottom="5dp"
+                android:paddingBottom="5dp"
+                android:gravity="center_vertical">
+                <TextView android:id="@+id/lblQ108" android:text="Q108" android:layout_width="60sp" android:layout_height="wrap_content" android:textSize="20sp" />
+                <TextView android:id="@+id/VlblQ108" android:text="আপনি এমন কোন সন্তান জন্ম দিয়েছেন যাদের জন্ম জীবিত কিন্তু আপনার সাথে থাকে না" android:layout_width="250dp" android:layout_height="wrap_content" android:textSize="20sp" />
+                <RadioGroup android:id="@+id/rdogrpQ108" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="20sp">
+                    <RadioButton android:paddingLeft="32dp" android:paddingRight="32dp" android:textSize="20sp" android:id="@+id/rdoYQ108" android:text="হ্যাঁ"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <RadioButton android:paddingLeft="32dp" android:paddingRight="32dp" android:textSize="20sp" android:id="@+id/rdoNQ108" android:text="না"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" /></RadioGroup>
+
+            </TableRow>
+            <TableRow android:paddingTop="5dp" android:background="#a9f6ff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:gravity="center_vertical">
+                <TextView android:id="@+id/lblQ109" android:text="Q109" android:layout_width="60sp" android:layout_height="wrap_content" android:textSize="20sp" />
+                <TextView android:id="@+id/lblHQ109" android:text="কতজন ছেলে ও মেয়ে আপনার সাথে থাকে না (না থাকলে ০০ রেকর্ড করুন)" android:layout_span="3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="20sp"/>
+            </TableRow>
+            <TableRow  android:paddingTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|center_vertical"
+                android:layout_marginBottom="5dp"
+                android:paddingBottom="5dp">
+
+                <TextView android:id="@+id/VlblQ109A" android:text="ছেলে" android:layout_width="100sp" android:layout_height="wrap_content" android:textSize="20sp" />
+                <EditText android:id="@+id/txtQ109A" android:maxLength="2" android:layout_width="60sp" android:inputType="number" android:layout_height="wrap_content" style="@style/customEdit" android:layout_marginRight="10sp" android:textSize="20sp" />
+
+                <TextView android:id="@+id/VlblQ109B" android:text="মেয়ে" android:layout_width="100sp" android:layout_height="wrap_content" android:textSize="20sp"
+                    android:layout_marginLeft="50dp" />
+
+                <EditText android:id="@+id/txtQ109B" android:maxLength="2" android:layout_width="60sp" android:inputType="number" android:layout_height="wrap_content" style="@style/customEdit" android:layout_marginRight="10sp" android:textSize="20sp" />
+            </TableRow>
+
+            <TableRow  android:paddingTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#b5fcbc"
+                android:layout_marginBottom="5dp"
+                android:gravity="center_vertical"
+                android:paddingBottom="5dp">
+                <TextView android:id="@+id/lblQ110" android:text="Q110" android:layout_width="60sp" android:layout_height="wrap_content" android:textSize="20sp" />
+                <TextView android:id="@+id/VlblQ110" android:text="আপনি এমন কোন সন্তান জন্ম দিয়েছেন যাদের জন্ম জীবিত কিন্তু পরে মারা গিয়েছে" android:layout_width="240dp" android:layout_height="wrap_content" android:textSize="20sp" />
+                <RadioGroup android:id="@+id/rdogrpQ110" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="20sp">
+                    <RadioButton android:paddingLeft="32dp" android:paddingRight="32dp" android:textSize="20sp" android:id="@+id/rdoYQ110" android:text="হ্যাঁ"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <RadioButton android:paddingLeft="32dp" android:paddingRight="32dp" android:textSize="20sp" android:id="@+id/rdoNQ110" android:text="না"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" /></RadioGroup>
+            </TableRow>
+            <TableRow android:paddingTop="5dp" android:background="#a9f6ff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:gravity="center_vertical"
+                android:paddingBottom="5dp">
+                <TextView android:id="@+id/lblQ111" android:text="Q111 " android:layout_width="60sp" android:layout_height="wrap_content" android:textSize="20sp" />
+                <TextView android:id="@+id/lblHQ111" android:text="কতজন ছেলে ও মেয়ে  জন্ম জীবিত কিন্তু পরে মারা গিয়েছে (না থাকলে ০০ রেকর্ড করুন)" android:layout_span="3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="20sp" />
+            </TableRow>
+            <TableRow android:paddingTop="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|center_vertical"
+                android:layout_marginBottom="5dp">
+
+                <TextView android:id="@+id/VlblQ111A" android:text="ছেলে" android:layout_width="100sp" android:layout_height="wrap_content" android:textSize="20sp" />
+                <EditText android:id="@+id/txtQ111A" android:maxLength="2" android:layout_width="60sp" android:inputType="number" android:layout_height="wrap_content" style="@style/customEdit" android:layout_marginRight="10sp" android:textSize="20sp" />
+
+                <TextView android:id="@+id/VlblQ111B" android:text="মেয়ে" android:layout_width="100sp" android:layout_height="wrap_content" android:textSize="20sp"
+                    android:layout_marginLeft="50dp" />
+
+                <EditText android:id="@+id/txtQ111B" android:maxLength="2" android:layout_width="60sp" android:inputType="number" android:layout_height="wrap_content" style="@style/customEdit" android:layout_marginRight="10sp" android:textSize="20sp" />
+
+            </TableRow>
+
+            <TableRow android:paddingTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#b5fcbc"
+                android:layout_marginBottom="5dp"
+                android:gravity="center_vertical"
+                android:paddingBottom="5dp">
+                <TextView android:id="@+id/lblQ112" android:text="Q112" android:layout_width="60sp" android:layout_height="wrap_content" android:textSize="20sp" />
+                <TextView android:id="@+id/VlblQ112" android:text="আপনি কি কোন মৃত সন্তান জন্মদান আথবা গর্ভপাত বা গর্ভনষ্ট হয়েছেন" android:layout_width="220dp" android:layout_height="wrap_content" android:textSize="20sp" />
+                <RadioGroup android:id="@+id/rdogrpQ112" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="20sp"
+                    android:layout_marginLeft="20dp">
+                    <RadioButton android:paddingLeft="32dp" android:paddingRight="32dp" android:textSize="20sp" android:id="@+id/rdoYQ112" android:text="হ্যাঁ"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <RadioButton android:paddingLeft="32dp" android:paddingRight="32dp" android:textSize="20sp" android:id="@+id/rdoNQ112" android:text="না"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" /></RadioGroup>
+            </TableRow>
+            <TableRow android:paddingTop="5dp" android:background="#a9f6ff"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:gravity="center_vertical"
+                android:paddingBottom="5dp">
+                <TextView android:id="@+id/lblQ113" android:text="Q113" android:layout_width="60sp" android:layout_height="wrap_content" android:textSize="20sp" />
+                <TextView android:id="@+id/VlblQ113" android:text="কতজন  মৃত সন্তান জন্মদান আথবা গর্ভপাত বা গর্ভনষ্ট হয়েছে" android:layout_width="340dp" android:layout_height="wrap_content" android:textSize="20sp" />
+                <EditText android:id="@+id/txtQ113" android:maxLength="2" android:layout_width="100dp" android:inputType="number" android:layout_height="wrap_content" style="@style/customEdit"
+                    android:textSize="20sp" />
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#b5fcbc"
+                android:layout_marginBottom="5dp"
+                android:gravity="center_vertical"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
+
+                <TextView android:id="@+id/lblQ114" android:text="Q114" android:layout_width="60sp" android:layout_height="wrap_content" android:textSize="20sp" />
+                <TextView android:id="@+id/VlblQ114" android:text="সর্বমোট জন্মদানের সংখ্যা" android:layout_width="340dp" android:layout_height="wrap_content" android:textSize="20sp" />
+                <EditText android:id="@+id/txtQ114" android:maxLength="2" android:layout_width="100dp" android:inputType="number" android:layout_height="wrap_content" style="@style/customEdit"
+                    android:textSize="20sp" />
+            </TableRow>
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:gravity="center_vertical">
+
+                <TextView android:id="@+id/VlblQ114" android:text="এবার আপনি আমাকে বলুন," android:layout_width="225dp" android:layout_height="wrap_content" android:textSize="20sp" />
+
+            </TableRow>
+            <TableRow android:paddingTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#a9f6ff"
+                android:layout_marginBottom="5dp"
+                android:gravity="center_vertical"
+                android:paddingBottom="5dp">
+
+                <TextView android:id="@+id/VlblQ115A" android:text="আপনার সর্বমোট জীবিত সন্তানের সংখ্যা (প্রশ্ন নাম্বার ১০৭+১০৯)" android:layout_width="400dp" android:layout_height="wrap_content" android:textSize="20sp" />
+                <TextView android:id="@+id/lblQ115A"  android:layout_height="wrap_content" android:textSize="20sp"
+                    android:layout_width="100dp"
+                    style="@style/customEdit" />
+            </TableRow>
+            <TableRow android:paddingTop="5dp" android:background="#b5fcbc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:gravity="center_vertical"
+                android:paddingBottom="5dp">
+
+                <TextView android:id="@+id/VlblQ115B" android:text="আপনার সর্বমোট মৃত সন্তানের সংখ্যা (প্রশ্ন নাম্বার ১১১)" android:layout_width="400dp" android:layout_height="wrap_content" android:textSize="20sp" />
+                <TextView android:id="@+id/lblQ115B"  android:layout_height="wrap_content" android:textSize="20sp"
+                    android:layout_width="100dp"
+                    style="@style/customEdit" />
+            </TableRow>
+            <TableRow android:paddingTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#a9f6ff"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_vertical"
+                android:paddingBottom="5dp">
+
+                <TextView android:id="@+id/VlblQ115C" android:text="আপনার সর্বমোট গর্ভপাত/গর্ভনষ্ট বা মৃত জন্ম সন্তানের সংখ্যা (প্রশ্ন নাম্বার ১১৩)" android:layout_width="400dp" android:layout_height="wrap_content" android:textSize="20sp" />
+                <TextView android:id="@+id/lblQ115C"  android:layout_height="wrap_content" android:textSize="20sp"
+                    android:layout_width="100dp"
+                    style="@style/customEdit" />
+            </TableRow>
+            <TableRow android:paddingTop="20sp" android:background="#b5fcbc" android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+                <TextView android:id="@+id/lblQ115" android:text="Q115" android:layout_width="60sp" android:layout_height="wrap_content" android:textSize="20sp" />
+                <TextView android:id="@+id/VlblQ115" android:text="আমার তথ্য কি ঠিক?" android:layout_width="100sp" android:layout_height="wrap_content" android:textSize="20sp" />
+                <RadioGroup android:id="@+id/rdogrpQ115" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="20sp">
+                    <RadioButton android:paddingLeft="32dp" android:paddingRight="32dp" android:textSize="20sp" android:id="@+id/rdoYQ115" android:text="হ্যাঁ"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <RadioButton android:paddingLeft="32dp" android:paddingRight="32dp" android:textSize="20sp" android:id="@+id/rdoNQ115" android:text="না"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" /></RadioGroup>
+            </TableRow>
+
+
+        </LinearLayout>
+	
+	<TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button android:id="@+id/cmdRHQSaveandContinue"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_column="2"
+            android:text="Save"/>
+        <Button android:id="@+id/cmdPrevious"
+        />
+	</TableRow>
+
+</TableLayout>
+</ScrollView>
+	<ViewFlipper android:id="@+id/details"
+		android:layout_span="3"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content">
+	</ViewFlipper>
+ </RelativeLayout>
+ 

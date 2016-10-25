@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical"  android:paddingTop="10sp">
+
+    <TableLayout
+        android:id="@+id/firsttab"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:paddingLeft="10sp"
+        android:paddingRight="10sp" >
+
+        <TableRow
+            android:background="#ffffff"
+            android:gravity="center" >
+
+            <TextView
+                android:layout_width="120sp"
+                android:layout_height="40sp"
+                android:layout_column="0"
+                android:layout_marginBottom="5sp"
+                android:layout_marginTop="5sp"
+                android:layout_span="4"
+                android:gravity="center"
+                android:text="Mirzapur DSS"
+                android:textColor="#000000"
+                android:textSize="30sp" />
+        </TableRow>
+
+        <TableRow
+            android:background="#ffffff"
+            android:gravity="center" >
+
+            <TextView
+                android:layout_width="120sp"
+                android:layout_height="40sp"
+                android:layout_column="0"
+                android:layout_marginBottom="15sp"
+                android:layout_span="4"
+                android:gravity="center"
+                android:text="(Round Visit)"
+                android:textColor="#000000"
+                android:textSize="30sp" />
+        </TableRow>
+
+        <TableRow
+            style="@style/rowStyle1"
+            android:gravity="center_horizontal" >
+
+            <TextView
+                android:layout_width="120sp"
+                android:layout_height="40sp"
+                android:layout_column="0"
+                android:layout_marginBottom="5sp"
+                android:layout_marginTop="5sp"
+                android:gravity="left"
+                android:text="Cluster :"
+                android:textColor="#000000"
+                android:textSize="25sp" />
+
+
+			<Spinner
+                android:id="@+id/spnCluster"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_marginBottom="20sp"
+                android:layout_marginRight="10sp"
+                android:drawSelectorOnTop="true"
+                android:prompt="@string/planet_prompt"
+                android:textSize="35sp" />            
+
+            <TextView
+                android:layout_width="120sp"
+                android:layout_height="40sp"
+                android:layout_column="2"
+                android:layout_marginBottom="5sp"
+                android:layout_marginTop="5sp"
+                android:gravity="left"
+                android:text="Round No:"
+                android:textColor="#000000"
+                android:textSize="25sp" />
+
+            <Spinner
+                android:id="@+id/txtRound"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_column="3"
+                android:layout_marginBottom="20sp"
+                android:layout_marginRight="10sp"
+                android:drawSelectorOnTop="true"
+                android:prompt="@string/planet_prompt"
+                android:textSize="35sp" />
+        </TableRow>
+
+        <TableRow
+            style="@style/rowStyle0"
+            android:background="#ffffff"
+            android:gravity="center_horizontal"
+            android:paddingBottom="30dp" >
+
+            <TextView
+                android:layout_width="120sp"
+                android:layout_height="40sp"
+                android:layout_column="0"
+                android:layout_marginBottom="5sp"
+                android:layout_marginTop="5sp"
+                android:gravity="left"
+                android:text="Block :"
+                android:textColor="#000000"
+                android:textSize="25sp" />
+
+            <Spinner
+                android:id="@+id/txtBlock"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_marginBottom="20sp"
+                android:layout_marginRight="10sp"
+                android:layout_span="3"
+                android:drawSelectorOnTop="true"
+                android:prompt="@string/planet_prompt"
+                android:textSize="35sp" />
+        </TableRow>
+
+        <TableRow
+            android:background="#f3f3f3"
+            android:gravity="center" >
+
+            <Button
+                android:id="@+id/cmdBlock"
+                android:layout_width="150sp"
+                android:layout_column="0"
+                android:layout_marginBottom="5sp"
+                android:layout_marginTop="5sp"
+                android:layout_span="4"
+                android:gravity="center"
+                android:text="Ok"
+                android:textColor="#000000"
+                android:textSize="25sp" />
+        </TableRow>
+
+        <TableRow
+            android:background="#ffffff" android:layout_marginTop="20sp"
+            android:gravity="center" >
+
+            <GridView
+                android:id="@+id/gridMenu"
+                android:layout_width="fill_parent"
+                android:layout_height="450sp"
+                android:layout_column="0"
+                android:layout_span="4"
+                android:numColumns="3" />        
+        </TableRow>        
+</TableLayout>
+
+</RelativeLayout>

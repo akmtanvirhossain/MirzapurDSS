@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="0dip"
+    android:paddingRight="0dip" >
+    <LinearLayout android:background="#F3F3F3" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+					<TextView android:text="Household"		
+					     android:layout_column="0"		    	 
+					     android:layout_width="100sp"
+					     android:textSize="20sp"
+					     android:layout_height="wrap_content"/>
+				     
+				     <TextView
+				         android:id="@+id/lblHousehold"
+				         android:textSize="20sp"
+				         android:layout_width="150sp"
+				         android:layout_height="wrap_content"
+				         android:layout_column="1"
+				         android:gravity="left"/>                
+					<TextView android:text="Village"		
+					     android:layout_column="0"		    	 
+					     android:layout_width="80sp"
+					     android:textSize="20sp"
+					     android:layout_height="wrap_content"/>
+				     
+				     <TextView
+				         android:id="@+id/lblVillName"
+				         android:textSize="20sp"
+				         android:layout_width="fill_parent"
+				         android:layout_height="wrap_content"
+				         android:layout_column="1"
+				         android:gravity="left"/>
+        
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="#CCCCCC" />
+
+    <LinearLayout android:background="#F3F3F3" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+					<TextView android:text="Bari"		
+					     android:layout_column="0"		    	 
+					     android:layout_width="100sp"
+					     android:textSize="20sp"
+					     android:layout_height="wrap_content"/>
+				     
+				     <TextView
+				         android:id="@+id/lblBariName"
+				         android:textSize="20sp"
+				         android:layout_width="fill_parent"
+				         android:layout_height="wrap_content"
+				         android:layout_column="1"
+				         android:gravity="left"/>
+        
+    </LinearLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dip"
+        android:background="#CCCCCC" />
+
+    <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+		        <Button android:id="@+id/cmdNewMem" android:text="New Mem" android:layout_width="120sp" android:layout_height="60sp" android:textSize="20sp" android:layout_marginBottom="5sp" />
+
+		        <Button 
+		            android:id="@+id/cmdSES"
+		            android:layout_width="100sp"
+		            android:layout_height="60sp"
+		            android:layout_marginBottom="5sp"
+		            android:paddingLeft="10dp"
+		            android:text="SES"
+		            android:textSize="20sp" />
+
+		        <Button 
+		            android:id="@+id/cmdPHis"
+		            android:layout_width="120sp"
+		            android:layout_height="60sp"
+		            android:layout_marginBottom="5sp"
+		            android:paddingLeft="10dp"
+		            android:text="Preg His"
+		            android:textSize="20sp" />
+
+		        <Button 
+		            android:id="@+id/cmdEvList"
+		            android:layout_width="120sp"
+		            android:layout_height="60sp"
+		            android:layout_marginBottom="5sp"
+		            android:paddingLeft="10dp"
+		            android:text="Event List"
+		            android:textSize="20sp" />
+
+		        <Button 
+		            android:id="@+id/cmdVisitList"
+		            android:layout_width="120sp"
+		            android:layout_height="60sp"
+		            android:layout_marginBottom="5sp"
+		            android:paddingLeft="10dp"
+		            android:text="Visit List"
+		            android:textSize="20sp" />	                
+    </LinearLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dip"
+        android:background="#00CD00" />
+
+    <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+
+					<HorizontalScrollView 
+		         		android:id="@android:id/tabcontent"
+		         		android:layout_height="fill_parent"
+		         		android:layout_width="fill_parent">
+					    	
+					<ListView
+				        android:id="@+id/lstMember"
+				        android:layout_width="match_parent"
+				        android:layout_height="450sp"
+				        android:divider="#000000"
+				        android:dividerHeight="1px"
+				        android:clickable="true">
+		    		</ListView>	
+		    						    
+					</HorizontalScrollView>        
+    </LinearLayout>
+    
+<!--	<View
+	    android:layout_width="wrap_content"
+	    android:layout_height="2dip"
+	    android:background="#00CD00" />-->
+
+    <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0" android:background="#F3F3F3">
+					<RadioGroup
+				        android:id="@+id/roMemberOption" android:layout_column="0" android:layout_span="4"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content" android:orientation="horizontal">
+				 
+				        <RadioButton
+				            android:id="@+id/roActiveMember"
+				            android:layout_width="wrap_content"
+				            android:layout_height="wrap_content"
+				            android:text="Active Members" 
+				            android:checked="true" />
+				 
+				        <RadioButton
+				            android:id="@+id/roAllMember"
+				            android:layout_width="wrap_content"
+				            android:layout_height="wrap_content"
+				            android:text="All Members" />				 
+				    </RadioGroup>
+        
+    </LinearLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="2dip"
+        android:background="#00CD00" />
+
+    <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+					<Button android:visibility="gone" android:layout_marginTop="20sp" android:layout_column="0"  android:layout_gravity="left" android:id="@+id/cmdCheckMember" android:text="Check Member List" android:layout_width="wrap_content" android:layout_height="50sp" android:textSize="20sp" />
+					<Button android:layout_marginTop="20sp" android:layout_column="1"  android:layout_gravity="left" android:id="@+id/cmdImmunization" android:text="Immunization" android:layout_width="wrap_content" android:layout_height="50sp" android:textSize="20sp" />
+					<Button android:layout_marginTop="20sp" android:layout_column="2"  android:layout_gravity="left" android:id="@+id/cmdVisitNote" android:text="Visit Note" android:layout_width="wrap_content" android:layout_height="50sp" android:textSize="20sp" />
+					<Button android:layout_marginTop="20sp" android:layout_column="3"  android:layout_gravity="left" android:id="@+id/cmdContactNo" android:text="Contact No" android:layout_width="wrap_content" android:layout_height="50sp" android:textSize="20sp" />						        
+    </LinearLayout>
+    
+    <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">        
+    </LinearLayout>
+    
+
+ </LinearLayout>
+ 
