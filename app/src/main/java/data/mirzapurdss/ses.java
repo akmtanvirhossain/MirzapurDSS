@@ -1340,13 +1340,14 @@ public class ses extends Activity {
 						}
 
 						if (rdoYQ026.isChecked()) {
-							if ((chkQ027z.isChecked()) && (chkQ027a.isChecked() || chkQ027b.isChecked() || chkQ027c.isChecked() || chkQ027d.isChecked() || chkQ027e.isChecked() || chkQ027f.isChecked() || chkQ027g.isChecked() || chkQ027h.isChecked() || chkQ027i.isChecked() || chkQ027j.isChecked() || chkQ027y.isChecked())) {
+							//stop: 23 apr 2018
+							/*if ((chkQ027z.isChecked()) && (chkQ027a.isChecked() || chkQ027b.isChecked() || chkQ027c.isChecked() || chkQ027d.isChecked() || chkQ027e.isChecked() || chkQ027f.isChecked() || chkQ027g.isChecked() || chkQ027h.isChecked() || chkQ027i.isChecked() || chkQ027j.isChecked() || chkQ027y.isChecked())) {
 								Connection.MessageBox(ses.this, "খানা প্রধানের সাথে বিদেশ অবস্থান কারী আত্মীয়ের সম্পক আছে তাই জানা নাই টিক হবে না");
 								return;
 							} else if (!chkQ027z.isChecked() && !chkQ027a.isChecked() && !chkQ027b.isChecked() && !chkQ027c.isChecked() && !chkQ027d.isChecked() && !chkQ027e.isChecked() && !chkQ027f.isChecked() && !chkQ027g.isChecked() && !chkQ027h.isChecked() && !chkQ027i.isChecked() && !chkQ027j.isChecked() && !chkQ027y.isChecked()) {
 								Connection.MessageBox(ses.this, "খানা প্রধানের সাথে বিদেশ অবস্থান কারী আত্মীয়ের সম্পক কি তা জানা নাই, তাই জানা নাই টিক হবে ");
 								return;
-							}
+							}*/
 							String V27F = "", V27G = "", V27H = "", V27I = "", V27J = "", V27Y = "", V27Z = "";
 							if (chkQ027f.isChecked()) {
 								V27F = "1";
@@ -1398,7 +1399,8 @@ public class ses extends Activity {
 
 
 						if (rdoYQ026.isChecked()) {
-							if (txtQ028a.getText().length() == 0) {
+							//stop : 23apr2018
+							/*if (txtQ028a.getText().length() == 0) {
 								Connection.MessageBox(ses.this, "সদস্যের কতজন আত্মীয় যুক্তরাজ্য/লন্ডন/ইউরপে থাকে তথ্য খালি রাখা যাবে না ");
 								return;
 							}
@@ -1421,10 +1423,10 @@ public class ses extends Activity {
 							if (txtQ028y.getText().length() == 0) {
 								Connection.MessageBox(ses.this, "সদস্যের কতজন আত্মীয় অন্যান্য জায়গাই থাকে তথ্য খালি রাখা যাবে না ");
 								return;
-							}
+							}*/
 							String V29 = "";
 							if (!rdoYQ029.isChecked() & !rdoNQ029.isChecked() && !rdoDKQ029.isChecked()) {
-								Connection.MessageBox(ses.this, "যে সকল আত্মীয়স্বজন দেশের বাইরে থাকে তারা টাকা পাঠাই কি  না তথ্য খালি রাখা যাবে না ");
+								Connection.MessageBox(ses.this, "যে সকল আত্মীয়স্বজন দেশের বাইরে থাকে তারা টাকা পাঠায় কি না তথ্য খালি রাখা যাবে না ");
 								return;
 							}
 							if (rdoYQ029.isChecked()) {
@@ -1515,7 +1517,7 @@ public class ses extends Activity {
 							V30Z = "2";
 						}
 						if (spnQ031.getSelectedItemPosition() == 0) {
-							Connection.MessageBox(ses.this, "আপনার পরিবারে কুমুদিনি হাসপাতালের শোভাসুন্দরী কার্ড আছে কি না তথ্য ফাকা রাখে যাবে না");
+							Connection.MessageBox(ses.this, "আপনার পরিবারের কুমুদিনি হাসপাতালের  Prescription/Ticket আছে কি? তথ্য ফাকা রাখে যাবে না");
 							return;
 						}
 						if (spnQ031.getSelectedItemPosition() > 3) {

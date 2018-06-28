@@ -1,7 +1,5 @@
 package data.mirzapurdss;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -23,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
@@ -30,7 +29,9 @@ import android.widget.ImageView;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class BlockList extends Activity{
 	Connection C;
@@ -115,12 +116,38 @@ public class BlockList extends Activity{
         C = new Connection(this);
         g = Global.getInstance();
 
+		try{
+			C.AddColumnIfNotExists("Immunization","fIPV1");
+			C.AddColumnIfNotExists("Immunization","fIPVDT1");
+			C.AddColumnIfNotExists("Immunization","fIPVSource1");
+			C.AddColumnIfNotExists("Immunization","fIPV2");
+			C.AddColumnIfNotExists("Immunization","fIPVDT2");
+			C.AddColumnIfNotExists("Immunization","fIPVSource2");
+
+			C.AddColumnIfNotExists("ImmunizationTemp","fIPV1");
+			C.AddColumnIfNotExists("ImmunizationTemp","fIPVDT1");
+			C.AddColumnIfNotExists("ImmunizationTemp","fIPVSource1");
+			C.AddColumnIfNotExists("ImmunizationTemp","fIPV2");
+			C.AddColumnIfNotExists("ImmunizationTemp","fIPVDT2");
+			C.AddColumnIfNotExists("ImmunizationTemp","fIPVSource2");
+
+			C.AddColumnIfNotExists("Mig_Immunization","fIPV1");
+			C.AddColumnIfNotExists("Mig_Immunization","fIPVDT1");
+			C.AddColumnIfNotExists("Mig_Immunization","fIPVSource1");
+			C.AddColumnIfNotExists("Mig_Immunization","fIPV2");
+			C.AddColumnIfNotExists("Mig_Immunization","fIPVDT2");
+			C.AddColumnIfNotExists("Mig_Immunization","fIPVSource2");
+
+		}catch (Exception ex){
+
+		}
+
         spnCluster = (Spinner)findViewById(R.id.spnCluster);
         spnCluster.setAdapter(C.getArrayAdapter("Select Cluster from currentcluster"));
 		CLUSTER = g.getClusterCode();
 
         final Spinner txtRound = (Spinner)findViewById(R.id.txtRound);
-        txtRound.setAdapter(C.getArrayAdapter("SELECT Rnd from Round where rnd is not null and rnd not in('null') order by rnd desc limit 10"));
+        txtRound.setAdapter(C.getArrayAdapter("Select Rnd from Round where rnd is not null and rnd not in('null') order by rnd desc limit 15"));
         
         
         final Spinner txtBlock = (Spinner)findViewById(R.id.txtBlock);
@@ -177,7 +204,7 @@ public class BlockList extends Activity{
             	try
             	{
 	         	  	final ProgressDialog progDailog = ProgressDialog.show(BlockList.this, "", "অপেক্ষা করুন ...", true); 
-
+					finish();
 			        new Thread() { 
 			            public void run() { 
 			                try { 	     
@@ -202,7 +229,7 @@ public class BlockList extends Activity{
 								IDbundle.putString("vcode", VL);
 								IDbundle.putString("village", V[1].toString());
 				         	  	
-					         	finish();
+					         	//finish();
 				     	    	Intent f11 = new Intent(getApplicationContext(),HouseholdIndex.class);
 				     	    	//Intent f11 = new Intent(getApplicationContext(),SESPregHisMissingList.class);
 				     	    	f11.putExtras(IDbundle);
@@ -254,8 +281,7 @@ public class BlockList extends Activity{
             	//Upload data to central server
             	//*******************************************************************************
             	if(position==0)
-            	{   	
-            		
+            	{
             		AlertDialog.Builder builder = new AlertDialog.Builder(BlockList.this);
         	    	builder
         			    	.setTitle("Message")	    			    	
@@ -332,20 +358,68 @@ public class BlockList extends Activity{
 
 														Common.Connection CJSon = new Common.Connection(BlockList.this);
 
+
+														//Delete Data From the Local Device: 20 Oct 2017
+														String UniqueID_Column = "";
+														String UniqueID = "";
+														String[] UniqueID_List;
+
+														CJSon.Sync_Download("DeleteID_List",g.getClusterCode(),"");
+
+														Cursor cur_H = C.ReadData("Select TableName,ID from DeleteID_List Where DeleteStatus='N'");
+														cur_H.moveToFirst();
+														while(!cur_H.isAfterLast())
+														{
+															UniqueID_Column = "";
+															UniqueID = C.ReturnSingleValue("select UniqueID from DatabaseTab where TableName='"+ cur_H.getString(cur_H.getColumnIndex("TableName")) +"'");
+															UniqueID_List = UniqueID.split(",");
+															for(int i=0;i<UniqueID_List.length;i++){
+																UniqueID_Column += UniqueID_Column.length()==0 ? "Cast("+ UniqueID_List[i] +" as varchar(50))" : "||Cast("+ UniqueID_List[i] +" as varchar(50))";
+															}
+
+															try {
+																C.Save("Delete from " + cur_H.getString(cur_H.getColumnIndex("TableName")) + " where " + UniqueID_Column + "='" + cur_H.getString(cur_H.getColumnIndex("ID")) + "'");
+																C.Save("Update DeleteID_List set DeleteStatus='Y',Upload='2' where ID='" + cur_H.getString(cur_H.getColumnIndex("ID")) + "'");
+															}catch (Exception ex){
+
+															}
+															cur_H.moveToNext();
+														}
+														cur_H.close();
+														TableName = "DeleteID_List";
+														VariableList = "TableName, ID, DeleteStatus, Upload, modifyDate";
+														response = CJSon.UploadJSON(TableName , VariableList , "TableName,ID");
+
+														//Baris Table: 03 Jan 2017
+														SQL  = "Select b.Vill, Bari,v.Cluster, Block, BariName, BariLoc, Xdec, Xmin, Xsec, Ydec, Ymin, Ysec, b.Status, EnDt, Upload from Baris b,MDSSVill v where b.Vill=v.Vill and v.Cluster='"+ g.getClusterCode() +"' and Upload='3'";
+														CJSon.DownloadJSON_UpdateServer(SQL, "Baris", "Vill, Bari,Cluster, Block, BariName, BariLoc, Xdec, Xmin, Xsec, Ydec, Ymin, Ysec, Status, EnDt, Upload", "Vill, Bari");
+
 														//Household Table: 16 May 2016
-														SQL  = "Select h.Vill, h.Bari, Hh, Pno, EnType, EnDate, ExType, ExDate, Rel, HHHead, Clust, h.Block, Rnd, h.Upload, ContactNo";
+														SQL  = "Select h.Vill, h.Bari, Hh, Pno, EnType, EnDate, ExType, ExDate, Rel, HHHead, Clust, h.Block, Rnd, h.Upload, ContactNo,h.EnDt";
 														SQL += " from Household h,Baris b,MDSSVill v where h.Vill+h.Bari=b.Vill+b.Bari and b.Vill=v.Vill and h.Upload='3' and v.Cluster='"+ g.getClusterCode() +"'";
-														CJSon.DownloadJSON_UpdateServer(SQL, "Household", "Vill, Bari, Hh, Pno, EnType, EnDate, ExType, ExDate, Rel, HHHead, Clust, Block, Rnd, Upload, ContactNo", "Vill, Bari, Hh");
+														CJSon.DownloadJSON_UpdateServer(SQL, "Household", "Vill, Bari, Hh, Pno, EnType, EnDate, ExType, ExDate, Rel, HHHead, Clust, Block, Rnd, Upload, ContactNo,EnDt", "Vill, Bari, Hh");
+
+														//Visits: 20 Oct 2017
+														SQL = "select v.Vill, v.Bari, v.Hh, Rsno, Dma, EnterDt, Vdate, v.Rnd, Lat, Lon, LatNet, LonNet, '1' Upload, v.Note \n" +
+																"from Visits v inner join Household h on v.Vill+v.Bari+v.Hh=h.Vill+h.Bari+h.Hh\n" +
+																"where h.Clust='"+ g.getClusterCode() +"' and v.Upload='3'";
+														CJSon.DownloadJSON_UpdateServer(SQL, "Visits", "Vill, Bari, Hh, Rsno, Dma, EnterDt, Vdate, Rnd, Lat, Lon, LatNet, LonNet, Upload, Note", "Vill, Bari, Hh, Rnd");
 
 														//Member Table
 														SQL = "Select m.Vill, m.Bari, m.Hh, m.Sno, m.Pno, m.Name, m.Rth, m.Sex, m.BDate, m.Age, m.Mono, m.Fano, m.Edu, m.Ms, m.Pstat, m.LmpDt, m.Sp1, m.Sp2, m.Sp3, m.Sp4, m.Ocp, m.EnType, m.EnDate, m.ExType, m.ExDate, m.PageNo, m.Status, m.Upload, m.PosMig, m.PosMigDate from Member m,Household h";
-														SQL += " where m.vill+m.bari+m.Hh=h.Vill+h.Bari+h.HH and h.Clust='"+ g.getClusterCode() +"' and UpdateNeeded='1'";
+														SQL += " where m.vill+m.bari+m.Hh=h.Vill+h.Bari+h.HH and h.Clust='"+ g.getClusterCode() +"' and m.Upload='3'";
 														CJSon.DownloadJSON_UpdateServer(SQL, "Member", "Vill, Bari, Hh, Sno, Pno, Name, Rth, Sex, BDate, Age, Mono, Fano, Edu, Ms, Pstat, LmpDt, Sp1, Sp2, Sp3, Sp4, Ocp, EnType, EnDate, ExType, ExDate, PageNo, Status, Upload, PosMig, PosMigDate", "Vill, Bari, Hh, Sno");
 
 														//Events Table
 														SQL = "Select e.Vill, e.Bari, e.Hh, e.Pno, e.Sno, e.EvType, e.EvDate, e.Info1, e.Info2, e.Info3, e.Info4, e.Vdate, e.Rnd, e.Upload";
-														SQL += " from Events e,Household h where e.vill+e.bari+e.Hh=h.Vill+h.Bari+h.HH and h.Clust='"+ g.getClusterCode() +"' and UpdateNeeded='1'";
+														SQL += " from Events e,Household h where e.vill+e.bari+e.Hh=h.Vill+h.Bari+h.HH and h.Clust='"+ g.getClusterCode() +"' and e.Upload='3'";
 														CJSon.DownloadJSON_UpdateServer(SQL,"Events", "Vill, Bari, Hh, Pno, Sno, EvType, EvDate, Info1, Info2, Info3, Info4, Vdate, Rnd, Upload", "Vill, Bari, Hh, Sno, EvDate, Rnd");
+
+														//PregHis: 20 Oct 2017
+														SQL = "Select p.Vill, p.Bari, p.Hh, p.Sno, p.Pno, Visit, MarM, MarY, Births, LiveHh, SLiveHh, DLiveHh, LiveOut, SLiveOut, DLiveOut, Died, SDied, DDied, Abor, TAbor, TotPreg, Vdate, p.Rnd, PageNo, Status, p.Upload, Lat, Lon\n" +
+																"from PregHis p inner join Household h on p.Vill+p.Bari+p.Hh=h.Vill+h.Bari+h.Hh \n" +
+																"where h.Clust='"+ g.getClusterCode() +"' and p.Upload='3'";
+														CJSon.DownloadJSON_UpdateServer(SQL,"PregHis", "Vill, Bari, Hh, Sno, Pno, Visit, MarM, MarY, Births, LiveHh, SLiveHh, DLiveHh, LiveOut, SLiveOut, DLiveOut, Died, SDied, DDied, Abor, TAbor, TotPreg, Vdate, Rnd, PageNo, Status, Upload, Lat, Lon", "Vill, Bari, Hh, Pno");
 
 														//PNO Update: Update needed 3 for pno update
 														SQL = "Select m.Vill, m.Bari, m.Hh, m.Sno, m.Pno from Member m,Household h";
@@ -353,16 +427,15 @@ public class BlockList extends Activity{
 														CJSon.DownloadJSON_UpdatePNO(SQL, "Vill, Bari, Hh, Sno, Pno", "Vill, Bari, Hh, Sno");
 
 														//Delete Events: 02 Apr 2014
-														SQL = "Select d.Vill, d.Bari, d.Hh, d.Sno, d.EvType, d.EvDate,d.Rnd";
+														/*SQL = "Select d.Vill, d.Bari, d.Hh, d.Sno, d.EvType, d.EvDate,d.Rnd";
 														SQL += " from Household h, EventsDelete d where h.Vill+h.Bari+h.Hh=d.Vill+d.Bari+d.Hh";
 														SQL += " and h.Clust='"+ g.getClusterCode() +"' and d.DeleteNeeded='1'";
 														CJSon.DownloadJSON_EventDelete(SQL, "Vill, Bari, Hh, Sno, EvType, EvDate, Rnd", "Vill, Bari, Hh, Sno, EvType, EvDate, Rnd");
-
+														*/
 
 														//***************************
 														//  Upload data to server
 														//***************************
-
 
 														//Table: Baris
 														TableName = "Baris";
@@ -376,7 +449,7 @@ public class BlockList extends Activity{
 
 														//Household
 														TableName = "Household";
-														VariableList = "Vill, Bari, Hh, Pno, EnType, EnDate, ExType, ExDate, Rel, HHHead, Clust, Block, EnDt, Rnd, Upload, ContactNo";
+														VariableList = "Vill, Bari, Hh, Pno, EnType, EnDate, ExType, ExDate, Rel, HHHead, Clust, Block, EnDt, Rnd, Upload, ContactNo,Note";
 														response = CJSon.UploadJSON(TableName, VariableList, "Vill, Bari, Hh");
 
 														//SES
@@ -423,7 +496,7 @@ public class BlockList extends Activity{
 
 														//Immunization
 														TableName = "Immunization";
-														VariableList = "Vill, Bari, HH, Sno, PNo, Status, BCG, BCGDT, BCGSource, Penta1, Penta1DT, Penta1Source, Penta2, Penta2DT, Penta2Source, Penta3, Penta3DT, Penta3Source, PCV1, PCV1DT, PCV1Source, PCV2, PCV2DT, PCV2Source, PCV3, PCV3DT, PCV3Source, OPV0, OPV0DT, OPV0Source, OPV1, OPV1DT, OPV1Source, OPV2, OPV2DT, OPV2Source, OPV3, OPV3DT, OPV3Source, OPV4, OPV4DT, OPV4Source, Measles, MeaslesDT, MeaslesSource, MR, MRDT, MRSource, Rota, RotaDT, RotaSource, MMR, MMRDT, MMRSource, Typhoid, TyphoidDT, TyphoidSource, Influ, InfluDT, InfluSource, HepaA, HepaADT, HepaASource, ChickenPox, ChickenPoxDT, ChickenPoxSource, Rabies, RabiesDT, RabiesSource,IPV, IPVDT, IPVSource,VitaminA, VitaminADT, VitaminASource, EnDt, Upload";
+														VariableList = "Vill, Bari, HH, Sno, PNo, Status, BCG, BCGDT, BCGSource, Penta1, Penta1DT, Penta1Source, Penta2, Penta2DT, Penta2Source, Penta3, Penta3DT, Penta3Source, PCV1, PCV1DT, PCV1Source, PCV2, PCV2DT, PCV2Source, PCV3, PCV3DT, PCV3Source, OPV0, OPV0DT, OPV0Source, OPV1, OPV1DT, OPV1Source, OPV2, OPV2DT, OPV2Source, OPV3, OPV3DT, OPV3Source, OPV4, OPV4DT, OPV4Source, Measles, MeaslesDT, MeaslesSource, MR, MRDT, MRSource, Rota, RotaDT, RotaSource, MMR, MMRDT, MMRSource, Typhoid, TyphoidDT, TyphoidSource, Influ, InfluDT, InfluSource, HepaA, HepaADT, HepaASource, ChickenPox, ChickenPoxDT, ChickenPoxSource, Rabies, RabiesDT, RabiesSource,IPV, IPVDT, IPVSource,fIPV1,fIPVDT1,fIPVSource1,fIPV2,fIPVDT2,fIPVSource2,VitaminA, VitaminADT, VitaminASource, EnDt, Upload";
 														String[] I = C.GenerateArrayList(VariableList, TableName);
 														response = CJSon.UploadJSON(TableName, VariableList, "Vill, Bari, HH, Sno");
 
@@ -482,18 +555,18 @@ public class BlockList extends Activity{
             	
             	//GPS Reading
             	//*******************************************************************************            	
-            	else if(position==1)
+            	/*else if(position==1)
             	{
                     //GPS Location
                     FindLocation();
             		Connection.MessageBox(BlockList.this, "GPS from Satellite\n   Latitude:     "+Double.toString(currentLatitude)+"\n   Longitude: "+ Double.toString(currentLongitude)
             										  + "\n\nGPS from Network\n   Latitude:     "+Double.toString(currentLatitudeNet)+"\n   Longitude: "+ Double.toString(currentLongitudeNet));
             		return;
-            	}
+            	}*/
 
             	//Migration Process
             	//*******************************************************************************            	
-            	else if(position==2)
+            	else if(position==1)
             	{            		                            
                     if(netwoekAvailable==false)
                     {
@@ -563,8 +636,8 @@ public class BlockList extends Activity{
 									//Immunization(Migration)
 									C.Save("Delete from Mig_Immunization");
 									TableName = "Mig_Immunization";
-									SQLStr  = "select Vill, Bari, HH, Sno, PNO, Status, BCG, BCGDT, BCGSource, Penta1, Penta1DT, Penta1Source, Penta2, Penta2DT, Penta2Source, Penta3, Penta3DT, Penta3Source, PCV1, PCV1DT, PCV1Source, PCV2, PCV2DT, PCV2Source, PCV3, PCV3DT, PCV3Source, OPV0, OPV0DT, OPV0Source, OPV1, OPV1DT, OPV1Source, OPV2, OPV2DT, OPV2Source, OPV3, OPV3DT, OPV3Source, OPV4, OPV4DT, OPV4Source, Measles, MeaslesDT, MeaslesSource, MR, MRDT, MRSource, Rota, RotaDT, RotaSource, MMR, MMRDT, MMRSource, Typhoid, TyphoidDT, TyphoidSource, Influ, InfluDT, InfluSource, HepaA, HepaADT, HepaASource, ChickenPox, ChickenPoxDT, ChickenPoxSource, Rabies, RabiesDT, RabiesSource, IPV, IPVDT, IPVSource, VitaminA, VitaminADT, VitaminASource, EnDt, Upload from Immunization i where exists(select * from MigDatabase where Pno=i.Pno)";
-									VariableList = "Vill, Bari, HH, Sno, PNO, Status, BCG, BCGDT, BCGSource, Penta1, Penta1DT, Penta1Source, Penta2, Penta2DT, Penta2Source, Penta3, Penta3DT, Penta3Source, PCV1, PCV1DT, PCV1Source, PCV2, PCV2DT, PCV2Source, PCV3, PCV3DT, PCV3Source, OPV0, OPV0DT, OPV0Source, OPV1, OPV1DT, OPV1Source, OPV2, OPV2DT, OPV2Source, OPV3, OPV3DT, OPV3Source, OPV4, OPV4DT, OPV4Source, Measles, MeaslesDT, MeaslesSource, MR, MRDT, MRSource, Rota, RotaDT, RotaSource, MMR, MMRDT, MMRSource, Typhoid, TyphoidDT, TyphoidSource, Influ, InfluDT, InfluSource, HepaA, HepaADT, HepaASource, ChickenPox, ChickenPoxDT, ChickenPoxSource, Rabies, RabiesDT, RabiesSource, IPV, IPVDT, IPVSource, VitaminA, VitaminADT, VitaminASource, EnDt, Upload";
+									SQLStr  = "select Vill, Bari, HH, Sno, PNO, Status, BCG, BCGDT, BCGSource, Penta1, Penta1DT, Penta1Source, Penta2, Penta2DT, Penta2Source, Penta3, Penta3DT, Penta3Source, PCV1, PCV1DT, PCV1Source, PCV2, PCV2DT, PCV2Source, PCV3, PCV3DT, PCV3Source, OPV0, OPV0DT, OPV0Source, OPV1, OPV1DT, OPV1Source, OPV2, OPV2DT, OPV2Source, OPV3, OPV3DT, OPV3Source, OPV4, OPV4DT, OPV4Source, Measles, MeaslesDT, MeaslesSource, MR, MRDT, MRSource, Rota, RotaDT, RotaSource, MMR, MMRDT, MMRSource, Typhoid, TyphoidDT, TyphoidSource, Influ, InfluDT, InfluSource, HepaA, HepaADT, HepaASource, ChickenPox, ChickenPoxDT, ChickenPoxSource, Rabies, RabiesDT, RabiesSource, IPV, IPVDT, IPVSource, fIPV1,fIPVDT1,fIPVSource1,fIPV2,fIPVDT2,fIPVSource2,VitaminA, VitaminADT, VitaminASource, EnDt, Upload from Immunization i where exists(select * from MigDatabase where Pno=i.Pno)";
+									VariableList = "Vill, Bari, HH, Sno, PNO, Status, BCG, BCGDT, BCGSource, Penta1, Penta1DT, Penta1Source, Penta2, Penta2DT, Penta2Source, Penta3, Penta3DT, Penta3Source, PCV1, PCV1DT, PCV1Source, PCV2, PCV2DT, PCV2Source, PCV3, PCV3DT, PCV3Source, OPV0, OPV0DT, OPV0Source, OPV1, OPV1DT, OPV1Source, OPV2, OPV2DT, OPV2Source, OPV3, OPV3DT, OPV3Source, OPV4, OPV4DT, OPV4Source, Measles, MeaslesDT, MeaslesSource, MR, MRDT, MRSource, Rota, RotaDT, RotaSource, MMR, MMRDT, MMRSource, Typhoid, TyphoidDT, TyphoidSource, Influ, InfluDT, InfluSource, HepaA, HepaADT, HepaASource, ChickenPox, ChickenPoxDT, ChickenPoxSource, Rabies, RabiesDT, RabiesSource, IPV, IPVDT, IPVSource, fIPV1,fIPVDT1,fIPVSource1,fIPV2,fIPVDT2,fIPVSource2,VitaminA, VitaminADT, VitaminASource, EnDt, Upload";
 									Res = CJson.DownloadJSON(SQLStr,TableName,VariableList,"Vill, Bari, HH, Sno, PNO");
 								}
 				    	    	
@@ -578,7 +651,7 @@ public class BlockList extends Activity{
             	
             	//Bari Update
             	//*******************************************************************************
-            	else if(position==3)
+            	/*else if(position==3)
             	{
                     if(netwoekAvailable==false)
                     {
@@ -590,11 +663,11 @@ public class BlockList extends Activity{
 		        		String SQ  = "select Cluster, Block, Vill, Bari, BariName, BariLoc, Xdec, Xmin, Xsec, Ydec, Ymin, Ysec from vwBariName where Cluster in('"+ g.getClusterCode() +"')";				
 		        		C.BariNameUpdate(SQ,"vwBariName", "Cluster, Block, Vill, Bari, BariName, BariLoc, Xdec, Xmin, Xsec, Ydec, Ymin, Ysec");
 	    	    	}
-            	}
+            	}*/
             	
             	//Block Update
             	//*******************************************************************************
-            	else if(position==4)
+            	/*else if(position==4)
             	{
                     if(netwoekAvailable==false)
                     {
@@ -610,12 +683,12 @@ public class BlockList extends Activity{
 		        		//Bari Transfer from one block to another block
 		        		
 	    	    	}
-            	}
+            	}*/
 
 
             	//Exit from the system
             	//*******************************************************************************
-            	else if(position==5)
+            	else if(position==2)
             	{    				
     				AlertDialog.Builder builder = new AlertDialog.Builder(BlockList.this);
         	    	builder
@@ -650,7 +723,7 @@ public class BlockList extends Activity{
             	
             	//Contact No and Note update
             	//*******************************************************************************            	
-            	else if(position==6)
+            	/*else if(position==6)
             	{
                     if(netwoekAvailable==false)
                     {
@@ -663,7 +736,7 @@ public class BlockList extends Activity{
 		    	    	C.UpdateData("Select Vill,Bari,HH,ContactNo from Household where Clust='"+ g.getClusterCode() +"' and len(ContactNo)<>0", "Household", "Vill,Bari,HH,ContactNo", "Vill,Bari,HH");
 		    	    	C.UpdateData("Select h.Vill,h.Bari,h.HH,h.Rnd,Note from Visits v, Household h where v.vill+v.bari+v.hh=h.vill+h.bari+h.hh and h.clust='"+ g.getClusterCode() +"' and LEN(Note)<>0", "Visits", "Vill,Bari,HH,Rnd,Note", "Vill,Bari,HH,Rnd");
             		}
-            	}
+            	}*/
              }
              catch(Exception ex)
              {
@@ -723,8 +796,22 @@ public class BlockList extends Activity{
 	            }
     	            return MyView;
 		}
-	
-		private String[] desc={		
+
+		//20 Oct 2017
+		private String[] desc={
+				"আপলোড",
+				"মাইগ্রেশন",
+				"বাহির"};
+
+		//references to our images
+		private Integer[] mThumbIds = {
+				R.drawable.upload,
+				R.drawable.sync,
+				R.drawable.exit
+		};
+
+
+		/*private String[] desc={
 				"আপলোড",			
 				"জি পি এস",
 				"Process Migration",
@@ -742,7 +829,7 @@ public class BlockList extends Activity{
 				R.drawable.sync, 
 				R.drawable.exit,
 				R.drawable.sync
-		};
+		};*/
 	}
 
     //GPS Reading

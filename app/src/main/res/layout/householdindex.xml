@@ -10,8 +10,8 @@
         android:id="@+id/firsttab"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:paddingLeft="10sp"
-        android:paddingRight="10sp"
+        android:paddingLeft="5sp"
+        android:paddingRight="5sp"
         android:stretchColumns="1" >
 
         <TableRow android:gravity="left" android:background="#f3f3f3" android:visibility="gone">
@@ -49,7 +49,7 @@
         <TableRow android:gravity="left" android:background="#ffffff">
 		
 			<TextView
-			    android:layout_height="40sp"
+			    android:layout_height="40sp" android:layout_width="wrap_content"
 			    android:layout_column="0"
 			    android:layout_marginBottom="5sp"
 			    android:layout_marginTop="5sp"
@@ -60,7 +60,7 @@
             
 			<Spinner
 			    android:id="@+id/BariList" android:layout_column="1"
-			    android:layout_width="300dp"
+			    android:layout_width="280dp"
 			    android:layout_height="wrap_content"
 			    android:layout_marginBottom="20sp"
 			    android:layout_marginRight="10sp"

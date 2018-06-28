@@ -3,129 +3,84 @@
 
     <item
         is-multidex="false"
-        jar="E:\AndroidStudioProject\MirzapurDSS\app\libs\gson-2.5.jar"
-        jumboMode="true"
+        jar="C:\Users\thossain\.android\build-cache\2d609bf5462bd9a80840b1585b520831770293a5\output\jars\classes.jar"
+        jumboMode="false"
         optimize="true"
-        revision="23.0.1"
-        sha1="686c608d1805b6d4d425ec4459e88164ffc85870">
-        <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\gson-2.5_03208ff3962fb473885280adc64eb042a034528b.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\8.4.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.1"
-        sha1="fef2b3e4b6b1b0e5fe7b69fa137a5fa55a3182ab">
-        <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-base-8.4.0_5e95f078e40fbbd0959c34b2e01d377d0c9b2bbe.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.3.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.1"
-        sha1="debf30ce0a7560396b6235edef77e447006454c2">
-        <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\com.android.support-recyclerview-v7-23.3.0_c7d8c20092df236e30d93c181143b44eb1cb6889.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.4.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.1"
+        revision="25.0.0"
         sha1="8e673cdfadd8f2d98fdb2fda2285c30f6e449782">
-        <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-basement-8.4.0_00d81b5064ba1b2b4e261918fa8ac272e08a5527.jar" />
+        <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\classes_64899118647eb99558153be3711ca038acc0c263.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\User\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.3.0\support-annotations-23.3.0.jar"
-        jumboMode="true"
+        jar="C:\Users\thossain\.android\build-cache\72e36d44109ef032c203b5c6ff9647690e2f10d7\output\jars\classes.jar"
+        jumboMode="false"
         optimize="true"
-        revision="23.0.1"
-        sha1="db7791d75a07fef9844d06236c1c59ba7bf6997c">
-        <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\support-annotations-23.3.0_dbe8237707094f632f7ae137baf11ca40e4db85d.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.3.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.1"
-        sha1="1b8e03daaa43fb0a4cd57e378167c2fd70454c1e">
-        <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-23.3.0_29d4554e06b5d5018b14c98c4ac03c16fb62ec63.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\8.4.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.1"
+        revision="25.0.0"
         sha1="04de44f90606c77f3b28cf44861f306290505aac">
-        <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-maps-8.4.0_e8ebff366b04fb995923028d6006e09d6a25890c.jar" />
+        <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\classes_b80d1326bb590599915cfb1f9368a18a47b7d086.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\jars\libs\internal_impl-23.3.0.jar"
-        jumboMode="true"
+        jar="C:\Users\thossain\.android\build-cache\eaaacef52b04bf9304a549929587d5cbc6c6253e\output\jars\classes.jar"
+        jumboMode="false"
         optimize="true"
-        revision="23.0.1"
-        sha1="4da5a4d697d32497c6f85567a5112e62fdfd0676">
-        <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\internal_impl-23.3.0_5a359d4d75233b6b304084174d0420af89087628.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.android.support\design\23.3.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.1"
+        revision="25.0.0"
         sha1="f0001e71cea6ae432a00021c6f727f5ef0f3d27e">
-        <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\com.android.support-design-23.3.0_ad588db8d3c60e483e721d418c6079afd2c8ee99.jar" />
+        <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\classes_7ec8d47289ed103c963c56a8a2549b0d42786002.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.3.0\jars\classes.jar"
-        jumboMode="true"
+        jar="C:\Users\thossain\.android\build-cache\bd2314f5cb2697a55f99ea95e9a3dbaa96d6efee\output\jars\classes.jar"
+        jumboMode="false"
         optimize="true"
-        revision="23.0.1"
+        revision="25.0.0"
         sha1="a0b5d60246cd9d4f3f2443611b3b4c25265840b5">
-        <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-23.3.0_9ca15cd85277f3c74d37e0ca5e51e4cfd25a11ff.jar" />
+        <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\classes_f709d522833badc3105ced01fe788d623c0b7dd7.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.3.0\jars\classes.jar"
-        jumboMode="true"
+        jar="C:\Users\thossain\.android\build-cache\96d417b0f3ea728dd83bbd371a1352ac94067101\output\jars\classes.jar"
+        jumboMode="false"
         optimize="true"
-        revision="23.0.1"
-        sha1="23be6993826b8fd88bbc8d14928bb3b8960d3d4e">
-        <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-23.3.0_3d0f049c7a3d4ecc325781e5a855e5642258d9c2.jar" />
+        revision="25.0.0"
+        sha1="debf30ce0a7560396b6235edef77e447006454c2">
+        <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\classes_0418e729aeabce5dd74a98882432709c5e3710e8.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
+        jar="C:\Users\thossain\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.5\686c608d1805b6d4d425ec4459e88164ffc85870\gson-2.5.jar"
+        jumboMode="false"
         optimize="true"
-        revision="23.0.1"
-        sha1="a256e7589f88db0dc199cb70ef19a6d671d0f24d">
-        <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\instant-run-bootstrap_1ac1a118c6287328a7edcce9d622846639cb332a.jar" />
+        revision="25.0.0"
+        sha1="686c608d1805b6d4d425ec4459e88164ffc85870">
+        <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\gson-2.5_dbddc48a7ef92699a467819bc006e2d7a01562ce.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
-        jumboMode="true"
+        jar="C:\Users\thossain\.android\build-cache\17ee23b0bd62f66d82abf08a149327682cc3c574\output\jars\classes.jar"
+        jumboMode="false"
         optimize="true"
-        revision="23.0.1"
-        sha1="cc2363f7e58b43e852119afd6baf18c392a25977">
-        <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\instant-run_0a3264ec1b652de5364c86a04ca40536e8e35f37.jar" />
+        revision="25.0.0"
+        sha1="1b8e03daaa43fb0a4cd57e378167c2fd70454c1e">
+        <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\classes_61ab568909513cf715ad82cdc81bf69335911c8c.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\jars\classes.jar"
-        jumboMode="true"
+        jar="C:\Users\thossain\AppData\Local\Android\Sdk\extras\android\m2repository\com\android\support\support-annotations\23.3.0\support-annotations-23.3.0.jar"
+        jumboMode="false"
         optimize="true"
-        revision="23.0.1"
-        sha1="8a034dd16c0dfd75fe86c52c2cd581592acc684a">
-        <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-23.3.0_6b45a375b5c85087d391a2fd3d2fd7b9169d26fd.jar" />
+        revision="25.0.0"
+        sha1="db7791d75a07fef9844d06236c1c59ba7bf6997c">
+        <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\support-annotations-23.3.0_2e31383669e4ad99bd811271b62b57cba7b368a1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\thossain\.android\build-cache\03cb474cacc6f456b0f6463cd2d59dbe8851991d\output\jars\libs\internal_impl-23.3.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="4da5a4d697d32497c6f85567a5112e62fdfd0676">
+        <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\internal_impl-23.3.0_8c477c3481d2f3c2f6f799d83f3f52cad7404dce.jar" />
     </item>
     <item
         is-multidex="false"
@@ -135,6 +90,42 @@
         revision="23.0.1"
         sha1="e8796346a9191a019e936210a2dc50662c57594b">
         <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\ksoap2-android-assembly-2.4-jar-with-dependencies_d7465b6e2ce6739648f7f6d48b386bb42dcca8ee.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\thossain\.android\build-cache\a217e5619cdc6fb8b4b568108fd51af0cccfd6a3\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="23be6993826b8fd88bbc8d14928bb3b8960d3d4e">
+        <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\classes_c5b4928b24ceff3ca951e928cc1246c6e868155b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidStudioProject\MirzapurDSS\app\libs\ksoap2-android-assembly-2.4-jar-with-dependencies.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="e8796346a9191a019e936210a2dc50662c57594b">
+        <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\ksoap2-android-assembly-2.4-jar-with-dependencies_d7465b6e2ce6739648f7f6d48b386bb42dcca8ee.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\thossain\.android\build-cache\03cb474cacc6f456b0f6463cd2d59dbe8851991d\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="8a034dd16c0dfd75fe86c52c2cd581592acc684a">
+        <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\classes_9255f4f3f1f3751faef934aba5e348ebaa7cebbd.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\thossain\.android\build-cache\696670cdacadc7e0aeff5ef6090804622c8407aa\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="fef2b3e4b6b1b0e5fe7b69fa137a5fa55a3182ab">
+        <dex dex="E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\pre-dexed\debug\classes_b40b271f9e3b6f00d56743b29e5b9056624231ee.jar" />
     </item>
 
 </items>

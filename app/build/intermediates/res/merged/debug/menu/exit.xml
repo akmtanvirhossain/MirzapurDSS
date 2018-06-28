@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">        
-    <item android:id="@+id/mnuUpdateRound" android:title="Update Round No" android:showAsAction="ifRoom|withText"/>
-    <item android:id="@+id/exitmenu" android:title="Exit" android:showAsAction="ifRoom|withText"/>
-</menu>

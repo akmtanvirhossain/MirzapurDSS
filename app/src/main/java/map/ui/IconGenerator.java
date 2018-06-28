@@ -29,7 +29,6 @@ import android.widget.TextView;
 
 import data.mirzapurdss.R;
 
-
 /**
  * IconGenerator generates icons that contain text (or custom content) within an info
  * window-like shape.

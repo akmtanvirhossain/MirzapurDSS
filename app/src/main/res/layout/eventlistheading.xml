@@ -3,63 +3,55 @@
  android:orientation="vertical" android:layout_width="fill_parent"
  android:layout_height="fill_parent"
  android:background="#FFFFFF">
-    		<TableLayout
-				android:id="@+id/eventlisttab"
-				android:layout_width="fill_parent"
-				android:layout_height="fill_parent" android:layout_marginRight="10sp"
-				android:background="#f3f3f3">
-
-				<TableRow>
-					<TextView  
-					        android:layout_width="60sp"  android:textSize="14sp" android:layout_column="0"
-					        android:layout_height="wrap_content"
-					        android:text=""/>
-					<TextView  
-					        android:layout_width="60sp"  android:textSize="14sp" android:layout_column="1"
-					        android:layout_height="wrap_content"
-					        android:text=""/>					    
-				    <TextView android:layout_column="2"
-				        android:text="SNo"				
-						android:textSize="18sp" android:gravity="center"
-						android:layout_width="60sp"
-						android:layout_height="40sp"/>
- 				    <TextView android:layout_column="3"
-				        android:text="Ev.Code"
-				         android:layout_width="70sp" android:textSize="18sp"
-				         android:gravity="center"
-				         android:layout_height="40sp"/>	
-			    	<TextView android:layout_column="4"
-				        android:text="Ev.Date"
-				         android:layout_width="120sp" android:textSize="18sp"
-				         android:gravity="center"
-				         android:layout_height="40sp"/>	
-				    <TextView android:layout_column="5"
-				        android:text="Info-1"
-				         android:layout_width="100sp" android:textSize="18sp"
-				         android:gravity="center"
-				         android:layout_height="40sp"/>	
-				    <TextView android:layout_column="6"
-				        android:text="Info-2"
-				         android:layout_width="70sp" android:textSize="18sp"
-				         android:gravity="center"
-				         android:layout_height="40sp"/>	
-				    <TextView android:layout_column="7"
-				        android:text="Info-3"
-				         android:layout_width="70sp" android:textSize="18sp"
-				         android:gravity="center"
-				         android:layout_height="40sp"/>	
- 				    <TextView android:layout_column="8"
-				        android:text="Info-4"
-				         android:layout_width="120sp" android:textSize="18sp"
-				         android:gravity="center"
-				         android:layout_height="40sp"/> 
- 				    <TextView android:layout_column="9"
-				        android:text="Round"
-				         android:layout_width="70sp" android:textSize="18sp"
-				         android:gravity="center"
-				         android:layout_height="30sp"/>	
- 				    				         
-				</TableRow>
-		</TableLayout>  						
+	<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+		<TextView
+			android:layout_width="60sp"  android:textSize="14sp" android:layout_column="0"
+			android:layout_height="wrap_content"
+			android:text=""/>
+		<TextView
+			android:layout_width="60sp"  android:textSize="14sp" android:layout_column="1"
+			android:layout_height="wrap_content"
+			android:text=""/>
+		<TextView android:layout_column="2"
+			android:text="SNo"
+			android:textSize="18sp" android:gravity="center"
+			android:layout_width="60sp"
+			android:layout_height="40sp"/>
+		<TextView android:layout_column="3"
+			android:text="Ev.Code"
+			android:layout_width="70sp" android:textSize="18sp"
+			android:gravity="center"
+			android:layout_height="40sp"/>
+		<TextView android:layout_column="4"
+			android:text="Ev.Date"
+			android:layout_width="120sp" android:textSize="18sp"
+			android:gravity="center"
+			android:layout_height="40sp"/>
+		<TextView android:layout_column="5"
+			android:text="Info-1"
+			android:layout_width="100sp" android:textSize="18sp"
+			android:gravity="center"
+			android:layout_height="40sp"/>
+		<TextView android:layout_column="6"
+			android:text="Info-2"
+			android:layout_width="70sp" android:textSize="18sp"
+			android:gravity="center"
+			android:layout_height="40sp"/>
+		<TextView android:layout_column="7"
+			android:text="Info-3"
+			android:layout_width="70sp" android:textSize="18sp"
+			android:gravity="center"
+			android:layout_height="40sp"/>
+		<TextView android:layout_column="8"
+			android:text="Info-4"
+			android:layout_width="120sp" android:textSize="18sp"
+			android:gravity="center"
+			android:layout_height="40sp"/>
+		<TextView android:layout_column="9"
+			android:text="Round"
+			android:layout_width="70sp" android:textSize="18sp"
+			android:gravity="center"
+			android:layout_height="30sp"/>
+	</LinearLayout>
  </RelativeLayout>
  

@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"        android:layout_width="fill_parent"         android:layout_height="fill_parent"         android:overScrollMode="always"         android:isScrollContainer="true"         android:scrollbarAlwaysDrawVerticalTrack="true"         android:scrollbarStyle="outsideInset"         android:scrollbars="vertical">
-    <LinearLayout  android:orientation="vertical" android:layout_width="fill_parent"    android:layout_marginLeft="10sp" android:layout_marginRight="10sp"    android:layout_height="wrap_content" android:scrollbars="vertical">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"        android:layout_width="match_parent"
+    android:layout_height="fill_parent"         android:overScrollMode="always"         android:isScrollContainer="true"         android:scrollbarAlwaysDrawVerticalTrack="true"         android:scrollbarStyle="outsideInset"         android:scrollbars="vertical">
+    <LinearLayout  android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_marginLeft="0sp" android:layout_marginRight="0sp"
+        android:layout_height="wrap_content" android:scrollbars="vertical">
 
     <LinearLayout android:id="@+id/secQCluster" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle1">
-       <TextView android:id="@+id/VlblQCluster" android:text="Clusster:" android:layout_width="100sp" android:layout_height="wrap_content" android:textSize="20sp" />
-       <TextView android:id="@+id/txtCluster" android:layout_width="150sp" android:layout_height="wrap_content" android:textSize="20sp" />
+       <TextView android:id="@+id/VlblQCluster" android:text="Cluster:" android:layout_width="100sp" android:layout_height="wrap_content" android:textSize="20sp" />
+       <TextView android:id="@+id/txtCluster" android:layout_width="100sp" android:layout_height="wrap_content" android:textSize="20sp" />
               
        <TextView android:id="@+id/VlblQBlock" android:text="Block:" android:layout_width="100sp" android:layout_height="wrap_content" android:textSize="20sp" />
        <!--<TextView android:id="@+id/txtBlock" android:text="05" android:layout_width="100sp" android:layout_height="wrap_content" android:textSize="20sp" />-->
         <Spinner
             android:id="@+id/txtBlock"
-            android:layout_width="60sp"
+            android:layout_width="80sp"
             android:layout_height="wrap_content"
             android:drawSelectorOnTop="true"
             android:prompt="@string/planet_prompt"

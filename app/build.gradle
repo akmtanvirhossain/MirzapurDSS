@@ -2,12 +2,13 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion '23.0.1'
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
         applicationId "data.mirzapurdss"
-        minSdkVersion 16
-        targetSdkVersion 19
+        minSdkVersion 15
+        targetSdkVersion 23
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -16,13 +17,19 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+    dexOptions {
+        jumboMode true
+        javaMaxHeapSize "4g"
+    }
 }
 
 dependencies {
     compile 'com.google.code.gson:gson:2.5'
     compile files('libs/ksoap2-android-assembly-2.4-jar-with-dependencies.jar')
-    compile files('libs/gson-2.5.jar')
+    /*compile files('libs/gson-2.5.jar')*/
+    compile 'com.google.code.gson:gson:2.8.1'
     compile 'com.android.support:appcompat-v7:23.3.0'
     compile 'com.android.support:design:23.3.0'
     compile 'com.google.android.gms:play-services-maps:8.4.0'
 }
+

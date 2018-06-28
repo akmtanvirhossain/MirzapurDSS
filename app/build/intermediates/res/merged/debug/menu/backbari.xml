@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/mnuGPSLandmark" android:title="Landmark" android:showAsAction="ifRoom|withText"/>
-    <item android:id="@+id/mnuRefresh" android:title="Refresh" android:showAsAction="ifRoom|withText"/>
-    <item android:id="@+id/mnuNewBari" android:title="New Bari" android:showAsAction="ifRoom|withText"/>
-    <item android:id="@+id/mnuBack" android:title="Back" android:showAsAction="ifRoom|withText"/>
-    <item android:id="@+id/mnuHHGps" android:title="GPS Bari" android:showAsAction="ifRoom|withText"/>
-</menu>

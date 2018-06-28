@@ -644,13 +644,16 @@
         </LinearLayout>
         <View android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
 
-        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle1">
+
+
+        //stop on: 23 apr 2018
+        <LinearLayout android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle1">
             <TextView android:id="@+id/lblHQ027"  android:text="০২৭.  খানা প্রধানের সাথে বিদেশ অবস্থান কারী আত্মীয়ের সম্পক কি?" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="20sp" />
 
         </LinearLayout>
-        <View android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
+        <View android:visibility="gone" android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
 
-        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+        <LinearLayout android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
             <TextView android:id="@+id/lblQ027a" android:text="A . " android:layout_height="wrap_content" android:textSize="20sp"
                 android:layout_width="30dp" />
             <TextView android:id="@+id/VlblQ027a" android:text="স্ত্রী/স্বামী"  android:layout_height="wrap_content" android:textSize="20sp"
@@ -659,9 +662,9 @@
             <CheckBox android:id="@+id/chkQ027a" android:layout_width="wrap_content" android:inputType="text" android:layout_height="wrap_content" android:layout_marginRight="10sp" android:textSize="20sp" />
 
         </LinearLayout>
-        <View android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
+        <View android:visibility="gone" android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
 
-        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+        <LinearLayout android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
             <TextView android:id="@+id/lblQ027b" android:text="B . " android:layout_height="wrap_content" android:textSize="20sp"
                 android:layout_width="30dp" />
             <TextView android:id="@+id/VlblQ027b" android:text="ছেলে"  android:layout_height="wrap_content" android:textSize="20sp"
@@ -670,9 +673,9 @@
             <CheckBox android:id="@+id/chkQ027b" android:layout_width="wrap_content" android:inputType="text" android:layout_height="wrap_content" android:layout_marginRight="10sp" android:textSize="20sp" />
 
         </LinearLayout>
-        <View android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
+        <View android:visibility="gone" android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
 
-        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+        <LinearLayout android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
             <TextView android:id="@+id/lblQ027c" android:text="C . " android:layout_height="wrap_content" android:textSize="20sp"
                 android:layout_width="30dp" />
             <TextView android:id="@+id/VlblQ027c" android:text="মেয়ে"  android:layout_height="wrap_content" android:textSize="20sp"
@@ -681,9 +684,9 @@
             <CheckBox android:id="@+id/chkQ027c" android:layout_width="wrap_content" android:inputType="text" android:layout_height="wrap_content" android:layout_marginRight="10sp" android:textSize="20sp" />
 
         </LinearLayout>
-        <View android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
+        <View android:visibility="gone" android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
 
-        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+        <LinearLayout android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
             <TextView android:id="@+id/lblQ027d" android:text="D . "  android:layout_height="wrap_content" android:textSize="20sp"
                 android:layout_width="30dp" />
             <TextView android:id="@+id/VlblQ027d" android:text="মেয়ের জামাই/ ছেলের বউ"  android:layout_height="wrap_content" android:textSize="20sp"
@@ -692,9 +695,9 @@
             <CheckBox android:id="@+id/chkQ027d" android:layout_width="wrap_content" android:inputType="text" android:layout_height="wrap_content" android:layout_marginRight="10sp" android:textSize="20sp" />
 
         </LinearLayout>
-        <View android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
+        <View android:visibility="gone" android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
 
-        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+        <LinearLayout android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
             <TextView android:id="@+id/lblQ027e" android:text="E . "  android:layout_height="wrap_content" android:textSize="20sp"
                 android:layout_width="30dp" />
             <TextView android:id="@+id/VlblQ027e" android:text="নাতি/ নাতনী"  android:layout_height="wrap_content" android:textSize="20sp"
@@ -702,71 +705,71 @@
             <CheckBox android:id="@+id/chkQ027e" android:layout_width="wrap_content" android:inputType="text" android:layout_height="wrap_content" android:layout_marginRight="10sp" android:textSize="20sp" />
 
         </LinearLayout>
-        <View android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
+        <View android:visibility="gone" android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
 
-        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+        <LinearLayout android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
             <TextView android:id="@+id/lblQ027f" android:text="F . " android:layout_width="30dp" android:layout_height="wrap_content" android:textSize="20sp" />
             <TextView android:id="@+id/VlblQ027f" android:text="বাবা/ মা" android:layout_width="250dp" android:layout_height="wrap_content" android:textSize="20sp" />
             <CheckBox android:id="@+id/chkQ027f" android:layout_width="wrap_content" android:inputType="text" android:layout_height="wrap_content" android:layout_marginRight="10sp" android:textSize="20sp" />
 
         </LinearLayout>
-        <View android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
+        <View android:visibility="gone" android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
 
-        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+        <LinearLayout android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
             <TextView android:id="@+id/lblQ027g" android:text="G . " android:layout_width="30dp" android:layout_height="wrap_content" android:textSize="20sp" />
             <TextView android:id="@+id/VlblQ027g" android:text="শ্বশুর/শাশুড়ী" android:layout_width="250dp" android:layout_height="wrap_content" android:textSize="20sp" />
             <CheckBox android:id="@+id/chkQ027g" android:layout_width="wrap_content" android:inputType="text" android:layout_height="wrap_content" android:layout_marginRight="10sp" android:textSize="20sp" />
 
         </LinearLayout>
-        <View android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
+        <View android:visibility="gone" android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
 
-        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+        <LinearLayout android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
             <TextView android:id="@+id/lblQ027h" android:text="H . " android:layout_width="30dp" android:layout_height="wrap_content" android:textSize="20sp" />
             <TextView android:id="@+id/VlblQ027h" android:text="ভাই/বোন" android:layout_width="250dp" android:layout_height="wrap_content" android:textSize="20sp" />
             <CheckBox android:id="@+id/chkQ027h" android:layout_width="wrap_content" android:inputType="text" android:layout_height="wrap_content" android:layout_marginRight="10sp" android:textSize="20sp" />
 
         </LinearLayout>
-        <View android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
+        <View android:visibility="gone" android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
 
-        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+        <LinearLayout android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
             <TextView android:id="@+id/lblQ027i" android:text="I .  " android:layout_width="30dp" android:layout_height="wrap_content" android:textSize="20sp" />
             <TextView android:id="@+id/VlblQ027i" android:text="অন্যান্য আত্মীয়স্বজন" android:layout_width="250dp" android:layout_height="wrap_content" android:textSize="20sp" />
             <CheckBox android:id="@+id/chkQ027i" android:layout_width="wrap_content" android:inputType="text" android:layout_height="wrap_content" android:layout_marginRight="10sp" android:textSize="20sp" />
 
         </LinearLayout>
-        <View android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
+        <View android:visibility="gone" android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
 
-        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+        <LinearLayout android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
             <TextView android:id="@+id/lblQ027j" android:text="J . " android:layout_width="30dp" android:layout_height="wrap_content" android:textSize="20sp" />
             <TextView android:id="@+id/VlblQ027j" android:text="পালিত/সৎ সন্তান" android:layout_width="250dp" android:layout_height="wrap_content" android:textSize="20sp" />
             <CheckBox android:id="@+id/chkQ027j" android:layout_width="wrap_content" android:inputType="text" android:layout_height="wrap_content" android:layout_marginRight="10sp" android:textSize="20sp" />
 
         </LinearLayout>
-        <View android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
+        <View android:visibility="gone" android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
 
-        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+        <LinearLayout android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
             <TextView android:id="@+id/lblQ027y" android:text="Y . " android:layout_width="30dp" android:layout_height="wrap_content" android:textSize="20sp" />
             <TextView android:id="@+id/VlblQ027y" android:text="অন্যান্য" android:layout_width="250dp" android:layout_height="wrap_content" android:textSize="20sp" />
             <CheckBox android:id="@+id/chkQ027y" android:layout_width="wrap_content" android:inputType="text" android:layout_height="wrap_content" android:layout_marginRight="10sp" android:textSize="20sp" />eRow  android:paddingTop="10sp" android:paddingBottom="10sp" android:background="#C2E0EC">
 
         </LinearLayout>
-        <View android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
+        <View android:visibility="gone" android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
 
-        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+        <LinearLayout android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
             <TextView android:id="@+id/lblQ027z" android:text="Z . " android:layout_width="30dp" android:layout_height="wrap_content" android:textSize="20sp" />
             <TextView android:id="@+id/VlblQ027z" android:text="জানি না" android:layout_width="250dp" android:layout_height="wrap_content" android:textSize="20sp" />
             <CheckBox android:id="@+id/chkQ027z" android:layout_width="150sp" android:inputType="text" android:layout_height="wrap_content" android:layout_marginRight="10sp" android:textSize="20sp" />
 
         </LinearLayout>
-        <View android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
+        <View android:visibility="gone" android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
 
-        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle1">
+        <LinearLayout android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle1">
             <TextView android:id="@+id/lblHQ027"  android:text="০২৮. এবার আমাকে বালুন এদের মধ্যে  নিম্নের দেশ গুলতে কতজন থাকে" android:layout_width="543dp" android:layout_height="wrap_content" android:textSize="20sp" />
 
         </LinearLayout>
-        <View android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
+        <View android:visibility="gone" android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
 
-        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+        <LinearLayout android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
             <TextView android:id="@+id/lblQ028a" android:text="A . "  android:layout_height="wrap_content" android:textSize="20sp"
                 android:layout_width="wrap_content" />
             <TextView android:id="@+id/VlblQ028a" android:text="যুক্তরাজ্য / লন্ডন / ইউরোপ" android:layout_height="wrap_content" android:textSize="20sp"
@@ -774,9 +777,9 @@
             <EditText android:id="@+id/txtQ028a" android:maxLength="2" android:layout_width="60sp" android:inputType="number" android:layout_height="wrap_content" style="@style/customEdit" android:layout_marginRight="10sp" android:textSize="20sp" />
 
         </LinearLayout>
-        <View android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
+        <View android:visibility="gone" android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
 
-        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+        <LinearLayout android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
             <TextView android:id="@+id/lblQ028b" android:text="B . "  android:layout_height="wrap_content" android:textSize="20sp"
                 android:layout_width="wrap_content" />
             <TextView android:id="@+id/VlblQ028b" android:text="উত্তর আমেরিকা / যুক্তরাষ্ট্র"  android:layout_height="wrap_content" android:textSize="20sp"
@@ -784,9 +787,9 @@
             <EditText android:id="@+id/txtQ028b" android:maxLength="2" android:layout_width="60sp" android:inputType="number" android:layout_height="wrap_content" style="@style/customEdit" android:layout_marginRight="10sp" android:textSize="20sp" />
 
         </LinearLayout>
-        <View android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
+        <View android:visibility="gone" android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
 
-        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+        <LinearLayout android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
             <TextView android:id="@+id/lblQ028c" android:text="C . "  android:layout_height="wrap_content" android:textSize="20sp"
                 android:layout_width="wrap_content" />
             <TextView android:id="@+id/VlblQ028c" android:text="অষ্টেলিয়া /নিউজিল্যান্ড"  android:layout_height="wrap_content" android:textSize="20sp"
@@ -794,9 +797,9 @@
             <EditText android:id="@+id/txtQ028c" android:maxLength="2" android:layout_width="60sp" android:inputType="number" android:layout_height="wrap_content" style="@style/customEdit" android:layout_marginRight="10sp" android:textSize="20sp" />
 
         </LinearLayout>
-        <View android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
+        <View android:visibility="gone" android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
 
-        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+        <LinearLayout android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
             <TextView android:id="@+id/lblQ028d" android:text="D . "  android:layout_height="wrap_content" android:textSize="20sp"
                 android:layout_width="wrap_content" />
             <TextView android:id="@+id/VlblQ028d" android:text="মধ্যপ্রাচ্য"  android:layout_height="wrap_content" android:textSize="20sp"
@@ -804,9 +807,9 @@
             <EditText android:id="@+id/txtQ028d" android:maxLength="2" android:layout_width="60sp" android:inputType="number" android:layout_height="wrap_content" style="@style/customEdit" android:layout_marginRight="10sp" android:textSize="20sp" />
 
         </LinearLayout>
-        <View android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
+        <View  android:visibility="gone" android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
 
-        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+        <LinearLayout android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
             <TextView android:id="@+id/lblQ028e" android:text="E . "  android:layout_height="wrap_content" android:textSize="20sp"
                 android:layout_width="wrap_content" />
             <TextView android:id="@+id/VlblQ028e" android:text="মালয়েশিয়া/সিঙ্গাপুর /ব্রনাই"  android:layout_height="wrap_content" android:textSize="20sp"
@@ -814,9 +817,9 @@
             <EditText android:id="@+id/txtQ028e" android:maxLength="2" android:layout_width="60sp" android:inputType="number" android:layout_height="wrap_content" style="@style/customEdit" android:layout_marginRight="10sp" android:textSize="20sp" />
 
         </LinearLayout>
-        <View android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
+        <View android:visibility="gone" android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
 
-        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+        <LinearLayout android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
             <TextView android:id="@+id/lblQ028y" android:text="Y . "  android:layout_height="wrap_content" android:textSize="20sp"
                 android:layout_width="wrap_content" />
             <TextView android:id="@+id/VlblQ028y" android:text="অন্যান্য"  android:layout_height="wrap_content" android:textSize="20sp"
@@ -824,7 +827,7 @@
             <EditText android:id="@+id/txtQ028y" android:maxLength="2" android:layout_width="60sp" android:inputType="number" android:layout_height="wrap_content" style="@style/customEdit" android:layout_marginRight="10sp" android:textSize="20sp" />
 
         </LinearLayout>
-        <View android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
+        <View android:visibility="gone" android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
 
         <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle1">
             <TextView android:id="@+id/lblQ029" android:text="০২৯."  android:layout_height="wrap_content" android:textSize="20sp"

@@ -1,6 +1,22 @@
 -- Merging decision tree log ---
 manifest
-ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:2:1-64:12
+ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:2:1-67:12
+INJECTED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:2:1-67:12
+INJECTED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:2:1-67:12
+INJECTED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:2:1-67:12
+MERGED from [com.android.support:design:23.3.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\design-23.3.0.aar\223783db7fdc4319ed84e267b86f108a\AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:appcompat-v7:23.3.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\appcompat-v7-23.3.0.aar\5b3baff1e63de52747ea5503c3b8e63c\AndroidManifest.xml:17:1-27:12
+MERGED from [com.google.android.gms:play-services-maps:8.4.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\play-services-maps-8.4.0.aar\974388ed91fd379cfca39c16bd822f03\AndroidManifest.xml:16:1-28:12
+MERGED from [com.android.support:multidex:1.0.2] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\multidex-1.0.2.aar\f21a937a6390a597388b1b08b792ee62\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:23.3.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-23.3.0.aar\37c516aa0f392097f99eabca4f3d9d24\AndroidManifest.xml:2:1-9:12
+MERGED from [com.android.support:support-vector-drawable:23.3.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-23.3.0.aar\bcf519376900a607255d938c0d0f71ce\AndroidManifest.xml:2:1-9:12
+MERGED from [com.android.support:recyclerview-v7:23.3.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-23.3.0.aar\9d8b61949f6cdaf25af557258909a070\AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.android.gms:play-services-base:8.4.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\play-services-base-8.4.0.aar\9bc154cad9c957dc2cbf2fc4f391f593\AndroidManifest.xml:16:1-19:12
+MERGED from [com.google.android.gms:play-services-basement:8.4.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\play-services-basement-8.4.0.aar\16b393a06aaf4002cb626c13d15fa8fc\AndroidManifest.xml:16:1-26:12
+MERGED from [com.android.support:support-v4:23.3.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\support-v4-23.3.0.aar\fe8ecec838c028573ed99a2bc8a0c877\AndroidManifest.xml:17:1-24:12
+INJECTED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:2:1-67:12
+INJECTED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:2:1-67:12
+INJECTED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:2:1-67:12
 	package
 		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:3:5-31
 		INJECTED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml
@@ -9,25 +25,40 @@ ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:
 		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:5:5-30
 		INJECTED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml
 		INJECTED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:2:11-69
 	android:versionCode
 		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:4:5-28
 		INJECTED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml
 		INJECTED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml
-	xmlns:android
-		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:2:11-69
 uses-sdk
 ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:6:5-8:37
-MERGED from [com.android.support:design:23.3.0] E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.android.support\design\23.3.0\AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:appcompat-v7:23.3.0] E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.3.0\AndroidManifest.xml:21:5-23:78
-MERGED from [com.android.support:support-vector-drawable:23.3.0] E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.3.0\AndroidManifest.xml:5:5-43
-MERGED from [com.android.support:support-v4:23.3.0] E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:animated-vector-drawable:23.3.0] E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.3.0\AndroidManifest.xml:5:5-44
-MERGED from [com.android.support:recyclerview-v7:23.3.0] E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.3.0\AndroidManifest.xml:20:5-43
-MERGED from [com.google.android.gms:play-services-maps:8.4.0] E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\8.4.0\AndroidManifest.xml:26:5-42
-MERGED from [com.google.android.gms:play-services-base:8.4.0] E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\8.4.0\AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-basement:8.4.0] E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.4.0\AndroidManifest.xml:18:5-42
+INJECTED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:6:5-8:37
+INJECTED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:6:5-8:37
+MERGED from [com.android.support:design:23.3.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\design-23.3.0.aar\223783db7fdc4319ed84e267b86f108a\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:design:23.3.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\design-23.3.0.aar\223783db7fdc4319ed84e267b86f108a\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:appcompat-v7:23.3.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\appcompat-v7-23.3.0.aar\5b3baff1e63de52747ea5503c3b8e63c\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:appcompat-v7:23.3.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\appcompat-v7-23.3.0.aar\5b3baff1e63de52747ea5503c3b8e63c\AndroidManifest.xml:21:5-23:78
+MERGED from [com.google.android.gms:play-services-maps:8.4.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\play-services-maps-8.4.0.aar\974388ed91fd379cfca39c16bd822f03\AndroidManifest.xml:26:5-42
+MERGED from [com.google.android.gms:play-services-maps:8.4.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\play-services-maps-8.4.0.aar\974388ed91fd379cfca39c16bd822f03\AndroidManifest.xml:26:5-42
+MERGED from [com.android.support:multidex:1.0.2] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\multidex-1.0.2.aar\f21a937a6390a597388b1b08b792ee62\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:multidex:1.0.2] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\multidex-1.0.2.aar\f21a937a6390a597388b1b08b792ee62\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:animated-vector-drawable:23.3.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-23.3.0.aar\37c516aa0f392097f99eabca4f3d9d24\AndroidManifest.xml:5:5-44
+MERGED from [com.android.support:animated-vector-drawable:23.3.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-23.3.0.aar\37c516aa0f392097f99eabca4f3d9d24\AndroidManifest.xml:5:5-44
+MERGED from [com.android.support:support-vector-drawable:23.3.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-23.3.0.aar\bcf519376900a607255d938c0d0f71ce\AndroidManifest.xml:5:5-43
+MERGED from [com.android.support:support-vector-drawable:23.3.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-23.3.0.aar\bcf519376900a607255d938c0d0f71ce\AndroidManifest.xml:5:5-43
+MERGED from [com.android.support:recyclerview-v7:23.3.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-23.3.0.aar\9d8b61949f6cdaf25af557258909a070\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:recyclerview-v7:23.3.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-23.3.0.aar\9d8b61949f6cdaf25af557258909a070\AndroidManifest.xml:20:5-43
+MERGED from [com.google.android.gms:play-services-base:8.4.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\play-services-base-8.4.0.aar\9bc154cad9c957dc2cbf2fc4f391f593\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-base:8.4.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\play-services-base-8.4.0.aar\9bc154cad9c957dc2cbf2fc4f391f593\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-basement:8.4.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\play-services-basement-8.4.0.aar\16b393a06aaf4002cb626c13d15fa8fc\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-basement:8.4.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\play-services-basement-8.4.0.aar\16b393a06aaf4002cb626c13d15fa8fc\AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:support-v4:23.3.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\support-v4-23.3.0.aar\fe8ecec838c028573ed99a2bc8a0c877\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:23.3.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\support-v4-23.3.0.aar\fe8ecec838c028573ed99a2bc8a0c877\AndroidManifest.xml:20:5-43
+INJECTED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:6:5-8:37
+INJECTED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:6:5-8:37
 	tools:overrideLibrary
-		ADDED from [com.android.support:appcompat-v7:23.3.0] E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.3.0\AndroidManifest.xml:23:9-75
+		ADDED from [com.android.support:appcompat-v7:23.3.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\appcompat-v7-23.3.0.aar\5b3baff1e63de52747ea5503c3b8e63c\AndroidManifest.xml:23:9-75
 	android:targetSdkVersion
 		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:8:5-34
 		INJECTED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml
@@ -46,12 +77,14 @@ ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:
 		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:10:22-77
 uses-permission#android.permission.INTERNET
 ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:11:5-66
-MERGED from [com.google.android.gms:play-services-maps:8.4.0] E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\8.4.0\AndroidManifest.xml:21:5-66
+MERGED from [com.google.android.gms:play-services-maps:8.4.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\play-services-maps-8.4.0.aar\974388ed91fd379cfca39c16bd822f03\AndroidManifest.xml:21:5-66
+MERGED from [com.google.android.gms:play-services-maps:8.4.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\play-services-maps-8.4.0.aar\974388ed91fd379cfca39c16bd822f03\AndroidManifest.xml:21:5-66
 	android:name
 		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:11:22-64
 uses-permission#android.permission.ACCESS_NETWORK_STATE
 ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:12:5-79
-MERGED from [com.google.android.gms:play-services-maps:8.4.0] E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\8.4.0\AndroidManifest.xml:20:5-78
+MERGED from [com.google.android.gms:play-services-maps:8.4.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\play-services-maps-8.4.0.aar\974388ed91fd379cfca39c16bd822f03\AndroidManifest.xml:20:5-78
+MERGED from [com.google.android.gms:play-services-maps:8.4.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\play-services-maps-8.4.0.aar\974388ed91fd379cfca39c16bd822f03\AndroidManifest.xml:20:5-78
 	android:name
 		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:12:22-76
 uses-permission#android.permission.ACCESS_FINE_LOCATION
@@ -70,140 +103,147 @@ uses-permission#android.permission.WRITE_SETTINGS
 ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:16:5-72
 	android:name
 		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:16:22-70
-uses-permission#android.permission.WRITE_SECURE_SETTINGS
-ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:17:2-76
-	android:name
-		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:17:19-74
 uses-permission#android.permission.CAMERA
 ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:18:2-61
 	android:name
 		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:18:19-59
 application
-ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:20:2-62:19
-MERGED from [com.android.support:design:23.3.0] E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.android.support\design\23.3.0\AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:appcompat-v7:23.3.0] E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.3.0\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-vector-drawable:23.3.0] E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.3.0\AndroidManifest.xml:7:5-20
-MERGED from [com.android.support:support-v4:23.3.0] E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:animated-vector-drawable:23.3.0] E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.3.0\AndroidManifest.xml:7:5-20
-MERGED from [com.google.android.gms:play-services-maps:8.4.0] E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\8.4.0\AndroidManifest.xml:27:5-20
-MERGED from [com.google.android.gms:play-services-basement:8.4.0] E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.4.0\AndroidManifest.xml:20:5-24:19
+ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:20:2-65:19
+MERGED from [com.android.support:design:23.3.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\design-23.3.0.aar\223783db7fdc4319ed84e267b86f108a\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:design:23.3.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\design-23.3.0.aar\223783db7fdc4319ed84e267b86f108a\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:appcompat-v7:23.3.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\appcompat-v7-23.3.0.aar\5b3baff1e63de52747ea5503c3b8e63c\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:appcompat-v7:23.3.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\appcompat-v7-23.3.0.aar\5b3baff1e63de52747ea5503c3b8e63c\AndroidManifest.xml:25:5-20
+MERGED from [com.google.android.gms:play-services-maps:8.4.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\play-services-maps-8.4.0.aar\974388ed91fd379cfca39c16bd822f03\AndroidManifest.xml:27:5-20
+MERGED from [com.google.android.gms:play-services-maps:8.4.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\play-services-maps-8.4.0.aar\974388ed91fd379cfca39c16bd822f03\AndroidManifest.xml:27:5-20
+MERGED from [com.android.support:animated-vector-drawable:23.3.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-23.3.0.aar\37c516aa0f392097f99eabca4f3d9d24\AndroidManifest.xml:7:5-20
+MERGED from [com.android.support:animated-vector-drawable:23.3.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-23.3.0.aar\37c516aa0f392097f99eabca4f3d9d24\AndroidManifest.xml:7:5-20
+MERGED from [com.android.support:support-vector-drawable:23.3.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-23.3.0.aar\bcf519376900a607255d938c0d0f71ce\AndroidManifest.xml:7:5-20
+MERGED from [com.android.support:support-vector-drawable:23.3.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-23.3.0.aar\bcf519376900a607255d938c0d0f71ce\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-basement:8.4.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\play-services-basement-8.4.0.aar\16b393a06aaf4002cb626c13d15fa8fc\AndroidManifest.xml:20:5-24:19
+MERGED from [com.google.android.gms:play-services-basement:8.4.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\play-services-basement-8.4.0.aar\16b393a06aaf4002cb626c13d15fa8fc\AndroidManifest.xml:20:5-24:19
+MERGED from [com.android.support:support-v4:23.3.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\support-v4-23.3.0.aar\fe8ecec838c028573ed99a2bc8a0c877\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:23.3.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\support-v4-23.3.0.aar\fe8ecec838c028573ed99a2bc8a0c877\AndroidManifest.xml:22:5-20
 	android:label
 		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:23:9-41
-	android:allowBackup
-		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:21:9-35
 	android:icon
 		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:22:9-45
+	android:allowBackup
+		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:21:9-35
 	android:theme
 		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:24:9-43
 service#data.mirzapurdss.ServiceInstallApplication
-ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:25:9-62
+ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:26:9-62
 	android:name
-		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:25:18-59
+		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:26:18-59
+service#data.mirzapurdss.Data_Process_Service
+ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:27:9-57
+	android:name
+		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:27:18-54
 meta-data#com.google.android.maps.v2.API_KEY
-ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:26:9-28:70
+ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:29:9-31:70
 	android:value
-		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:28:13-68
+		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:31:13-68
 	android:name
-		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:27:13-62
+		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:30:13-62
 activity#data.mirzapurdss.LoginActivity
-ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:29:9-36:20
+ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:32:9-39:20
 	android:label
-		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:31:13-45
+		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:34:13-45
 	android:name
-		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:30:13-59
+		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:33:13-59
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:32:13-35:29
+ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:35:13-38:29
 action#android.intent.action.MAIN
-ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:33:17-69
+ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:36:17-69
 	android:name
-		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:33:25-66
+		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:36:25-66
 category#android.intent.category.LAUNCHER
-ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:34:17-77
+ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:37:17-77
 	android:name
-		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:34:27-74
+		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:37:27-74
 activity#data.mirzapurdss.BlockList
-ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:38:9-48
+ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:41:9-48
 	android:name
-		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:38:19-46
+		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:41:19-46
 activity#data.mirzapurdss.HouseholdIndex
-ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:39:9-85
+ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:42:9-85
 	android:label
-		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:39:52-83
+		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:42:52-83
 	android:name
-		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:39:19-51
+		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:42:19-51
 activity#data.mirzapurdss.MemberEvents
-ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:40:9-81
+ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:43:9-81
 	android:label
-		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:40:50-79
+		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:43:50-79
 	android:name
-		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:40:19-49
+		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:43:19-49
 activity#data.mirzapurdss.Bari
-ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:41:9-43
+ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:44:9-43
 	android:name
-		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:41:19-41
+		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:44:19-41
 activity#data.mirzapurdss.Events
-ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:42:9-45
+ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:45:9-45
 	android:name
-		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:42:19-43
+		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:45:19-43
 activity#data.mirzapurdss.EventList
-ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:43:9-75
+ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:46:9-75
 	android:label
-		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:43:47-73
+		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:46:47-73
 	android:name
-		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:43:19-46
+		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:46:19-46
 activity#data.mirzapurdss.ses
-ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:44:9-85
+ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:47:9-85
 	android:label
-		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:44:41-83
+		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:47:41-83
 	android:name
-		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:44:19-40
+		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:47:19-40
 activity#data.mirzapurdss.reproductive_history
-ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:45:9-100
+ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:48:9-100
 	android:label
-		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:45:58-98
+		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:48:58-98
 	android:name
-		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:45:19-57
+		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:48:19-57
 activity#data.mirzapurdss.SESPregHisMissingList
-ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:46:9-105
+ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:49:9-105
 	android:label
-		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:46:59-103
+		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:49:59-103
 	android:name
-		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:46:19-58
+		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:49:19-58
 activity#data.mirzapurdss.Immunization
-ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:47:9-80
+ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:50:9-80
 	android:label
-		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:47:50-78
+		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:50:50-78
 	android:name
-		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:47:19-49
+		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:50:19-49
 activity#data.mirzapurdss.Death
-ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:48:9-81
+ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:51:9-81
 	android:label
-		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:48:43-79
+		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:51:43-79
 	android:name
-		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:48:19-42
+		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:51:19-42
 activity#data.mirzapurdss.GPSDialogActivity
-ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:50:9-52:73
-	android:label
-		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:51:13-45
-	android:theme
-		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:52:13-70
-	android:name
-		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:50:19-52
-activity#map.IconGeneratorDemoActivity
-ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:53:9-54:47
+ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:53:9-55:73
 	android:label
 		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:54:13-45
+	android:theme
+		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:55:13-70
 	android:name
-		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:53:19-63
+		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:53:19-52
+activity#map.IconGeneratorDemoActivity
+ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:56:9-57:47
+	android:label
+		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:57:13-45
+	android:name
+		ADDED from E:\AndroidStudioProject\MirzapurDSS\app\src\main\AndroidManifest.xml:56:19-63
 uses-feature#0x00020000
-ADDED from [com.google.android.gms:play-services-maps:8.4.0] E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\8.4.0\AndroidManifest.xml:22:5-24:33
+ADDED from [com.google.android.gms:play-services-maps:8.4.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\play-services-maps-8.4.0.aar\974388ed91fd379cfca39c16bd822f03\AndroidManifest.xml:22:5-24:33
 	android:glEsVersion
-		ADDED from [com.google.android.gms:play-services-maps:8.4.0] E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\8.4.0\AndroidManifest.xml:23:8-40
+		ADDED from [com.google.android.gms:play-services-maps:8.4.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\play-services-maps-8.4.0.aar\974388ed91fd379cfca39c16bd822f03\AndroidManifest.xml:23:8-40
 	android:required
-		ADDED from [com.google.android.gms:play-services-maps:8.4.0] E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\8.4.0\AndroidManifest.xml:24:8-31
+		ADDED from [com.google.android.gms:play-services-maps:8.4.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\play-services-maps-8.4.0.aar\974388ed91fd379cfca39c16bd822f03\AndroidManifest.xml:24:8-31
 meta-data#com.google.android.gms.version
-ADDED from [com.google.android.gms:play-services-basement:8.4.0] E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.4.0\AndroidManifest.xml:21:9-23:69
+ADDED from [com.google.android.gms:play-services-basement:8.4.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\play-services-basement-8.4.0.aar\16b393a06aaf4002cb626c13d15fa8fc\AndroidManifest.xml:21:9-23:69
 	android:value
-		ADDED from [com.google.android.gms:play-services-basement:8.4.0] E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.4.0\AndroidManifest.xml:23:13-66
+		ADDED from [com.google.android.gms:play-services-basement:8.4.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\play-services-basement-8.4.0.aar\16b393a06aaf4002cb626c13d15fa8fc\AndroidManifest.xml:23:13-66
 	android:name
-		ADDED from [com.google.android.gms:play-services-basement:8.4.0] E:\AndroidStudioProject\MirzapurDSS\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.4.0\AndroidManifest.xml:22:13-58
+		ADDED from [com.google.android.gms:play-services-basement:8.4.0] C:\Users\thossain\.gradle\caches\transforms-1\files-1.1\play-services-basement-8.4.0.aar\16b393a06aaf4002cb626c13d15fa8fc\AndroidManifest.xml:22:13-58

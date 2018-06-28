@@ -15,7 +15,7 @@ public class ReturnResult extends AsyncTask<String, Void, String> {
 		
 		public String WSDL_TARGET_NAMESPACE = Global.Namespace;
 		public String SOAP_ACTION = Global.Namespace+Method_Name;
-		public String SOAP_ADDRESS =Global.Soap_Address;
+		public String SOAP_ADDRESS = Common.Global.Soap_Address;
 		ProgressDialog dialog;
 		String Data=null;
 		

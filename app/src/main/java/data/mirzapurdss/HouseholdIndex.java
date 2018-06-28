@@ -105,18 +105,32 @@ public class HouseholdIndex extends Activity{
 	    	case R.id.mnuRefresh:
 		        //C.Save("delete from visits_temp");
 	     	  	//C.Save("insert into visits_temp(vill,bari,hh,rnd,rsno,vdate) select vill,bari,hh,rnd,rsno,vdate from visits where Rnd='"+ g.getRoundNumber() +"' and vill='"+ CurrentVCode +"'");
-	    		
-	    		BariList = (Spinner)findViewById(R.id.BariList);
+
+				BariList = (Spinner)findViewById(R.id.BariList);
 	    		//BariList.setSelection(2);
-	    		BlockList(false, Global.Left(BariList.getSelectedItem().toString(),4));
-	    		
+	    		//BlockList(false, Global.Left(BariList.getSelectedItem().toString(),4));
+				//====
+				if(BariList.getSelectedItemPosition()==0)
+				{
+
+				}
+				else if(BariList.getSelectedItem().toString().trim().equalsIgnoreCase("all bari"))
+				{
+					BlockList(false, "");
+				}
+				else
+				{
+					BlockList(false, Global.Left(BariList.getSelectedItem().toString(),4));
+				}
+				//====
+
 	    		//Total household visited : 26 Nov 2013
-		    	TextView lblTotalHH=(TextView)findViewById(R.id.lblTotalHH);
-		    	TextView lblHHVisited=(TextView)findViewById(R.id.lblHHVisited);
+		    	TextView lblTotalHH   = (TextView)findViewById(R.id.lblTotalHH);
+		    	TextView lblHHVisited = (TextView)findViewById(R.id.lblHHVisited);
 		    		    	
 		    	//Cursor cur = C.ReadData("select count(h.vill)thh,count(v.vill)tvisit from Household h left outer join visits_temp v on h.vill||h.bari||h.hh=v.vill||v.bari||v.hh and v.rnd='"+ g.getRoundNumber() +"' where h.Clust='"+ g.getClusterCode() +"' and h.block='"+ g.getBlockCode() +"' and (length(h.Extype)=0 or h.extype not in('51','52','53','55'))");
 				String SQL = "";
-				SQL  = "select (select totalhh from ClusterBlock_Status where Cluster='"+ g.getClusterCode() +"' and Block='"+ g.getBlockCode() +"')thh,count(v.vill)tvisit";
+				SQL  = "select (select totalhh from ClusterBlock_Status where Cluster='"+ g.getClusterCode() +"' and Block='"+ g.getBlockCode() +"' and Rnd='"+ (Integer.valueOf(g.getRoundNumber())-1) +"')thh,count(v.vill)tvisit";
 				SQL += " from Household h left outer join visits_temp v on h.vill||h.bari||h.hh=v.vill||v.bari||v.hh and v.rnd='"+ g.getRoundNumber() +"'";
 				SQL += " where h.Clust='"+ g.getClusterCode() +"' and h.block='"+ g.getBlockCode() +"'";
 
@@ -156,7 +170,7 @@ public class HouseholdIndex extends Activity{
     		case R.id.mnuBack:
     			finish();	
     			Intent f11 = new Intent(getApplicationContext(),BlockList.class);
-     	    	startActivity(f11); 
+     	    	startActivity(f11);
     			return true;	    			
     	}    
     	return false;
@@ -192,28 +206,61 @@ public class HouseholdIndex extends Activity{
 
 	        
 	        FindLocation();
-	        //FindLocationNet();
-	       /* btnMap = (Button) findViewById(R.id.buttonMap);
-			btnMap.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					Intent intent = new Intent(getApplicationContext(),map.IconGeneratorDemoActivity.class);
-					startActivity(intent);
-				}
-			});*/
 
 			IDbundle       = getIntent().getExtras();
 	        CurrentVillage = IDbundle.getString("village");
 	        CurrentVCode   = IDbundle.getString("vcode");
 	        setTitle("[ Block: " + g.getBlockCode() + " ,Vill: "+ CurrentVCode + "-" + CurrentVillage + " ]");
-	        
+
+	        //update total number of member
+			Cursor cur_tot_mem=C.ReadData("select h.vill as vill,h.bari as bari,h.hh as hh,m.totalmem from household h\n" +
+					" left outer join (select vill,bari,hh,count(*)totalmem from member where length(extype)=0 group by vill,bari,hh)m\n" +
+					" on h.vill=m.vill and h.bari=m.bari and h.hh=m.hh\n" +
+					" where cast(h.totalmem as int)!=cast(m.totalmem as int)\n" +
+					" and h.vill='"+ CurrentVCode +"'");
+			cur_tot_mem.moveToFirst();
+			String SQLUpdate = "";
+			while(!cur_tot_mem.isAfterLast())
+			{
+				SQLUpdate += "Update Household set totalmem='"+ cur_tot_mem.getString(cur_tot_mem.getColumnIndex("totalmem")) +"'" +
+						" where " +
+						" vill='"+ cur_tot_mem.getString(cur_tot_mem.getColumnIndex("vill")) +"'" +
+						" and bari='"+ cur_tot_mem.getString(cur_tot_mem.getColumnIndex("bari")) +"'" +
+						" and hh='"+ cur_tot_mem.getString(cur_tot_mem.getColumnIndex("hh")) +"';";
+				cur_tot_mem.moveToNext();
+			}
+			cur_tot_mem.close();
+
+			if(SQLUpdate.length()>0) {
+				try {
+					C.Save(SQLUpdate);
+				} catch (Exception ex) {
+
+				}
+			}
+
+
 			C.Save("delete from visits_temp");
 			C.Save("insert into visits_temp(vill,bari,hh,rnd,rsno,vdate) select distinct vill,bari,hh,rnd,rsno,vdate from visits where Rnd='"+ g.getRoundNumber() +"' and vill='"+ CurrentVCode +"'");
 
-	        //TextView lblBlock=(TextView)findViewById(R.id.lblBlock);
-	        //lblBlock.setText(" Block: " + g.getBlockCode());        
-	        //TextView lblVillage=(TextView)findViewById(R.id.lblVillageName);
-	    	//lblVillage.setText("Village: "+ CurrentVCode + "," + CurrentVillage);        
+
+			/*String SQL1 = "Select Vill,Bari,HH as HH,(Select Name from member where Rth='01' and Vill||Bari||HH=h.Vill||h.Bari||h.HH order by date(endate) desc limit 1)Name\n" +
+					" from Household h where length(h.HHHead)=0 and h.Clust='"+ g.getClusterCode() +"' and h.Block='"+ g.getBlockCode() +"'";
+
+			Cursor curH = C.ReadData(SQL1);
+			curH.moveToFirst();
+			while(!curH.isAfterLast())
+			{
+				SQL1 = "Update Household set upload='2',HHHead='"+ curH.getString(curH.getColumnIndex("Name")) +"'";
+				SQL1 += " where vill='"+ curH.getString(curH.getColumnIndex("Vill")) +"'";
+				SQL1 += " and bari='"+ curH.getString(curH.getColumnIndex("Bari")) +"'";
+				SQL1 += " and hh='"+ curH.getString(curH.getColumnIndex("HH")) +"'";
+				C.Save(SQL1);
+				curH.moveToNext();
+			}
+			curH.close();*/
+
+
 			BariList = (Spinner)findViewById(R.id.BariList);
 	    	list = (ListView) findViewById(R.id.listHHIndex);
 	    	
@@ -224,7 +271,7 @@ public class HouseholdIndex extends Activity{
 			//Cursor cur = C.ReadData("select count(h.vill)thh,count(v.vill)tvisit from Household h left outer join visits_temp v on h.vill||h.bari||h.hh=v.vill||v.bari||v.hh and v.rnd='"+ g.getRoundNumber() +"' where h.Clust='"+ g.getClusterCode() +"' and h.block='"+ g.getBlockCode() +"' and (length(h.Extype)=0 or h.extype not in('51','52','53','55'))");
 
 			String SQL = "";
-			SQL  = "select (select totalhh from ClusterBlock_Status where Cluster='"+ g.getClusterCode() +"' and Block='"+ g.getBlockCode() +"')thh,count(v.vill)tvisit";
+			SQL  = "select (select totalhh from ClusterBlock_Status where Cluster='"+ g.getClusterCode() +"' and Block='"+ g.getBlockCode() +"' and Rnd='"+ (Integer.valueOf(g.getRoundNumber())-1) +"')thh,count(v.vill)tvisit";
 			SQL += " from Household h left outer join visits_temp v on h.vill||h.bari||h.hh=v.vill||v.bari||v.hh and v.rnd='"+ g.getRoundNumber() +"'";
 			SQL += " where h.Clust='"+ g.getClusterCode() +"' and h.block='"+ g.getBlockCode() +"'";
 
@@ -331,6 +378,17 @@ public class HouseholdIndex extends Activity{
 				//BariCode = g.getBariCode().length()==0?BariCode:g.getBariCode();
 				if(BariCode.length()!=0)
 				{
+					SQL +="select b.bari,ifnull(h.hh,'')as hh,ifnull(h.hhhead,'')hhhead,ifnull(totalMem,'0')totalMem,b.vill,b.bariname,(case when v.rnd is null then '2' else '1' end)RoundVisit,";
+					SQL +=" ifnull(h.rel,'')rel,ifnull(v.rsno,'')rsno,ifnull(v.vdate,'')vdate,posmig from ";
+					SQL +=" Baris b";
+					SQL +=" left outer join Household h on b.vill||b.bari=h.vill||h.bari";
+					SQL +=" left outer join visits_temp v on h.vill||h.bari||h.hh=v.Vill||v.Bari||v.hh";
+					SQL +=" where ";
+					SQL +=" b.Cluster='"+ g.getClusterCode() +"' and";
+					SQL +=" b.block='"+ g.getBlockCode() +"' and b.bari ='"+ BariCode +"'";
+					SQL +=" order by h.vill, h.Bari, h.HH";
+
+					/* stop on : 20 oct 2017
 					SQL +="select b.bari,ifnull(h.hh,'')as hh,ifnull(h.hhhead,'')hhhead,count(m.vill)totalMem,b.vill,b.bariname,(case when v.rnd is null then '2' else '1' end)RoundVisit,";
 					SQL +=" ifnull(h.rel,'')rel,ifnull(v.rsno,'')rsno,ifnull(v.vdate,'')vdate,count(case when m.posmig='54' then '1' else null end)posmig from ";
 					SQL +=" Baris b";
@@ -342,7 +400,7 @@ public class HouseholdIndex extends Activity{
 					SQL +=" b.Cluster='"+ g.getClusterCode() +"' and";
 					SQL +=" b.block='"+ g.getBlockCode() +"' and b.bari ='"+ BariCode +"'";
 					SQL +=" group by h.vill,h.bari,h.hh";
-					SQL +=" order by h.vill, h.Bari, h.HH";
+					SQL +=" order by h.vill, h.Bari, h.HH";*/
 					
 					/*SQL +="Select b.bari,ifnull(h.hh,'')hh,ifnull(h.hhhead,'')hhhead,0 totalmem,b.vill,b.bariname, (case when v1.vill is null then '2' else '1' end)RoundVisit,Rel,ifnull(v1.rsno,'')rsno,ifnull(v1.vdate,'')vdate";
 					SQL +=" from Baris b";
@@ -356,6 +414,17 @@ public class HouseholdIndex extends Activity{
 				}
 				else
 				{
+					SQL +="select b.bari,ifnull(h.hh,'')as hh,ifnull(h.hhhead,'')hhhead,ifnull(totalMem,'0')totalMem,b.vill,b.bariname,(case when v.rnd is null then '2' else '1' end)RoundVisit,";
+					SQL +=" ifnull(h.rel,'')rel,ifnull(v.rsno,'')rsno,ifnull(v.vdate,'')vdate,posmig from ";
+					SQL +=" Baris b";
+					SQL +=" left outer join Household h on b.vill||b.bari=h.vill||h.bari";
+					SQL +=" left outer join visits_temp v on h.vill||h.bari||h.hh=v.Vill||v.Bari||v.hh";
+					SQL +=" where ";
+					SQL +=" b.Cluster='"+ g.getClusterCode() +"' and";
+					SQL +=" b.block='"+ g.getBlockCode() +"'";
+					SQL +=" order by h.vill, h.Bari, h.HH";
+
+					/*stop on: 20 oct 2017
 					SQL +="select b.bari,ifnull(h.hh,'')as hh,ifnull(h.hhhead,'')hhhead,count(m.vill)totalMem,b.vill,b.bariname,(case when v.rnd is null then '2' else '1' end)RoundVisit,";
 					SQL +=" ifnull(h.rel,'')rel,ifnull(v.rsno,'')rsno,ifnull(v.vdate,'')vdate,count(case when m.posmig='54' then '1' else null end)posmig from ";
 					SQL +=" Baris b";
@@ -367,7 +436,7 @@ public class HouseholdIndex extends Activity{
 					SQL +=" b.Cluster='"+ g.getClusterCode() +"' and";
 					SQL +=" b.block='"+ g.getBlockCode() +"'";
 					SQL +=" group by h.vill,h.bari,h.hh";
-					SQL +=" order by h.vill, h.Bari, h.HH";
+					SQL +=" order by h.vill, h.Bari, h.HH";*/
 
 					/*SQL +="Select b.bari,ifnull(h.hh,'')hh,ifnull(h.hhhead,'')hhhead,0 totalmem,b.vill,b.bariname, (case when v1.vill is null then '2' else '1' end)RoundVisit,Rel,ifnull(v1.rsno,'')rsno,ifnull(v1.vdate,'')vdate";
 					SQL +=" from Baris b";
@@ -578,7 +647,7 @@ public class HouseholdIndex extends Activity{
 	            			Connection.MessageBox(HouseholdIndex.this, "এ বাড়ীতে 99 এর বেশী খানা হবে না।");
 	            			return;
 	            		}
-	            		String HNo = Global.Right("000"+C.ReturnSingleValue("select (ifnull(max(cast(hh as int)),0)+1)MaxSl from Member where vill||Bari='"+ o.get("vcode")+o.get("bari") +"'"),2);
+	            		String HNo = Global.Right("000"+C.ReturnSingleValue("select (ifnull(max(cast(hh as int)),0)+1)MaxSl from Household where vill||Bari='"+ o.get("vcode")+o.get("bari") +"'"),2);
 	            		ShowVisitForm(o.get("vcode"),o.get("bari"),HNo,g.getRoundNumber(),o.get("bariname"),o.get("hhhead"),"n","0","","");
 	            	}
 	        });	
@@ -691,9 +760,6 @@ public class HouseholdIndex extends Activity{
     	    	try
     	    	{
         		AlertDialog.Builder adb = new AlertDialog.Builder(HouseholdIndex.this);
-        				
-        				
-        		
 		            	if(txtRnd.getText().length()==0)
 		            	{
 		            		Connection.MessageBox(HouseholdIndex.this, "সঠিক রউন্ড নাম্বার সিলেক্ট করুন।");

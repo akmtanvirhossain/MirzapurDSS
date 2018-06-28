@@ -1,17 +1,5 @@
 package data.mirzapurdss;
 
-import android.media.Image;
-import android.provider.ContactsContract;
-import android.widget.ArrayAdapter;
-import java.io.File;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -42,7 +30,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -58,6 +46,14 @@ import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TextView;
+
+import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 
 public class MemberEvents extends Activity{
 	SimpleAdapter mSchedule;
@@ -114,16 +110,15 @@ public class MemberEvents extends Activity{
 				adb.setNegativeButton("No", null);
 				adb.setPositiveButton("Yes", new AlertDialog.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
-/*		            	  final ProgressDialog progDailog = ProgressDialog.show( 
-					                MemberEvents.this, "", "কিছুক্ষন অপেক্ষা করুন ...", true); 
-
-					        new Thread() { 
-					            public void run() {*/
 						try
 						{
 							String msg = ProcessTransaction(vill+bari+hhno,g.getRoundNumber());
 							if(msg.length()==0)
 							{
+								String totalmem = C.ReturnSingleValue("Select count(*)totalmem from Member where Vill||Bari||HH='"+ (vill+bari+hhno) +"' and length(ExType)=0");
+								String posmig   = C.ReturnSingleValue("Select count(*)posmig from Member where Vill||Bari||HH='"+ (vill+bari+hhno) +"' and length(ExType)=0 and posmig='54'");
+								C.Save("Update Household set totalmem='"+ (totalmem==null?'0':totalmem) +"',posmig='"+ (Integer.valueOf(posmig)>=1?"1":"2") +"',Upload='2' where Vill||bari||HH='"+ (vill+bari+hhno) +"'");
+
 								g.setBariCode("");
 								g.setHouseholdNo("");
 
@@ -140,9 +135,6 @@ public class MemberEvents extends Activity{
 							Connection.MessageBox(MemberEvents.this, ex.getMessage());
 							return;
 						}
-						//progDailog.dismiss(); 
-/*					            } 
-					        }.start();*/
 
 					}});
 				adb.show();
@@ -373,6 +365,37 @@ public class MemberEvents extends Activity{
 
 		C.Save("Update ImmunizationTemp Set PNo=ifnull((Select PNo from tTrans where status='m' and Vill||Bari||HH||SNo=ImmunizationTemp.vill||ImmunizationTemp.bari||ImmunizationTemp.hh||ImmunizationTemp.sno),'') where length(pno)=0 or pno is null");
 
+
+		//Drop Image from the database if age>5 years
+		//25 Jan 2018
+		try {
+			Cursor curH = C.ReadData("select vill as vill,bari as bari,hh as hh,sno as sno,name from Member where Vill||Bari||HH='"+ (vill+bari+hhno) +"' and Cast(((julianday(date('now'))-julianday(BDate))/365.25) as int) between 5 and 11");
+			curH.moveToFirst();
+			String filaName = "";
+			while (!curH.isAfterLast()) {
+				filaName = curH.getString(curH.getColumnIndex("vill"))+
+						curH.getString(curH.getColumnIndex("bari"))+
+						curH.getString(curH.getColumnIndex("hh"))+
+						curH.getString(curH.getColumnIndex("sno"));
+
+				File imageFile1 = new File(Environment.getExternalStorageDirectory()+ File.separator + Global.DatabaseFolder + File.separator + "Photos", (filaName) +"1.jpg");
+				if(imageFile1.exists()) imageFile1.delete();
+				File imageFile2 = new File(Environment.getExternalStorageDirectory()+ File.separator + Global.DatabaseFolder + File.separator + "Photos", (filaName) +"2.jpg");
+				if(imageFile2.exists()) imageFile2.delete();
+				File imageFile3 = new File(Environment.getExternalStorageDirectory()+ File.separator + Global.DatabaseFolder + File.separator + "Photos", (filaName) +"3.jpg");
+				if(imageFile3.exists()) imageFile3.delete();
+				File imageFile4 = new File(Environment.getExternalStorageDirectory()+ File.separator + Global.DatabaseFolder + File.separator + "Photos", (filaName) +"4.jpg");
+				if(imageFile4.exists()) imageFile4.delete();
+				File imageFile5 = new File(Environment.getExternalStorageDirectory()+ File.separator + Global.DatabaseFolder + File.separator + "Photos", (filaName) +"5.jpg");
+				if(imageFile5.exists()) imageFile5.delete();
+
+				curH.moveToNext();
+			}
+			curH.close();
+		}catch (Exception ex){
+
+		}
+
 	}
 
 
@@ -402,7 +425,6 @@ public class MemberEvents extends Activity{
 				SQLStr += " left outer join member m on t.vill||t.bari||t.hh||t.sno = m.vill||m.bari||m.hh||m.sno";
 				SQLStr += " where t.status='m' and t.vill||t.bari||t.hh='"+ HH +"' order by cast(t.SNo as int) asc";
 			}
-
 
 			Cursor cur1 = C.ReadData(SQLStr);
 
@@ -467,8 +489,6 @@ public class MemberEvents extends Activity{
 				cur1.moveToNext();
 			}
 			cur1.close();
-
-
 		}
 		catch(Exception  e)
 		{
@@ -707,7 +727,7 @@ public class MemberEvents extends Activity{
 
 
 			final AlertDialog.Builder adb = new AlertDialog.Builder(MemberEvents.this);
-			final TableLayout memtab = (TableLayout)convertView.findViewById(R.id.memtab);
+			final LinearLayout memtab = (LinearLayout)convertView.findViewById(R.id.memtab);
 			final EditText lblsno = (EditText)convertView.findViewById(R.id.txtQSNo);
 			final TextView lblName = (TextView)convertView.findViewById(R.id.lblName);
 
@@ -2003,6 +2023,7 @@ public class MemberEvents extends Activity{
 					Connection.MessageBox(MemberEvents.this, "সদস্য বর্তমানে গর্ভবতী, ইভেন্ট ৪০/৪৯ প্রযোজ্য নয়।"); return;
 				}
 			}
+
 			else if (ECode == 41)
 			{
 				if(EDT.length()!=0)
@@ -2024,6 +2045,7 @@ public class MemberEvents extends Activity{
 
 				//difference between lmp and visit date should be equal or greater than 40 days
 			}
+
 			else if (ECode == 42)
 			{
 				String LMPDT = Global.DateValidate(txtLmpDt.getText().toString());
@@ -2058,7 +2080,7 @@ public class MemberEvents extends Activity{
 				//21 may 2016
 				//difference between LMP and EDD Check
 				int outcode_difference = Global.DateDifferenceDays(txtEvDate.getText().toString(),txtLmpDt.getText().toString());
-				int outcome_result = Integer.valueOf(Global.Left(txtPOR.getSelectedItem().toString(),2));
+				int outcome_result 	   = Integer.valueOf(Global.Left(txtPOR.getSelectedItem().toString(),2));
 
 				if(outcode_difference < 0)
 				{
@@ -2098,7 +2120,6 @@ public class MemberEvents extends Activity{
 					POP = Global.Left(txt43.getSelectedItem().toString(),2);
 					POA = Global.Left(txt44.getSelectedItem().toString(),1);
 				}*/
-
 			}
 			else if (ECode == 25)
 			{
@@ -2113,6 +2134,10 @@ public class MemberEvents extends Activity{
 				else if(ECode == 61 & Code.length() == 0)
 				{
 					Connection.MessageBox(MemberEvents.this, "সদস্যের মায়ের সঠিক সিরিয়াল নাম্বার লিখুন।");return;
+				}
+				else if(ECode == 61 & (Code.equals("0") | Code.equals("00")))
+				{
+					Connection.MessageBox(MemberEvents.this, "সদস্যের মায়ের সিরিয়াল নাম্বার 00 হবে না।");return;
 				}
 				if(SNo.equals(Code))
 				{
@@ -2129,6 +2154,10 @@ public class MemberEvents extends Activity{
 				else if(ECode == 62 & Code.length() == 0)
 				{
 					Connection.MessageBox(MemberEvents.this, "সদস্যের বাবার সঠিক সিরিয়াল নাম্বার লিখুন।");return;
+				}
+				else if(ECode == 62 & (Code.equals("0") | Code.equals("00")))
+				{
+					Connection.MessageBox(MemberEvents.this, "সদস্যের বাবার সিরিয়াল নাম্বার 00 হবে না।");return;
 				}
 				if(SNo.equals(Code))
 				{
@@ -2295,11 +2324,11 @@ public class MemberEvents extends Activity{
 						return;
 					}
 					//check education code should be greater 1 for occupation code 32
-					else if(edu < 1 & ocp == 32)
+					/*else if(edu < 1 & ocp == 32) //stop on 25 jan 2018
 					{
 						Connection.MessageBox(MemberEvents.this, "পেশার কোড ৩২ এর জন্য সদস্য অবশ্যই শিক্ষিত হতে হবে।");
 						return;
-					}
+					}*/
 					//student
 					else if(ocp == 2 & edu == 0 & age > 30)
 					{
@@ -2994,13 +3023,13 @@ public class MemberEvents extends Activity{
 				SQL += " (Status,Vill,bari,Hh,Pno,Sno,Visit,MarM, MarY, Births, LiveHh, SLiveHh, DLiveHh, LiveOut, SLiveOut, DLiveOut,";
 				SQL += " Died, SDied, DDied, Abor, TAbor, TotPreg,VDate,Rnd)";
 				SQL += " Select 'p','"+ V +"' Vill,'"+ B +"' bari,'"+ H +"' Hh, '"+ pno +"' Pno,'"+ memsl +"' sno,Visit,MarM, MarY, Births, LiveHh, SLiveHh, DLiveHh, LiveOut, SLiveOut, DLiveOut,";
-				SQL += " Died, SDied, DDied, Abor, TAbor, TotPreg,VDate,Rnd From Mig_PregHis where PNo = '"+ pno +"'";
+				SQL += " Died, SDied, DDied, Abor, TAbor, TotPreg,VDate,Rnd From Mig_PregHis where PNo = '"+ pno +"' order by cast(visit as int) limit 1";
 				C.Save(SQL);
 
 				//Immunization Information : 03 05 2016
-				SQL = "Insert into ImmunizationTemp(Vill, Bari, HH, Sno, PNO, Status, BCG, BCGDT, BCGSource, Penta1, Penta1DT, Penta1Source, Penta2, Penta2DT, Penta2Source, Penta3, Penta3DT, Penta3Source, PCV1, PCV1DT, PCV1Source, PCV2, PCV2DT, PCV2Source, PCV3, PCV3DT, PCV3Source, OPV0, OPV0DT, OPV0Source, OPV1, OPV1DT, OPV1Source, OPV2, OPV2DT, OPV2Source, OPV3, OPV3DT, OPV3Source, OPV4, OPV4DT, OPV4Source, Measles, MeaslesDT, MeaslesSource, MR, MRDT, MRSource, Rota, RotaDT, RotaSource, MMR, MMRDT, MMRSource, Typhoid, TyphoidDT, TyphoidSource, Influ, InfluDT, InfluSource, HepaA, HepaADT, HepaASource, ChickenPox, ChickenPoxDT, ChickenPoxSource, Rabies, RabiesDT, RabiesSource, IPV, IPVDT, IPVSource, VitaminA, VitaminADT, VitaminASource, EnDt, Upload)";
-				SQL += "Select '"+ V +"' Vill,'"+ B +"' Bari,'"+ H +"' HH, '"+ memsl +"' Sno, '"+ pno +"' PNO, Status, BCG, BCGDT, BCGSource, Penta1, Penta1DT, Penta1Source, Penta2, Penta2DT, Penta2Source, Penta3, Penta3DT, Penta3Source, PCV1, PCV1DT, PCV1Source, PCV2, PCV2DT, PCV2Source, PCV3, PCV3DT, PCV3Source, OPV0, OPV0DT, OPV0Source, OPV1, OPV1DT, OPV1Source, OPV2, OPV2DT, OPV2Source, OPV3, OPV3DT, OPV3Source, OPV4, OPV4DT, OPV4Source, Measles, MeaslesDT, MeaslesSource, MR, MRDT, MRSource, Rota, RotaDT, RotaSource, MMR, MMRDT, MMRSource, Typhoid, TyphoidDT, TyphoidSource, Influ, InfluDT, InfluSource, HepaA, HepaADT, HepaASource, ChickenPox, ChickenPoxDT, ChickenPoxSource, Rabies, RabiesDT, RabiesSource, IPV, IPVDT, IPVSource, VitaminA, VitaminADT, VitaminASource, EnDt, Upload from Mig_Immunization";
-				SQL += " where PNo = '"+ pno +"'";
+				SQL = "Insert into ImmunizationTemp(Vill, Bari, HH, Sno, PNO, Status, BCG, BCGDT, BCGSource, Penta1, Penta1DT, Penta1Source, Penta2, Penta2DT, Penta2Source, Penta3, Penta3DT, Penta3Source, PCV1, PCV1DT, PCV1Source, PCV2, PCV2DT, PCV2Source, PCV3, PCV3DT, PCV3Source, OPV0, OPV0DT, OPV0Source, OPV1, OPV1DT, OPV1Source, OPV2, OPV2DT, OPV2Source, OPV3, OPV3DT, OPV3Source, OPV4, OPV4DT, OPV4Source, Measles, MeaslesDT, MeaslesSource, MR, MRDT, MRSource, Rota, RotaDT, RotaSource, MMR, MMRDT, MMRSource, Typhoid, TyphoidDT, TyphoidSource, Influ, InfluDT, InfluSource, HepaA, HepaADT, HepaASource, ChickenPox, ChickenPoxDT, ChickenPoxSource, Rabies, RabiesDT, RabiesSource, IPV, IPVDT, IPVSource, fIPV1,fIPVDT1,fIPVSource1,fIPV2,fIPVDT2,fIPVSource2, VitaminA, VitaminADT, VitaminASource, EnDt, Upload)";
+				SQL += "Select '"+ V +"' Vill,'"+ B +"' Bari,'"+ H +"' HH, '"+ memsl +"' Sno, '"+ pno +"' PNO, Status, BCG, BCGDT, BCGSource, Penta1, Penta1DT, Penta1Source, Penta2, Penta2DT, Penta2Source, Penta3, Penta3DT, Penta3Source, PCV1, PCV1DT, PCV1Source, PCV2, PCV2DT, PCV2Source, PCV3, PCV3DT, PCV3Source, OPV0, OPV0DT, OPV0Source, OPV1, OPV1DT, OPV1Source, OPV2, OPV2DT, OPV2Source, OPV3, OPV3DT, OPV3Source, OPV4, OPV4DT, OPV4Source, Measles, MeaslesDT, MeaslesSource, MR, MRDT, MRSource, Rota, RotaDT, RotaSource, MMR, MMRDT, MMRSource, Typhoid, TyphoidDT, TyphoidSource, Influ, InfluDT, InfluSource, HepaA, HepaADT, HepaASource, ChickenPox, ChickenPoxDT, ChickenPoxSource, Rabies, RabiesDT, RabiesSource, IPV, IPVDT, IPVSource, fIPV1,fIPVDT1,fIPVSource1,fIPV2,fIPVDT2,fIPVSource2, VitaminA, VitaminADT, VitaminASource, EnDt, Upload from Mig_Immunization";
+				SQL += " where PNo = '"+ pno +"' order by cast(status as int) limit 1";
 				C.Save(SQL);
 
 				Cursor cur=null;
@@ -3160,8 +3189,6 @@ public class MemberEvents extends Activity{
 	            		spnOcp.setSelection(19);
 	            	}
 	            	*/
-
-
 
 					cur.moveToNext();
 				}
@@ -4763,20 +4790,45 @@ public class MemberEvents extends Activity{
 			evmylist.add(map);
 
 			eList = new SimpleAdapter(MemberEvents.this, evmylist, R.layout.migrationrow,
-					new String[] {"sno","pno","name","exdate"},
-					new int[] {R.id.m_sno,R.id.m_pno,R.id.m_name,R.id.m_exdate});
+					new String[] {"sno","pno","name","exdate","hh"},
+					new int[] {R.id.m_sno,R.id.m_pno,R.id.m_name,R.id.m_exdate,R.id.m_hhno});
 			evlist.setAdapter(eList);
 
 			cur1.moveToNext();
 		}
 
-
 		cur1.close();
 
 		evlist.setOnItemClickListener(new OnItemClickListener() {
-			public void onItemClick(AdapterView<?> listView, View view,
-									int position, long id) {
-				String[] a = listView.getItemAtPosition(position).toString().split(",");
+			public void onItemClick(AdapterView<?> listView, View view,int position, long id) {
+				TextView m_hhno = (TextView) view.findViewById(R.id.m_hhno);
+				TextView m_sno = (TextView) view.findViewById(R.id.m_sno);
+				TextView m_pno = (TextView) view.findViewById(R.id.m_pno);
+				TextView m_name = (TextView) view.findViewById(R.id.m_name);
+				TextView m_exdate = (TextView) view.findViewById(R.id.m_exdate);
+
+				TextView lblName = (TextView)d.findViewById(R.id.lblName);
+				lblName.setText("Name: "+ m_name.getText().toString() +" [Outdate: "+ m_exdate.getText().toString() + "]");
+				g.setPNo(m_pno.getText().toString().trim());
+				g.setEvDate(m_exdate.getText().toString().trim());
+				g.setPrevHousehold(m_hhno.getText().toString().trim());
+
+				/*String temp = listView.getItemAtPosition(position).toString().replace("{","");
+				temp = temp.replace("}","");
+				temp = temp.replace("name=","");
+				temp = temp.replace("pno=","");
+				temp = temp.replace("sno=","");
+				temp = temp.replace("exdate=","");
+				temp = temp.replace("hh=","");
+				String[] a = temp.split(",");
+
+				TextView lblName = (TextView)d.findViewById(R.id.lblName);
+				lblName.setText("Name: "+ a[0] +" [Outdate: "+ a[3] + "]");
+				g.setPNo(a[1].trim());
+				g.setEvDate(a[3].trim());
+				g.setPrevHousehold(a[4].trim());*/
+
+				/*String[] a = listView.getItemAtPosition(position).toString().split(",");
 				String H = a[0].substring(4, a[0].length());
 				String E = a[2].substring(8, a[2].length());
 				String P = a[3].substring(5, a[3].length());
@@ -4786,7 +4838,7 @@ public class MemberEvents extends Activity{
 				lblName.setText("Name: "+ N +" [Outdate: "+ E + "]");
 				g.setPNo(P);
 				g.setEvDate(E);
-				g.setPrevHousehold(H);
+				g.setPrevHousehold(H);*/
 				//Object o =  listView.getItemAtPosition(position);
 			}
 		});
@@ -4829,6 +4881,7 @@ public class MemberEvents extends Activity{
 			TextView m_pno   = (TextView)convertView.findViewById(R.id.m_pno);
 			TextView m_name  = (TextView)convertView.findViewById(R.id.m_name);
 			TextView m_exdate= (TextView)convertView.findViewById(R.id.m_exdate);
+			LinearLayout secRow = (LinearLayout)convertView.findViewById(R.id.secRow);
 
 			m_sno.setText(o.get("sno").toString());
 			m_pno.setText(o.get("pno").toString());
@@ -4860,6 +4913,13 @@ public class MemberEvents extends Activity{
 					//lblName.setText(o.get("name").toString());
 				}
 			});
+
+			/*secRow.setOnClickListener(new View.OnClickListener() {
+				public void onClick(View v) {
+					g.setPNo(o.get("pno").toString());
+					//lblName.setText(o.get("name").toString());
+				}
+			});*/
 
 			return convertView;
 		}
@@ -6519,7 +6579,7 @@ public class MemberEvents extends Activity{
 
 
 
-		//occupation missing (age >= 12 years)
+		//occupation missing (age >= 12 years): 25 Jan 2018
 		SQLS = "Select SNo as sno, Name as name from tTrans where status='m' and VILL||BARI||HH='"+ Household +"' and cast((julianday(date('now'))-julianday(bdate))/365.25 as int)>=12 and length(OCp)=0 and (extype is null or length(extype)=0)";
 		Cursor CR = null;
 		CR = C.ReadData(SQLS);
@@ -6660,10 +6720,16 @@ public class MemberEvents extends Activity{
 			//-- ---------------------------------------
 			String SQL="";
 			String Head = "";
+			String Active_Head = "";
 			//***** need current household head name
 			if(C.Existence("Select vill from Household where vill||bari||hh='"+ Household +"'"))
 			{
-				Head = C.ReturnSingleValue("select name from tTrans where status='m' and vill||bari||hh='"+ Household +"' and Rth='01' and (length(extype)=0 or extype is null)");
+				Active_Head = C.ReturnSingleValue("Select name from tTrans where status='m' and vill||bari||hh='"+ Household +"' and Rth='01' and length(ExType)=0 order by date(endate) desc limit 1");
+				if(Active_Head==null | Active_Head.length()==0) {
+					Head = C.ReturnSingleValue("Select name from tTrans where status='m' and vill||bari||hh='" + Household + "' and Rth='01' order by date(endate) desc limit 1");
+				}else{
+					Head = Active_Head;
+				}
 				Cursor curH = C.ReadData("Select ContactNo,ifnull(ExType,'')as ExType,ifnull(ExDate,'')as ExDate,HHHead,Note from tTrans where status='h' and vill||bari||hh='"+ Household +"'");
 				curH.moveToFirst();
 				while(!curH.isAfterLast())
@@ -6927,7 +6993,7 @@ public class MemberEvents extends Activity{
 			//-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 			try {
 				C.Save("Delete from Immunization where vill||bari||hh='"+ Household +"'");
-				//C.Save("Insert into Immunization Select * from ImmunizationTemp where vill||bari||hh='"+ Household +"'");
+
 				//20 May 2016
 				C.Save("Insert into Immunization Select * from ImmunizationTemp");
 			}catch(Exception ex)

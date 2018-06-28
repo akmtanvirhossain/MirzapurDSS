@@ -263,6 +263,17 @@ public class Immunization extends Activity{
         final Spinner  spnIPV = (Spinner)findViewById(R.id.spnIPV);
         spnIPV.setAdapter(dataSource);
 
+        //23apr 2018
+        final CheckBox chkfIPV1 = (CheckBox)findViewById(R.id.chkfIPV1);
+        final EditText fIPVDT1 = (EditText)findViewById(R.id.fIPVDT1);
+        final Spinner  spnfIPV1 = (Spinner)findViewById(R.id.spnfIPV1);
+        spnfIPV1.setAdapter(dataSource);
+
+        final CheckBox chkfIPV2 = (CheckBox)findViewById(R.id.chkfIPV2);
+        final EditText fIPVDT2 = (EditText)findViewById(R.id.fIPVDT2);
+        final Spinner  spnfIPV2 = (Spinner)findViewById(R.id.spnfIPV2);
+        spnfIPV2.setAdapter(dataSource);
+
         final CheckBox chkVitaminA = (CheckBox)findViewById(R.id.chkVitaminA);
         final EditText VitaminADT = (EditText)findViewById(R.id.VitaminADT);
         final Spinner  spnVitaminA = (Spinner)findViewById(R.id.spnVitaminA);
@@ -563,6 +574,8 @@ public class Immunization extends Activity{
                             chkChickenPox.setChecked(false);
                             chkRabies.setChecked(false);
                             chkIPV.setChecked( false );
+                            chkfIPV1.setChecked( false );
+                            chkfIPV2.setChecked( false );
                             chkVitaminA.setChecked( false );
                             
                             BCGDT.setText("");
@@ -630,6 +643,13 @@ public class Immunization extends Activity{
 
                             IPVDT.setText("");
                             spnIPV.setSelection(0);
+
+                            fIPVDT1.setText("");
+                            spnfIPV1.setSelection(0);
+
+                            fIPVDT2.setText("");
+                            spnfIPV2.setSelection(0);
+
 
                             VitaminADT.setText("");
                             spnVitaminA.setSelection(0);
@@ -783,6 +803,24 @@ public class Immunization extends Activity{
                                                 IPVDT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("IPVDT"))));
                                                 spnIPV.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("IPVSource"))));
                                             }
+
+                                            //23 apr 2018
+                                            if(cur.getString(cur.getColumnIndex("fIPV1")).equals("1"))
+                                            {
+                                                chkfIPV1.setChecked(true);
+                                                fIPVDT1.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("fIPVDT1"))));
+                                                spnfIPV1.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("fIPVSource1"))));
+                                            }
+
+                                            if(cur.getString(cur.getColumnIndex("fIPV2")).equals("1"))
+                                            {
+                                                chkfIPV2.setChecked(true);
+                                                fIPVDT2.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("fIPVDT2"))));
+                                                spnfIPV2.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("fIPVSource2"))));
+                                            }
+
+
+
                                             if(cur.getString(cur.getColumnIndex("VitaminA")).equals("1"))
                                             {
                                                 chkVitaminA.setChecked(true);
@@ -853,6 +891,8 @@ public class Immunization extends Activity{
                             chkChickenPox.setChecked(false);
                             chkRabies.setChecked(false);
                             chkIPV.setChecked(false);
+                            chkfIPV1.setChecked(false);
+                            chkfIPV2.setChecked(false);
                             chkVitaminA.setChecked(false);
                             
                             secVaccine.setVisibility(View.GONE);
@@ -1663,8 +1703,8 @@ public class Immunization extends Activity{
                                     IPVDT.requestFocus();
                                     return;
                             }
-                    
-                            SQL +="IPV='1',";                              
+
+                            SQL +="IPV='1',";
                             SQL +="IPVDT='"+ Global.DateConvertYMD(IPVDT.getText().toString()) +"',";
                             SQL +="IPVSource='"+ Global.Left(spnIPV.getSelectedItem().toString(),2) +"',";
                     }
@@ -1674,6 +1714,79 @@ public class Immunization extends Activity{
                             SQL +="IPVDT='',";
                             SQL +="IPVSource='',";
                     }
+
+                    //23 apr 2018
+                    if(chkfIPV1.isChecked()==true)
+                    {
+                        EDT = Global.DateValidate(fIPVDT1.getText().toString());
+                        if(EDT.length()!=0)
+                        {
+                            Connection.MessageBox(Immunization.this, EDT);
+                            fIPVDT1.requestFocus();
+                            return;
+                        }
+                        else if(spnfIPV1.getSelectedItemPosition()==0)
+                        {
+                            Connection.MessageBox(Immunization.this, "Select a valid vaccination center.");
+                            spnfIPV1.requestFocus();
+                            return;
+                        }
+                        VacD = sdf.parse(Global.DateConvertYMD(fIPVDT1.getText().toString()));
+                        if(BD.after(VacD))
+                        {
+                            Connection.MessageBox(Immunization.this, "Vaccination date should be greater than date of birth["+ Global.DateConvertDMY(DOB) +"].");
+                            fIPVDT1.requestFocus();
+                            return;
+                        }
+
+                        SQL +="fIPV1='1',";
+                        SQL +="fIPVDT1='"+ Global.DateConvertYMD(fIPVDT1.getText().toString()) +"',";
+                        SQL +="fIPVSource1='"+ Global.Left(spnfIPV1.getSelectedItem().toString(),2) +"',";
+                    }
+                    else
+                    {
+                        SQL +="fIPV1='',";
+                        SQL +="fIPVDT1='',";
+                        SQL +="fIPVSource1='',";
+                    }
+
+                    if(chkfIPV2.isChecked()==true)
+                    {
+                        EDT = Global.DateValidate(fIPVDT2.getText().toString());
+                        if(EDT.length()!=0)
+                        {
+                            Connection.MessageBox(Immunization.this, EDT);
+                            fIPVDT2.requestFocus();
+                            return;
+                        }
+                        else if(spnfIPV2.getSelectedItemPosition()==0)
+                        {
+                            Connection.MessageBox(Immunization.this, "Select a valid vaccination center.");
+                            spnfIPV2.requestFocus();
+                            return;
+                        }
+                        VacD = sdf.parse(Global.DateConvertYMD(fIPVDT2.getText().toString()));
+                        if(BD.after(VacD))
+                        {
+                            Connection.MessageBox(Immunization.this, "Vaccination date should be greater than date of birth["+ Global.DateConvertDMY(DOB) +"].");
+                            fIPVDT2.requestFocus();
+                            return;
+                        }
+
+                        SQL +="fIPV2='1',";
+                        SQL +="fIPVDT2='"+ Global.DateConvertYMD(fIPVDT2.getText().toString()) +"',";
+                        SQL +="fIPVSource2='"+ Global.Left(spnfIPV2.getSelectedItem().toString(),2) +"',";
+                    }
+                    else
+                    {
+                        SQL +="fIPV2='',";
+                        SQL +="fIPVDT2='',";
+                        SQL +="fIPVSource2='',";
+                    }
+
+
+
+
                     if(chkVitaminA.isChecked()==true)
                     {
                             EDT = Global.DateValidate(VitaminADT.getText().toString());
@@ -1860,6 +1973,18 @@ public class Immunization extends Activity{
             final Spinner  spnIPV = (Spinner)findViewById(R.id.spnIPV);
             spnIPV.setAdapter(dataSource);
 
+            //23 apr 2018
+            final CheckBox chkfIPV1 = (CheckBox)findViewById(R.id.chkfIPV1);
+            final EditText fIPVDT1 = (EditText)findViewById(R.id.fIPVDT1);
+            final Spinner  spnfIPV1 = (Spinner)findViewById(R.id.spnfIPV1);
+            spnfIPV1.setAdapter(dataSource);
+
+            final CheckBox chkfIPV2 = (CheckBox)findViewById(R.id.chkfIPV2);
+            final EditText fIPVDT2 = (EditText)findViewById(R.id.fIPVDT2);
+            final Spinner  spnfIPV2 = (Spinner)findViewById(R.id.spnfIPV2);
+            spnfIPV2.setAdapter(dataSource);
+
+
             final CheckBox chkVitaminA = (CheckBox)findViewById(R.id.chkVitaminA);
             final EditText VitaminADT = (EditText)findViewById(R.id.VitaminADT);
             final Spinner  spnVitaminA = (Spinner)findViewById(R.id.spnVitaminA);
@@ -1902,7 +2027,12 @@ public class Immunization extends Activity{
             chkHepaA.setChecked(false);
             chkChickenPox.setChecked(false);
             chkRabies.setChecked(false);
+
             chkIPV.setChecked( false );
+
+            chkfIPV1.setChecked( false );
+            chkfIPV2.setChecked( false );
+
             chkVitaminA.setChecked( false );
 
             BCGDT.setText("");
@@ -1970,6 +2100,12 @@ public class Immunization extends Activity{
 
             IPVDT.setText("");
             spnIPV.setSelection(0);
+
+            fIPVDT1.setText("");
+            spnfIPV1.setSelection(0);
+
+            fIPVDT2.setText("");
+            spnfIPV2.setSelection(0);
 
             VitaminADT.setText("");
             spnVitaminA.setSelection(0);
@@ -2121,6 +2257,23 @@ public class Immunization extends Activity{
                     IPVDT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("IPVDT"))));
                     spnIPV.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("IPVSource"))));
                 }
+
+                //23 apr 2018
+                if(cur.getString(cur.getColumnIndex("fIPV1")).equals("1"))
+                {
+                    chkfIPV1.setChecked(true);
+                    fIPVDT1.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("fIPVDT1"))));
+                    spnfIPV1.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("fIPVSource1"))));
+                }
+
+                if(cur.getString(cur.getColumnIndex("fIPV2")).equals("1"))
+                {
+                    chkfIPV2.setChecked(true);
+                    fIPVDT2.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("fIPVDT2"))));
+                    spnfIPV2.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("fIPVSource2"))));
+                }
+
+
                 if(cur.getString(cur.getColumnIndex("VitaminA")).equals("1"))
                 {
                     chkVitaminA.setChecked(true);

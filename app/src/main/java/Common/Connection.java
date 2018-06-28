@@ -634,7 +634,13 @@ public class Connection extends SQLiteOpenHelper {
                 //Generate SQL String
                 List<String> sqlString = new ArrayList<String>();
                 for(String data : dataStatus){
-                    sqlString.add("Update "+ TableName +" Set UpdateNeeded='2' Where "+ data);
+                    try {
+                        //sqlString.add("Update " + TableName + " Set UpdateNeeded='2' Where " + data);
+                        sqlString.add("Update " + TableName + " Set Upload='1' Where " + data);
+                    }catch (Exception ex)
+                    {
+
+                    }
                 }
 
                 DataClass_SQL_Update dt = new DataClass_SQL_Update();
@@ -1844,8 +1850,345 @@ public class Connection extends SQLiteOpenHelper {
     }
     */
 
+    //New Update: 20 Oct 2017
+    public void Sync_Download(String TableName, String UserId, String WhereClause)
+    {
+        //Retrieve sync parameter
+        //------------------------------------------------------------------------------------------
+        String[] SyncParam = Sync_Parameter(TableName);
+
+        String SQLStr       = SyncParam[0];
+        String VariableList = SyncParam[1];
+        String UniqueField  = SyncParam[2];
+        String SQL_VariableList  = SyncParam[3];
+        String Res = "";
+        String SQL = "";
+
+        //Generate Unique ID field
+        //------------------------------------------------------------------------------------------
+        String[] U = UniqueField.split(",");
+        String UID = "";
+        //String UID_Sync = "";
+        for(int i=0; i<U.length; i++){
+            if(i==0)
+                UID = "cast(t."+ U[i] +" as varchar(50))";
+            else
+                UID += "+cast(t."+ U[i] +" as varchar(50))";
+        }
+
+        //calculate total records
+        //------------------------------------------------------------------------------------------
+        Integer totalRecords = 0;
+        SQL  = "Select Count(*)totalRec from "+ TableName +" as t";
+        SQL += " where not exists(select * from Sync_Management where";
+        SQL += " lower(TableName)  = lower('"+ TableName +"') and";
+        SQL += " UniqueID   = "+ UID +" and";
+        SQL += " convert(varchar(19),modifydate,120) = convert(varchar(19),t.modifydate,120) and";
+
+        SQL += " UserId   ='"+ UserId +"')";
+        if(WhereClause.length()>0)
+        {
+            SQL += " and "+ WhereClause;
+        }
+
+        String totalRec = ReturnResult("ReturnSingleValue",SQL);
+        if(totalRec==null)
+            totalRecords =0;
+        else
+            totalRecords = Integer.valueOf(totalRec);
+
+        //Calculate batch size
+        //------------------------------------------------------------------------------------------
+        //0(zero) means all selected data
+        Integer batchSize = Integer.valueOf(ReturnSingleValue("select ifnull(batchsize,0)batchsize from DatabaseTab where TableName='"+ TableName +"'"));
+        Integer totalBatch   = 1;
+
+        if(batchSize==0) {
+            totalBatch = 1;
+            batchSize = totalRecords;
+        }
+        else if(batchSize > 0) {
+            totalBatch = totalRecords/batchSize;
+            if(totalRecords%batchSize>0)
+                totalBatch += 1;
+        }
+
+        //Execute batch download
+        //------------------------------------------------------------------------------------------
+        for(int i = 0; i < totalBatch; i++) {
+            SQL  = "Select top "+ batchSize +" "+ SQL_VariableList +" from "+ TableName +" as t";
+            SQL += " where not exists(select * from Sync_Management where";
+            SQL += " lower(TableName)  = lower('"+ TableName +"') and";
+            SQL += " UniqueID   = "+ UID +" and";
+            SQL += " convert(varchar(19),modifydate,120) = convert(varchar(19),t.modifydate,120) and";
+            SQL += " UserId   ='"+ UserId +"')";
+            if(WhereClause.length()>0)
+            {
+                SQL += " and "+ WhereClause;
+            }
+
+            Res = DownloadJSON_Update_Sync_Management(SQL, TableName, VariableList, UniqueField, UserId);
+        }
+    }
+
+    private String DownloadJSON_Update_Sync_Management(String SQL, String TableName,String ColumnList, String UniqueField, String UserId)
+    {
+        String WhereClause="";
+        int varPos=0;
+
+        String response = "";
+        String resp = "";
+
+        try{
+
+            DownloadDataJSON dload = new DownloadDataJSON();
+            response=dload.execute(SQL).get();
+
+            //Process Response
+            downloadClass d = new downloadClass();
+            Gson gson = new Gson();
+            Type collType = new TypeToken<downloadClass>(){}.getType();
+            downloadClass responseData = (downloadClass) gson.fromJson(response,collType);
+
+            String UField[]  = UniqueField.split(",");
+            String VarList[] = ColumnList.split(",");
+
+            List<String> dataStatus = new ArrayList<>();
+            String modifyDate = "";
+            String UID        = "";
+            String USID       = "";
+            String DataList = "";
+            DataClassProperty dd;
+            List<DataClassProperty> data = new ArrayList<DataClassProperty>();
+
+            for(int i=0; i<responseData.getdata().size(); i++)
+            {
+                String VarData[] = split(responseData.getdata().get(i).toString(),'^');
+
+                //Generate where clause
+                SQL="";
+                WhereClause="";
+                varPos=0;
+                for(int j=0; j< UField.length; j++)
+                {
+                    varPos = VarPosition(UField[j].toString(),VarList);
+                    if(j==0)
+                    {
+                        WhereClause = UField[j].toString()+"="+ "'"+ VarData[varPos].toString().replace("'","") +"'";
+                        UID = VarData[varPos].toString();
+                    }
+                    else
+                    {
+                        WhereClause += " and "+ UField[j].toString()+"="+ "'"+ VarData[varPos].toString().replace("'","") +"'";
+                        UID += VarData[varPos].toString();
+                    }
+                }
+
+                //Update command
+                if(Existence("Select "+ VarList[0] +" from "+ TableName +" Where "+ WhereClause))
+                {
+                    for(int r=0;r<VarList.length;r++)
+                    {
+                        if(r==0)
+                        {
+                            SQL = "Update "+ TableName +" Set ";
+                            SQL+= VarList[r] + " = '"+ VarData[r].toString().replace("'","") +"'";
+                        }
+                        else
+                        {
+                            if(r == VarData.length-1)
+                            {
+                                SQL+= ","+ VarList[r] + " = '"+ VarData[r].toString().replace("'","") +"'";
+                                SQL += " Where "+ WhereClause;
+                            }
+                            else
+                            {
+                                SQL+= ","+ VarList[r] + " = '"+ VarData[r].toString().replace("'","") +"'";
+                            }
+                        }
+
+                        if(VarList[r].toString().toLowerCase().equals("modifydate"))
+                            modifyDate = VarData[r].toString();
+                    }
+
+                    Save(SQL);
+                }
+                //Insert command
+                else
+                {
+                    for(int r=0;r<VarList.length;r++)
+                    {
+                        if(r==0)
+                        {
+                            SQL = "Insert into "+ TableName +"("+ ColumnList +")Values(";
+                            SQL+= "'"+ VarData[r].toString().replace("'","") +"'";
+                        }
+                        else
+                        {
+                            SQL+= ",'"+ VarData[r].toString().replace("'","") +"'";
+                        }
+
+                        if(VarList[r].toString().toLowerCase().equals("modifydate"))
+                            modifyDate = VarData[r].toString();
+
+                    }
+                    SQL += ")";
+
+                    Save(SQL);
+                }
+
+                DataList = TableName + "^" + UID + "^"+ UserId + "^" + modifyDate;
+                dd = new DataClassProperty();
+                dd.setdatalist(DataList);
+                dd.setuniquefieldwithdata("" +
+                        "TableName='"+ TableName +"' and " +
+                        "UniqueID='"+ UID +"' and " +
+                        "UserId='"+ UserId +"' and " +
+                        "modifyDate='"+ modifyDate +"'");
+                data.add(dd);
+            }
+
+            DataClass dt = new DataClass();
+            dt.settablename("Sync_Management");
+            dt.setcolumnlist("TableName, UniqueID, UserId, modifyDate");
+            dt.setdata(data);
+
+            Gson gson1   = new Gson();
+            String json1 = gson1.toJson(dt);
+            String resp1 = "";
+
+            UploadDataJSON u = new UploadDataJSON();
+
+            try{
+                resp1=u.execute(json1).get();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
 
+
+        } catch (Exception e) {
+            resp = e.getMessage();
+            e.printStackTrace();
+        }
+
+        return resp;
+    }
+
+
+    public String[] Sync_Parameter(String TableName)
+    {
+        String VariableList = "";
+        String UniqueField  = "";
+        String SQLStr       = "";
+        String SQL_VariableList = "";
+        String BatchSize = "0";
+
+        Cursor cur_H = ReadData("Select ColumnList as columnlist, UniqueID as uniqueid,ifnull(BatchSize,'0') as batchsize from DatabaseTab where tablename='"+ TableName +"'");
+        cur_H.moveToFirst();
+
+        while(!cur_H.isAfterLast())
+        {
+            SQLStr       = "Select "+ cur_H.getString(cur_H.getColumnIndex("columnlist")) +" from "+ TableName +" Where Upload='2'";
+            VariableList = cur_H.getString(cur_H.getColumnIndex("columnlist"));
+            SQL_VariableList = Convert_VariableList(TableName,VariableList);
+            UniqueField  = cur_H.getString(cur_H.getColumnIndex("uniqueid"));
+            BatchSize  = cur_H.getString(cur_H.getColumnIndex("batchsize"));
+
+            cur_H.moveToNext();
+        }
+        cur_H.close();
+        String[] ParaList = new String[]{
+                SQLStr,
+                VariableList,
+                UniqueField,
+                SQL_VariableList,
+                BatchSize
+        };
+
+        return  ParaList;
+    }
+
+    private String Convert_VariableList(String TableName, String VariableList)
+    {
+        String finalVariableList = "";
+        String[] tempList = VariableList.split(",");
+        String tempVar = "";
+        String temp="";
+        String[] DateVarList = DateVariableList(TableName).split(",");
+        int matched = 2;
+        for(int i=0;i<tempList.length;i++)
+        {
+            temp = tempList[i];
+            matched = 2;
+
+            for(int j=0;j<DateVarList.length;j++)
+            {
+                if(temp.equalsIgnoreCase(DateVarList[j]))
+                    matched = 1;
+            }
+
+            if(matched==1) {
+                if(temp.equalsIgnoreCase("endt") | temp.equalsIgnoreCase("modifydate") | temp.equalsIgnoreCase("uploaddt"))
+                    finalVariableList += finalVariableList.length() == 0 ? "Convert(varchar(19)," + tempList[i] + ",120)" : ", Convert(varchar(19)," + tempList[i] + ",120)";
+                else
+                    finalVariableList += finalVariableList.length() == 0 ? "Convert(varchar(10)," + tempList[i] + ",120)" : ", Convert(varchar(10)," + tempList[i] + ",120)";
+            }
+            else {
+                if(temp.equalsIgnoreCase("upload"))
+                    finalVariableList += finalVariableList.length()==0 ? "'1'" : ", '1'";
+                else
+                    finalVariableList += finalVariableList.length() == 0 ? tempList[i] : ", " + tempList[i];
+            }
+        }
+        return finalVariableList;
+    }
+
+    private String DateVariableList(String TableName)
+    {
+        Cursor cur_H = ReadData("PRAGMA table_info('"+ TableName +"')");
+        cur_H.moveToFirst();
+        String temp = "";
+        String type = "";
+        String name = "";
+        String dateVariable = "";
+        while(!cur_H.isAfterLast())
+        {
+            type = cur_H.getString(cur_H.getColumnIndex("type"));
+            name = cur_H.getString(cur_H.getColumnIndex("name")).toLowerCase();
+            if((type.equalsIgnoreCase("date") | type.equalsIgnoreCase("datetime")) & !name.equalsIgnoreCase("endt") & !name.equalsIgnoreCase("modifydate"))
+            {
+                dateVariable += dateVariable.length()==0? cur_H.getString(cur_H.getColumnIndex("name")) : ","+  cur_H.getString(cur_H.getColumnIndex("name"));
+            }
+
+            cur_H.moveToNext();
+        }
+        cur_H.close();
+
+        return dateVariable;
+    }
+
+
+    public void HouseholdHead_Update()
+    {
+        String SQL1 = "select h.vill,h.bari,h.hh,m.name from Household h inner join (select vill,bari,hh,sno,name from Member where rth='01' group by vill,bari,hh order by date(endate) desc) m on h.vill=m.vill and h.bari=m.bari and h.hh=m.hh where length(h.hhhead)=0";
+
+        try {
+            Cursor curH = ReadData(SQL1);
+            curH.moveToFirst();
+            while (!curH.isAfterLast()) {
+                SQL1 = "Update Household set upload='2',HHHead='" + curH.getString(curH.getColumnIndex("Name")) + "'";
+                SQL1 += " where vill='" + curH.getString(curH.getColumnIndex("Vill")) + "'";
+                SQL1 += " and bari='" + curH.getString(curH.getColumnIndex("Bari")) + "'";
+                SQL1 += " and hh='" + curH.getString(curH.getColumnIndex("HH")) + "'";
+                Save(SQL1);
+                curH.moveToNext();
+            }
+            curH.close();
+        }catch (Exception ex){
+
+        }
+    }
 
 
 }

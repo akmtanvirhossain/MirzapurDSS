@@ -25,10 +25,10 @@ public class Global {
 	//----------------------------------------------------------------------------------------------------------------
 	public static String Organization    = "ICDDRB, CHRF";
 	public static String Namespace       = "http://203.190.254.42/";
-	public static String Soap_Address    = "http://203.190.254.42/dssjson/datasync.asmx";
+	public static String Soap_Address    = "http://mchd.icddrb.org/dssjson/datasync.asmx";
 
 	//New version
-	public static String UpdatedSystem   = "http://203.190.254.42/dssjson/Update/"+ Global.NewVersionName +".txt";
+	public static String UpdatedSystem   = "http://mchd.icddrb.org/dssjson/Update/"+ Global.NewVersionName +".txt";
 
 	//Database
 	public static String DatabaseFolder = "DSSDatabase";

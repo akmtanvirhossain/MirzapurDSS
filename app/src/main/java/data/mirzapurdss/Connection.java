@@ -2156,5 +2156,33 @@ public class Connection extends SQLiteOpenHelper {
 		return data;
 	}
 
+	//To get the list of columns(string array) in table
+	//----------------------------------------------------------------------------------------------
+	public String[] GetColumnListArray(String TableName) {
+		Cursor cur = ReadData("Select * From " + TableName + " Where 0");
+		String[] columnNames;
+		try {
+			columnNames = cur.getColumnNames();
+		} finally {
+			cur.close();
+		}
+		return columnNames;
+	}
+
+	public void AddColumnIfNotExists(String TableName, String ColumnName) {
+		//Server database
+		String[] ColumnList = GetColumnListArray(TableName);
+		//ReturnSingleValue("select ColumnList from databaseSetting where TableName='"+ TableName +"'").toString().split(",");
+		Boolean matched = false;
+		for (int i = 0; i < ColumnList.length; i++) {
+			if (ColumnList[i].toString().toLowerCase().equals(ColumnName.toLowerCase())) {
+				matched = true;
+				i = ColumnList.length;
+			}
+		}
+		if (matched == false) {
+			Save("Alter table " + TableName + " add column " + ColumnName + " varchar(50) default ''");
+		}
+	}
 }
 

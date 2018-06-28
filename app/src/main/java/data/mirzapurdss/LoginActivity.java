@@ -50,7 +50,7 @@ public class LoginActivity extends Activity{
             //Need to update date every time whenever shared updated system
             //Format: DDMMYYYY
             //*********************************************************************
-            SystemUpdateDT = "09102016";
+            SystemUpdateDT = "08052018";
             lblSystemDate.setText(Global.Left(SystemUpdateDT, 2)+" - "+SystemUpdateDT.substring(2,4)+" - "+Global.Right(SystemUpdateDT,4));
             //*********************************************************************
     
@@ -66,14 +66,13 @@ public class LoginActivity extends Activity{
         		
         		//30 Jun 2015
         		//Downlaod SQL Command from server and execute on local device
-        		C.ExecuteSQLQuery(g.getClusterCode());
+        		//C.ExecuteSQLQuery(g.getClusterCode());
         	 
         	} else {     	 
         		netwoekAvailable=false;
         	} 
     	
-    	
-    	
+
     	
         	//User List -----------------------------------------------------------------------
       		Spinner s = (Spinner) findViewById(R.id.userId);    
@@ -86,8 +85,12 @@ public class LoginActivity extends Activity{
 	            	System.exit(0);
 	            }
 	        });
-      		
-      		
+
+
+      		//07 Jan 2018
+			Intent syncService = new Intent(this, Data_Process_Service.class);
+			startService(syncService);
+
             //Login -----------------------------------------------------------------------
 	        Button loginButton = (Button) findViewById(R.id.btnLogin);
 	        final Spinner uid=(Spinner) findViewById(R.id.userId);
@@ -97,7 +100,10 @@ public class LoginActivity extends Activity{
 	 
 	            public void onClick(View view) {
 	            		try
-	            		{	  	            			
+	            		{
+							//if(g.getClusterCode().equals("10"))
+							//	C.Save("Delete from Baris where cluster='10' and block='58' and Vill='158' and Bari='0070'");
+
 	            			g.setUserId(Global.Left(uid.getSelectedItem().toString(),2));
 	            			
 	                                //Store Last Login information

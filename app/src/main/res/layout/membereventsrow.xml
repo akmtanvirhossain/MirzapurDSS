@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
- android:orientation="vertical" android:layout_width="fill_parent"
- android:layout_height="fill_parent" 
+ android:orientation="vertical" android:layout_width="match_parent"
+ android:layout_height="wrap_content"
      android:paddingTop="0dp"
     android:paddingBottom="0dp">
-    		<TableLayout
+    		<LinearLayout
 				android:id="@+id/memtab"
-				android:layout_width="fill_parent"
-				android:layout_height="fill_parent" android:layout_marginRight="10sp">
-
-				<TableRow>
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" android:layout_marginRight="10sp">
 					<Button android:id="@+id/cmdDel" 
 					        android:layout_width="50sp"  android:textSize="14sp"
 					        android:layout_height="wrap_content"
 					        android:text="del"/>
 					<Button android:id="@+id/cmdEdit" 
-					        android:layout_width="50sp"  android:textSize="14sp"
+					        android:layout_width="55sp"  android:textSize="14sp"
 					        android:layout_height="wrap_content"
 					        android:text="edit"/>
-					<ImageView android:id="@+id/imgPreg" android:visibility="invisible" android:background="@drawable/preg" />
+					<ImageView android:id="@+id/imgPreg" android:visibility="invisible" android:layout_gravity="center_vertical"
+						android:background="@drawable/preg" android:layout_height="wrap_content" android:layout_width="wrap_content" />
 				    <TextView android:id="@+id/sno" 
 				         android:layout_width="50sp"
 				         android:gravity="center"
@@ -133,12 +132,8 @@
 				         android:layout_width="130sp"
 				         android:gravity="center"
 				         android:layout_column="22"
-				         android:layout_height="wrap_content"/>					         				    					    					    					    					         				         				    				    				    				         			         			         		         			         			     
-				    				         				         				    					    					    					    					         				         				    				    				    				         			         			         		         			         			     
-				</TableRow>  				
-		</TableLayout>
-			
-			
+				         android:layout_height="wrap_content"/>
+		</LinearLayout>
 			  						
  </RelativeLayout>
  
