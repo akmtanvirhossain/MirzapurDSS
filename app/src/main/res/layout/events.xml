@@ -3,7 +3,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"        android:layout_width="fill_parent"         android:layout_height="fill_parent"         android:overScrollMode="always"         android:isScrollContainer="true"         android:scrollbarAlwaysDrawVerticalTrack="true"         android:scrollbarStyle="outsideInset"         android:scrollbars="vertical">
     <LinearLayout   android:orientation="vertical" android:layout_width="fill_parent"    android:layout_marginLeft="10sp" android:layout_marginRight="10sp"    android:layout_height="wrap_content" android:scrollbars="vertical">
 
-    <LinearLayout android:id="@+id/secEvDate" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+    <LinearLayout android:id="@+id/secEvDate1" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
         <TextView android:id="@+id/VlblQEType" android:text="Event Type" android:layout_width="150sp" android:layout_height="wrap_content" android:textSize="20sp" />
         <EditText android:id="@+id/txtQEType" android:maxLength="50" android:layout_width="100sp" android:inputType="text" android:layout_height="wrap_content" style="@style/customEdit" android:layout_marginRight="10sp" android:textSize="20sp" />
         <TextView android:id="@+id/VlblQEType1" android:text="" android:layout_width="70sp" android:layout_height="wrap_content" android:textSize="20sp" />

@@ -54,6 +54,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 public class MemberEvents extends Activity{
 	SimpleAdapter mSchedule;
@@ -177,6 +178,8 @@ public class MemberEvents extends Activity{
 
 	//event update form
 	ImageButton btnEvDate_Update;
+	LinearLayout secDelivType;
+	Spinner spnDelType;
 
 	//***************************************************************************************************************************
 	@Override
@@ -221,7 +224,7 @@ public class MemberEvents extends Activity{
 		STR_POP += " Union Select '03-মির্জাপুরের বাহিরে বাবা/মা এর বাড়ী'";
 		STR_POP += " Union Select '04-মির্জাপুরের বাহিরে অন্য কোন বাড়ী'";
 		STR_POP += " Union Select '17-মির্জাপুরের বাহিরে অন্যান্য অলাভজনক এন.জি.ও/ক্লিনিক/সরকারী মাতৃসদন'";
-		STR_POP += " Union Select '08-মির্জপুরের বাইরে অন্য যে কোন হাসপাতাল/ক্লিনিক'";
+		//STR_POP += " Union Select '08-মির্জপুরের বাইরে অন্য যে কোন হাসপাতাল/ক্লিনিক'";
 		STR_POP += " Union Select '13-মির্জাপুরের বাহিরে অন্যান্য উপজেলা স্বাস্থ্যকেন্দ্র'";
 		STR_POP += " Union Select '14-মির্জাপুরের বাহিরে সরকারী হাসপাতাল/FWC'";
 		STR_POP += " Union Select '16-মির্জাপুরের বাহিরে বেসরকারী ক্লিনিক/হাসপাতাল(লাভজনক)'";
@@ -709,20 +712,6 @@ public class MemberEvents extends Activity{
 					name.setBackgroundColor(Color.WHITE);
 					name.setTextColor( Color.RED );
 				}
-			    /*if(o.get("exdate")==null | o.get("exdate").trim().length()==0)
-			    {
-			        
-			    }
-			    else if(Integer.valueOf(o.get("exyear"))>=2014)
-			    {
-			        name.setBackgroundColor(Color.RED);
-			        name.setTextColor( Color.WHITE );
-			    }
-			    else
-			    {
-			        name.setBackgroundColor(Color.WHITE);
-			        name.setTextColor( Color.RED );
-			    }*/
 			}
 
 
@@ -967,6 +956,7 @@ public class MemberEvents extends Activity{
 		txtCodeList.setVisibility(View.GONE);
 		secSp.setVisibility(View.GONE);
 		secDeliv.setVisibility(View.GONE);
+		secDelivType.setVisibility(View.GONE);
 		secLMP.setVisibility(View.GONE);
 
 		secReason.setVisibility(View.GONE);
@@ -1015,6 +1005,7 @@ public class MemberEvents extends Activity{
 				txtCodeList.setVisibility(View.GONE);
 				secSp.setVisibility(View.GONE);
 				secDeliv.setVisibility(View.GONE);
+				secDelivType.setVisibility(View.GONE);
 				secLMP.setVisibility(View.GONE);
 
 				secPOR.setVisibility(View.GONE);
@@ -1084,6 +1075,7 @@ public class MemberEvents extends Activity{
 					String LMP = C.ReturnSingleValue("Select LmpDt from tTrans where status='m' and vill||bari||hh||sno='"+ (Vill+Bari+HH+S) +"'");
 					secPOR.setVisibility(View.VISIBLE);
 					secDeliv.setVisibility(View.VISIBLE);
+					secDelivType.setVisibility(View.VISIBLE);
 					secLMP.setVisibility(View.VISIBLE);
 					txtLmpDt.setText(Global.DateConvertDMY(LMP));
 					txtLmpDt.setEnabled(false);
@@ -1421,6 +1413,18 @@ public class MemberEvents extends Activity{
 		wlp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;
 		window.setAttributes(wlp);
 
+		secDelivType=(LinearLayout)dialog.findViewById(R.id.secDelivType);
+		spnDelType=(Spinner)dialog.findViewById(R.id.spnDelType);
+
+		List<String> listDelivType = new ArrayList<String>();
+
+		listDelivType.add("");
+		listDelivType.add("1-Normal Delivery");
+		listDelivType.add("2-C Secttion Delivery");
+		ArrayAdapter<String> adptrusecontraceptive= new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listDelivType);
+		spnDelType.setAdapter(adptrusecontraceptive);
+
+
 
 		EditText txtQSNo = (EditText)dialog.findViewById(R.id.txtQSNo);
 		final EditText txtQPNo = (EditText)dialog.findViewById(R.id.txtQPNo);
@@ -1555,6 +1559,7 @@ public class MemberEvents extends Activity{
 		txtCodeList.setVisibility(View.GONE);
 		secSp.setVisibility(View.GONE);
 		secDeliv.setVisibility(View.GONE);
+		secDelivType.setVisibility(View.GONE);
 		secLMP.setVisibility(View.GONE);
 
 		secReason.setVisibility(View.GONE);
@@ -1589,6 +1594,7 @@ public class MemberEvents extends Activity{
 				txtCodeList.setVisibility(View.GONE);
 				secSp.setVisibility(View.GONE);
 				secDeliv.setVisibility(View.GONE);
+				secDelivType.setVisibility(View.GONE);
 				secLMP.setVisibility(View.GONE);
 
 				secPOR.setVisibility(View.GONE);
@@ -1658,6 +1664,7 @@ public class MemberEvents extends Activity{
 					String LMP = C.ReturnSingleValue("Select LmpDt from tTrans where status='m' and vill||bari||hh||sno='"+ (Vill+Bari+HH+S) +"'");
 					secPOR.setVisibility(View.VISIBLE);
 					secDeliv.setVisibility(View.VISIBLE);
+					secDelivType.setVisibility(View.VISIBLE);
 					secLMP.setVisibility(View.VISIBLE);
 					txtLmpDt.setText(Global.DateConvertDMY(LMP));
 					txtLmpDt.setEnabled(false);
@@ -2076,6 +2083,12 @@ public class MemberEvents extends Activity{
 					Connection.MessageBox(MemberEvents.this, "সঠিক প্রসবের সময় উপস্থিত ব্যক্তি/সহায়তা কারী সিলেক্ট করুন।");
 					return;
 				}
+				else if(spnDelType.getSelectedItemPosition()==0)
+				{
+					Connection.MessageBox(MemberEvents.this, "সঠিক প্রসবের ধরণ সিলেক্ট করুন।");
+					spnDelType.requestFocus();
+					return;
+				}
 
 				//21 may 2016
 				//difference between LMP and EDD Check
@@ -2433,6 +2446,7 @@ public class MemberEvents extends Activity{
 					SQL = SQL + "Info2,";
 					SQL = SQL + "Info3,";
 					SQL = SQL + "Info4,";
+					SQL = SQL + "Info5,";
 				}
 
 				SQL = SQL + "VDate,";
@@ -2500,6 +2514,7 @@ public class MemberEvents extends Activity{
 					SQL = SQL + "'"+ POP +"',";
 					SQL = SQL + "'"+ POA +"',";
 					SQL = SQL + "'"+ LmpDt +"',";
+					SQL = SQL + "'"+ spnDelType.getSelectedItem().toString().split("-")[0] +"',";
 				}
 
 				//Current & Previous Mother Serial No
@@ -4058,11 +4073,11 @@ public class MemberEvents extends Activity{
 
 		if(Status.equals("current"))
 		{
-			cur1 = C.ReadData("select sno,pno as pno,evtype,evdate,ifnull(info1,'')info1,ifnull(info2,'')info2,ifnull(info3,'')info3,ifnull(info4,'')info4,Rnd from ttrans where status='e' and Vill||Bari||HH='"+ Household +"' order by sno,Rnd,evtype");
+			cur1 = C.ReadData("select sno,pno as pno,evtype,evdate,ifnull(info1,'')info1,ifnull(info2,'')info2,ifnull(info3,'')info3,ifnull(info4,'')info4,ifnull(info5,'')info5,Rnd from ttrans where status='e' and Vill||Bari||HH='"+ Household +"' order by sno,Rnd,evtype");
 		}
 		else if(Status.equals("all"))
 		{
-			cur1 = C.ReadData("select sno,pno as pno,evtype,evdate,ifnull(info1,'')info1,ifnull(info2,'')info2,ifnull(info3,'')info3,ifnull(info4,'')info4,Rnd from Events where Vill||Bari||HH='"+ Household +"' order by sno,Rnd,evtype");
+			cur1 = C.ReadData("select sno,pno as pno,evtype,evdate,ifnull(info1,'')info1,ifnull(info2,'')info2,ifnull(info3,'')info3,ifnull(info4,'')info4,ifnull(info5,'')info5,Rnd from Events where Vill||Bari||HH='"+ Household +"' order by sno,Rnd,evtype");
 		}
 
 		if(cur1.getCount()==0)
@@ -4088,6 +4103,7 @@ public class MemberEvents extends Activity{
 			map.put("info2", cur1.getString(cur1.getColumnIndex("info2")));
 			map.put("info3", cur1.getString(cur1.getColumnIndex("info3")));
 			map.put("info4", cur1.getString(cur1.getColumnIndex("info4")));
+			map.put("info5", cur1.getString(cur1.getColumnIndex("info5")));
 			map.put("rnd", cur1.getString(cur1.getColumnIndex("Rnd")));
 			map.put("status", Status);
 
@@ -4144,6 +4160,7 @@ public class MemberEvents extends Activity{
 			TextView e_info2=(TextView)convertView.findViewById(R.id.e_info2);
 			TextView e_info3=(TextView)convertView.findViewById(R.id.e_info3);
 			TextView e_info4=(TextView)convertView.findViewById(R.id.e_info4);
+			TextView e_info5=(TextView)convertView.findViewById(R.id.e_info5);
 			TextView e_round=(TextView)convertView.findViewById(R.id.e_round);
 
 			e_sno.setText(o.get("sno").toString());
@@ -4153,6 +4170,7 @@ public class MemberEvents extends Activity{
 			e_info2.setText(o.get("info2").toString());
 			e_info3.setText(o.get("info3").toString());
 			e_info4.setText(o.get("info4").toString().trim().length()==0?o.get("info4").toString():Global.DateConvertDMY(o.get("info4").toString()));
+			e_info5.setText(o.get("info5").toString());
 			e_round.setText(o.get("rnd"));
 
 			Button cmdEvListDel = (Button)convertView.findViewById(R.id.cmdEvListDel);
@@ -6942,8 +6960,8 @@ public class MemberEvents extends Activity{
 
 			//-- -Event Table----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 			SQL = "Insert into Events";
-			SQL += " (Vill,Bari,Hh,Pno,Sno,EvType,EvDate,Info1,Info2,Info3,Info4,VDate,Rnd,Upload)";
-			SQL += " Select Vill,Bari,HH,PNo,SNo,EvType,EvDate,ifnull(Info1,'')Info1,ifnull(Info2,'')Info2,ifnull(Info3,'')Info3,ifnull(Info4,'')Info4,VDate,Rnd,'2'";
+			SQL += " (Vill,Bari,Hh,Pno,Sno,EvType,EvDate,Info1,Info2,Info3,Info4,Info5,VDate,Rnd,Upload)";
+			SQL += " Select Vill,Bari,HH,PNo,SNo,EvType,EvDate,ifnull(Info1,'')Info1,ifnull(Info2,'')Info2,ifnull(Info3,'')Info3,ifnull(Info4,'')Info4,ifnull(Info5,'')Info5,VDate,Rnd,'2'";
 			SQL += " from tTrans where Status='e' and vill||bari||hh='"+ Household +"'";
 			C.Save(SQL);
 

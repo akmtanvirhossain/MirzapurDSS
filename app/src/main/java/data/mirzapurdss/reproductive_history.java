@@ -526,7 +526,7 @@ public class reproductive_history extends Activity {
           	txtQ113.addTextChangedListener(new TextWatcher() {	    		 
 	    		   public void afterTextChanged(Editable s)
 	    		   {
-	    			   lblQ115C.setText(txtQ113.getText());    	
+	    			   lblQ115C.setText(txtQ113.getText().toString());
 	    		   }	    		 
 	    		   public void beforeTextChanged(CharSequence s, int start,
 	    		     int count, int after) {
@@ -647,23 +647,35 @@ public class reproductive_history extends Activity {
 					String SQL="";
 					int i=0;
 
-						String  VQ103="", VQ105="",VQ106="", VQ108="",VQ110="",VQ109A="",VQ109B="",VQ111A="",VQ111B="";
-                    Integer Q107A=0,Q107B=0,Q109A=0,Q109B=0,Q111A=0,Q111B=0,Q113=0;
-						if(spnQ103.getSelectedItemPosition()==0)
-						{
-							Connection.MessageBox(reproductive_history.this, "সাক্ষাৎ এর অবস্থা কি তথ্য খালি রাখা যাবে না");
-	  						return;
-						}
-						if(spnQ103.getSelectedItemPosition()==1 & txtQ104MM.getText().length()==0)
-						{
-							Connection.MessageBox(reproductive_history.this, "গর্ভবতী মায়ের কোন মাসে বিয়ে হয়েছিল তথ্য খালি রাখা যাবে না");
-	  						return;
-						}
-						if(spnQ103.getSelectedItemPosition()==1 & txtQ104YY.getText().length()==0)
-						{
-							Connection.MessageBox(reproductive_history.this, "গর্ভবতী মায়ের কোন বছরে বিয়ে হয়েছিল এ তথ্য খালি রাখা যাবে না");
-	  						return;
-						}
+					String  VQ103="", VQ105="",VQ106="", VQ108="",VQ110="",VQ109A="",VQ109B="",VQ111A="",VQ111B="";
+                   	Integer Q107A=0,Q107B=0,Q109A=0,Q109B=0,Q111A=0,Q111B=0,Q113=0;
+
+					if(spnQ103.getSelectedItemPosition()==0)
+					{
+						Connection.MessageBox(reproductive_history.this, "সাক্ষাৎ এর অবস্থা কি তথ্য খালি রাখা যাবে না");
+						return;
+					}
+					if(spnQ103.getSelectedItemPosition()==1 & txtQ104MM.getText().toString().length()==0)
+					{
+						Connection.MessageBox(reproductive_history.this, "গর্ভবতী মায়ের কোন মাসে বিয়ে হয়েছিল তথ্য খালি রাখা যাবে না");
+						return;
+					}
+					if(spnQ103.getSelectedItemPosition()==1 & txtQ104MM.getText().toString().length()!=2)
+					{
+						Connection.MessageBox(reproductive_history.this, "বিবাহের মাস অবশ্যই ২ সংখ্যার হতে হবে।");
+						return;
+					}
+
+					if(spnQ103.getSelectedItemPosition()==1 & txtQ104YY.getText().toString().length()==0)
+					{
+						Connection.MessageBox(reproductive_history.this, "গর্ভবতী মায়ের কোন বছরে বিয়ে হয়েছিল এ তথ্য খালি রাখা যাবে না");
+						return;
+					}
+					if(spnQ103.getSelectedItemPosition()==1 & txtQ104YY.getText().toString().length()!=4)
+					{
+						Connection.MessageBox(reproductive_history.this, "বিবাহের বৎসর অবশ্যই ৪ সংখ্যার হতে হবে। ");
+						return;
+					}
 
 						  try
 	  	  					{
@@ -672,7 +684,7 @@ public class reproductive_history extends Activity {
 	  		  					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	  		  					String formattedDate = sdf.format(c.getTime());
 	  			  		        Date date1 = sdf.parse(formattedDate);
-	  			  		        Date date2 = sdf.parse(txtQ104YY.getText()+"-"+txtQ104MM.getText()+"-"+"1");
+	  			  		        Date date2 = sdf.parse(txtQ104YY.getText().toString()+"-"+txtQ104MM.getText().toString()+"-"+"1");
 	  			  		        if(date2.after(date1))
 	  					        {
 	  					        	Connection.MessageBox(reproductive_history.this, "বিয়ের তারিখ বর্তমান তারিখের থেকে বড় হবে না");
@@ -731,7 +743,7 @@ public class reproductive_history extends Activity {
 			  	  			  		SQL+="'" + Global.Left(txtQ102SL.getSelectedItem().toString(),2) +"',";
 			  	  			  		SQL+="'" + PNo +"',";
 			  	  					SQL+="'" + VQ103 +"',";
-			  						SQL+="'" + txtQ104MM.getText() + "','" +  txtQ104YY.getText() + "',";
+			  						SQL+="'" + txtQ104MM.getText().toString() + "','" +  txtQ104YY.getText().toString() + "',";
 			  						SQL+="'"+ Global.DateNow() +"',";
 			  						SQL+="'"+ g.getRoundNumber() +"')";
 
@@ -762,7 +774,7 @@ public class reproductive_history extends Activity {
 	  						{
 	  							if(spnQ103.getSelectedItemPosition()==1)
 	  							{
-	  								SQL="Update tTrans set  Visit='" + VQ103 + "',MarM='" + txtQ104MM.getText() + "',MarY='" + txtQ104YY.getText() + "' ";
+	  								SQL="Update tTrans set  Visit='" + VQ103 + "',MarM='" + txtQ104MM.getText().toString() + "',MarY='" + txtQ104YY.getText().toString() + "' ";
 			  						SQL+=" where status='p' and vill||bari||hh='"+ Household +"' and SNo='"+ Global.Left(txtQ102SL.getSelectedItem().toString(),2) +"'";
 					  		  		C.Save(SQL);
 
@@ -832,7 +844,7 @@ public class reproductive_history extends Activity {
 									Connection.MessageBox(reproductive_history.this, "কতজন মেয়ে আপনার সাথে থাকে তথ্য ফাকা রাখা যাবে না");
 									return;
 								}
-								SQL="Update tTrans set Births='" + VQ105 + "', LiveHh='" + VQ106 + "', SLiveHh='" + txtQ107A.getText() + "', DLiveHh='" + txtQ107B.getText() + "' ";
+								SQL="Update tTrans set Births='" + VQ105 + "', LiveHh='" + VQ106 + "', SLiveHh='" + txtQ107A.getText().toString() + "', DLiveHh='" + txtQ107B.getText().toString() + "' ";
 								SQL+=" where  status='p' and vill||bari||hh='"+ Household +"' and SNo='"+ Global.Left(txtQ102SL.getSelectedItem().toString(),2) +"'";
 				  		  		C.Save(SQL);
 
@@ -1169,24 +1181,45 @@ public class reproductive_history extends Activity {
     		}
     		else
     		{
-		  		SQLStr = "Select Visit,";
-		  		SQLStr+="(case when VDate is null then '' else VDate end) VDate ,";
-		  		SQLStr+="(case when MarM is null then '' else MarM end) MarM ,";
-		  		SQLStr+="(case when MarY is null then '' else MarY end) MarY ,";
-		  		SQLStr+="(case when Births is null then '' else Births end) Births ,";
-		  		SQLStr+="(case when LiveHh is null then '' else LiveHh end) LiveHh ,";
-		  		SQLStr+="(case when SLiveHh  is null then '' else SLiveHh  end) SLiveHh ,";
-		  		SQLStr+="(case when DLiveHh  is null then '' else DLiveHh  end) DLiveHh ,";
-		  		SQLStr+="(case when LiveOut  is null then '' else LiveOut  end) LiveOut ,";
-		  		SQLStr+="(case when SLiveOut is null then '' else SLiveOut end) SLiveOut ,";
-		  		SQLStr+="(case when DLiveOut is null then '' else DLiveOut end) DLiveOut ,";
-		  		SQLStr+="(case when Died is null then '' else Died end) Died ,";
-		  		SQLStr+="(case when SDied is null then '' else SDied end) SDied ,";
-		  		SQLStr+="(case when DDied is null then '' else DDied end) DDied ,";
-		  		SQLStr+="(case when Abor is null then '' else Abor end) Abor ,";
-		  		SQLStr+="(case when TAbor is null then '' else TAbor end) TAbor,";
-		  		SQLStr+="(case when TotPreg is null then '' else TotPreg end) TotPreg";
-		  		SQLStr+=" from PregHis where PNo='"+ PNo +"'";
+    			if(PNo.length()==8) {
+					SQLStr = "Select Visit,";
+					SQLStr += "(case when VDate is null then '' else VDate end) VDate ,";
+					SQLStr += "(case when MarM is null then '' else MarM end) MarM ,";
+					SQLStr += "(case when MarY is null then '' else MarY end) MarY ,";
+					SQLStr += "(case when Births is null then '' else Births end) Births ,";
+					SQLStr += "(case when LiveHh is null then '' else LiveHh end) LiveHh ,";
+					SQLStr += "(case when SLiveHh  is null then '' else SLiveHh  end) SLiveHh ,";
+					SQLStr += "(case when DLiveHh  is null then '' else DLiveHh  end) DLiveHh ,";
+					SQLStr += "(case when LiveOut  is null then '' else LiveOut  end) LiveOut ,";
+					SQLStr += "(case when SLiveOut is null then '' else SLiveOut end) SLiveOut ,";
+					SQLStr += "(case when DLiveOut is null then '' else DLiveOut end) DLiveOut ,";
+					SQLStr += "(case when Died is null then '' else Died end) Died ,";
+					SQLStr += "(case when SDied is null then '' else SDied end) SDied ,";
+					SQLStr += "(case when DDied is null then '' else DDied end) DDied ,";
+					SQLStr += "(case when Abor is null then '' else Abor end) Abor ,";
+					SQLStr += "(case when TAbor is null then '' else TAbor end) TAbor,";
+					SQLStr += "(case when TotPreg is null then '' else TotPreg end) TotPreg";
+					SQLStr += " from PregHis where PNo='" + PNo + "'";
+				}else{
+					SQLStr = "Select Visit,";
+					SQLStr += "(case when VDate is null then '' else VDate end) VDate ,";
+					SQLStr += "(case when MarM is null then '' else MarM end) MarM ,";
+					SQLStr += "(case when MarY is null then '' else MarY end) MarY ,";
+					SQLStr += "(case when Births is null then '' else Births end) Births ,";
+					SQLStr += "(case when LiveHh is null then '' else LiveHh end) LiveHh ,";
+					SQLStr += "(case when SLiveHh  is null then '' else SLiveHh  end) SLiveHh ,";
+					SQLStr += "(case when DLiveHh  is null then '' else DLiveHh  end) DLiveHh ,";
+					SQLStr += "(case when LiveOut  is null then '' else LiveOut  end) LiveOut ,";
+					SQLStr += "(case when SLiveOut is null then '' else SLiveOut end) SLiveOut ,";
+					SQLStr += "(case when DLiveOut is null then '' else DLiveOut end) DLiveOut ,";
+					SQLStr += "(case when Died is null then '' else Died end) Died ,";
+					SQLStr += "(case when SDied is null then '' else SDied end) SDied ,";
+					SQLStr += "(case when DDied is null then '' else DDied end) DDied ,";
+					SQLStr += "(case when Abor is null then '' else Abor end) Abor ,";
+					SQLStr += "(case when TAbor is null then '' else TAbor end) TAbor,";
+					SQLStr += "(case when TotPreg is null then '' else TotPreg end) TotPreg";
+					SQLStr += " from PregHis limit 0";
+				}
     		}
     		
     		

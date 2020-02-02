@@ -67,7 +67,9 @@ public class Connection extends SQLiteOpenHelper {
 		SQL += "SDied varchar(2),DDied varchar(2),Abor varchar(2),TAbor varchar(2),TotPreg varchar(2),Vdate varchar(10),Rnd varchar(2),PageNo varchar(2),Status varchar(1),";
 		SQL += "Upload varchar(1),Lat varchar(20),Lon varchar(20))";
 		CreateTable("Mig_PregHis",SQL);
-                
+		if(!isFieldExist("Mig_PregHis","modifydate")){
+			Save("Alter table Mig_PregHis add column modifydate datetime");
+		}
 		SQL = "CREATE TABLE Mig_Immunization(";
 		SQL += " Vill varchar(3),Bari varchar(4),HH varchar(2),Sno varchar(2),PNO varchar(8),Status varchar(2),BCG varchar(1),BCGDT varchar(10),BCGSource varchar(2),Penta1 varchar(1),Penta1DT varchar(10),Penta1Source varchar(2),";
 		SQL += "Penta2 varchar(1),Penta2DT varchar(10),Penta2Source varchar(2),Penta3 varchar(1),Penta3DT varchar(10),Penta3Source varchar(2),PCV1 varchar(1),PCV1DT varchar(10),PCV1Source varchar(2),PCV2 varchar(1),PCV2DT varchar(10),";
@@ -77,6 +79,9 @@ public class Connection extends SQLiteOpenHelper {
 		SQL += "Influ varchar(1),InfluDT varchar(10),InfluSource varchar(2),HepaA varchar(1),HepaADT varchar(10),HepaASource varchar(2),ChickenPox varchar(1),ChickenPoxDT varchar(10),ChickenPoxSource varchar(2),Rabies varchar(1),";
 		SQL += "RabiesDT varchar(10),RabiesSource varchar(2),IPV varchar(1),IPVDT varchar(10),IPVSource varchar(2),VitaminA varchar(1),VitaminADT varchar(10),VitaminASource varchar(2),EnDt varchar(20),Upload varchar(1))";
 		CreateTable("Mig_Immunization",SQL);
+		if(!isFieldExist("Mig_Immunization","modifydate")){
+			Save("Alter table Mig_Immunization add column modifydate datetime");
+		}
 
 		CreateTable("Death"     ,"CREATE TABLE Death(Vill varchar(3) ,Bari varchar(4) ,HH varchar(2) ,SNo varchar(2) ,PNo varchar(8) ,Status varchar(2) ,DthPlace varchar(2) ,FacName varchar(2) ,FacOther varchar(50) ,Treatment varchar(1) ,WhenTreat varchar(3) ,Facility varchar(2) ,Disp varchar(2) ,WhoDisp varchar(50) ,Type varchar(2) ,Time varchar(2) , EverPreg varchar(1) ,PregonDeath varchar(1) ,LastPregTime varchar(2) ,DMY varchar(1) ,CauseofDeath varchar(2) , StartTime varchar(10) , EndTime varchar(10) ,   Lat varchar(50) ,       Lon varchar(50) ,       UserId varchar(10) ,    EnDt varchar(20) ,      Upload varchar(1) )");
 		CreateTable("Death_Temp","CREATE TABLE Death_Temp(Vill varchar(3) ,Bari varchar(4) ,HH varchar(2) ,SNo varchar(2) ,PNo varchar(8) ,Status varchar(2) ,DthPlace varchar(2) ,FacName varchar(2) ,FacOther varchar(50) ,Treatment varchar(1) ,WhenTreat varchar(3) ,Facility varchar(2) ,Disp varchar(2) ,WhoDisp varchar(50) ,Type varchar(2) ,Time varchar(2) ,    EverPreg varchar(1) ,PregonDeath varchar(1) ,LastPregTime varchar(2) ,DMY varchar(1) ,CauseofDeath varchar(2) , StartTime varchar(10) , EndTime varchar(10) ,   Lat varchar(50) ,       Lon varchar(50) ,       UserId varchar(10) ,    EnDt varchar(20) ,      Upload varchar(1) )");
@@ -93,226 +98,56 @@ public class Connection extends SQLiteOpenHelper {
 
 		Save("update baris set cluster=(select cluster from mdssvill where vill=baris.vill) where length(cluster)=0 or cluster is null");
 
-		/*
-                Cursor d=db.rawQuery("Select * from Death limit 1",null);
-                if(d.getColumnCount()!=27)
-                 {
-                    Save("Drop table Death");
-                    Save("Drop table Death_Temp");                    
-                 }
-                d.close();
-                */
-                
-                //25 Oct 2015
-                Cursor d1=db.rawQuery("Select * from Death limit 1",null);
-                if(d1.getColumnCount()==27)
-                 {
-                    Save("Alter table Death add      column Status varchar(2)");
-                    Save("Alter table Death_Temp add column Status varchar(2)");                 
-                 }
-                d1.close();
-                
-                Cursor d2=db.rawQuery("Select * from Immunization limit 1",null);
-                if(d2.getColumnCount()==71)
-                 {
-                        Save("Alter table Immunization add column IPV varchar(1)");
-                        Save("Alter table Immunization add column IPVDT varchar(10)");
-                        Save("Alter table Immunization add column IPVSource varchar(2)");
 
-                        Save("Alter table Immunization add column VitaminA varchar(1)");
-                        Save("Alter table Immunization add column VitaminADT varchar(10)");
-                        Save("Alter table Immunization add column VitaminASource varchar(2)");
-
-                        Save("Alter table ImmunizationTemp add column IPV varchar(1)");
-                        Save("Alter table ImmunizationTemp add column IPVDT varchar(10)");
-                        Save("Alter table ImmunizationTemp add column IPVSource varchar(2)");
-
-                        Save("Alter table ImmunizationTemp add column VitaminA varchar(1)");
-                        Save("Alter table ImmunizationTemp add column VitaminADT varchar(10)");
-                        Save("Alter table ImmunizationTemp add column VitaminASource varchar(2)");
-
-                 }
-                d2.close();
+		//25 Oct 2015
+		Cursor c1=db.rawQuery("Select * from Events limit 1",null);
+		if(c1.getColumnCount()==14)
+		{
+			Save("Alter table Events add column info5 varchar(10)");
+			Save("Alter table tTrans add column info5 varchar(10)");
+		}
+		c1.close();
 
 		/*
-		CreateTable("MigData",    "Create table MigData    (hh varchar(9), Sno varchar(2),Pno varchar(8),Name varchar(100),ExDate varchar(10))");
-		CreateTable("MigDatabase","Create table MigDatabase(ExType varchar(2), hh varchar(9), Sno varchar(2),Pno varchar(8),Name varchar(100),ExDate varchar(10))");
-		
-		String TableSQL="";
-		TableSQL = "CREATE TABLE MigMember (Vill VARCHAR( 3 ),Bari VARCHAR( 4 ),Hh VARCHAR( 2 ),Sno VARCHAR( 2 ),";
-		TableSQL +=	" Pno VARCHAR( 8 ),Name VARCHAR( 100 ),Rth VARCHAR( 2 ),Sex VARCHAR( 1 ),BDate VARCHAR( 10 ),";
-		TableSQL +=	" Age VARCHAR( 3 ),Mono VARCHAR( 2 ),Fano VARCHAR( 2 ),Edu  VARCHAR( 2 ),Ms   VARCHAR( 2 ),";
-		TableSQL +=	" Pstat  VARCHAR( 2 ) ,LmpDt  VARCHAR( 10 ),Sp1  VARCHAR( 2 ),Sp2  VARCHAR( 2 ),Sp3  VARCHAR( 2 ),";
-		TableSQL +=	" Sp4  VARCHAR( 2 ),Ocp  VARCHAR( 2 ),EnType VARCHAR( 2 ),EnDate VARCHAR( 10 ),ExType VARCHAR( 2 ),";
-		TableSQL +=	" ExDate VARCHAR( 10 ),PageNo VARCHAR( 2 ),Status VARCHAR( 2 ),Upload VARCHAR( 1 ),PosMig VARCHAR( 2 ),";
-		TableSQL +=	" PosMigDate VARCHAR( 10 ))";
-		CreateTable("MigMember",TableSQL);
-		
-		//add variable note in visits table
-		//.....................................................................................
-		Cursor d=db.rawQuery("Select * from visits limit 1",null);
-        	int totalCol=d.getColumnCount();
-        	if(d.getColumnCount()==13)
-        	 {
-        	   db.execSQL("alter table Visits add Note varchar(150) not null default ''");
-        	 }
-        	d.close();
-	    
-	        //add variable note in visits table
-	  	//.....................................................................................
-	  	Cursor d1=db.rawQuery("Select * from tTrans limit 1",null);
-	  	if(d1.getColumnCount()==151)
-	  	 {
-	  	  	db.execSQL("alter table tTrans add Note varchar(150) not null default ''");
-	  	 }
-	  	d1.close();
-	  	
-	        //.....................................................................................
-	  	//Date: 21 Oct 2013
-	  	if(!Existence("select * from POP where Code='06'"))
-	  	{
-	  		Save("Insert into POP(Code,Place)Values('06','06 - মির্জাপুরের ভিতরে এন.জি.ও/ক্লিনিক/সরকারী মাতৃসদন')");
-	  	}
-	  	
-	  	//Immunization : 24 Nov 2013
-	  	if(TableExists("Immunization"))
-	  	{
-	  		//Save("Drop table Immunization");
-		  	Cursor d2=db.rawQuery("Select * from Immunization limit 1",null);
-		  	if(d2.getColumnCount()==10)
-		  	 {
-		  		Save("Drop table Immunization");
-		  	 }
-		  	d2.close();
-	  	}
-	  	
-  		String S = "";
-			S += "Vill	varchar(3)	,Bari	varchar(4)	,HH	varchar(2)	,Sno	varchar(2), Status varchar(2),	,BCG	varchar(1)	,BCGDT	varchar(10)	,BCGSource	varchar(2)	,";
-			S += "Penta1	varchar(1)	,Penta1DT	varchar(10)	,Penta1Source	varchar(2)	,Penta2	varchar(1)	,Penta2DT	varchar(10)	,Penta2Source	varchar(2)	,";
-			S += "Penta3	varchar(1)	,Penta3DT	varchar(10)	,Penta3Source	varchar(2)	,PCV1	varchar(1)	,PCV1DT	varchar(10)	,PCV1Source	varchar(2)	,";
-			S += "PCV2	varchar(1)	,PCV2DT	varchar(10)	,PCV2Source	varchar(2)	,PCV3	varchar(1)	,PCV3DT	varchar(10)	,PCV3Source	varchar(2)	,";
-			S += "OPV0	varchar(1)	,OPV0DT	varchar(10)	,OPV0Source	varchar(2)	,OPV1	varchar(1)	,OPV1DT	varchar(10)	,OPV1Source	varchar(2)	,";
-			S += "OPV2	varchar(1)	,OPV2DT	varchar(10)	,OPV2Source	varchar(2)	,OPV3	varchar(1)	,OPV3DT	varchar(10)	,OPV3Source	varchar(2)	,";
-			S += "OPV4	varchar(1)	,OPV4DT	varchar(10)	,OPV4Source	varchar(2)	,Measles	varchar(1)	,MeaslesDT	varchar(10)	,MeaslesSource	varchar(2)	,";
-			S += "MR	varchar(1)	,MRDT	varchar(10)	,MRSource	varchar(2)	,";
-			S += "Rota 	varchar(1),RotaDT	varchar(10),RotaSource	varchar(2),MMR	varchar(1),";
-			S += "MMRDT	varchar(10),MMRSource	varchar(2),Typhoid	varchar(1),TyphoidDT	varchar(10),";
-			S += "TyphoidSource	varchar(2),Influ	varchar(1),InfluDT	varchar(10),InfluSource	varchar(2),";
-			S += "HepaA	varchar(1),HepaADT	varchar(10),HepaASource	varchar(2),ChickenPox	varchar(1),";
-			S += "ChickenPoxDT	varchar(10),ChickenPoxSource	varchar(2),Rabies	varchar(1),RabiesDT	varchar(10),";
-			S += "RabiesSource	varchar(2),EnDt	varchar(20)	,Upload	varchar(1))";
-
-	  	CreateTable("Immunization","Create table Immunization(" +S);
-	  	CreateTable("ImmunizationTemp","Create table ImmunizationTemp(" +S);
-	  	
-	  	
-	  	//Tables for update and delete old events	  	
-	  	S  = "Create table UpdateEvents(";
-	  	S += "    Vill   VARCHAR( 3 )   NOT NULL,    Bari   VARCHAR( 4 )   NOT NULL,    Hh     VARCHAR( 2 )   NOT NULL,";
-	  	S += "    Pno    VARCHAR( 8 )   NOT NULL,    Sno    VARCHAR( 2 )   NOT NULL,    EvType VARCHAR( 2 )   NOT NULL,";
-	  	S += "    EvDate VARCHAR( 10 )  NOT NULL,    Info1  VARCHAR( 20 )  NOT NULL,    Info2  VARCHAR( 8 )   NOT NULL,";
-	  	S += "    Info3  VARCHAR( 8 )   NOT NULL,    Info4  VARCHAR( 10 )  ,    Vdate  VARCHAR( 10 )  ,";
-	  	S += "    Rnd    VARCHAR( 2 )   NOT NULL,    Upload VARCHAR( 1 ))";
-	  	
-	  	CreateTable("UpdateEvents",S);
-	  	
-	  	
-	  	//06 Dec 2013 : Update existing data
-	  	Save("Update Household set upload='2' where upload is null");
-	  	Save("Update visits set latnet='' where latnet is null");
-	  	Save("Update visits set lonnet='' where lonnet is null");
-	  	Save("update visits set upload='2' where upload is null");
-	  	Save("Update events set upload='2' where upload is null");
-	  	*/
-		
-		/*
-	  	//Immunization : 07 Dec 2013
-		if(TableExists("Immunization"))
-	  	{
-		  	Cursor d2=db.rawQuery("Select * from Immunization limit 1",null);
-		  	if(d2.getColumnCount()==69)
-		  	 {
-		  		Save("Drop table Immunization");
-		  		Save("Drop table ImmunizationTemp");
-		  	 }
-		  	d2.close();
-	  	}
-		
-  		String S = "";
-			S += "Vill	varchar(3)	,Bari	varchar(4)	,HH	varchar(2)	,Sno	varchar(2), Status varchar(2),BCG	varchar(1)	,BCGDT	varchar(10)	,BCGSource	varchar(2),";
-			S += "Penta1	varchar(1)	,Penta1DT	varchar(10)	,Penta1Source	varchar(2)	,Penta2	varchar(1)	,Penta2DT	varchar(10)	,Penta2Source	varchar(2)	,";
-			S += "Penta3	varchar(1)	,Penta3DT	varchar(10)	,Penta3Source	varchar(2)	,PCV1	varchar(1)	,PCV1DT	varchar(10)	,PCV1Source	varchar(2)	,";
-			S += "PCV2	varchar(1)	,PCV2DT	varchar(10)	,PCV2Source	varchar(2)	,PCV3	varchar(1)	,PCV3DT	varchar(10)	,PCV3Source	varchar(2)	,";
-			S += "OPV0	varchar(1)	,OPV0DT	varchar(10)	,OPV0Source	varchar(2)	,OPV1	varchar(1)	,OPV1DT	varchar(10)	,OPV1Source	varchar(2)	,";
-			S += "OPV2	varchar(1)	,OPV2DT	varchar(10)	,OPV2Source	varchar(2)	,OPV3	varchar(1)	,OPV3DT	varchar(10)	,OPV3Source	varchar(2)	,";
-			S += "OPV4	varchar(1)	,OPV4DT	varchar(10)	,OPV4Source	varchar(2)	,Measles	varchar(1)	,MeaslesDT	varchar(10)	,MeaslesSource	varchar(2)	,";
-			S += "MR	varchar(1)	,MRDT	varchar(10)	,MRSource	varchar(2)	,";
-			S += "Rota 	varchar(1),RotaDT	varchar(10),RotaSource	varchar(2),MMR	varchar(1),";
-			S += "MMRDT	varchar(10),MMRSource	varchar(2),Typhoid	varchar(1),TyphoidDT	varchar(10),";
-			S += "TyphoidSource	varchar(2),Influ	varchar(1),InfluDT	varchar(10),InfluSource	varchar(2),";
-			S += "HepaA	varchar(1),HepaADT	varchar(10),HepaASource	varchar(2),ChickenPox	varchar(1),";
-			S += "ChickenPoxDT	varchar(10),ChickenPoxSource	varchar(2),Rabies	varchar(1),RabiesDT	varchar(10),";
-			S += "RabiesSource	varchar(2),EnDt	varchar(20)	,Upload	varchar(1))";
-
-	  	CreateTable("Immunization","Create table Immunization(" +S);
-	  	CreateTable("ImmunizationTemp","Create table ImmunizationTemp(" +S);	
-	  	*/
-		
-		//table for data upload: 28 Jan 2014
-		//CreateTable("ServerID","Create table ServerID(IDField varchar(50))");
-		
-		
-		
-		
-		
-		//Data Update
-		//06 Mar 2014
-				
-		/*
-	  	Cursor d2=db.rawQuery("Select * from Household limit 1",null);
-	  	if(d2.getColumnCount()==15)
-	  	 {
-	  		Save("alter table Household add column Note varchar(200) not null default ''");
-	  	 }
-	  	d2.close();
+		Cursor d=db.rawQuery("Select * from Death limit 1",null);
+		if(d.getColumnCount()!=27)
+		 {
+			Save("Drop table Death");
+			Save("Drop table Death_Temp");
+		 }
+		d.close();
 		*/
-		
-	  	//14 Apr 2014
-	  	//Save("Update MDSSVILL set vname='Baje Chuattar' where vill='198'");
-	  	
-		
-		/*
-	        //add new variable PNo varchar(8) in Immunization,ImmunizationTemp table: 18 Sep 2014
-	  	//.....................................................................................
-	  	Cursor d1=db.rawQuery("Select * from Immunization limit 1",null);
-	  	if(d1.getColumnCount()==70)
-	  	 {
-	  	  	db.execSQL("alter table Immunization     add PNo varchar(8) not null default ''");
-	  	  	db.execSQL("alter table ImmunizationTemp add PNo varchar(8) not null default ''");
-	  	  	db.execSQL("Update Immunization Set PNo=(Select PNo from Member where Vill||Bari||HH||SNo=Immunization.vill||Immunization.bari||Immunization.hh||Immunization.sno)");	  	  	
-	  	 }
-	  	d1.close();
 
+		//25 Oct 2015
+		Cursor d1=db.rawQuery("Select * from Death limit 1",null);
+		if(d1.getColumnCount()==27)
+		 {
+			Save("Alter table Death add      column Status varchar(2)");
+			Save("Alter table Death_Temp add column Status varchar(2)");
+		 }
+		d1.close();
 
-	  	Cursor d2=db.rawQuery("Select * from Household limit 1",null);
-	  	if(d2.getColumnCount()==16)
-	  	 {
-	  		db.execSQL("alter table Household add ContactNo varchar(50) not null default ''");
-	  	 }
-	  	d2.close();
-	  	
-	  	Cursor d3=db.rawQuery("Select * from tTrans limit 1",null);
-	  	if(d3.getColumnCount()==152)
-	  	 {
-	  		db.execSQL("alter table tTrans add ContactNo varchar(50) not null default ''");
-	  	 }
-	  	d3.close();
-	  	*/
+		Cursor d2=db.rawQuery("Select * from Immunization limit 1",null);
+		if(d2.getColumnCount()==71)
+		 {
+				Save("Alter table Immunization add column IPV varchar(1)");
+				Save("Alter table Immunization add column IPVDT varchar(10)");
+				Save("Alter table Immunization add column IPVSource varchar(2)");
 
+				Save("Alter table Immunization add column VitaminA varchar(1)");
+				Save("Alter table Immunization add column VitaminADT varchar(10)");
+				Save("Alter table Immunization add column VitaminASource varchar(2)");
 
+				Save("Alter table ImmunizationTemp add column IPV varchar(1)");
+				Save("Alter table ImmunizationTemp add column IPVDT varchar(10)");
+				Save("Alter table ImmunizationTemp add column IPVSource varchar(2)");
 
+				Save("Alter table ImmunizationTemp add column VitaminA varchar(1)");
+				Save("Alter table ImmunizationTemp add column VitaminADT varchar(10)");
+				Save("Alter table ImmunizationTemp add column VitaminASource varchar(2)");
 
-
+		 }
+		d2.close();
 
 		//Date: 12 Apr 2015
         //if(!Existence("select * from POP where Code='06'"))
@@ -2183,6 +2018,21 @@ public class Connection extends SQLiteOpenHelper {
 		if (matched == false) {
 			Save("Alter table " + TableName + " add column " + ColumnName + " varchar(50) default ''");
 		}
+	}
+
+	// This method will check if column exists in your table
+	public boolean isFieldExist(String tableName, String fieldName)
+	{
+		boolean isExist = false;
+		Cursor res = db.rawQuery("PRAGMA table_info("+ tableName +")",null);
+		res.moveToFirst();
+		do {
+			String currentColumn = res.getString(1);
+			if (currentColumn.equals(fieldName)) {
+				isExist = true;
+			}
+		} while (res.moveToNext());
+		return isExist;
 	}
 }
 

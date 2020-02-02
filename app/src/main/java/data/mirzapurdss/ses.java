@@ -299,9 +299,11 @@ public class ses extends Activity {
          String SQL="";
          String NewSESNo = "";
          
-         if(C.Existence("select vill from tTrans where status='s' and vill||bari||hh='" + Household + "'"))
+         /*if(C.Existence("select vill from tTrans where status='s' and vill||bari||hh='" + Household + "'"))
          {
-        	 NewSESNo = C.ReturnSingleValue("select (ifnull(max(sesno),0)+1)SESNo from ttrans where status='s' and vill||bari||hh='"+ Household +"' and cast((julianday(date('now'))-julianday(vdate))/365.25 as int)>=3 order by sesno desc limit 1");
+             //strftime('%Y',vdate)
+        	 //NewSESNo = C.ReturnSingleValue("select (ifnull(max(sesno),0)+1)SESNo from ttrans where status='s' and vill||bari||hh='"+ Household +"' and cast((julianday(date('now'))-julianday(vdate))/365.25 as int)>=3 order by sesno desc limit 1");
+             NewSESNo = C.ReturnSingleValue("select (ifnull(max(sesno),0)+1)SESNo from ttrans where status='s' and vill||bari||hh='"+ Household +"' and strftime('%Y',vdate)<=2016 order by sesno desc limit 1");
         	 if(NewSESNo.equals("1"))
         		 SQL = "select distinct ifnull(SESNo,'')SESNo from ttrans where status='s' and vill||bari||hh='"+ Household +"' order by SESNo desc";
         	 else
@@ -310,9 +312,9 @@ public class ses extends Activity {
          else
          {
         	 SQL = "Select '1'";
-         }
-         
-         //SQL = "Select '1'";
+         }*/
+
+        SQL = "Select '2' SESNo union select distinct ifnull(SESNo,'')SESNo from ttrans where status='s' and vill||bari||hh='"+ Household +"' order by SESNo desc";
          
          spnSESNo.setAdapter(C.getArrayAdapter(SQL));
          //spnSESNo.setAdapter(C.getArrayAdapter("select ifnull(max(sesno),1)SESNo from ttrans where status='s' and vill||bari||hh='"+ Household +"' order by sesno desc"));
@@ -2144,6 +2146,13 @@ public class ses extends Activity {
 	        txtQ024b.setSelection(0);
 	        txtQ025a.setSelection(0);
 	        txtQ025b.setSelection(0);
+
+			txtQ023a.setText("");
+		txtQ023b.setText("");
+		txtQ024a.setText("");
+		txtQ024b.setText("");
+		txtQ025a.setText("");
+		txtQ025b.setText("");
 
 	        rdogrpQ026.clearCheck();
 	                

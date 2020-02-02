@@ -49,6 +49,12 @@
 			android:layout_width="120sp" android:textSize="18sp"
 			android:gravity="center"
 			android:layout_height="30sp"/>
+		<TextView android:id="@+id/e_info5" android:layout_column="8"
+			android:text="Info-5"
+			android:layout_width="120sp" android:textSize="18sp"
+			android:gravity="center"
+			android:layout_height="30sp"/>
+
 		<TextView android:id="@+id/e_round" android:layout_column="9"
 			android:layout_width="70sp" android:textSize="18sp"
 			android:gravity="center"

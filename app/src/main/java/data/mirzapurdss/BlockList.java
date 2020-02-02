@@ -116,7 +116,7 @@ public class BlockList extends Activity{
         C = new Connection(this);
         g = Global.getInstance();
 
-		try{
+		/*try{
 			C.AddColumnIfNotExists("Immunization","fIPV1");
 			C.AddColumnIfNotExists("Immunization","fIPVDT1");
 			C.AddColumnIfNotExists("Immunization","fIPVSource1");
@@ -140,7 +140,7 @@ public class BlockList extends Activity{
 
 		}catch (Exception ex){
 
-		}
+		}*/
 
         spnCluster = (Spinner)findViewById(R.id.spnCluster);
         spnCluster.setAdapter(C.getArrayAdapter("Select Cluster from currentcluster"));
@@ -172,7 +172,7 @@ public class BlockList extends Activity{
 			String response = CJSon.DownloadJSON(SQL, TableName, VariableList, "Cluster,Block,TotalBari,TotalHH,TotalMem,Rnd");
 		}
 
-/*
+        /*
     	//30 Jun 2015
     	//PNO Missing in Pregnancy History
     	String SQL = "";
@@ -194,7 +194,7 @@ public class BlockList extends Activity{
             m.moveToNext();
         }                       
         m.close();     	
-*/
+        */
 
     	
 
@@ -231,7 +231,6 @@ public class BlockList extends Activity{
 				         	  	
 					         	//finish();
 				     	    	Intent f11 = new Intent(getApplicationContext(),HouseholdIndex.class);
-				     	    	//Intent f11 = new Intent(getApplicationContext(),SESPregHisMissingList.class);
 				     	    	f11.putExtras(IDbundle);
 				     	    	startActivity(f11);   
 				     	    	
@@ -317,8 +316,8 @@ public class BlockList extends Activity{
 	    		    		    	    	        	String SQL = "";
 	    		    		    	    	        	String UniqueField = "";
 
+														Common.Connection CJSon = new Common.Connection(BlockList.this);
 
-														//C.Sync_Download("Physician" ,CLUSTER, "");
 
 	    		    		    	    	        	//Upload/Download Status: 02 Apr 2014
 	    		    		    	    	        	String r = C.ExecuteCommandOnServer("Insert into UploadMonitor(Cluster)Values('"+ g.getClusterCode() +"')");
@@ -356,7 +355,6 @@ public class BlockList extends Activity{
 	    		        		    	            	//  Update Local Database
 	    		    		    	    	        	//***************************
 
-														Common.Connection CJSon = new Common.Connection(BlockList.this);
 
 
 														//Delete Data From the Local Device: 20 Oct 2017
@@ -411,15 +409,26 @@ public class BlockList extends Activity{
 														CJSon.DownloadJSON_UpdateServer(SQL, "Member", "Vill, Bari, Hh, Sno, Pno, Name, Rth, Sex, BDate, Age, Mono, Fano, Edu, Ms, Pstat, LmpDt, Sp1, Sp2, Sp3, Sp4, Ocp, EnType, EnDate, ExType, ExDate, PageNo, Status, Upload, PosMig, PosMigDate", "Vill, Bari, Hh, Sno");
 
 														//Events Table
-														SQL = "Select e.Vill, e.Bari, e.Hh, e.Pno, e.Sno, e.EvType, e.EvDate, e.Info1, e.Info2, e.Info3, e.Info4, e.Vdate, e.Rnd, e.Upload";
+														SQL = "Select e.Vill, e.Bari, e.Hh, e.Pno, e.Sno, e.EvType, e.EvDate, e.Info1, e.Info2, e.Info3, e.Info4,e.Info5, e.Vdate, e.Rnd, e.Upload";
 														SQL += " from Events e,Household h where e.vill+e.bari+e.Hh=h.Vill+h.Bari+h.HH and h.Clust='"+ g.getClusterCode() +"' and e.Upload='3'";
-														CJSon.DownloadJSON_UpdateServer(SQL,"Events", "Vill, Bari, Hh, Pno, Sno, EvType, EvDate, Info1, Info2, Info3, Info4, Vdate, Rnd, Upload", "Vill, Bari, Hh, Sno, EvDate, Rnd");
+														CJSon.DownloadJSON_UpdateServer(SQL,"Events", "Vill, Bari, Hh, Pno, Sno, EvType, EvDate, Info1, Info2, Info3, Info4, Info5, Vdate, Rnd, Upload", "Vill, Bari, Hh, Sno, EvDate, Rnd");
 
 														//PregHis: 20 Oct 2017
 														SQL = "Select p.Vill, p.Bari, p.Hh, p.Sno, p.Pno, Visit, MarM, MarY, Births, LiveHh, SLiveHh, DLiveHh, LiveOut, SLiveOut, DLiveOut, Died, SDied, DDied, Abor, TAbor, TotPreg, Vdate, p.Rnd, PageNo, Status, p.Upload, Lat, Lon\n" +
 																"from PregHis p inner join Household h on p.Vill+p.Bari+p.Hh=h.Vill+h.Bari+h.Hh \n" +
 																"where h.Clust='"+ g.getClusterCode() +"' and p.Upload='3'";
 														CJSon.DownloadJSON_UpdateServer(SQL,"PregHis", "Vill, Bari, Hh, Sno, Pno, Visit, MarM, MarY, Births, LiveHh, SLiveHh, DLiveHh, LiveOut, SLiveOut, DLiveOut, Died, SDied, DDied, Abor, TAbor, TotPreg, Vdate, Rnd, PageNo, Status, Upload, Lat, Lon", "Vill, Bari, Hh, Pno");
+
+														//SES download: 02 Dec 2018
+														SQL = "select s.Vill, s.Bari, s.Hh, s.SESNo, s.Visit, s.Q015a, s.Q015b, s.Q015c, s.Q016a, s.Q016b, s.Q016c, s.Q017, s.Q018, s.Q019a, s.Q019b, s.Q019c, s.Q019d, s.Q019e, s.Q019f, \n" +
+																"s.Q019g, s.Q019h, s.Q019i, s.Q019j, s.Q019k, s.Q019l, s.Q019m, s.Q019n, s.Q019o, s.Q019p, s.Q019q, s.Q019r, s.Q019s, s.Q019t, s.Q019u, s.Q019v, s.Q019w, s.Q019x, s.Q019y, \n" +
+																"s.Q019z, s.Q020a, s.Q020b, s.Q020c, s.Q020d, s.Q020e, s.Q020f, s.Q020g, s.Q020h, s.Q021, s.Q022a, s.Q022b, s.Q022c, s.Q023a, s.Q023b, s.Q024a, s.Q024b, s.Q025a, s.Q025b, \n" +
+																"s.Q026, s.Q027a, s.Q027b, s.Q027c, s.Q027d, s.Q027e, s.Q027f, s.Q027g, s.Q027h, s.Q027i, s.Q027j, s.Q027y, s.Q027z, s.Q028a, s.Q028b, s.Q028c, s.Q028d, s.Q028e, s.Q028y, \n" +
+																"s.Q029, s.Q030a, s.Q030b, s.Q030c, s.Q030d, s.Q030e, s.Q030f, s.Q030g, s.Q030h, s.Q030z, s.Q031, s.Vdate, s.Rnd, s.PageNo, s.Status, s.Upload, s.Lat, s.Lon from ses s\n" +
+																" inner join Baris b on s.vill=b.vill and s.bari=b.bari\n" +
+																" inner join MDSSVill c on b.vill=c.Vill \n" +
+																" where s.sesno=2 and c.cluster='"+ g.getClusterCode() +"' and s.Upload=3";
+														CJSon.DownloadJSON_UpdateServer(SQL,"SES", "Vill, Bari, Hh, SESNo, Visit, Q015a, Q015b, Q015c, Q016a, Q016b, Q016c, Q017, Q018, Q019a, Q019b, Q019c, Q019d, Q019e, Q019f, Q019g, Q019h, Q019i, Q019j, Q019k, Q019l, Q019m, Q019n, Q019o, Q019p, Q019q, Q019r, Q019s, Q019t, Q019u, Q019v, Q019w, Q019x, Q019y, Q019z, Q020a, Q020b, Q020c, Q020d, Q020e, Q020f, Q020g, Q020h, Q021, Q022a, Q022b, Q022c, Q023a, Q023b, Q024a, Q024b, Q025a, Q025b, Q026, Q027a, Q027b, Q027c, Q027d, Q027e, Q027f, Q027g, Q027h, Q027i, Q027j, Q027y, Q027z, Q028a, Q028b, Q028c, Q028d, Q028e, Q028y, Q029, Q030a, Q030b, Q030c, Q030d, Q030e, Q030f, Q030g, Q030h, Q030z, Q031, Vdate, Rnd, PageNo, Status, Upload, Lat, Lon", "Vill, Bari, Hh, SESNo");
 
 														//PNO Update: Update needed 3 for pno update
 														SQL = "Select m.Vill, m.Bari, m.Hh, m.Sno, m.Pno from Member m,Household h";
@@ -442,25 +451,26 @@ public class BlockList extends Activity{
 														VariableList = "Vill, Bari, Block, BariName, BariLoc, Xdec, Xmin, Xsec, Ydec, Ymin, Ysec, Status, EnDt, Upload";
 														response = CJSon.UploadJSON(TableName , VariableList , "Vill, Bari");
 
+														//Household
+														TableName = "Household";
+														VariableList = "Vill, Bari, Hh, Pno, EnType, EnDate, ExType, ExDate, Rel, HHHead, Clust, Block, EnDt, Rnd, Upload, ContactNo,Note";
+														response = CJSon.UploadJSON(TableName, VariableList, "Vill, Bari, Hh");
+
 														//Table: Visits
 														TableName = "Visits";
 														VariableList = "Vill, Bari, Hh, Rsno, Dma, EnterDt, Vdate, Rnd, Lat, Lon, LatNet, LonNet, Upload, Note";
 														response = CJSon.UploadJSON(TableName, VariableList, "Vill, Bari, Hh, Rnd");
 
-														//Household
-														TableName = "Household";
-														VariableList = "Vill, Bari, Hh, Pno, EnType, EnDate, ExType, ExDate, Rel, HHHead, Clust, Block, EnDt, Rnd, Upload, ContactNo,Note";
-														response = CJSon.UploadJSON(TableName, VariableList, "Vill, Bari, Hh");
+														//Member
+														TableName = "Member";
+														VariableList = "Vill, Bari, Hh, Sno, Pno, Name, Rth, Sex, BDate, Age, Mono, Fano, Edu, Ms, Pstat, LmpDt, Sp1, Sp2, Sp3, Sp4, Ocp, EnType, EnDate, ExType, ExDate, PageNo, Status, Upload, PosMig, PosMigDate";
+														response = CJSon.UploadJSON(TableName, VariableList, "Vill, Bari, Hh, Sno");
 
 														//SES
 														TableName = "SES";
 														VariableList = "Vill, Bari, Hh, SESNo, Visit, Q015a, Q015b, Q015c, Q016a, Q016b, Q016c, Q017, Q018, Q019a, Q019b, Q019c, Q019d, Q019e, Q019f, Q019g, Q019h, Q019i, Q019j, Q019k, Q019l, Q019m, Q019n, Q019o, Q019p, Q019q, Q019r, Q019s, Q019t, Q019u, Q019v, Q019w, Q019x, Q019y, Q019z, Q020a, Q020b, Q020c, Q020d, Q020e, Q020f, Q020g, Q020h, Q021, Q022a, Q022b, Q022c, Q023a, Q023b, Q024a, Q024b, Q025a, Q025b, Q026, Q027a, Q027b, Q027c, Q027d, Q027e, Q027f, Q027g, Q027h, Q027i, Q027j, Q027y, Q027z, Q028a, Q028b, Q028c, Q028d, Q028e, Q028y, Q029, Q030a, Q030b, Q030c, Q030d, Q030e, Q030f, Q030g, Q030h, Q030z, Q031, Vdate, Rnd, PageNo, Status, Upload, Lat, Lon";
 														response = CJSon.UploadJSON(TableName, VariableList, "Vill, Bari, Hh, SESNo");
 
-														//Member
-														TableName = "Member";
-														VariableList = "Vill, Bari, Hh, Sno, Pno, Name, Rth, Sex, BDate, Age, Mono, Fano, Edu, Ms, Pstat, LmpDt, Sp1, Sp2, Sp3, Sp4, Ocp, EnType, EnDate, ExType, ExDate, PageNo, Status, Upload, PosMig, PosMigDate";
-														response = CJSon.UploadJSON(TableName, VariableList, "Vill, Bari, Hh, Sno");
 
 														//Preg. History
 														TableName = "PregHis";
@@ -491,7 +501,7 @@ public class BlockList extends Activity{
 
 														//Events
 														TableName = "Events";
-														VariableList = "Vill, Bari, Hh, Pno, Sno, EvType, EvDate, Info1, Info2, Info3, Info4, Vdate, Rnd, Upload";
+														VariableList = "Vill, Bari, Hh, Pno, Sno, EvType, EvDate, Info1, Info2, Info3, Info4, Info5, Vdate, Rnd, Upload";
 														response = CJSon.UploadJSON(TableName, VariableList, "Vill, Bari, Hh, Sno, EvType, EvDate, Rnd");
 
 														//Immunization
@@ -579,9 +589,25 @@ public class BlockList extends Activity{
 			        new Thread() { 
 			            public void run() { 
 			                try {
+								String TableName = "";
+								String VariableList = "";
+								String SQLStr = "";
+								String Res = "";
+
+								Common.Connection CJson = new Common.Connection(BlockList.this);
 			            		String SQL = "";
 			            		String S  = "";
-			            		
+
+								//CJson.Sync_Download_Batch("DatabaseTab",CLUSTER,"");
+								SQLStr  = "Select TableName, TableScript, ColumnList, UniqueID, Sync_Upload, Sync_Download, BatchSize, modifyDate from DatabaseTab as t\n" +
+										"where not exists(select * from Sync_Management where\n" +
+										"lower(TableName)  = lower('DatabaseTab') and\n" +
+										"UniqueID   = 'DatabaseTab' and\n" +
+										"convert(varchar(19),modifydate,120) = convert(varchar(19),t.modifydate,120) and\n" +
+										"UserId   ='"+ CLUSTER +"')";
+								VariableList = "TableName, TableScript, ColumnList, UniqueID, Sync_Upload, Sync_Download, BatchSize, modifyDate";
+								Res = CJson.DownloadJSON(SQLStr,"DatabaseTab",VariableList,"TableName");
+
 			            		C.Save("Delete from MigDatabase");
 
 			            		//Data from with-in cluster
@@ -592,7 +618,6 @@ public class BlockList extends Activity{
 				    	    	SQL =  "Insert into migdatabase(extype, hh, Sno,Pno,Name,ExDate) select extype, (vill||bari||hh)hh, Sno,Pno,Name,ExDate from Member m where ExType='53'";
 				    	    	SQL += "and not exists(select sno from Member where pno=m.pno and entype='23' and endate=m.exdate)order by Name asc";  
 				    	    	C.Save(SQL);
-				    	    					    	    
 
 								/*
 				    	    	if(netwoekAvailable==true)
@@ -613,15 +638,24 @@ public class BlockList extends Activity{
 				    	    	}
 								*/
 
-								String TableName = "";
-								String VariableList = "";
-								String SQLStr = "";
-								String Res = "";
-								Common.Connection CJson = new Common.Connection(BlockList.this);
+
+
 
 								if(netwoekAvailable==true)
 								{
-									TableName = "MigDatabase";
+								    CJson.ExecuteCommandOnServer("Delete from sync_management where TableName='DatabaseTab' and UserId='"+ CLUSTER +"'");
+                                    CJson.Sync_Download_Batch("MigDatabase",CLUSTER,"");
+
+                                    C.Save("Delete from Mig_PregHis");
+									CJson.ExecuteCommandOnServer("Delete from sync_management where TableName='Mig_PregHis' and UserId='"+ CLUSTER +"'");
+									CJson.Sync_Download_Batch("Mig_PregHis",CLUSTER,"");
+
+                                    C.Save("Delete from Mig_Immunization");
+									CJson.ExecuteCommandOnServer("Delete from sync_management where TableName='Mig_Immunization' and UserId='"+ CLUSTER +"'");
+									CJson.Sync_Download_Batch("Mig_Immunization",CLUSTER,"");
+
+
+									/*TableName = "MigDatabase";
 									SQLStr  = "select extype, hh, Sno,Pno,Name,ExDate from MigDatabase m,mdssvill v where left(m.hh,3)=v.vill and v.Cluster not in('"+ g.getClusterCode() +"')";
 									VariableList = "extype, hh, Sno, Pno, Name, ExDate";
 									Res = CJson.DownloadJSON(SQLStr,TableName,VariableList,"extype, hh, Sno, Pno, Name, ExDate");
@@ -638,7 +672,7 @@ public class BlockList extends Activity{
 									TableName = "Mig_Immunization";
 									SQLStr  = "select Vill, Bari, HH, Sno, PNO, Status, BCG, BCGDT, BCGSource, Penta1, Penta1DT, Penta1Source, Penta2, Penta2DT, Penta2Source, Penta3, Penta3DT, Penta3Source, PCV1, PCV1DT, PCV1Source, PCV2, PCV2DT, PCV2Source, PCV3, PCV3DT, PCV3Source, OPV0, OPV0DT, OPV0Source, OPV1, OPV1DT, OPV1Source, OPV2, OPV2DT, OPV2Source, OPV3, OPV3DT, OPV3Source, OPV4, OPV4DT, OPV4Source, Measles, MeaslesDT, MeaslesSource, MR, MRDT, MRSource, Rota, RotaDT, RotaSource, MMR, MMRDT, MMRSource, Typhoid, TyphoidDT, TyphoidSource, Influ, InfluDT, InfluSource, HepaA, HepaADT, HepaASource, ChickenPox, ChickenPoxDT, ChickenPoxSource, Rabies, RabiesDT, RabiesSource, IPV, IPVDT, IPVSource, fIPV1,fIPVDT1,fIPVSource1,fIPV2,fIPVDT2,fIPVSource2,VitaminA, VitaminADT, VitaminASource, EnDt, Upload from Immunization i where exists(select * from MigDatabase where Pno=i.Pno)";
 									VariableList = "Vill, Bari, HH, Sno, PNO, Status, BCG, BCGDT, BCGSource, Penta1, Penta1DT, Penta1Source, Penta2, Penta2DT, Penta2Source, Penta3, Penta3DT, Penta3Source, PCV1, PCV1DT, PCV1Source, PCV2, PCV2DT, PCV2Source, PCV3, PCV3DT, PCV3Source, OPV0, OPV0DT, OPV0Source, OPV1, OPV1DT, OPV1Source, OPV2, OPV2DT, OPV2Source, OPV3, OPV3DT, OPV3Source, OPV4, OPV4DT, OPV4Source, Measles, MeaslesDT, MeaslesSource, MR, MRDT, MRSource, Rota, RotaDT, RotaSource, MMR, MMRDT, MMRSource, Typhoid, TyphoidDT, TyphoidSource, Influ, InfluDT, InfluSource, HepaA, HepaADT, HepaASource, ChickenPox, ChickenPoxDT, ChickenPoxSource, Rabies, RabiesDT, RabiesSource, IPV, IPVDT, IPVSource, fIPV1,fIPVDT1,fIPVSource1,fIPV2,fIPVDT2,fIPVSource2,VitaminA, VitaminADT, VitaminASource, EnDt, Upload";
-									Res = CJson.DownloadJSON(SQLStr,TableName,VariableList,"Vill, Bari, HH, Sno, PNO");
+									Res = CJson.DownloadJSON(SQLStr,TableName,VariableList,"Vill, Bari, HH, Sno, PNO");*/
 								}
 				    	    	
 			                } catch (Exception e) { 

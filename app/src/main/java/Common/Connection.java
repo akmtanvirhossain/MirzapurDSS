@@ -183,6 +183,18 @@ public class Connection extends SQLiteOpenHelper {
         db.close();
     }
 
+    public String SaveData(String SQL) {
+        String response = "";
+        SQLiteDatabase db = this.getWritableDatabase();
+        try {
+            db.execSQL(SQL);
+        }catch(Exception ex){
+            response = ex.getMessage();
+        }finally {
+            db.close();
+        }
+        return response;
+    }
 
     //Message Box
     //----------------------------------------------------------------------------------------------
@@ -635,7 +647,6 @@ public class Connection extends SQLiteOpenHelper {
                 List<String> sqlString = new ArrayList<String>();
                 for(String data : dataStatus){
                     try {
-                        //sqlString.add("Update " + TableName + " Set UpdateNeeded='2' Where " + data);
                         sqlString.add("Update " + TableName + " Set Upload='1' Where " + data);
                     }catch (Exception ex)
                     {
@@ -2190,5 +2201,206 @@ public class Connection extends SQLiteOpenHelper {
         }
     }
 
+
+
+    //Download
+    //**********************************************************************************************
+    public void Sync_Download_Batch(String TableName, String UserId, String WhereClause) {
+        try {
+            //Retrieve sync parameter
+            //------------------------------------------------------------------------------------------
+            String[] SyncParam = Sync_Parameter(TableName);
+
+            String SQLStr = SyncParam[0];
+            String VariableList = SyncParam[1];
+            String UniqueField = SyncParam[2];
+            String SQL_VariableList = SyncParam[3];
+            String Res = "";
+            String SQL = "";
+
+            //Generate Unique ID field
+            //------------------------------------------------------------------------------------------
+            String[] U = UniqueField.split(",");
+            String UID = "";
+            //String UID_Sync = "";
+            for (int i = 0; i < U.length; i++) {
+                if (i == 0)
+                    UID = "cast(t." + U[i] + " as varchar(50))";
+                else
+                    UID += "+cast(t." + U[i] + " as varchar(50))";
+            }
+
+            //calculate total records
+            //------------------------------------------------------------------------------------------
+            Integer totalRecords = 0;
+            SQL = "Select Count(*)totalRec from " + TableName + " as t";
+            SQL += " where not exists(select * from Sync_Management where";
+            SQL += " lower(TableName)  = lower('" + TableName + "') and";
+            SQL += " UniqueID   = " + UID + " and";
+            SQL += " convert(varchar(19),modifydate,120) = convert(varchar(19),t.modifydate,120) and";
+
+            SQL += " UserId   ='" + UserId + "')";
+            if (WhereClause.length() > 0) {
+                SQL += " and " + WhereClause;
+            }
+
+            String totalRec = ReturnResult("ReturnSingleValue", SQL);
+            if (totalRec == null)
+                totalRecords = 0;
+            else
+                totalRecords = Integer.valueOf(totalRec);
+
+            //Calculate batch size
+            //------------------------------------------------------------------------------------------
+            //0(zero) means all selected data
+            Integer batchSize = Integer.valueOf(ReturnSingleValue("select ifnull(batchsize,0)batchsize from DatabaseTab where TableName='" + TableName + "'"));
+            Integer totalBatch = 1;
+
+            if (batchSize == 0) {
+                totalBatch = 1;
+                batchSize = totalRecords;
+            } else if (batchSize > 0) {
+                totalBatch = totalRecords / batchSize;
+                if (totalRecords % batchSize > 0)
+                    totalBatch += 1;
+            }
+
+            //Execute batch download
+            //------------------------------------------------------------------------------------------
+            for (int i = 0; i < totalBatch; i++) {
+                SQL = "Select top " + batchSize + " " + SQL_VariableList + " from " + TableName + " as t";
+                SQL += " where not exists(select * from Sync_Management where";
+                SQL += " lower(TableName)  = lower('" + TableName + "') and";
+                SQL += " UniqueID   = " + UID + " and";
+                SQL += " convert(varchar(19),modifydate,120) = convert(varchar(19),t.modifydate,120) and";
+                SQL += " UserId   ='" + UserId + "')";
+                if (WhereClause.length() > 0) {
+                    SQL += " and " + WhereClause;
+                }
+
+                Res = DownloadJSON_Batch(SQL, TableName, VariableList, UniqueField, UserId);
+            }
+        }catch (Exception ex)
+        {
+
+        }
+    }
+
+
+    private String DownloadJSON_Batch(String SQL, String TableName, String ColumnList, String UniqueField, String UserId) {
+        String WhereClause = "";
+        int varPos = 0;
+        int varPos_modifyDate = 0;
+
+        String response = "";
+        String resp = "";
+
+        try {
+            DownloadDataJSON dload = new DownloadDataJSON();
+            response = dload.execute(SQL).get();
+
+            //Process Response
+            downloadClass d = new downloadClass();
+            Gson gson = new Gson();
+            Type collType = new TypeToken<downloadClass>() {
+            }.getType();
+            downloadClass responseData = gson.fromJson(response, collType);
+
+            String UField[] = UniqueField.split(",");
+            String VarList[] = ColumnList.split(",");
+
+            List<String> dataStatus = new ArrayList<>();
+            String modifyDate = "";
+            String UID = "";
+            String USID = "";
+            String DataList = "";
+            DataClassProperty dd;
+            List<DataClassProperty> dataTemp = new ArrayList<DataClassProperty>();
+            List<DataClassProperty> data     = new ArrayList<DataClassProperty>();
+
+            String downloadSyncStatus = "";
+
+            if (responseData != null & responseData.getdata().size()>0) {
+                SQL = "Insert or replace into "+ TableName +"("+ ColumnList +")Values";
+                for (int i = 0; i < responseData.getdata().size(); i++) {
+                    String VarData[] = split(responseData.getdata().get(i).toString(), '^');
+
+                    //Generate where clause/Unique ID
+                    //------------------------------------------------------------------------------
+                    //Generate Unique ID
+                    //------------------------------------------------------------------------------
+                    for (int j = 0; j < UField.length; j++) {
+                        varPos = VarPosition(UField[j].toString(), VarList);
+
+                        if (j == 0) {
+                            UID += VarData[varPos].toString();
+                        } else {
+                            UID += VarData[varPos].toString();
+                        }
+                    }
+
+                    varPos_modifyDate = VarPosition("modifyDate", VarList);
+                    modifyDate = VarData[varPos_modifyDate].toString();
+
+                    //------------------------------------------------------------------------------
+                    if (i == 0) {
+                        SQL += "('" + responseData.getdata().get(i).toString().replace("^","','").replace("null","") +"')";
+                    } else {
+                        SQL += ",('" + responseData.getdata().get(i).toString().replace("^","','").replace("null","") +"')";
+                    }
+
+                    //Populate class with data for sync_management
+                    //------------------------------------------------------------------------------
+                    DataList = TableName + "^" + UID + "^" + UserId + "^" + modifyDate;
+                    dd = new DataClassProperty();
+                    dd.setdatalist(DataList);
+                    dd.setuniquefieldwithdata("" +
+                            "TableName='" + TableName + "' and " +
+                            "UniqueID='" + UID + "' and " +
+                            "UserId='" + UserId + "' and " +
+                            "modifyDate='" + modifyDate + "'");
+                    dataTemp.add(dd);
+
+                    UID = "";
+                }
+
+                //If there have no error then response send back to server
+                downloadSyncStatus = SaveData(SQL);
+                if(downloadSyncStatus.length()==0){
+                    data = dataTemp;
+                }else{
+                    resp = downloadSyncStatus;
+                }
+
+
+                //30 Jul 2017
+                //Update data to Server on sync management
+                //------------------------------------------------------------------------------
+                DataClass dt = new DataClass();
+                dt.settablename("Sync_Management");
+                dt.setcolumnlist("TableName, UniqueID, UserId, modifyDate");
+                dt.setdata(data);
+
+                Gson gson1 = new Gson();
+                String json1 = gson1.toJson(dt);
+                String resp1 = "";
+
+                UploadDataJSON u = new UploadDataJSON();
+
+                try {
+                    resp1 = u.execute(json1).get();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+        } catch (Exception e) {
+            resp += e.getMessage();
+            e.printStackTrace();
+        }
+
+        return resp;
+    }
 
 }
