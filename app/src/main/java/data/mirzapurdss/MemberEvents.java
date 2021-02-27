@@ -16,6 +16,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Gravity;
@@ -56,7 +57,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-public class MemberEvents extends Activity{
+public class MemberEvents extends AppCompatActivity {
 	SimpleAdapter mSchedule;
 	SimpleAdapter eList;
 	String VariableID;
@@ -934,6 +935,15 @@ public class MemberEvents extends Activity{
 		final Spinner txtPOR = (Spinner)dialog.findViewById(R.id.txtPOR);
 		final Spinner txt43 = (Spinner)dialog.findViewById(R.id.txt43);
 		final Spinner txt44 = (Spinner)dialog.findViewById(R.id.txt44);
+		final LinearLayout secDelivType = (LinearLayout)dialog.findViewById(R.id.secDelivType);
+		final Spinner spnDelType = (Spinner)dialog.findViewById(R.id.spnDelType);
+		List<String> listDelivType = new ArrayList<String>();
+
+		listDelivType.add("");
+		listDelivType.add("1-Normal Delivery");
+		listDelivType.add("2-C Secttion Delivery");
+		ArrayAdapter<String> adptrusecontraceptive= new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listDelivType);
+		spnDelType.setAdapter(adptrusecontraceptive);
 
 		final EditText SpNo = (EditText)dialog.findViewById(R.id.SpNo);
 		final LinearLayout secSp = (LinearLayout)dialog.findViewById(R.id.secSp);

@@ -5,10 +5,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.StrictMode;
+import android.support.v4.content.FileProvider;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -72,7 +76,7 @@ import android.widget.TextView;
 
 
 
-public class Immunization extends Activity{   
+public class Immunization extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.mnuclose, menu);
@@ -133,6 +137,9 @@ public class Immunization extends Activity{
         setContentView(R.layout.immunization);
         C = new Connection(this);
         g = Global.getInstance();
+
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
 
         try
         {
@@ -2381,15 +2388,31 @@ public void TakePhoto(String PhotoName)
             startActivityForResult(intent, 2);
             }
               */
-             
+
+        /*
              Intent intent1 = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
              String fname = Environment.getExternalStorageDirectory()+ File.separator + Global.DatabaseFolder + File.separator + "Photos" + File.separator + PhotoName +".jpg";
              File outFile = new File(Environment.getExternalStorageDirectory()+ File.separator + Global.DatabaseFolder + File.separator + "Photos" , PhotoName+".jpg");
              //File outFile = getFileStreamPath(fname);
              outFile.createNewFile();
              outFile.setWritable(true, false);
-             intent1.putExtra(android.provider.MediaStore.EXTRA_OUTPUT,Uri.fromFile(outFile));
-             startActivityForResult(intent1, 2);             
+             //intent1.putExtra(android.provider.MediaStore.EXTRA_OUTPUT,Uri.fromFile(outFile));
+             Uri outputFileUri = FileProvider.getUriForFile(Immunization.this, BuildConfig.APPLICATION_ID, outFile);
+             intent1.putExtra(android.provider.MediaStore.EXTRA_OUTPUT,outputFileUri);
+             startActivityForResult(intent1, 2);
+*/
+        final int REQUEST_IMAGE_CAPTURE = 1;
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        try {
+            File outFile = new File(Environment.getExternalStorageDirectory()+ File.separator + Global.DatabaseFolder + File.separator + "Photos" , PhotoName+".jpg");
+            outFile.createNewFile();
+            Uri outputFileUri = FileProvider.getUriForFile(Immunization.this, "android.arch.core.provider", outFile);
+            takePictureIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT,outputFileUri);
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        } catch (ActivityNotFoundException e) {
+            // display error state to the user
+        }
+
     }
     catch(Exception ex)
     {

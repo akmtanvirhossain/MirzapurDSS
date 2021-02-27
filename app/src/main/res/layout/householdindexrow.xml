@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout android:id="@+id/rowlay" xmlns:android="http://schemas.android.com/apk/res/android"
  android:orientation="vertical" android:layout_width="fill_parent"
- android:layout_height="fill_parent" android:paddingTop="5sp" android:paddingBottom="5sp" android:layout_marginRight="10sp"
+ android:layout_height="wrap_content" android:minHeight="50sp" android:paddingTop="5sp" android:paddingBottom="5sp" android:layout_marginRight="10sp"
  android:background="#FFFFFF">
     		<TableLayout
 				android:id="@+id/secHHIndex"

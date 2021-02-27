@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ android:orientation="vertical" android:layout_width="fill_parent"
+ android:layout_height="fill_parent"
+ android:background="#FFFFFF"> 			
+    		<TableLayout 
+				android:id="@+id/firsttab1"
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent"
+				android:paddingLeft="0sp"
+				android:paddingRight="0sp"
+				android:stretchColumns="1">
+				
+		        <TableRow android:paddingBottom="10sp" android:layout_marginTop="20sp" android:gravity="center">
+		            <TextView
+		                android:layout_height="wrap_content"
+		                android:layout_column="0"
+		                android:gravity="center"
+		                android:text="Mirzapur DSS"
+		                android:textColor="#000000"
+		                android:textSize="35sp" />
+		        </TableRow>	
+		        <TableRow android:paddingBottom="10sp" android:gravity="center">
+		            <TextView android:id="@+id/lblSystemDate"
+		                android:layout_height="30sp"
+		                android:layout_column="0"
+		                android:background="#ffffff"
+		                android:gravity="center"
+		                android:text=""
+		                android:textColor="#000000"
+		                android:textSize="20sp" />
+		        </TableRow>			        
+				<TableRow android:layout_width="match_parent" android:gravity="center">
+				    <ImageView android:src="@drawable/dsslogo"/>
+				</TableRow>		        	
+				<TableRow android:layout_width="260sp" android:gravity="center">
+				    
+				</TableRow>
+				
+				<LinearLayout
+			      android:id="@+id/LinearLayout1"
+			      android:layout_width="wrap_content"
+			      android:layout_height="wrap_content" android:layout_marginTop="50sp"
+			      android:padding="5dip" >
+					<TableLayout
+							android:id="@+id/firsttab"
+							android:layout_width="fill_parent"
+							android:layout_height="fill_parent"
+							android:paddingLeft="30sp"
+							android:paddingRight="30sp"
+							android:stretchColumns="1">
+		    		    <TableRow  android:gravity="center">
+							<!--  User ID Label -->
+							  <TextView android:layout_width="fill_parent" 
+							  		android:layout_height="wrap_content" 
+							  		android:textColor="#000000"
+							  		android:text="Data Collector"/>
+						</TableRow>
+						<TableRow  android:gravity="center">
+		    		    	  <Spinner 
+											android:id="@+id/userId"
+											android:textSize="25sp"
+											android:layout_width="250sp"
+											android:layout_height="wrap_content"
+											android:drawSelectorOnTop="true" android:enabled="true"/>
+						</TableRow>
+						<TableRow  android:gravity="center">
+							  <!--  Password Label -->
+							  <TextView android:layout_width="fill_parent"
+							  		android:layout_height="wrap_content"
+							  		android:textColor="#000000"
+							  		android:text="Password"/>
+						</TableRow>
+						<TableRow  android:gravity="center">
+							  <EditText android:id="@+id/pass"
+							      	android:layout_width="fill_parent"
+							  		android:layout_height="wrap_content"
+							  		android:layout_marginTop="5dip" android:layout_marginBottom="5dip"
+							  		android:singleLine="true" style="@style/customEdit"
+							  		android:password="true" android:text=""/>
+						</TableRow>
+						<TableRow  android:gravity="center">
+							<TextView android:layout_width="fill_parent"
+								android:layout_height="wrap_content"
+								android:textColor="#000000"
+								android:text="Block Number"/>
+						</TableRow>
+						<TableRow  android:gravity="center">
+							<Spinner
+								android:id="@+id/blockNumber"
+								android:textSize="25sp"
+								android:layout_width="250sp"
+								android:layout_height="wrap_content"
+								android:drawSelectorOnTop="true" android:enabled="true"/>
+						</TableRow>
+
+						<LinearLayout android:orientation="horizontal"
+						      android:id="@+id/LinearLayout12" android:layout_marginTop="20sp"
+						      android:layout_width="wrap_content"
+						      android:layout_height="wrap_content" android:gravity="center"
+						      android:padding="5dip" >
+							<Button android:id="@+id/btnLogin"  android:background="@drawable/button_style"
+								android:layout_width="200sp"
+								android:layout_height="wrap_content"
+								android:layout_marginTop="10dip"
+								android:layout_marginBottom="10sp"
+								android:text="Login"/>
+
+							<Button android:id="@+id/btnClose"  android:background="@drawable/button_style"
+								android:layout_width="200sp"
+								android:layout_height="wrap_content"
+								android:layout_marginTop="10dip" android:layout_marginLeft="20sp"
+								android:layout_marginBottom="10sp"
+								android:text="Close"/>
+
+
+						</LinearLayout>		
+					</TableLayout>
+					</LinearLayout>
+								
+				<View android:visibility="gone"
+					android:layout_height="1dip"
+					android:background="#CCCCCC" android:layout_marginTop="10sp"/>																	
+			</TableLayout>			    						
+ </RelativeLayout>

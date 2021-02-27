@@ -12,6 +12,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -27,7 +28,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
-public class EventList extends Activity {
+public class EventList extends AppCompatActivity {
 	SimpleAdapter eList;
 	ArrayList<HashMap<String, String>> mylist   = new ArrayList<HashMap<String, String>>();
 	ArrayList<HashMap<String, String>> evmylist = new ArrayList<HashMap<String, String>>();

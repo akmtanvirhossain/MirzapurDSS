@@ -17,6 +17,7 @@ import android.database.Cursor;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -43,7 +44,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.ArrayAdapter;
 
-public class Death extends Activity {
+public class Death extends AppCompatActivity {
     boolean netwoekAvailable=false;
     Location currentLocation; 
     double currentLatitude,currentLongitude; 

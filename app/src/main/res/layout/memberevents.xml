@@ -62,7 +62,7 @@
         android:layout_height="1dip"
         android:background="#CCCCCC" />
 
-    <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
+    <LinearLayout android:layout_width="fill_parent" android:weightSum="5" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
 		        <Button android:id="@+id/cmdNewMem" android:text="New Mem" android:layout_width="120sp" android:layout_height="60sp" android:textSize="20sp" android:layout_marginBottom="5sp" />
 
 		        <Button 
@@ -71,7 +71,7 @@
 		            android:layout_height="60sp"
 		            android:layout_marginBottom="5sp"
 		            android:paddingLeft="10dp"
-		            android:text="SES"
+		            android:text="SES" android:layout_weight="1"
 		            android:textSize="20sp" />
 
 		        <Button 
@@ -80,7 +80,7 @@
 		            android:layout_height="60sp"
 		            android:layout_marginBottom="5sp"
 		            android:paddingLeft="10dp"
-		            android:text="Preg His"
+		            android:text="Preg His" android:layout_weight="1"
 		            android:textSize="20sp" />
 
 		        <Button 
@@ -89,7 +89,7 @@
 		            android:layout_height="60sp"
 		            android:layout_marginBottom="5sp"
 		            android:paddingLeft="10dp"
-		            android:text="Event List"
+		            android:text="Event List" android:layout_weight="1"
 		            android:textSize="20sp" />
 
 		        <Button 
@@ -98,7 +98,7 @@
 		            android:layout_height="60sp"
 		            android:layout_marginBottom="5sp"
 		            android:paddingLeft="10dp"
-		            android:text="Visit List"
+		            android:text="Visit List" android:layout_weight="1"
 		            android:textSize="20sp" />	                
     </LinearLayout>
 

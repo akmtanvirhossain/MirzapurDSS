@@ -19,6 +19,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -47,7 +48,7 @@ import android.text.Editable;
 //import android.provider.Settings.Global;
 
 
-public class Bari extends Activity {
+public class Bari extends AppCompatActivity {
 	 Connection C;
 	 Location currentLocation; 
 	 double currentLatitude,currentLongitude; 

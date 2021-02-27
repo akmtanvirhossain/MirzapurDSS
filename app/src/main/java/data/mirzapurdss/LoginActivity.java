@@ -16,6 +16,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -24,7 +25,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-public class LoginActivity extends Activity{
+public class LoginActivity extends AppCompatActivity {
     Connection C;
     Global g;
     boolean networkAvailable=false;
@@ -57,7 +58,7 @@ public class LoginActivity extends Activity{
             //Need to update date every time whenever shared updated system
             //Format: DDMMYYYY
             //*********************************************************************
-            SystemUpdateDT = "02022020";
+            SystemUpdateDT = "11112020"; //03022020
             lblSystemDate.setText(Global.Left(SystemUpdateDT, 2)+" - "+SystemUpdateDT.substring(2,4)+" - "+Global.Right(SystemUpdateDT,4));
             //*********************************************************************
     
@@ -200,8 +201,6 @@ public class LoginActivity extends Activity{
     	
     				            	    systemDownload d = new systemDownload();
     				            	    d.setContext(getApplicationContext());
-    				            	    //d.execute("http://203.190.254.42/mobdata/Update/mzpdss.txt");
-										//d.execute("http://203.190.254.42/dssjson/Update/mzpdss.txt");
 										d.execute(Common.Global.UpdatedSystem);
     		            			}
     		            			else

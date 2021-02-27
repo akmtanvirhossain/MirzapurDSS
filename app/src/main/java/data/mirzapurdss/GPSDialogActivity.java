@@ -11,6 +11,7 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,7 +22,7 @@ import android.widget.Spinner;
 
 import Common.Connection;
 
-public class GPSDialogActivity extends Activity implements LocationListener {
+public class GPSDialogActivity extends AppCompatActivity implements LocationListener {
     Location currentLocation;
     double currentLatitude, currentLongitude;
 

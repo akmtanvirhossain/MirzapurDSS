@@ -50,8 +50,8 @@ public class ExecuteCommand extends AsyncTask<String, Void, String> {
 		    }
 		    
 		    @Override
-		    protected void onPostExecute(String result) {    	
-		    	super.onPostExecute(result);	   
+		    protected void onPostExecute(String result) {
+				super.onPostExecute(result);
 		    }
 		    
 }

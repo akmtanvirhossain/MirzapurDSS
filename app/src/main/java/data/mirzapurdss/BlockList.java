@@ -14,12 +14,14 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
@@ -33,7 +35,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class BlockList extends Activity{
+import Utility.MySharedPreferences;
+
+public class BlockList extends AppCompatActivity {
 	Connection C;
 	Global g;
 	boolean netwoekAvailable=false;
@@ -41,9 +45,9 @@ public class BlockList extends Activity{
 	double currentLatitude,currentLongitude; 
 
 	Location currentLocationNet; 
-	double currentLatitudeNet,currentLongitudeNet; 
-	
-	
+	double currentLatitudeNet,currentLongitudeNet;
+
+	ProgressDialog progDailog;
 	ArrayList<HashMap<String, String>> mylist = new ArrayList<HashMap<String, String>>();
 	SimpleAdapter mSchedule;
 	
@@ -112,10 +116,10 @@ public class BlockList extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.blocklist);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        
+
         C = new Connection(this);
         g = Global.getInstance();
-
+		//g.setBlockCode("01");
 		/*try{
 			C.AddColumnIfNotExists("Immunization","fIPV1");
 			C.AddColumnIfNotExists("Immunization","fIPVDT1");
@@ -144,7 +148,7 @@ public class BlockList extends Activity{
 
         spnCluster = (Spinner)findViewById(R.id.spnCluster);
         spnCluster.setAdapter(C.getArrayAdapter("Select Cluster from currentcluster"));
-		CLUSTER = g.getClusterCode();
+		CLUSTER = spnCluster.getSelectedItem().toString();
 
         final Spinner txtRound = (Spinner)findViewById(R.id.txtRound);
         txtRound.setAdapter(C.getArrayAdapter("Select Rnd from Round where rnd is not null and rnd not in('null') order by rnd desc limit 15"));
@@ -152,7 +156,8 @@ public class BlockList extends Activity{
         
         final Spinner txtBlock = (Spinner)findViewById(R.id.txtBlock);
         txtBlock.setAdapter(C.getArrayAdapter("Select distinct block from baris order by cast(block as int)"));
-        txtBlock.setSelection(Global.SpinnerItemPosition(txtBlock, 2, g.getBlockCode()));
+        //txtBlock.setSelection(Global.SpinnerItemPosition(txtBlock, 2, g.getBlockCode()));
+        txtBlock.setSelection(Global.SpinnerItemPosition(txtBlock, 2, MySharedPreferences.getValue(BlockList.this,"block")));
 
         //Bari Number Update: 18 Sep 2014
         String NewVillNo = "";
@@ -302,8 +307,16 @@ public class BlockList extends Activity{
     		    	            		{    		    	            			
     		    	            			String ResponseString="Upload Status:";
  
-	    		    				        final ProgressDialog progDailog = ProgressDialog.show( 
-	    		    				        		BlockList.this, "", "অপেক্ষা করুন ...", true); 
+	    		    				        /*final ProgressDialog progDailog = ProgressDialog.show(
+	    		    				        		BlockList.this, "", "অপেক্ষা করুন ...", true);*/
+											progDailog = new ProgressDialog(BlockList.this);
+											progDailog.setTitle("Data Sync");
+											progDailog.setMessage("Data Sync in Progress, Please wait ...");
+											progDailog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+											progDailog.setCancelable(false);
+											progDailog.setIcon(R.drawable.upload);
+											progDailog.show();
+
 
 	    		    				        new Thread() { 
 	    		    				            public void run() { 
@@ -317,8 +330,7 @@ public class BlockList extends Activity{
 	    		    		    	    	        	String UniqueField = "";
 
 														Common.Connection CJSon = new Common.Connection(BlockList.this);
-
-
+														
 	    		    		    	    	        	//Upload/Download Status: 02 Apr 2014
 	    		    		    	    	        	String r = C.ExecuteCommandOnServer("Insert into UploadMonitor(Cluster)Values('"+ g.getClusterCode() +"')");
 	    		    		    	    	        	
@@ -583,8 +595,15 @@ public class BlockList extends Activity{
                         Connection.MessageBox(BlockList.this, "Migration Process এর জন্য ইন্টারনেট থাকা আবশ্যক।");
                     }
 
-            		final ProgressDialog progDailog = ProgressDialog.show( 
-			                BlockList.this, "", "অপেক্ষা করুন ...", true); 
+            		//final ProgressDialog progDailog = ProgressDialog.show( BlockList.this, "", "মাইগ্রেশন প্রসেস হচ্ছে, অপেক্ষা করুন ...", true);
+
+					progDailog = new ProgressDialog(BlockList.this);
+					progDailog.setTitle("মাইগ্রেশন প্রসেস");
+					progDailog.setMessage("মাইগ্রেশন প্রসেস হচ্ছে, অপেক্ষা করুন ...");
+					progDailog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+					progDailog.setCancelable(false);
+					progDailog.setIcon(R.drawable.upload);
+					progDailog.show();
 
 			        new Thread() { 
 			            public void run() { 
@@ -608,42 +627,30 @@ public class BlockList extends Activity{
 								VariableList = "TableName, TableScript, ColumnList, UniqueID, Sync_Upload, Sync_Download, BatchSize, modifyDate";
 								Res = CJson.DownloadJSON(SQLStr,"DatabaseTab",VariableList,"TableName");
 
+								C.CreateTable("t22","create table t22(pno varchar(10),endate varchar(10))");
+								C.CreateTable("t23","create table t23(pno varchar(10),endate varchar(10))");
+								C.Save("delete from t22");
+								C.Save("delete from t23");
+								C.Save("Insert into t22 select pno,endate from member where entype in('22')");
+								C.Save("Insert into t23 select pno,endate from member where entype in('22')");
+
 			            		C.Save("Delete from MigDatabase");
 
 			            		//Data from with-in cluster
 				    	    	SQL =  "Insert into migdatabase(extype, hh, Sno,Pno,Name,ExDate) select extype, (vill||bari||hh)hh, Sno,Pno,Name,ExDate from Member m where ExType='52'";
-				    	    	SQL += "and not exists(select sno from Member where pno=m.pno and entype='22' and endate=m.exdate)order by Name asc";  
+				    	    	SQL += " and not exists(select sno from t22 where t22.pno=m.pno and t22.endate=m.exdate)order by Name asc";
 				    	    	C.Save(SQL);
 
 				    	    	SQL =  "Insert into migdatabase(extype, hh, Sno,Pno,Name,ExDate) select extype, (vill||bari||hh)hh, Sno,Pno,Name,ExDate from Member m where ExType='53'";
-				    	    	SQL += "and not exists(select sno from Member where pno=m.pno and entype='23' and endate=m.exdate)order by Name asc";  
+				    	    	SQL += " and not exists(select sno from t23 where t23.pno=m.pno and t23.endate=m.exdate)order by Name asc";
 				    	    	C.Save(SQL);
 
-								/*
-				    	    	if(netwoekAvailable==true)
-				    	    	{
-					    	    //Data from outside cluster
-				    	    	    S  = "select extype, hh, Sno,Pno,Name,ExDate from MigDatabase m,mdssvill v where left(m.hh,3)=v.vill and v.Cluster not in('"+ g.getClusterCode() +"')";				
-				    	    	    C.DownloadMigData(S,"MigDatabase", "extype, hh, Sno, Pno, Name, ExDate");
-				    	    	    
-				    	    	    //Pregnancy History(Migration)
-				    	    	    C.Save("Delete from Mig_PregHis");
-									S  = "select Vill, Bari, Hh, Sno, Pno, Visit, MarM, MarY, Births, LiveHh, SLiveHh, DLiveHh, LiveOut, SLiveOut, DLiveOut, Died, SDied, DDied, Abor, TAbor, TotPreg, Vdate, Rnd, PageNo, Status, Upload, Lat, Lon from PregHis p where exists(select * from MigDatabase where Pno=p.Pno)";
-                                    C.DownloadMigData(S,"Mig_PregHis", "Vill, Bari, Hh, Sno, Pno, Visit, MarM, MarY, Births, LiveHh, SLiveHh, DLiveHh, LiveOut, SLiveOut, DLiveOut, Died, SDied, DDied, Abor, TAbor, TotPreg, Vdate, Rnd, PageNo, Status, Upload, Lat, Lon");
 
-                                    //Immunization(Migration)
-                                    C.Save("Delete from Mig_Immunization");
-                                    S  = "select Vill, Bari, HH, Sno, PNO, Status, BCG, BCGDT, BCGSource, Penta1, Penta1DT, Penta1Source, Penta2, Penta2DT, Penta2Source, Penta3, Penta3DT, Penta3Source, PCV1, PCV1DT, PCV1Source, PCV2, PCV2DT, PCV2Source, PCV3, PCV3DT, PCV3Source, OPV0, OPV0DT, OPV0Source, OPV1, OPV1DT, OPV1Source, OPV2, OPV2DT, OPV2Source, OPV3, OPV3DT, OPV3Source, OPV4, OPV4DT, OPV4Source, Measles, MeaslesDT, MeaslesSource, MR, MRDT, MRSource, Rota, RotaDT, RotaSource, MMR, MMRDT, MMRSource, Typhoid, TyphoidDT, TyphoidSource, Influ, InfluDT, InfluSource, HepaA, HepaADT, HepaASource, ChickenPox, ChickenPoxDT, ChickenPoxSource, Rabies, RabiesDT, RabiesSource, IPV, IPVDT, IPVSource, VitaminA, VitaminADT, VitaminASource, EnDt, Upload from Immunization i where exists(select * from MigDatabase where Pno=i.Pno)";
-                                    C.DownloadMigData(S,"Mig_Immunization", "Vill, Bari, HH, Sno, PNO, Status, BCG, BCGDT, BCGSource, Penta1, Penta1DT, Penta1Source, Penta2, Penta2DT, Penta2Source, Penta3, Penta3DT, Penta3Source, PCV1, PCV1DT, PCV1Source, PCV2, PCV2DT, PCV2Source, PCV3, PCV3DT, PCV3Source, OPV0, OPV0DT, OPV0Source, OPV1, OPV1DT, OPV1Source, OPV2, OPV2DT, OPV2Source, OPV3, OPV3DT, OPV3Source, OPV4, OPV4DT, OPV4Source, Measles, MeaslesDT, MeaslesSource, MR, MRDT, MRSource, Rota, RotaDT, RotaSource, MMR, MMRDT, MMRSource, Typhoid, TyphoidDT, TyphoidSource, Influ, InfluDT, InfluSource, HepaA, HepaADT, HepaASource, ChickenPox, ChickenPoxDT, ChickenPoxSource, Rabies, RabiesDT, RabiesSource, IPV, IPVDT, IPVSource, VitaminA, VitaminADT, VitaminASource, EnDt, Upload");
-				    	    	}
-								*/
-
-
-
-
+				    	    	//Download data from server
 								if(netwoekAvailable==true)
 								{
-								    CJson.ExecuteCommandOnServer("Delete from sync_management where TableName='DatabaseTab' and UserId='"+ CLUSTER +"'");
+									//C.Save("Delete from MigDatabase");
+								    CJson.ExecuteCommandOnServer("Delete from sync_management where TableName='MigDatabase' and UserId='"+ CLUSTER +"'");
                                     CJson.Sync_Download_Batch("MigDatabase",CLUSTER,"");
 
                                     C.Save("Delete from Mig_PregHis");
@@ -654,25 +661,6 @@ public class BlockList extends Activity{
 									CJson.ExecuteCommandOnServer("Delete from sync_management where TableName='Mig_Immunization' and UserId='"+ CLUSTER +"'");
 									CJson.Sync_Download_Batch("Mig_Immunization",CLUSTER,"");
 
-
-									/*TableName = "MigDatabase";
-									SQLStr  = "select extype, hh, Sno,Pno,Name,ExDate from MigDatabase m,mdssvill v where left(m.hh,3)=v.vill and v.Cluster not in('"+ g.getClusterCode() +"')";
-									VariableList = "extype, hh, Sno, Pno, Name, ExDate";
-									Res = CJson.DownloadJSON(SQLStr,TableName,VariableList,"extype, hh, Sno, Pno, Name, ExDate");
-
-									//Pregnancy History(Migration)
-									C.Save("Delete from Mig_PregHis");
-									TableName = "Mig_PregHis";
-									SQLStr  = "select Vill, Bari, Hh, Sno, Pno, Visit, MarM, MarY, Births, LiveHh, SLiveHh, DLiveHh, LiveOut, SLiveOut, DLiveOut, Died, SDied, DDied, Abor, TAbor, TotPreg, Vdate, Rnd, PageNo, Status, Upload, Lat, Lon from PregHis p where exists(select * from MigDatabase where Pno=p.Pno)";
-									VariableList = "Vill, Bari, Hh, Sno, Pno, Visit, MarM, MarY, Births, LiveHh, SLiveHh, DLiveHh, LiveOut, SLiveOut, DLiveOut, Died, SDied, DDied, Abor, TAbor, TotPreg, Vdate, Rnd, PageNo, Status, Upload, Lat, Lon";
-									Res = CJson.DownloadJSON(SQLStr,TableName,VariableList,"Vill, Bari, Hh, Sno, Pno");
-
-									//Immunization(Migration)
-									C.Save("Delete from Mig_Immunization");
-									TableName = "Mig_Immunization";
-									SQLStr  = "select Vill, Bari, HH, Sno, PNO, Status, BCG, BCGDT, BCGSource, Penta1, Penta1DT, Penta1Source, Penta2, Penta2DT, Penta2Source, Penta3, Penta3DT, Penta3Source, PCV1, PCV1DT, PCV1Source, PCV2, PCV2DT, PCV2Source, PCV3, PCV3DT, PCV3Source, OPV0, OPV0DT, OPV0Source, OPV1, OPV1DT, OPV1Source, OPV2, OPV2DT, OPV2Source, OPV3, OPV3DT, OPV3Source, OPV4, OPV4DT, OPV4Source, Measles, MeaslesDT, MeaslesSource, MR, MRDT, MRSource, Rota, RotaDT, RotaSource, MMR, MMRDT, MMRSource, Typhoid, TyphoidDT, TyphoidSource, Influ, InfluDT, InfluSource, HepaA, HepaADT, HepaASource, ChickenPox, ChickenPoxDT, ChickenPoxSource, Rabies, RabiesDT, RabiesSource, IPV, IPVDT, IPVSource, fIPV1,fIPVDT1,fIPVSource1,fIPV2,fIPVDT2,fIPVSource2,VitaminA, VitaminADT, VitaminASource, EnDt, Upload from Immunization i where exists(select * from MigDatabase where Pno=i.Pno)";
-									VariableList = "Vill, Bari, HH, Sno, PNO, Status, BCG, BCGDT, BCGSource, Penta1, Penta1DT, Penta1Source, Penta2, Penta2DT, Penta2Source, Penta3, Penta3DT, Penta3Source, PCV1, PCV1DT, PCV1Source, PCV2, PCV2DT, PCV2Source, PCV3, PCV3DT, PCV3Source, OPV0, OPV0DT, OPV0Source, OPV1, OPV1DT, OPV1Source, OPV2, OPV2DT, OPV2Source, OPV3, OPV3DT, OPV3Source, OPV4, OPV4DT, OPV4Source, Measles, MeaslesDT, MeaslesSource, MR, MRDT, MRSource, Rota, RotaDT, RotaSource, MMR, MMRDT, MMRSource, Typhoid, TyphoidDT, TyphoidSource, Influ, InfluDT, InfluSource, HepaA, HepaADT, HepaASource, ChickenPox, ChickenPoxDT, ChickenPoxSource, Rabies, RabiesDT, RabiesSource, IPV, IPVDT, IPVSource, fIPV1,fIPVDT1,fIPVSource1,fIPV2,fIPVDT2,fIPVSource2,VitaminA, VitaminADT, VitaminASource, EnDt, Upload";
-									Res = CJson.DownloadJSON(SQLStr,TableName,VariableList,"Vill, Bari, HH, Sno, PNO");*/
 								}
 				    	    	
 			                } catch (Exception e) { 
