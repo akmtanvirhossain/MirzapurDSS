@@ -33,8 +33,11 @@ import com.google.gson.reflect.TypeToken;
 import Common.DataClass;
 import Common.DataClassProperty;
 import Common.DownloadDataJSON;
+import Common.FileUpload;
+import Common.ProjectSetting;
 import Common.UploadDataJSON;
 import Common.downloadClass;
+import Utility.CompressZip;
 
 public class Connection extends SQLiteOpenHelper {
     private static final String DB_NAME = "DSSDatabase.db";
@@ -2033,6 +2036,51 @@ public class Connection extends SQLiteOpenHelper {
 			}
 		} while (res.moveToNext());
 		return isExist;
+	}
+
+	private static void zipDatabase(String DeviceID)
+	{
+		CompressZip compressZip = new CompressZip();
+		String[] dbFile = new String[1];
+		dbFile[0] = Environment.getExternalStorageDirectory() + File.separator + Global.DatabaseFolder + File.separator + Global.DatabaseName;
+		String dbFolder = Environment.getExternalStorageDirectory() + File.separator + Global.DatabaseFolder;
+		String output   = Global.zipDatabaseName;
+		compressZip.zip(dbFile, dbFolder, output);
+	}
+
+	public static void DatabaseUploadZip(String DeviceID) {
+
+		//Compress database
+		zipDatabase(DeviceID);
+
+		//Upload File from Specific Folder
+		String[] FilePathStrings;
+		String[] FileNameStrings;
+		File[] listFile;
+
+		//
+		File file = new File(Environment.getExternalStorageDirectory() + File.separator + Global.DatabaseFolder);
+		file.mkdirs();
+		if (file.isDirectory()) {
+			listFile = file.listFiles();
+			FilePathStrings = new String[listFile.length];
+			FileNameStrings = new String[listFile.length];
+
+			for (int i = 0; i < listFile.length; i++) {
+				FilePathStrings[i] = listFile[i].getAbsolutePath();
+				FileNameStrings[i] = listFile[i].getName();
+
+				//Upload file to server
+				FileUpload myTask = new FileUpload();
+				String[] params = new String[2];
+
+				if (listFile[i].getName().equalsIgnoreCase(Global.zipDatabaseName)) {
+					params[0] = listFile[i].getName();
+					params[1] = DeviceID + "_" + Common.Global.CurrentDMY() + "_" + listFile[i].getName();
+					myTask.execute(params);
+				}
+			}
+		}
 	}
 }
 

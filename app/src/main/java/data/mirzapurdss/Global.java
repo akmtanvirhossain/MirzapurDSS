@@ -14,6 +14,7 @@ public class Global {
         //Database
         public static String DatabaseFolder = "DSSDatabase";
         public static String DatabaseName   = "DSSDatabase.db";
+	public static String zipDatabaseName= "MZPDSS_Database.zip";
 
 	//Global Variables for Events
 	//...........................................................................................................

@@ -1361,8 +1361,93 @@ public class Connection extends SQLiteOpenHelper {
         return dataStatus;
     }
 
+    private void UploadProcess(String JSON_Data, String TableName, Gson gson){
+        String response = "";
+        UploadDataJSON u = new UploadDataJSON();
+        try {
+            response = u.execute(JSON_Data).get();
 
-    public String UploadJSON(String TableName,String ColumnList,String UniqueFields)
+            //Process Response
+            if (response != null) {
+                Type collType = new TypeToken<downloadClass>() {
+                }.getType();
+
+                downloadClass responseData = gson.fromJson(response, collType);
+
+                //upload all records as successfull upload then update status of upload=2 for unsuccessfull
+                for (int i = 0; i < responseData.getdata().size(); i++) {
+                    SaveData("Update " + TableName + " Set Upload='1' where " + responseData.getdata().get(i));
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String UploadJSON(String TableName, String ColumnList, String UniqueFields) {
+        String response = "";
+        List<DataClassProperty> data = GetDataListJSON(ColumnList, TableName, UniqueFields);
+
+        List<DataClassProperty> TempData = null;
+        DataClassProperty d = null;
+        DataClass dt = null;
+        Gson gson = null;
+
+        String json = "";
+        int LoopStart = 0;
+        int LoopEnd = 1000;
+        if(data.size()>1000){
+
+            while(LoopEnd < data.size()+1) {
+
+                TempData = new ArrayList<DataClassProperty>();
+                for (int i = LoopStart; i < LoopEnd; i++) {
+                    d = new DataClassProperty();
+                    d.setdatalist(data.get(i).getdatalist());
+                    d.setuniquefieldwithdata(data.get(i).getuniquefieldwithdata());
+                    TempData.add(d);
+                }
+
+                //----------------------------------------------------------------------------------
+                dt = new DataClass();
+                dt.settablename(TableName);
+                dt.setcolumnlist(ColumnList);
+                //dt.setuniquefields(UniqueFields);
+                dt.setdata(TempData);
+
+                gson = new Gson();
+                json = gson.toJson(dt);
+                UploadProcess(json,TableName,gson);
+                //----------------------------------------------------------------------------------
+                LoopStart = LoopEnd;
+
+
+                if(LoopEnd == data.size()) LoopEnd+= 1;
+                else {
+                    LoopEnd += 1000;
+                    //LoopEnd = LoopEnd > data.size() ? data.size() : LoopEnd;
+                    LoopEnd = Math.min(LoopEnd, data.size());
+                }
+
+            }
+        }else if(data.size()==0){
+
+        }else if(data.size()<=1000){
+            dt = new DataClass();
+            dt.settablename(TableName);
+            dt.setcolumnlist(ColumnList);
+            //dt.setuniquefields(UniqueFields);
+            dt.setdata(data);
+            gson = new Gson();
+            json = gson.toJson(dt);
+            UploadProcess(json,TableName,gson);
+        }
+
+        return response;
+    }
+
+    public String UploadJSON_Old(String TableName,String ColumnList,String UniqueFields)
     {
         DataClass dt = new DataClass();
         dt.settablename(TableName);
@@ -1889,7 +1974,7 @@ public class Connection extends SQLiteOpenHelper {
 
         //calculate total records
         //------------------------------------------------------------------------------------------
-        Integer totalRecords = 0;
+        int totalRecords = 0;
         SQL  = "Select Count(*)totalRec from "+ TableName +" as t";
         SQL += " where not exists(select * from Sync_Management where";
         SQL += " lower(TableName)  = lower('"+ TableName +"') and";
@@ -1906,7 +1991,7 @@ public class Connection extends SQLiteOpenHelper {
         if(totalRec==null)
             totalRecords =0;
         else
-            totalRecords = Integer.valueOf(totalRec);
+            totalRecords = Integer.parseInt(totalRec);
 
         //Calculate batch size
         //------------------------------------------------------------------------------------------

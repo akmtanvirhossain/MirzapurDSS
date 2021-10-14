@@ -50,6 +50,19 @@ public class Global {
 	public static String SNo;
 	public static String PNo;
 
+	public static String CurrentDMY()
+	{
+		return CurrentDay()+CurrentMonth()+CurrentYear();
+	}
+	public static String CurrentDay()
+	{
+		Calendar c = Calendar.getInstance();
+		int mDay = c.get(Calendar.DAY_OF_MONTH);
+
+		String D = Right("00"+String.valueOf(mDay),2);
+
+		return D;
+	}
 
 	private String _UserId;
 	 public void setUserId(String UserId){this._UserId = UserId;}

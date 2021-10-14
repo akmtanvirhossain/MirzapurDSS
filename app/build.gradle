@@ -25,6 +25,7 @@ android {
 dependencies {
     //implementation 'com.google.code.gson:gson:2.5'
     implementation files('libs/ksoap2-android-assembly-2.4-jar-with-dependencies.jar')
+    implementation files('libs/org.apache.http.legacy.jar')
     /*compile files('libs/gson-2.5.jar')*/
     implementation 'com.google.code.gson:gson:2.8.1'
     implementation 'com.android.support:appcompat-v7:27.1.1'

@@ -281,7 +281,9 @@ public class BlockList extends AppCompatActivity {
 		g1.setOnItemClickListener(new OnItemClickListener() {
         public void onItemClick(AdapterView<?> parent, View v, int position, long id) {           
         	 try
-        	 {            	
+        	 {
+        	 	g.setClusterCode(spnCluster.getSelectedItem().toString());
+
             	//Upload data to central server
             	//*******************************************************************************
             	if(position==0)
@@ -299,7 +301,7 @@ public class BlockList extends AppCompatActivity {
     		    	    	        	
     		    	    	        	if(netwoekAvailable==false)
     		    	                	{
-    		    	                		Connection.MessageBox(BlockList.this, "Internet connection is not avialable.");
+    		    	                		Connection.MessageBox(BlockList.this, "Internet connection is not available.");
     		    	                		return;
     		    	                	}
     		    	            		
@@ -549,7 +551,10 @@ public class BlockList extends AppCompatActivity {
 
 	    		    				                } catch (Exception e) { 
 	    		    				                } 
-	    		    				                progDailog.dismiss(); 
+	    		    				                progDailog.dismiss();
+
+													Intent syncService = new Intent(BlockList.this, DatabaseFileSync_Service.class);
+													startService(syncService);
 	    		    				                
 	    		    				            } 
 	    		    				        }.start(); 	

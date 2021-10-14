@@ -151,13 +151,14 @@ public class LoginActivity_New extends AppCompatActivity {
 
             CLUSTER = C.ReturnSingleValue("Select Cluster from CurrentCluster");
             g.setClusterCode(CLUSTER);
+            sp.save(this,"cluster",CLUSTER);
 
             lblSystemDate = (TextView)findViewById(R.id.lblSystemDate);
 
             //Need to update date every time whenever shared updated system
             //Format: DDMMYYYY
             //*********************************************************************
-            SystemUpdateDT = "24032021"; //old version date: "11112020"
+            SystemUpdateDT = "14102021"; //old version date: "11112020"
 
             lblSystemDate.setText(data.mirzapurdss.Global.Left(SystemUpdateDT, 2)+" - "+SystemUpdateDT.substring(2,4)+" - "+ data.mirzapurdss.Global.Right(SystemUpdateDT,4));
             //*********************************************************************
