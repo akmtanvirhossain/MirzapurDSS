@@ -114,7 +114,7 @@ public class MemberEvents extends AppCompatActivity {
 				adb.setNegativeButton("No", null);
 				adb.setPositiveButton("Yes", new AlertDialog.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
-						final ProgressDialog progDailog = ProgressDialog.show(MemberEvents.this, "", "Please Wait . . .", true);
+						/*final ProgressDialog progDailog = ProgressDialog.show(MemberEvents.this, "", "Please Wait . . .", true);
 						new Thread() {
 							public void run() {
 								try
@@ -144,9 +144,9 @@ public class MemberEvents extends AppCompatActivity {
 								}
 								progDailog.dismiss();
 							}
-						}.start();
+						}.start();*/
 
-						/*try
+						try
 						{
 							String msg = ProcessTransaction(vill+bari+hhno,g.getRoundNumber());
 							if(msg.length()==0)
@@ -170,7 +170,7 @@ public class MemberEvents extends AppCompatActivity {
 						{
 							Connection.MessageBox(MemberEvents.this, ex.getMessage());
 							return;
-						}*/
+						}
 
 					}});
 				adb.show();
