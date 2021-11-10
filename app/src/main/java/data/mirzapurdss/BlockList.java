@@ -119,32 +119,6 @@ public class BlockList extends AppCompatActivity {
 
         C = new Connection(this);
         g = Global.getInstance();
-		//g.setBlockCode("01");
-		/*try{
-			C.AddColumnIfNotExists("Immunization","fIPV1");
-			C.AddColumnIfNotExists("Immunization","fIPVDT1");
-			C.AddColumnIfNotExists("Immunization","fIPVSource1");
-			C.AddColumnIfNotExists("Immunization","fIPV2");
-			C.AddColumnIfNotExists("Immunization","fIPVDT2");
-			C.AddColumnIfNotExists("Immunization","fIPVSource2");
-
-			C.AddColumnIfNotExists("ImmunizationTemp","fIPV1");
-			C.AddColumnIfNotExists("ImmunizationTemp","fIPVDT1");
-			C.AddColumnIfNotExists("ImmunizationTemp","fIPVSource1");
-			C.AddColumnIfNotExists("ImmunizationTemp","fIPV2");
-			C.AddColumnIfNotExists("ImmunizationTemp","fIPVDT2");
-			C.AddColumnIfNotExists("ImmunizationTemp","fIPVSource2");
-
-			C.AddColumnIfNotExists("Mig_Immunization","fIPV1");
-			C.AddColumnIfNotExists("Mig_Immunization","fIPVDT1");
-			C.AddColumnIfNotExists("Mig_Immunization","fIPVSource1");
-			C.AddColumnIfNotExists("Mig_Immunization","fIPV2");
-			C.AddColumnIfNotExists("Mig_Immunization","fIPVDT2");
-			C.AddColumnIfNotExists("Mig_Immunization","fIPVSource2");
-
-		}catch (Exception ex){
-
-		}*/
 
         spnCluster = (Spinner)findViewById(R.id.spnCluster);
         spnCluster.setAdapter(C.getArrayAdapter("Select Cluster from currentcluster"));
@@ -163,45 +137,6 @@ public class BlockList extends AppCompatActivity {
         String NewVillNo = "";
     	String NewBariNo = "";
     	String OldVillBari = "";
-
-		//19 May 2016
-		//Status: Total Bari, Household, Member
-		String CurrRound = txtRound.getSelectedItem().toString();
-		String PrevRound = String.valueOf(Integer.valueOf(CurrRound)-1);
-
-		if(!C.Existence("Select Cluster from ClusterBlock_Status Where Cluster='"+ g.getClusterCode() +"' and Rnd='"+ PrevRound +"'")) {
-			Common.Connection CJSon = new Common.Connection(BlockList.this);
-			String TableName = "ClusterBlock_Status";
-			String SQL = "select Cluster,Block,TotalBari,TotalHH,TotalMem,Rnd from ClusterBlock_Status where Cluster='" + g.getClusterCode() + "' and Rnd='"+ PrevRound +"'";
-			String VariableList = "Cluster,Block,TotalBari,TotalHH,TotalMem,Rnd";
-			String response = CJSon.DownloadJSON(SQL, TableName, VariableList, "Cluster,Block,TotalBari,TotalHH,TotalMem,Rnd");
-		}
-
-        /*
-    	//30 Jun 2015
-    	//PNO Missing in Pregnancy History
-    	String SQL = "";
-    	SQL = "select h.Vill||h.Bari||h.HH||h.Sno hh,h.Pno from Member h,PregHis p where h.Vill||h.Bari||h.HH||h.Sno=p.Vill||p.Bari||p.Hh||p.Sno and LENgth(p.pno)=0";    	
-        Cursor m = C.ReadData(SQL);
-        m.moveToFirst();
-        while(!m.isAfterLast())
-        {       
-            try
-            {
-                SQL = "Update PregHis set pno='"+ m.getString(1).toString() +"' where vill||bari||hh||sno='"+ m.getString(0).toString() +"'";   
-                C.Save(SQL);
-            }
-            catch(Exception e)
-            {
-                
-            }
-                
-            m.moveToNext();
-        }                       
-        m.close();     	
-        */
-
-    	
 
         Button cmdBlock = (Button)findViewById(R.id.cmdBlock);
         cmdBlock.setOnClickListener(new View.OnClickListener() {

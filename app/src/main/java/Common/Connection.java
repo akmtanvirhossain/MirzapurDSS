@@ -9,6 +9,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
 import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -22,6 +23,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
+
+import data.mirzapurdss.BlockList;
+import data.mirzapurdss.R;
 
 //--------------------------------------------------------------------------------------------------
 // Created by TanvirHossain on 18/04/2016.
@@ -39,10 +43,11 @@ public class Connection extends SQLiteOpenHelper {
     private static final String TABLE_TODO = "todo_items";
 
     private Context dbContext;
-
+    private static Context ud_context;
     public Connection(Context context) {
         super(context, DBLocation, null, DATABASE_VERSION);
         dbContext=context;
+        ud_context = context;
 
         CreateTable("LastLogin","Create Table LastLogin(BlockNo varchar(2))");
     }
@@ -1977,7 +1982,7 @@ public class Connection extends SQLiteOpenHelper {
         int totalRecords = 0;
         SQL  = "Select Count(*)totalRec from "+ TableName +" as t";
         SQL += " where not exists(select * from Sync_Management where";
-        SQL += " lower(TableName)  = lower('"+ TableName +"') and";
+        SQL += " (TableName)  = ('"+ TableName +"') and";
         SQL += " UniqueID   = "+ UID +" and";
         SQL += " convert(varchar(19),modifydate,120) = convert(varchar(19),t.modifydate,120) and";
 
@@ -2027,7 +2032,7 @@ public class Connection extends SQLiteOpenHelper {
         }
     }
 
-    private String DownloadJSON_Update_Sync_Management(String SQL, String TableName,String ColumnList, String UniqueField, String UserId)
+    public String DownloadJSON_Update_Sync_Management(String SQL, String TableName,String ColumnList, String UniqueField, String UserId)
     {
         String WhereClause="";
         int varPos=0;
@@ -2684,5 +2689,38 @@ public class Connection extends SQLiteOpenHelper {
         }
 
         return resp;
+    }
+
+    public static void SyncDataService(String CLUSTER, String RND)
+    {
+        Common.Connection C = new Common.Connection(ud_context);
+        String SQL = "";
+        SQL  = "Select TableName, TableScript, ColumnList, UniqueID, Sync_Upload, Sync_Download, BatchSize, modifyDate from DatabaseTab as t";
+        SQL += " where not exists(select * from Sync_Management where";
+        SQL += " (TableName)  = 'DatabaseTab' and";
+        SQL += " UniqueID   = t.TableName and";
+        SQL += " convert(varchar(19),modifydate,120) = convert(varchar(19),t.modifydate,120) and";
+        SQL += " UserId   ='"+ CLUSTER +"')";
+
+        String Res = C.DownloadJSON_Update_Sync_Management(SQL, "DatabaseTab", "TableName, TableScript, ColumnList, UniqueID, Sync_Upload, Sync_Download, BatchSize, modifyDate", "TableName", CLUSTER);
+
+        C.Sync_Download("DataCorrectionNote", CLUSTER, "Cluster='"+ CLUSTER +"'");
+
+        //Total Bari, HH Update : 09 Nov 2021
+        int PrevRound = Integer.parseInt(RND)-1;
+        if(!C.Existence("Select Cluster from ClusterBlock_Status Where Cluster='"+ CLUSTER +"' and Rnd='"+ PrevRound +"'")) {
+            Common.Connection CJSon = new Common.Connection(ud_context);
+            String TableName = "ClusterBlock_Status";
+            SQL = "select Cluster,Block,TotalBari,TotalHH,TotalMem,Rnd from ClusterBlock_Status where Cluster='" + CLUSTER + "' and Rnd='"+ PrevRound +"'";
+            String VariableList = "Cluster,Block,TotalBari,TotalHH,TotalMem,Rnd";
+            String response = CJSon.DownloadJSON(SQL, TableName, VariableList, "Cluster,Block,TotalBari,TotalHH,TotalMem,Rnd");
+        }
+
+        //Round Update: 09 Nov 2021
+        String RD = C.ReturnResult("ReturnSingleValue","Select Rnd from Round where CurrentRound='1'");
+        if(!C.Existence("Select * from Round where Rnd='"+ RD +"'"))
+        {
+            C.Save("Insert into Round(Rnd,StartDate,EndDate,CurrentRound)Values('"+ RD +"','','','1')");
+        }
     }
 }

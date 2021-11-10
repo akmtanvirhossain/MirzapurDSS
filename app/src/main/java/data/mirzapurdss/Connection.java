@@ -46,10 +46,14 @@ public class Connection extends SQLiteOpenHelper {
 	
 	private final Context dbContext;
 	SQLiteDatabase db;
-	
+
+	private static Context ud_context;
+
 	public Connection(Context context) {
        super(context, DB_NAME, null, DB_VERSION);		
-		dbContext=context;		
+		dbContext=context;
+		ud_context = context;
+
 		CreateOpenDatabase();
 
 		String SQL = "";
@@ -2082,5 +2086,23 @@ public class Connection extends SQLiteOpenHelper {
 			}
 		}
 	}
+
+	/*public static void SyncDataService(String CLUSTER, String RND)
+	{
+			Common.Connection C = new Common.Connection();
+			String SQL = "";
+			SQL  = "Select TableName, TableScript, ColumnList, UniqueID, Sync_Upload, Sync_Download, BatchSize, modifyDate from DatabaseTab as t";
+			SQL += " where not exists(select * from Sync_Management where";
+			SQL += " (TableName)  = 'DatabaseTab' and";
+			SQL += " UniqueID   = t.TableName and";
+			SQL += " convert(varchar(19),modifydate,120) = convert(varchar(19),t.modifydate,120) and";
+			SQL += " UserId   ='"+ CLUSTER +"')";
+
+			String Res = C.DownloadJSON_Update_Sync_Management(SQL, "DatabaseTab", "TableName, TableScript, ColumnList, UniqueID, Sync_Upload, Sync_Download, BatchSize, modifyDate", "TableName", CLUSTER);
+
+			C.Sync_Download("DataCorrectionNote", CLUSTER, "Cluster='"+ CLUSTER +"' and Rnd='"+ RND +"'");
+
+	}*/
+
 }
 

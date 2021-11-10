@@ -3,6 +3,8 @@ package data.mirzapurdss;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -19,6 +21,10 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -37,6 +43,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -108,20 +115,20 @@ public class HouseholdIndex extends AppCompatActivity {
 	     	  	//C.Save("insert into visits_temp(vill,bari,hh,rnd,rsno,vdate) select vill,bari,hh,rnd,rsno,vdate from visits where Rnd='"+ g.getRoundNumber() +"' and vill='"+ CurrentVCode +"'");
 
 				BariList = (Spinner)findViewById(R.id.BariList);
-	    		//BariList.setSelection(2);
-	    		//BlockList(false, Global.Left(BariList.getSelectedItem().toString(),4));
-				//====
+
 				if(BariList.getSelectedItemPosition()==0)
 				{
 
 				}
 				else if(BariList.getSelectedItem().toString().trim().equalsIgnoreCase("all bari"))
 				{
-					BlockList(false, "");
+					//BlockList(false, "");
+					DataSearch("");
 				}
 				else
 				{
-					BlockList(false, Global.Left(BariList.getSelectedItem().toString(),4));
+					//BlockList(false, Global.Left(BariList.getSelectedItem().toString(),4));
+					DataSearch( Global.Left(BariList.getSelectedItem().toString(),4));
 				}
 				//====
 
@@ -194,6 +201,27 @@ public class HouseholdIndex extends AppCompatActivity {
         EditText VisitDate;
 	Spinner BariList;
 
+	private List<data_HHList_DataModel> dataList = new ArrayList<>();
+	private RecyclerView recyclerView;
+	private DataAdapter mAdapter;
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if(BariList.getSelectedItemPosition()==0)
+		{
+
+		}
+		else if(BariList.getSelectedItem().toString().trim().equalsIgnoreCase("all bari"))
+		{
+			DataSearch("");
+		}
+		else
+		{
+			DataSearch( Global.Left(BariList.getSelectedItem().toString(),4));
+		}
+	}
+
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -214,8 +242,10 @@ public class HouseholdIndex extends AppCompatActivity {
 	        setTitle("[ Block: " + g.getBlockCode() + " ,Vill: "+ CurrentVCode + "-" + CurrentVillage + " ]");
 
 	        //update total number of member
-			Cursor cur_tot_mem=C.ReadData("select h.vill as vill,h.bari as bari,h.hh as hh,m.totalmem from household h\n" +
-					" left outer join (select vill,bari,hh,count(*)totalmem from member where length(extype)=0 group by vill,bari,hh)m\n" +
+			/* stop on: 10 Nov 2021
+			Cursor cur_tot_mem=C.ReadData("select h.vill as vill,h.bari as bari,h.hh as hh,m.totalmem " +
+					" from (Select * from Household where Vill='"+ CurrentVCode +"')  h\n" +
+					" left outer join (select vill,bari,hh,count(*)totalmem from member where Vill='"+ CurrentVCode +"' and length(extype)=0 group by vill,bari,hh)m\n" +
 					" on h.vill=m.vill and h.bari=m.bari and h.hh=m.hh\n" +
 					" where cast(h.totalmem as int)!=cast(m.totalmem as int)\n" +
 					" and h.vill='"+ CurrentVCode +"'");
@@ -239,27 +269,10 @@ public class HouseholdIndex extends AppCompatActivity {
 
 				}
 			}
-
+			*/
 
 			C.Save("delete from visits_temp");
 			C.Save("insert into visits_temp(vill,bari,hh,rnd,rsno,vdate) select distinct vill,bari,hh,rnd,rsno,vdate from visits where Rnd='"+ g.getRoundNumber() +"' and vill='"+ CurrentVCode +"'");
-
-
-			/*String SQL1 = "Select Vill,Bari,HH as HH,(Select Name from member where Rth='01' and Vill||Bari||HH=h.Vill||h.Bari||h.HH order by date(endate) desc limit 1)Name\n" +
-					" from Household h where length(h.HHHead)=0 and h.Clust='"+ g.getClusterCode() +"' and h.Block='"+ g.getBlockCode() +"'";
-
-			Cursor curH = C.ReadData(SQL1);
-			curH.moveToFirst();
-			while(!curH.isAfterLast())
-			{
-				SQL1 = "Update Household set upload='2',HHHead='"+ curH.getString(curH.getColumnIndex("Name")) +"'";
-				SQL1 += " where vill='"+ curH.getString(curH.getColumnIndex("Vill")) +"'";
-				SQL1 += " and bari='"+ curH.getString(curH.getColumnIndex("Bari")) +"'";
-				SQL1 += " and hh='"+ curH.getString(curH.getColumnIndex("HH")) +"'";
-				C.Save(SQL1);
-				curH.moveToNext();
-			}
-			curH.close();*/
 
 
 			BariList = (Spinner)findViewById(R.id.BariList);
@@ -273,7 +286,7 @@ public class HouseholdIndex extends AppCompatActivity {
 
 			String SQL = "";
 			SQL  = "select (select totalhh from ClusterBlock_Status where Cluster='"+ g.getClusterCode() +"' and Block='"+ g.getBlockCode() +"' and Rnd='"+ (Integer.valueOf(g.getRoundNumber())-1) +"')thh,count(v.vill)tvisit";
-			SQL += " from Household h left outer join visits_temp v on h.vill||h.bari||h.hh=v.vill||v.bari||v.hh and v.rnd='"+ g.getRoundNumber() +"'";
+			SQL += " from (Select * from Household where Vill='"+ CurrentVCode +"') h left outer join visits_temp v on h.vill||h.bari||h.hh=v.vill||v.bari||v.hh and v.rnd='"+ g.getRoundNumber() +"'";
 			SQL += " where h.Clust='"+ g.getClusterCode() +"' and h.block='"+ g.getBlockCode() +"'";
 
 			Cursor cur = C.ReadData(SQL);
@@ -333,12 +346,14 @@ public class HouseholdIndex extends AppCompatActivity {
 	    	    	else if(BariList.getSelectedItem().toString().trim().equalsIgnoreCase("all bari"))
 	    	    	{
 	    	    		g.setBariCode("");
-	    	    		BlockList(false, "");	    	    		
+	    	    		//BlockList(false, "");
+						DataSearch("");
 	    	    	}
 	    	    	else
 	    	    	{
 	    	    		g.setBariCode(BariList.getSelectedItem().toString());
-	    	    		BlockList(false, Global.Left(BariList.getSelectedItem().toString(),4));
+	    	    		//BlockList(false, Global.Left(BariList.getSelectedItem().toString(),4));
+						DataSearch(Global.Left(BariList.getSelectedItem().toString(),4));
 	    	    	}
 	    	    		    	    	
 	    	    }
@@ -348,7 +363,20 @@ public class HouseholdIndex extends AppCompatActivity {
 	    	    	
 	    	    }
 
-	    	});	   
+	    	});
+
+
+			recyclerView = (RecyclerView)findViewById(R.id.recycler_view);
+			mAdapter = new DataAdapter(dataList);
+			recyclerView.setItemViewCacheSize(20);
+			recyclerView.setDrawingCacheEnabled(true);
+			recyclerView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+			recyclerView.setHasFixedSize(true);
+			RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+			recyclerView.setLayoutManager(mLayoutManager);
+			recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+			//recyclerView.setItemAnimator(new DefaultItemAnimator());
+			recyclerView.setAdapter(mAdapter);
         }
         catch(Exception ex)
         {
@@ -360,7 +388,7 @@ public class HouseholdIndex extends AppCompatActivity {
 	
 	public void BlockListUpdate()
 	{
-		BlockList(false,g.getBariCode());
+		//BlockList(false,g.getBariCode());
 	}
 
 	public void BlockList(Boolean heading, String BariCode)
@@ -381,73 +409,27 @@ public class HouseholdIndex extends AppCompatActivity {
 				{
 					SQL +="select b.bari,ifnull(h.hh,'')as hh,ifnull(h.hhhead,'')hhhead,ifnull(totalMem,'0')totalMem,b.vill,b.bariname,(case when v.rnd is null then '2' else '1' end)RoundVisit,";
 					SQL +=" ifnull(h.rel,'')rel,ifnull(v.rsno,'')rsno,ifnull(v.vdate,'')vdate,posmig from ";
-					SQL +=" Baris b";
-					SQL +=" left outer join Household h on b.vill||b.bari=h.vill||h.bari";
+					SQL +=" (Select * from Baris where Cluster='"+ g.getClusterCode() +"' and block='"+ g.getBlockCode() +"') b";
+					SQL +=" left outer join (Select * from Household where Vill='"+ CurrentVCode +"') h on b.vill||b.bari=h.vill||h.bari";
 					SQL +=" left outer join visits_temp v on h.vill||h.bari||h.hh=v.Vill||v.Bari||v.hh";
 					SQL +=" where ";
 					SQL +=" b.Cluster='"+ g.getClusterCode() +"' and";
 					SQL +=" b.block='"+ g.getBlockCode() +"' and b.bari ='"+ BariCode +"'";
 					SQL +=" order by h.vill, h.Bari, h.HH";
 
-					/* stop on : 20 oct 2017
-					SQL +="select b.bari,ifnull(h.hh,'')as hh,ifnull(h.hhhead,'')hhhead,count(m.vill)totalMem,b.vill,b.bariname,(case when v.rnd is null then '2' else '1' end)RoundVisit,";
-					SQL +=" ifnull(h.rel,'')rel,ifnull(v.rsno,'')rsno,ifnull(v.vdate,'')vdate,count(case when m.posmig='54' then '1' else null end)posmig from ";
-					SQL +=" Baris b";
-					SQL +=" left outer join Household h on b.vill||b.bari=h.vill||h.bari";
-					SQL +=" left outer join Member m on h.vill||h.bari||h.hh=m.Vill||m.Bari||m.hh and length(m.extype)=0";
-					SQL +=" left outer join visits_temp v on h.vill||h.bari||h.hh=v.Vill||v.Bari||v.hh";
-					//SQL +=" inner join mdssvill vl on (b.vill=vl.vill)";
-					SQL +=" where ";//vl.Cluster='"+ g.getClusterCode() +"' and";
-					SQL +=" b.Cluster='"+ g.getClusterCode() +"' and";
-					SQL +=" b.block='"+ g.getBlockCode() +"' and b.bari ='"+ BariCode +"'";
-					SQL +=" group by h.vill,h.bari,h.hh";
-					SQL +=" order by h.vill, h.Bari, h.HH";*/
-					
-					/*SQL +="Select b.bari,ifnull(h.hh,'')hh,ifnull(h.hhhead,'')hhhead,0 totalmem,b.vill,b.bariname, (case when v1.vill is null then '2' else '1' end)RoundVisit,Rel,ifnull(v1.rsno,'')rsno,ifnull(v1.vdate,'')vdate";
-					SQL +=" from Baris b";
-					SQL +=" left outer join Household h on (b.vill=h.vill and b.bari=h.bari)";
-					SQL +=" inner join mdssvill v on (b.vill=v.vill)";
-					SQL +=" left outer join visits_temp v1 on (h.vill||h.bari||h.HH=v1.vill||v1.bari||v1.hh)";
-					SQL +=" where"; 
-					SQL +=" v.Cluster='"+ g.getClusterCode() +"' and";
-					SQL +=" b.block='"+ g.getBlockCode() +"' and b.bari ='"+ BariCode +"'";
-					SQL +=" order by h.vill, h.Bari, h.HH";*/
 				}
 				else
 				{
 					SQL +="select b.bari,ifnull(h.hh,'')as hh,ifnull(h.hhhead,'')hhhead,ifnull(totalMem,'0')totalMem,b.vill,b.bariname,(case when v.rnd is null then '2' else '1' end)RoundVisit,";
 					SQL +=" ifnull(h.rel,'')rel,ifnull(v.rsno,'')rsno,ifnull(v.vdate,'')vdate,posmig from ";
-					SQL +=" Baris b";
-					SQL +=" left outer join Household h on b.vill||b.bari=h.vill||h.bari";
+					SQL +=" (Select * from Baris where Cluster='"+ g.getClusterCode() +"' and block='"+ g.getBlockCode() +"') b";
+					SQL +=" left outer join (Select * from Household where Vill='"+ CurrentVCode +"') h on b.vill||b.bari=h.vill||h.bari";
 					SQL +=" left outer join visits_temp v on h.vill||h.bari||h.hh=v.Vill||v.Bari||v.hh";
 					SQL +=" where ";
 					SQL +=" b.Cluster='"+ g.getClusterCode() +"' and";
 					SQL +=" b.block='"+ g.getBlockCode() +"'";
 					SQL +=" order by h.vill, h.Bari, h.HH";
 
-					/*stop on: 20 oct 2017
-					SQL +="select b.bari,ifnull(h.hh,'')as hh,ifnull(h.hhhead,'')hhhead,count(m.vill)totalMem,b.vill,b.bariname,(case when v.rnd is null then '2' else '1' end)RoundVisit,";
-					SQL +=" ifnull(h.rel,'')rel,ifnull(v.rsno,'')rsno,ifnull(v.vdate,'')vdate,count(case when m.posmig='54' then '1' else null end)posmig from ";
-					SQL +=" Baris b";
-					SQL +=" left outer join Household h on b.vill||b.bari=h.vill||h.bari";
-					SQL +=" left outer join Member m on h.vill||h.bari||h.hh=m.Vill||m.Bari||m.hh and length(m.extype)=0";
-					SQL +=" left outer join visits_temp v on h.vill||h.bari||h.hh=v.Vill||v.Bari||v.hh";
-					//SQL +=" inner join mdssvill vl on (b.vill=vl.vill)";
-					SQL +=" where ";//vl.Cluster='"+ g.getClusterCode() +"' and";
-					SQL +=" b.Cluster='"+ g.getClusterCode() +"' and";
-					SQL +=" b.block='"+ g.getBlockCode() +"'";
-					SQL +=" group by h.vill,h.bari,h.hh";
-					SQL +=" order by h.vill, h.Bari, h.HH";*/
-
-					/*SQL +="Select b.bari,ifnull(h.hh,'')hh,ifnull(h.hhhead,'')hhhead,0 totalmem,b.vill,b.bariname, (case when v1.vill is null then '2' else '1' end)RoundVisit,Rel,ifnull(v1.rsno,'')rsno,ifnull(v1.vdate,'')vdate";
-					SQL +=" from Baris b";
-					SQL +=" left outer join Household h on (b.vill=h.vill and b.bari=h.bari)";
-					SQL +=" inner join mdssvill v on (b.vill=v.vill)";
-					SQL +=" left outer join visits_temp v1 on (h.vill||h.bari||h.HH=v1.vill||v1.bari||v1.hh)";
-					SQL +=" where"; 
-					SQL +=" v.Cluster='"+ g.getClusterCode() +"' and";
-					SQL +=" b.block='"+ g.getBlockCode() +"'";
-					SQL +=" order by h.vill, h.Bari, h.HH";*/					
 				}
 				Cursor cur=C.ReadData(SQL);
 				
@@ -550,7 +532,7 @@ public class HouseholdIndex extends AppCompatActivity {
 				HHNo.setTextColor(Color.BLACK);
 				HHHead.setTextColor(Color.BLACK);								
 			}
-			//else if(o.get("visit").equals("1") & o.get("rsno").equals("77"))
+
 			else if(Integer.valueOf(o.get("totalmem"))==0)
 			{
 				Bari.setTextColor(Color.LTGRAY);				
@@ -856,7 +838,8 @@ public class HouseholdIndex extends AppCompatActivity {
 												   }
 												   C.Save(SQL);
 
-				        			            	BlockList(false, Global.Left(BariList.getSelectedItem().toString(),4));
+				        			            	//BlockList(false, Global.Left(BariList.getSelectedItem().toString(),4));
+												   DataSearch(Global.Left(BariList.getSelectedItem().toString(),4));
 			        		            	   }
 			        		            	   catch(Exception ex)
 			        		            	   {
@@ -1049,7 +1032,8 @@ public class HouseholdIndex extends AppCompatActivity {
 									   }
 									   C.Save(SQL);
 
-		        			            	BlockList(false, Global.Left(BariList.getSelectedItem().toString(),4));  	
+		        			            	//BlockList(false, Global.Left(BariList.getSelectedItem().toString(),4));
+									   DataSearch(Global.Left(BariList.getSelectedItem().toString(),4));
 	     		            	   }
 	     		            	   catch(Exception ex)
 	     		            	   {
@@ -1504,4 +1488,170 @@ private void ShowBariForm(final String Vill,final String BariNo, final String St
                     }
             }
     };
+
+	private void DataSearch(String BariCode)
+	{
+		try
+		{
+			data_HHList_DataModel d = new data_HHList_DataModel();
+			String SQL = "";
+
+			if(BariCode.length()!=0)
+			{
+				SQL +="select b.bari bari,ifnull(h.hh,'')as hh,ifnull(h.hhhead,'')hhhead,ifnull(totalMem,'0')totalmem,b.vill vill,b.bariname bariname,(case when v.rnd is null then '2' else '1' end)roundvisit,";
+				SQL +=" ifnull(h.rel,'')rel,ifnull(v.rsno,'')rsno,ifnull(v.vdate,'')vdate,posmig posmig from ";
+				SQL +=" (Select * from Baris where Cluster='"+ g.getClusterCode() +"' and block='"+ g.getBlockCode() +"') b";
+				SQL +=" left outer join (Select * from Household where Vill='"+ CurrentVCode +"') h on b.vill||b.bari=h.vill||h.bari";
+				SQL +=" left outer join visits_temp v on h.vill||h.bari||h.hh=v.Vill||v.Bari||v.hh";
+				SQL +=" where ";
+				SQL +=" b.Cluster='"+ g.getClusterCode() +"' and";
+				SQL +=" b.block='"+ g.getBlockCode() +"' and b.bari ='"+ BariCode +"'";
+				SQL +=" order by h.vill, h.Bari, h.HH";
+
+			}
+			else
+			{
+				SQL +="select b.bari bari,ifnull(h.hh,'')as hh,ifnull(h.hhhead,'')hhhead,ifnull(totalMem,'0')totalmem,b.vill vill,b.bariname bariname,(case when v.rnd is null then '2' else '1' end)roundvisit,";
+				SQL +=" ifnull(h.rel,'')rel,ifnull(v.rsno,'')rsno,ifnull(v.vdate,'')vdate,posmig posmig from ";
+				SQL +=" (Select * from Baris where Cluster='"+ g.getClusterCode() +"' and block='"+ g.getBlockCode() +"') b";
+				SQL +=" left outer join (Select * from Household where Vill='"+ CurrentVCode +"') h on b.vill||b.bari=h.vill||h.bari";
+				SQL +=" left outer join visits_temp v on h.vill||h.bari||h.hh=v.Vill||v.Bari||v.hh";
+				SQL +=" where ";
+				SQL +=" b.Cluster='"+ g.getClusterCode() +"' and";
+				SQL +=" b.block='"+ g.getBlockCode() +"'";
+				SQL +=" order by h.vill, h.Bari, h.HH";
+
+			}
+
+			List<data_HHList_DataModel> data = d.SelectAll(this, SQL);
+			dataList.clear();
+
+			dataList.addAll(data);
+			try {
+				mAdapter.notifyDataSetChanged();
+			}catch ( Exception ex){
+				Common.Connection.MessageBox(HouseholdIndex.this,ex.getMessage());
+			}
+		}
+		catch(Exception  e)
+		{
+			Common.Connection.MessageBox(HouseholdIndex.this, e.getMessage());
+			return;
+		}
+	}
+
+	public class DataAdapter extends RecyclerView.Adapter<DataAdapter.MyViewHolder> {
+		private List<data_HHList_DataModel> dataList;
+		public class MyViewHolder extends RecyclerView.ViewHolder {
+			RelativeLayout rowlay;
+			TextView Bari;
+			TextView BariN;
+			TextView HHNo;
+			TextView HHHead;
+			TextView provtype;
+			Button cmdNewHH;
+
+			public MyViewHolder(View convertView) {
+				super(convertView);
+				rowlay = (RelativeLayout)convertView.findViewById(R.id.rowlay);
+				Bari = (TextView)convertView.findViewById(R.id.Bari);
+				BariN = (TextView)convertView.findViewById(R.id.BariN);
+				HHNo = (TextView)convertView.findViewById(R.id.HHNo);
+				HHHead = (TextView)convertView.findViewById(R.id.HHHead);
+				cmdNewHH = (Button)convertView.findViewById(R.id.cmdNewHH);
+			}
+		}
+		public DataAdapter(List<data_HHList_DataModel> datalist) {
+			this.dataList = datalist;
+		}
+		@Override
+		public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+			View itemView = LayoutInflater.from(parent.getContext())
+					.inflate(R.layout.householdindexrow, parent, false);
+			return new MyViewHolder(itemView);
+		}
+		@Override
+		public void onBindViewHolder(MyViewHolder holder, int position) {
+			final data_HHList_DataModel data = dataList.get(position);
+			holder.Bari.setText(data.getBari());
+			holder.HHNo.setText(data.getHHNo());
+			holder.HHHead.setText(data.getHHHead());
+			holder.BariN.setText(data.getBariName());
+			Global.VillageCode = data.getVCode();
+			final String VD = Global.DateConvertDMY(data.getVDate());
+
+			if(data.getVisit().equals("1") & data.getRSNO().equals("99"))
+			{
+				holder.Bari.setTextColor(Color.RED);
+				holder.BariN.setTextColor(Color.BLACK);
+				holder.HHNo.setTextColor(Color.BLACK);
+				holder.HHHead.setTextColor(Color.BLACK);
+			}
+
+			else if(Integer.parseInt(data.getTotalMem())==0)
+			{
+				holder.Bari.setTextColor(Color.LTGRAY);
+				holder.BariN.setTextColor(Color.LTGRAY);
+				holder.HHNo.setTextColor(Color.LTGRAY);
+				holder.HHHead.setTextColor(Color.LTGRAY);
+			}
+			else if(data.getPosMig().equals("1"))
+			{
+				holder.Bari.setTextColor(Color.BLUE);
+				holder.BariN.setTextColor(Color.BLUE);
+				holder.HHNo.setTextColor(Color.BLUE);
+				holder.HHHead.setTextColor(Color.BLUE);
+			}
+			else if(data.getVisit().equals("2"))
+			{
+				holder.Bari.setTextColor(Color.BLACK);
+				holder.BariN.setTextColor(Color.BLACK);
+				holder.HHNo.setTextColor(Color.BLACK);
+				holder.HHHead.setTextColor(Color.BLACK);
+			}
+			else if(data.getVisit().equals("1"))
+			{
+				holder.Bari.setTextColor(Color.GREEN);
+				holder.BariN.setTextColor(Color.BLACK);
+				holder.HHNo.setTextColor(Color.BLACK);
+				holder.HHHead.setTextColor(Color.BLACK);
+			}
+
+			holder.cmdNewHH.setOnClickListener(new View.OnClickListener() {
+				public void onClick(View v) {
+					g.setVillageCode(data.getVCode());
+					g.setBariCode(data.getBari());
+					String TotalHH = C.ReturnSingleValue("select ifnull(max(cast(hh as int)),0) from Member where vill||bari='"+ data.getVCode()+data.getBari() +"'");
+					if(TotalHH.equals("99"))
+					{
+						Connection.MessageBox(HouseholdIndex.this, "এ বাড়ীতে 99 এর বেশী খানা হবে না।");
+						return;
+					}
+					String HNo = Global.Right("000"+C.ReturnSingleValue("select (ifnull(max(cast(hh as int)),0)+1)MaxSl from Household where vill||Bari='"+ data.getVCode()+data.getBari() +"'"),2);
+					ShowVisitForm(data.getVCode(),data.getBari(),HNo,g.getRoundNumber(),data.getBariName(),data.getHHHead(),"n","0","","");
+
+				}
+			});
+
+			holder.rowlay.setOnClickListener(new View.OnClickListener() {
+				public void onClick(View v) {
+					g.setVillageCode(data.getVCode());
+					g.setBariCode(data.getBari());
+					if(data.getHHNo().length()==0)
+					{
+						Connection.MessageBox(HouseholdIndex.this, "এ বাড়ীতে কোন খানা নেই।");
+						return;
+					}
+
+					g.setHouseholdNo(data.getHHNo());
+					ShowVisitForm(data.getVCode(),data.getBari(),data.getHHNo(),g.getRoundNumber(),data.getBariName(),data.getHHHead(),"o",data.getRel(),VD,data.getRSNO());
+
+				}
+			});
+		}
+		@Override
+		public int getItemCount() {
+			return dataList.size();
+		}
+	}
 }

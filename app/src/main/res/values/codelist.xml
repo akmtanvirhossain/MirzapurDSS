@@ -12,7 +12,8 @@
       <string-array name="listVisitStatus">
         <item></item>
         <item>1-Completed</item>
-        <item>3-Absent</item>      
+        <item>2-Refused</item>
+        <item>3-Absent</item>
 	    <item>7-Incomplete</item>        
 	</string-array>
     <string-array name="listQ015a">

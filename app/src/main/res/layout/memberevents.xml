@@ -62,6 +62,25 @@
         android:layout_height="1dip"
         android:background="#CCCCCC" />
 
+	<LinearLayout
+		style="@style/rowStyle0"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal">
+		<Button
+			android:id="@+id/btnErrorCheck"
+			android:layout_width="20sp"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="5sp"
+			android:layout_marginLeft="10sp"
+			android:layout_marginRight="0sp"
+			android:layout_marginTop="5sp"
+			android:layout_weight="1"
+			android:background="@drawable/button_style_circle_line"
+			android:text="অসামঞ্জস্য তথ্য"
+			android:textSize="16sp" />
+
+	</LinearLayout>
     <LinearLayout android:layout_width="fill_parent" android:weightSum="5" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
 		        <Button android:id="@+id/cmdNewMem" android:text="New Mem" android:layout_width="120sp" android:layout_height="60sp" android:textSize="20sp" android:layout_marginBottom="5sp" />
 

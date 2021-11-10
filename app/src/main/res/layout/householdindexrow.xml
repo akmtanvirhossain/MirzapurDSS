@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout android:id="@+id/rowlay" xmlns:android="http://schemas.android.com/apk/res/android"
  android:orientation="vertical" android:layout_width="fill_parent"
- android:layout_height="wrap_content" android:minHeight="50sp" android:paddingTop="5sp" android:paddingBottom="5sp" android:layout_marginRight="10sp"
+ android:layout_height="wrap_content"  android:paddingTop="8sp" android:paddingBottom="8sp" android:layout_marginRight="10sp"
  android:background="#FFFFFF">
     		<TableLayout
 				android:id="@+id/secHHIndex"
 				android:layout_width="fill_parent"
-				android:layout_height="fill_parent" 
-				android:background="#ffffff">
+				android:layout_height="match_parent"
+				android:background="#ffffff"
+				android:layout_marginLeft="10sp">
 
 				<TableRow android:gravity="center_vertical" >
 
@@ -30,9 +31,9 @@
 					         android:layout_height="wrap_content"/>	
 					<Button android:id="@+id/cmdNewHH" 
 					        android:layout_width="85sp"  android:textSize="14sp"
-					        android:layout_height="40sp"
+					        android:layout_height="45sp"
 					        android:text="New HH"/>		
 				</TableRow>
-				<View android:layout_height="2dip" android:background="#CCCCCC" />
+
 			</TableLayout>	
 </RelativeLayout>		         									

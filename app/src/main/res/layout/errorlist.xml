@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+	<LinearLayout
+		style="@style/rowStyle1"
+		android:layout_width="fill_parent"
+		android:layout_height="45dp"
+		android:orientation="horizontal"
+		android:weightSum="1">
+
+		<TextView
+			android:id="@+id/lblErrTitle"
+			android:layout_width="200sp"
+			android:layout_height="wrap_content"
+			android:layout_weight="0.22"
+			android:text="অসামঞ্জস্য তথ্যের তালিকা"
+			android:textSize="20sp" />
+	</LinearLayout>
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal">
+		<ListView
+			android:id="@+id/LstError"
+			android:layout_width="match_parent"
+			android:layout_height="750sp"
+			android:divider="#000000"
+			android:dividerHeight="1px"
+			android:clickable="true">
+		</ListView>
+	</LinearLayout>
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:background="#F3F3F3"
+		android:orientation="horizontal"
+		android:paddingBottom="10sp"
+		android:paddingTop="10dp">
+		<Button
+			android:id="@+id/cmdErrorListClose"
+			android:layout_width="150sp" android:layout_marginLeft="20sp" android:layout_marginRight="20sp" android:textColor="#FFFFFF"
+			android:layout_height="wrap_content"
+			android:layout_gravity="right" android:layout_weight="1"
+			android:layout_marginTop="10dp" android:background="@drawable/button_style_oval_green"
+			android:text="Close" />
+	</LinearLayout>
+</LinearLayout>

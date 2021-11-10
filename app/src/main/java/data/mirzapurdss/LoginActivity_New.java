@@ -1,6 +1,7 @@
 package data.mirzapurdss;
 
 import android.Manifest;
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.arch.core.BuildConfig;
@@ -158,7 +159,7 @@ public class LoginActivity_New extends AppCompatActivity {
             //Need to update date every time whenever shared updated system
             //Format: DDMMYYYY
             //*********************************************************************
-            SystemUpdateDT = "14102021"; //old version date: "11112020"
+            SystemUpdateDT = "10112021"; //old version date: "11112020"
 
             lblSystemDate.setText(data.mirzapurdss.Global.Left(SystemUpdateDT, 2)+" - "+SystemUpdateDT.substring(2,4)+" - "+ data.mirzapurdss.Global.Right(SystemUpdateDT,4));
             //*********************************************************************
@@ -231,9 +232,28 @@ public class LoginActivity_New extends AppCompatActivity {
                     C.CreateTable("tTrans",SQL);
                     if (resp1.length() == 0) C.Save("Insert into process_tab(process_id)values(4)");
                 }
+
+                //08112021
+                if (!C.Existence("Select * from process_tab where process_id=5")) {
+                    C.CreateTable("DataCorrectionNote", "Create table DataCorrectionNote(Vill varchar (3),Bari varchar (4),HH varchar (2),Sno varchar (2),Serial int,Note nvarchar(500),Status varchar (1),ClearDate varchar (20),Cluster varchar (2),Block varchar (2),Upload varchar (1),modifyDate datetime,Constraint pk_DataCorrectionNote Primary Key(Vill,Bari,HH,Sno,Serial))");
+                    C.Save("Insert into process_tab(process_id)values(5)");
+                }
             }catch (Exception ex){
 
             }
+
+            if (networkAvailable)
+            {
+                if(!isMyServiceRunning(Sync_Service.class)) {
+                    String CLUSTER = C.ReturnSingleValue("Select Cluster from currentcluster limit 1");
+                    String RND = C.ReturnSingleValue("Select max(cast(Rnd as int))Rnd from Round");
+                    sp.save(this,"cluster",CLUSTER);
+                    sp.save(this,"rnd",RND);
+                    Intent syncService = new Intent(this, Sync_Service.class);
+                    startService(syncService);
+                }
+            }
+
 
             //Login -----------------------------------------------------------------------
             Button loginButton = (Button) findViewById(R.id.btnLogin);
@@ -435,5 +455,15 @@ public class LoginActivity_New extends AppCompatActivity {
             }
             return null;
         }
+    }
+
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

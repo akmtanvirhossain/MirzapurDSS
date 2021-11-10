@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:background="#ffffff" android:id="@+id/secRow"
+    android:orientation="horizontal">
+
+					<Button
+						android:id="@+id/cmdErrorListUpdate"
+						android:layout_width="100dp"
+						android:layout_height="wrap_content"
+						android:text="Status" android:visibility="gone"
+						android:textSize="15sp" />
+
+					<TextView android:id="@+id/v_Mslno"
+						android:layout_width="100sp"
+						android:gravity="center"
+						android:layout_height="wrap_content"/>
+
+					<TextView android:id="@+id/v_note"
+						android:layout_width="wrap_content"
+						android:gravity="left" android:layout_marginBottom="10px"
+						android:layout_height="wrap_content"/>
+
+</LinearLayout>
+ 

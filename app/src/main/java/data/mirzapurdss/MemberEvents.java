@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.KeyguardManager;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -81,6 +82,7 @@ public class MemberEvents extends AppCompatActivity {
 	private static String totalmember;
 	private String ErrMsg;
 	private static String vdate;
+	Button btnErrorCheck;
 
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
@@ -112,14 +114,46 @@ public class MemberEvents extends AppCompatActivity {
 				adb.setNegativeButton("No", null);
 				adb.setPositiveButton("Yes", new AlertDialog.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
-						try
+						final ProgressDialog progDailog = ProgressDialog.show(MemberEvents.this, "", "Please Wait . . .", true);
+						new Thread() {
+							public void run() {
+								try
+								{
+									String msg = ProcessTransaction(vill+bari+hhno,g.getRoundNumber());
+									if(msg.length()==0)
+									{
+										String totalmem = C.ReturnSingleValue("Select count(*)totalmem from Member where Vill||Bari||HH='"+ (vill+bari+hhno) +"' and length(ExType)=0");
+										String posmig   = C.ReturnSingleValue("Select count(*)posmig from Member where Vill||Bari||HH='"+ (vill+bari+hhno) +"' and length(ExType)=0 and posmig='54'");
+										C.Save("Update Household set totalmem='"+ (totalmem==null?'0':totalmem) +"',posmig='"+ (Integer.parseInt(posmig)>=1?"1":"2") +"',Upload='2' where Vill||bari||HH='"+ (vill+bari+hhno) +"'");
+
+										g.setBariCode("");
+										g.setHouseholdNo("");
+
+										finish();
+									}
+									else
+									{
+										Connection.MessageBox(MemberEvents.this, msg);
+										return;
+									}
+								}
+								catch(Exception ex)
+								{
+									Connection.MessageBox(MemberEvents.this, ex.getMessage());
+									return;
+								}
+								progDailog.dismiss();
+							}
+						}.start();
+
+						/*try
 						{
 							String msg = ProcessTransaction(vill+bari+hhno,g.getRoundNumber());
 							if(msg.length()==0)
 							{
 								String totalmem = C.ReturnSingleValue("Select count(*)totalmem from Member where Vill||Bari||HH='"+ (vill+bari+hhno) +"' and length(ExType)=0");
 								String posmig   = C.ReturnSingleValue("Select count(*)posmig from Member where Vill||Bari||HH='"+ (vill+bari+hhno) +"' and length(ExType)=0 and posmig='54'");
-								C.Save("Update Household set totalmem='"+ (totalmem==null?'0':totalmem) +"',posmig='"+ (Integer.valueOf(posmig)>=1?"1":"2") +"',Upload='2' where Vill||bari||HH='"+ (vill+bari+hhno) +"'");
+								C.Save("Update Household set totalmem='"+ (totalmem==null?'0':totalmem) +"',posmig='"+ (Integer.parseInt(posmig)>=1?"1":"2") +"',Upload='2' where Vill||bari||HH='"+ (vill+bari+hhno) +"'");
 
 								g.setBariCode("");
 								g.setHouseholdNo("");
@@ -136,7 +170,7 @@ public class MemberEvents extends AppCompatActivity {
 						{
 							Connection.MessageBox(MemberEvents.this, ex.getMessage());
 							return;
-						}
+						}*/
 
 					}});
 				adb.show();
@@ -181,6 +215,20 @@ public class MemberEvents extends AppCompatActivity {
 	ImageButton btnEvDate_Update;
 	LinearLayout secDelivType;
 	Spinner spnDelType;
+
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if (C.Existence("select D.status from DataCorrectionNote D Where d.Vill='"+ vill +"' and d.Bari='"+ bari +"' and d.HH='"+ hhno +"' and status='2'")) {
+			btnErrorCheck.setBackgroundResource(R.drawable.button_style_oval_red);
+			btnErrorCheck.setTextColor(Color.WHITE);
+		}
+		else{
+			btnErrorCheck.setBackgroundResource(R.drawable.button_style_circle_line);
+			btnErrorCheck.setTextColor(Color.BLACK);
+		}
+	}
 
 	//***************************************************************************************************************************
 	@Override
@@ -259,6 +307,13 @@ public class MemberEvents extends AppCompatActivity {
 		STR_EDU += " Union Select '34–ব্রাক চতুর্থ শ্রেণী পাশ:Class 4 passed '";
 		STR_EDU += " Union Select '35–ব্রাক পঞ্চম শ্রেণী পাশ:Class 5 passed '";
 		STR_EDU += " Union Select '99-জানিনা'";
+
+		btnErrorCheck = findViewById(R.id.btnErrorCheck);
+		btnErrorCheck.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View arg0) {
+				ErrorList(vill,bari,hhno);
+			}
+		});
 
 		final RadioGroup roMemberOption =(RadioGroup)findViewById(R.id.roMemberOption);
 		roMemberOption.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -371,7 +426,8 @@ public class MemberEvents extends AppCompatActivity {
 
 
 		//Drop Image from the database if age>5 years
-		//25 Jan 2018
+		//25 Jan 2018 : stop om: 09 Nov 2021
+		/*
 		try {
 			Cursor curH = C.ReadData("select vill as vill,bari as bari,hh as hh,sno as sno,name from Member where Vill||Bari||HH='"+ (vill+bari+hhno) +"' and Cast(((julianday(date('now'))-julianday(BDate))/365.25) as int) between 5 and 11");
 			curH.moveToFirst();
@@ -398,9 +454,10 @@ public class MemberEvents extends AppCompatActivity {
 			curH.close();
 		}catch (Exception ex){
 
-		}
+		}*/
 
 	}
+
 
 
 	//Retrieve member list
@@ -8657,6 +8714,9 @@ public class MemberEvents extends AppCompatActivity {
 			Button cmdImmClose = (Button)dialog.findViewById(R.id.cmdVisitNoteClose);
 			cmdImmClose.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View arg0) {
+
+
+
 					dialog.dismiss();
 				}
 			});
@@ -8875,4 +8935,152 @@ public class MemberEvents extends AppCompatActivity {
 	};
 
 
+	private void ErrorList(final String Vill, final String Bari, final String HH)
+	{
+		try
+		{
+			final Dialog dialog = new Dialog(MemberEvents.this);
+
+			dialog .requestWindowFeature(Window.FEATURE_NO_TITLE);
+			dialog.setContentView(R.layout.errorlist);
+			dialog.setCanceledOnTouchOutside(false);
+			dialog.setCancelable(true);
+
+			Window window = dialog.getWindow();
+			WindowManager.LayoutParams wlp = window.getAttributes();
+
+			wlp.gravity = Gravity.TOP;
+			wlp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+			window.setAttributes(wlp);
+
+			final ListView evlist = (ListView)dialog.findViewById(R.id.LstError);
+			View header = getLayoutInflater().inflate(R.layout.errorlistheading, null);
+			evlist.addHeaderView(header);
+			Cursor cur = C.ReadData("select D.vill,D.bari,D.hh,d.Serial,M.Name,D.sno Sno,D.note,D.status from DataCorrectionNote D left outer join tTrans M on D.vill||D.bari||D.hh||D.sno=M.vill||M.bari||M.hh||M.sno and m.status='m' Where d.Vill='"+ Vill +"' and d.Bari='"+ Bari +"' and d.HH='"+ HH +"' and D.status='2' order by D.vill,D.bari,D.hh,D.sno asc");
+
+			cur.moveToFirst();
+			evmylist.clear();
+			eList = null;
+			evlist.setAdapter(null);
+
+			while(!cur.isAfterLast())
+			{
+				HashMap<String, String> map = new HashMap<String, String>();
+				map.put("vill", cur.getString(cur.getColumnIndex("Vill")));
+				map.put("bari", cur.getString(cur.getColumnIndex("Bari")));
+				map.put("hh", cur.getString(cur.getColumnIndex("HH")));
+				map.put("name", cur.getString(cur.getColumnIndex("Name")));
+				map.put("sno", cur.getString(cur.getColumnIndex("Sno")));
+				map.put("serial", cur.getString(cur.getColumnIndex("Serial")));
+				map.put("status", cur.getString(cur.getColumnIndex("Status")));
+				map.put("note", cur.getString(cur.getColumnIndex("Note")));
+
+				evmylist.add(map);
+
+				eList = new SimpleAdapter(MemberEvents.this, evmylist, R.layout.errorlistrow,
+						new String[] {"sno","note"},
+						new int[] {R.id.v_Mslno,R.id.v_note});
+				evlist.setAdapter(new ErrorListAdapter(this,dialog,evlist));
+				cur.moveToNext();
+			}
+			cur.close();
+
+			Button cmdErrorListClose = (Button)dialog.findViewById(R.id.cmdErrorListClose);
+			cmdErrorListClose.setOnClickListener(new View.OnClickListener() {
+				public void onClick(View arg0) {
+					if (C.Existence("select D.status from DataCorrectionNote D Where d.Vill='"+ vill +"' and d.Bari='"+ bari +"' and d.HH='"+ hhno +"' and status='2'")) {
+						btnErrorCheck.setBackgroundResource(R.drawable.button_style_oval_red);
+						btnErrorCheck.setTextColor(Color.WHITE);
+					}
+					else{
+						btnErrorCheck.setBackgroundResource(R.drawable.button_style_circle_line);
+						btnErrorCheck.setTextColor(Color.BLACK);
+					}
+					dialog.dismiss();
+				}
+			});
+
+			dialog.show();
+		}
+		catch(Exception  e)
+		{
+			Common.Connection.MessageBox(MemberEvents.this, e.getMessage());
+			return;
+		}
+	}
+
+	public class ErrorListAdapter extends BaseAdapter
+	{
+		private Context context;
+		Dialog dg;
+		ListView lv;
+		public ErrorListAdapter(Context c,Dialog d,ListView Errorlist){
+			context = c;
+			dg=d;
+			lv=Errorlist;
+		}
+
+		public int getCount() {
+			return eList.getCount();
+		}
+
+		public Object getItem(int position) {
+			return position;
+		}
+
+		public long getItemId(int position) {
+			return position;
+		}
+
+		public View getView(final int position, View convertView, ViewGroup parent) {
+
+			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+			if (convertView == null) {
+				convertView = inflater.inflate(R.layout.errorlistrow, null);
+			}
+
+			final HashMap<String, String> o = (HashMap<String, String>) eList.getItem(position);
+
+			TextView v_Mslno=(TextView)convertView.findViewById(R.id.v_Mslno);
+			TextView v_note=(TextView)convertView.findViewById(R.id.v_note);
+			final LinearLayout secRow = (LinearLayout)convertView.findViewById(R.id.secRow);
+
+			v_Mslno.setText(o.get("sno").toString());
+			v_note.setText(o.get("note").toString());
+			if(o.get("status").equals("1")) {
+				secRow.setBackgroundColor(Color.GREEN);
+			}else{
+				secRow.setBackgroundColor(Color.WHITE);
+			}
+
+
+			secRow.setOnClickListener(new View.OnClickListener() {
+				public void onClick(View v) {
+					AlertDialog.Builder adb = new AlertDialog.Builder(MemberEvents.this);
+					adb.setTitle("List Update");
+					adb.setMessage("সদস্য নং "+ o.get("sno").toString() +" এর তথ্য কি আপডেট করা হয়েছে [হ্যাঁ/না]?");
+
+					adb.setNegativeButton("না", new AlertDialog.OnClickListener() {
+						public void onClick(DialogInterface dialog1, int which) {
+
+						}});
+
+					adb.setPositiveButton("হ্যাঁ", new AlertDialog.OnClickListener() {
+						public void onClick(DialogInterface dialog1, int which) {
+							String HH = o.get("vill")+o.get("bari")+o.get("hh");
+							String SN = o.get("sno").toString();
+							String ST = o.get("status").toString();
+							String Serial = o.get("serial").toString();
+							C.Save("Update DataCorrectionNote set Status='1',ClearDate='"+ Common.Global.DateTimeNowYMDHMS()+"',Upload='2' where vill||bari||hh='"+ HH +"' and sno='"+ SN + "' and Serial='"+ Serial +"'");
+							//cmdErroeListUpdate.setEnabled(false);
+							//cmdErroeListUpdate.setText("Solve");
+						}});
+					adb.show();
+					return;
+				}});
+
+			return convertView;
+		}
+	}
 }
