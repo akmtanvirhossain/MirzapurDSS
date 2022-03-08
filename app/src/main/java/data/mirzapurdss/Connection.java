@@ -282,6 +282,18 @@ public class Connection extends SQLiteOpenHelper {
 		db.execSQL(SQL);
 	}
 
+	public String SaveData(String SQL) {
+		String response = "";
+		SQLiteDatabase db = this.getWritableDatabase();
+		try {
+			db.execSQL(SQL);
+		}catch(Exception ex){
+			response = ex.getMessage();
+		}finally {
+			db.close();
+		}
+		return response;
+	}
 
 	public static String[] split(String s, char separator) 
     {

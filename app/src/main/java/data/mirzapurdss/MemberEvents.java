@@ -328,7 +328,6 @@ public class MemberEvents extends AppCompatActivity {
 				}
 			}});
 
-		//C.Save("Delete from Death_Temp");
 
 		DataRetrieve(vill+bari+hhno, true,"active");
 
@@ -1369,12 +1368,12 @@ public class MemberEvents extends AppCompatActivity {
 
 
 				//Transfer events from main to UpdateEvents table
-				SQL = "Insert into UpdateEvents(Vill, Bari, Hh, Pno, Sno, EvType, EvDate, Info1, Info2, Info3, Info4, Vdate, Rnd, Upload)";
+				/*SQL = "Insert into UpdateEvents(Vill, Bari, Hh, Pno, Sno, EvType, EvDate, Info1, Info2, Info3, Info4, Vdate, Rnd, Upload)";
 				SQL += "Select Vill, Bari, Hh, Pno, Sno, EvType, EvDate, Info1, Info2, Info3, Info4, Vdate, Rnd, Upload from Events where";
 				SQL += " Vill||Bari||HH = '"+ vill+bari+hhno +"' and ";
 				SQL += " PNo = '"+ PNo +"' and ";
 				SQL += " SNo = '"+ SNo +"'  and EvType='"+ ECode +"' and EvDate='"+ EDate +"'";
-				C.Save(SQL);
+				C.Save(SQL);*/
 
 				//Table: Event
 				SQL = "Update Events set ";
@@ -1413,12 +1412,12 @@ public class MemberEvents extends AppCompatActivity {
 				C.Save(SQL);
 
 				//Transfer events from main to UpdateEvents table
-				SQL = "Insert into UpdateEvents(Vill, Bari, Hh, Pno, Sno, EvType, EvDate, Info1, Info2, Info3, Info4, Vdate, Rnd, Upload)";
+				/*SQL = "Insert into UpdateEvents(Vill, Bari, Hh, Pno, Sno, EvType, EvDate, Info1, Info2, Info3, Info4, Vdate, Rnd, Upload)";
 				SQL += "Select Vill, Bari, Hh, Pno, Sno, EvType, EvDate, Info1, Info2, Info3, Info4, Vdate, Rnd, Upload from Events where";
 				SQL += " Vill||Bari||HH = '"+ vill+bari+hhno +"' and ";
 				SQL += " PNo = '"+ PNo +"' and ";
 				SQL += " SNo = '"+ SNo +"'  and EvType='41' and EvDate='"+ EDate +"'";
-				C.Save(SQL);
+				C.Save(SQL);*/
 
 				//Table: Event
 				SQL = "Update Events set ";
@@ -4300,11 +4299,11 @@ public class MemberEvents extends AppCompatActivity {
 								C.Save("Update tTrans set PStat='',LMPDt='' where status='m' and vill||bari||hh='"+ HH +"' and SNo='"+ SN +"'");
 
 								//Transfer events from main to UpdateEvents table
-								String SQL = "Insert into UpdateEvents(Vill, Bari, Hh, Pno, Sno, EvType, EvDate, Info1, Info2, Info3, Info4, Vdate, Rnd, Upload)";
+								/*String SQL = "Insert into UpdateEvents(Vill, Bari, Hh, Pno, Sno, EvType, EvDate, Info1, Info2, Info3, Info4, Vdate, Rnd, Upload)";
 								SQL += "Select Vill, Bari, Hh, Pno, Sno, EvType, EvDate, Info1, Info2, Info3, Info4, Vdate, Rnd, Upload from Events where";
 								SQL += " Vill||Bari||HH = '"+ HH +"' and ";
 								SQL += " SNo = '"+ SN +"' and EvType='41' and EvDate='"+ EVD +"'";
-								C.Save(SQL);
+								C.Save(SQL);*/
 
 								//Update from main table
 								C.Save("delete from Events where vill||bari||hh='"+ HH +"' and SNo='"+ SN +"' and EvType='41' and EvDate='"+ EVD +"'");
@@ -4404,7 +4403,7 @@ public class MemberEvents extends AppCompatActivity {
 			{
 				if(o.get("evtype").toString().equals("41"))
 				{
-					cmdEvListDel.setEnabled(true);
+					cmdEvListDel.setEnabled(false);
 					cmdEvListEdit.setEnabled(true);
 				}
 				else if(o.get("evtype").toString().equals("31"))
@@ -6774,9 +6773,6 @@ public class MemberEvents extends AppCompatActivity {
 		String Err = "";
 		try
 		{
-			//C.Save("Delete from PregHis where vill||bari||hh='"+ Household +"'");
-			C.Save("Delete from SES where vill||bari||hh='"+ Household +"'");
-
 			//Search Maximun PNo from Member table
 			//-- ---------------------------------------
 			String CP = C.ReturnSingleValue("Select (ifnull(max(cast(substr(pno,4,8)as int)),0)+1)MaxPno from Member where substr(pno,1,3)='"+ Global.Left(Household, 3)  +"' group by substr(pno,1,3)");
@@ -6802,7 +6798,7 @@ public class MemberEvents extends AppCompatActivity {
 			cur.close();
 
 			//Household Table
-			//-- ---------------------------------------
+			//--------------------------------------------------------------------------------------
 			String SQL="";
 			String Head = "";
 			String Active_Head = "";
@@ -6909,22 +6905,130 @@ public class MemberEvents extends AppCompatActivity {
 			curM.close();
 
 
-
 			//-- -SES Table-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-			SQL = "Insert into SES";
+			/*SQL = "Insert into SES";
 			SQL += "(Vill, Bari, Hh, SESNo, Visit, Q015a, Q015b, Q015c, Q016a, Q016b, Q016c, Q017, Q018, Q019a, Q019b, Q019c, Q019d, Q019e, Q019f, Q019g, Q019h, Q019i, Q019j, Q019k, Q019l, Q019m, Q019n, Q019o, Q019p, Q019q, Q019r, Q019s, Q019t, Q019u, Q019v, Q019w, Q019x, Q019y, Q019z, Q020a, Q020b, Q020c, Q020d, Q020e, Q020f, Q020g, Q020h, Q021, Q022a, Q022b, Q022c, Q023a, Q023b, Q024a, Q024b, Q025a, Q025b, Q026, Q027a, Q027b, Q027c, Q027d, Q027e, Q027f, Q027g, Q027h, Q027i, Q027j, Q027y, Q027z, Q028a, Q028b, Q028c, Q028d, Q028e, Q028y, Q029, Q030a, Q030b, Q030c, Q030d, Q030e, Q030f, Q030g, Q030h, Q030z, Q031, Vdate, Rnd, PageNo, Status, Upload, Lat, Lon)";
 			SQL += " Select Vill, Bari, Hh, SESNo, Visit, Q015a, Q015b, Q015c, Q016a, Q016b, Q016c, Q017, Q018, Q019a, Q019b, Q019c, Q019d, Q019e, Q019f, Q019g, Q019h, Q019i, Q019j, Q019k, Q019l, Q019m, Q019n, Q019o, Q019p, Q019q, Q019r, Q019s, Q019t, Q019u, Q019v, Q019w, Q019x, Q019y, Q019z, Q020a, Q020b, Q020c, Q020d, Q020e, Q020f, Q020g, Q020h, Q021, Q022a, Q022b, Q022c, Q023a, Q023b, Q024a, Q024b, Q025a, Q025b, Q026, Q027a, Q027b, Q027c, Q027d, Q027e, Q027f, Q027g, Q027h, Q027i, Q027j, Q027y, Q027z, Q028a, Q028b, Q028c, Q028d, Q028e, Q028y, Q029, Q030a, Q030b, Q030c, Q030d, Q030e, Q030f, Q030g, Q030h, Q030z, Q031, Vdate, Rnd, ifnull(PageNo,'')PageNo, Status, '2', ifnull(Lat,'')Lat, ifnull(Lon,'')Lon";
 			SQL += " from ttrans where status='s' and vill||bari||hh='"+ Household +"'";
 
-			C.Save(SQL);
+			C.Save(SQL);*/
+
+			SQL  = " Select Vill, Bari, Hh, SESNo, Visit, Q015a, Q015b, Q015c, Q016a, Q016b, Q016c, Q017, Q018, Q019a, Q019b, Q019c, Q019d, Q019e, Q019f, Q019g, Q019h, Q019i, Q019j, Q019k, Q019l, Q019m, Q019n, Q019o, Q019p, Q019q, Q019r, Q019s, Q019t, Q019u, Q019v, Q019w, Q019x, Q019y, Q019z, Q020a, Q020b, Q020c, Q020d, Q020e, Q020f, Q020g, Q020h, Q021, Q022a, Q022b, Q022c, Q023a, Q023b, Q024a, Q024b, Q025a, Q025b, Q026, Q027a, Q027b, Q027c, Q027d, Q027e, Q027f, Q027g, Q027h, Q027i, Q027j, Q027y, Q027z, Q028a, Q028b, Q028c, Q028d, Q028e, Q028y, Q029, Q030a, Q030b, Q030c, Q030d, Q030e, Q030f, Q030g, Q030h, Q030z, Q031, Vdate Vdate, Rnd, ifnull(PageNo,'')PageNo, Status, '2', ifnull(Lat,'')Lat, ifnull(Lon,'')Lon";
+			SQL += " from ttrans where status='s' and vill||bari||hh='"+ Household +"'";
+
+			Cursor curSES = C.ReadData(SQL);
+			curSES.moveToFirst();
+			while(!curSES.isAfterLast())
+			{
+				if(C.Existence("Select HH from SES where vill||bari||hh='"+ Household +"' and SESNo='"+ curSES.getString(curSES.getColumnIndex("SESNo")) +"'")){
+					SQL = "Update SES Set ";
+					SQL += "Visit='"+ curSES.getString(curSES.getColumnIndex("Visit")) +"',";
+					SQL += "Q015a='"+ curSES.getString(curSES.getColumnIndex("Q015a")) +"',";
+					SQL += "Q015b='"+ curSES.getString(curSES.getColumnIndex("Q015b")) +"',";
+					SQL += "Q015c='"+ curSES.getString(curSES.getColumnIndex("Q015c")) +"',";
+					SQL += "Q016a='"+ curSES.getString(curSES.getColumnIndex("Q016a")) +"',";
+					SQL += "Q016b='"+ curSES.getString(curSES.getColumnIndex("Q016b")) +"',";
+					SQL += "Q016c='"+ curSES.getString(curSES.getColumnIndex("Q016c")) +"',";
+					SQL += "Q017='"+ curSES.getString(curSES.getColumnIndex("Q017")) +"',";
+					SQL += "Q018='"+ curSES.getString(curSES.getColumnIndex("Q018")) +"',";
+					SQL += "Q019a='"+ curSES.getString(curSES.getColumnIndex("Q019a")) +"',";
+					SQL += "Q019b='"+ curSES.getString(curSES.getColumnIndex("Q019b")) +"',";
+					SQL += "Q019c='"+ curSES.getString(curSES.getColumnIndex("Q019c")) +"',";
+					SQL += "Q019d='"+ curSES.getString(curSES.getColumnIndex("Q019d")) +"',";
+					SQL += "Q019e='"+ curSES.getString(curSES.getColumnIndex("Q019e")) +"',";
+					SQL += "Q019f='"+ curSES.getString(curSES.getColumnIndex("Q019f")) +"',";
+					SQL += "Q019g='"+ curSES.getString(curSES.getColumnIndex("Q019g")) +"',";
+					SQL += "Q019h='"+ curSES.getString(curSES.getColumnIndex("Q019h")) +"',";
+					SQL += "Q019i='"+ curSES.getString(curSES.getColumnIndex("Q019i")) +"',";
+					SQL += "Q019j='"+ curSES.getString(curSES.getColumnIndex("Q019j")) +"',";
+					SQL += "Q019k='"+ curSES.getString(curSES.getColumnIndex("Q019k")) +"',";
+					SQL += "Q019l='"+ curSES.getString(curSES.getColumnIndex("Q019l")) +"',";
+					SQL += "Q019m='"+ curSES.getString(curSES.getColumnIndex("Q019m")) +"',";
+					SQL += "Q019n='"+ curSES.getString(curSES.getColumnIndex("Q019n")) +"',";
+					SQL += "Q019o='"+ curSES.getString(curSES.getColumnIndex("Q019o")) +"',";
+					SQL += "Q019p='"+ curSES.getString(curSES.getColumnIndex("Q019p")) +"',";
+					SQL += "Q019q='"+ curSES.getString(curSES.getColumnIndex("Q019q")) +"',";
+					SQL += "Q019r='"+ curSES.getString(curSES.getColumnIndex("Q019r")) +"',";
+					SQL += "Q019s='"+ curSES.getString(curSES.getColumnIndex("Q019s")) +"',";
+					SQL += "Q019t='"+ curSES.getString(curSES.getColumnIndex("Q019t")) +"',";
+					SQL += "Q019u='"+ curSES.getString(curSES.getColumnIndex("Q019u")) +"',";
+					SQL += "Q019v='"+ curSES.getString(curSES.getColumnIndex("Q019v")) +"',";
+					SQL += "Q019w='"+ curSES.getString(curSES.getColumnIndex("Q019w")) +"',";
+					SQL += "Q019x='"+ curSES.getString(curSES.getColumnIndex("Q019x")) +"',";
+					SQL += "Q019y='"+ curSES.getString(curSES.getColumnIndex("Q019y")) +"',";
+					SQL += "Q019z='"+ curSES.getString(curSES.getColumnIndex("Q019z")) +"',";
+					SQL += "Q020a='"+ curSES.getString(curSES.getColumnIndex("Q020a")) +"',";
+					SQL += "Q020b='"+ curSES.getString(curSES.getColumnIndex("Q020b")) +"',";
+					SQL += "Q020c='"+ curSES.getString(curSES.getColumnIndex("Q020c")) +"',";
+					SQL += "Q020d='"+ curSES.getString(curSES.getColumnIndex("Q020d")) +"',";
+					SQL += "Q020e='"+ curSES.getString(curSES.getColumnIndex("Q020e")) +"',";
+					SQL += "Q020f='"+ curSES.getString(curSES.getColumnIndex("Q020f")) +"',";
+					SQL += "Q020g='"+ curSES.getString(curSES.getColumnIndex("Q020g")) +"',";
+					SQL += "Q020h='"+ curSES.getString(curSES.getColumnIndex("Q020h")) +"',";
+					SQL += "Q021='"+ curSES.getString(curSES.getColumnIndex("Q021")) +"',";
+					SQL += "Q022a='"+ curSES.getString(curSES.getColumnIndex("Q022a")) +"',";
+					SQL += "Q022b='"+ curSES.getString(curSES.getColumnIndex("Q022b")) +"',";
+					SQL += "Q022c='"+ curSES.getString(curSES.getColumnIndex("Q022c")) +"',";
+					SQL += "Q023a='"+ curSES.getString(curSES.getColumnIndex("Q023a")) +"',";
+					SQL += "Q023b='"+ curSES.getString(curSES.getColumnIndex("Q023b")) +"',";
+					SQL += "Q024a='"+ curSES.getString(curSES.getColumnIndex("Q024a")) +"',";
+					SQL += "Q024b='"+ curSES.getString(curSES.getColumnIndex("Q024b")) +"',";
+					SQL += "Q025a='"+ curSES.getString(curSES.getColumnIndex("Q025a")) +"',";
+					SQL += "Q025b='"+ curSES.getString(curSES.getColumnIndex("Q025b")) +"',";
+					SQL += "Q026='"+ curSES.getString(curSES.getColumnIndex("Q026")) +"',";
+					SQL += "Q027a='"+ curSES.getString(curSES.getColumnIndex("Q027a")) +"',";
+					SQL += "Q027b='"+ curSES.getString(curSES.getColumnIndex("Q027b")) +"',";
+					SQL += "Q027c='"+ curSES.getString(curSES.getColumnIndex("Q027c")) +"',";
+					SQL += "Q027d='"+ curSES.getString(curSES.getColumnIndex("Q027d")) +"',";
+					SQL += "Q027e='"+ curSES.getString(curSES.getColumnIndex("Q027e")) +"',";
+					SQL += "Q027f='"+ curSES.getString(curSES.getColumnIndex("Q027f")) +"',";
+					SQL += "Q027g='"+ curSES.getString(curSES.getColumnIndex("Q027g")) +"',";
+					SQL += "Q027h='"+ curSES.getString(curSES.getColumnIndex("Q027h")) +"',";
+					SQL += "Q027i='"+ curSES.getString(curSES.getColumnIndex("Q027i")) +"',";
+					SQL += "Q027j='"+ curSES.getString(curSES.getColumnIndex("Q027j")) +"',";
+					SQL += "Q027y='"+ curSES.getString(curSES.getColumnIndex("Q027y")) +"',";
+					SQL += "Q027z='"+ curSES.getString(curSES.getColumnIndex("Q027z")) +"',";
+					SQL += "Q028a='"+ curSES.getString(curSES.getColumnIndex("Q028a")) +"',";
+					SQL += "Q028b='"+ curSES.getString(curSES.getColumnIndex("Q028b")) +"',";
+					SQL += "Q028c='"+ curSES.getString(curSES.getColumnIndex("Q028c")) +"',";
+					SQL += "Q028d='"+ curSES.getString(curSES.getColumnIndex("Q028d")) +"',";
+					SQL += "Q028e='"+ curSES.getString(curSES.getColumnIndex("Q028e")) +"',";
+					SQL += "Q028y='"+ curSES.getString(curSES.getColumnIndex("Q028y")) +"',";
+					SQL += "Q029='"+ curSES.getString(curSES.getColumnIndex("Q029")) +"',";
+					SQL += "Q030a='"+ curSES.getString(curSES.getColumnIndex("Q030a")) +"',";
+					SQL += "Q030b='"+ curSES.getString(curSES.getColumnIndex("Q030b")) +"',";
+					SQL += "Q030c='"+ curSES.getString(curSES.getColumnIndex("Q030c")) +"',";
+					SQL += "Q030d='"+ curSES.getString(curSES.getColumnIndex("Q030d")) +"',";
+					SQL += "Q030e='"+ curSES.getString(curSES.getColumnIndex("Q030e")) +"',";
+					SQL += "Q030f='"+ curSES.getString(curSES.getColumnIndex("Q030f")) +"',";
+					SQL += "Q030g='"+ curSES.getString(curSES.getColumnIndex("Q030g")) +"',";
+					SQL += "Q030h='"+ curSES.getString(curSES.getColumnIndex("Q030h")) +"',";
+					SQL += "Q030z='"+ curSES.getString(curSES.getColumnIndex("Q030z")) +"',";
+					SQL += "Q031='"+ curSES.getString(curSES.getColumnIndex("Q031")) +"',";
+					SQL += "Vdate='"+ curSES.getString(curSES.getColumnIndex("Vdate")) +"',";
+					SQL += "Rnd='"+ curSES.getString(curSES.getColumnIndex("Rnd")) +"',";
+					SQL += "PageNo='"+ curSES.getString(curSES.getColumnIndex("PageNo")) +"',";
+					SQL += "Status='"+ curSES.getString(curSES.getColumnIndex("Status")) +"',";
+					SQL += "Upload='2',";
+					SQL += "Lat='"+ curSES.getString(curSES.getColumnIndex("Lat")) +"',";
+					SQL += "Lon='"+ curSES.getString(curSES.getColumnIndex("Lon")) +"'";
+					SQL += " where vill||bari||hh='"+ Household +"' and SESNo='"+ curSES.getString(curSES.getColumnIndex("SESNo")) +"'";
+					C.Save(SQL);
+
+				}else{
+					SQL = "Insert into SES";
+					SQL += "(Vill, Bari, Hh, SESNo, Visit, Q015a, Q015b, Q015c, Q016a, Q016b, Q016c, Q017, Q018, Q019a, Q019b, Q019c, Q019d, Q019e, Q019f, Q019g, Q019h, Q019i, Q019j, Q019k, Q019l, Q019m, Q019n, Q019o, Q019p, Q019q, Q019r, Q019s, Q019t, Q019u, Q019v, Q019w, Q019x, Q019y, Q019z, Q020a, Q020b, Q020c, Q020d, Q020e, Q020f, Q020g, Q020h, Q021, Q022a, Q022b, Q022c, Q023a, Q023b, Q024a, Q024b, Q025a, Q025b, Q026, Q027a, Q027b, Q027c, Q027d, Q027e, Q027f, Q027g, Q027h, Q027i, Q027j, Q027y, Q027z, Q028a, Q028b, Q028c, Q028d, Q028e, Q028y, Q029, Q030a, Q030b, Q030c, Q030d, Q030e, Q030f, Q030g, Q030h, Q030z, Q031, Vdate, Rnd, PageNo, Status, Upload, Lat, Lon)";
+					SQL += " Select Vill, Bari, Hh, SESNo, Visit, Q015a, Q015b, Q015c, Q016a, Q016b, Q016c, Q017, Q018, Q019a, Q019b, Q019c, Q019d, Q019e, Q019f, Q019g, Q019h, Q019i, Q019j, Q019k, Q019l, Q019m, Q019n, Q019o, Q019p, Q019q, Q019r, Q019s, Q019t, Q019u, Q019v, Q019w, Q019x, Q019y, Q019z, Q020a, Q020b, Q020c, Q020d, Q020e, Q020f, Q020g, Q020h, Q021, Q022a, Q022b, Q022c, Q023a, Q023b, Q024a, Q024b, Q025a, Q025b, Q026, Q027a, Q027b, Q027c, Q027d, Q027e, Q027f, Q027g, Q027h, Q027i, Q027j, Q027y, Q027z, Q028a, Q028b, Q028c, Q028d, Q028e, Q028y, Q029, Q030a, Q030b, Q030c, Q030d, Q030e, Q030f, Q030g, Q030h, Q030z, Q031, Vdate, Rnd, ifnull(PageNo,'')PageNo, Status, '2', ifnull(Lat,'')Lat, ifnull(Lon,'')Lon";
+					SQL += " from ttrans where status='s' and vill||bari||hh='"+ Household +"'";
+
+					C.Save(SQL);
+				}
+
+				curSES.moveToNext();
+			}
+			curSES.close();
 
 			//-- -Pregnancy Info. Table--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-			//SQL = "Insert into PregHis(Vill, Bari, Hh, Sno, Pno, Visit, MarM, MarY, Births, LiveHh, SLiveHh, DLiveHh, LiveOut, SLiveOut, DLiveOut, Died, SDied, DDied, Abor, TAbor, TotPreg, Vdate, Rnd, PageNo, Status, Upload, Lat, Lon)";
-			//SQL += " select Vill, Bari, Hh, Sno, Pno, Visit, MarM, MarY, Births, LiveHh, SLiveHh, DLiveHh, LiveOut, SLiveOut, DLiveOut, Died, SDied, DDied, Abor, TAbor, TotPreg, Vdate, Rnd, ifnull(PageNo,'')PageNo, ifnull(Status,'C')Status, ifnull(Upload,'2')Upload, ifnull(Lat,'')Lat, ifnull(Lon,'')Lon";
-			//SQL += " from tTrans t where t.status='p' and t.vill||t.bari||t.hh='"+ Household +"'";
-
-			//C.Save(SQL);
-
 			//Pregnancy History: 03 05 2016
 			Cursor pHis = C.ReadData("select Vill, Bari, Hh, Sno, Pno, Visit, MarM, MarY, Births, LiveHh, SLiveHh, DLiveHh, LiveOut, SLiveOut, DLiveOut, Died, SDied, DDied, Abor, TAbor, TotPreg, Vdate as vdate, Rnd, PageNo, Status from tTrans where status='p' and vill||bari||hh='"+ Household +"'");
 			pHis.moveToFirst();
@@ -6967,7 +7071,7 @@ public class MemberEvents extends AppCompatActivity {
 
 
 			//-- -Visit Table-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-			if(C.Existence("Select vill from Visits where vill||bari||hh='"+ Household +"' and Rnd ='"+ Rnd +"'")==true)
+			if(C.Existence("Select vill from Visits where vill||bari||hh='" + Household + "' and Rnd ='" + Rnd + "'"))
 			{
 				Cursor curV = C.ReadData("select Vill, Bari, Hh, ifnull(Resp,'')Resp, Dma, EnterDt, Vdate, Rnd, Lat, Lon,ExType,ExDate,Note from tTrans where status='v' and vill||bari||hh='"+ Household +"' and Rnd ='"+ Rnd +"'");
 				curV.moveToFirst();

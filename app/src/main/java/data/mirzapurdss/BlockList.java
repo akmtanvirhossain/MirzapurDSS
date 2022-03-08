@@ -304,8 +304,6 @@ public class BlockList extends AppCompatActivity {
 	    		        		    	            	//  Update Local Database
 	    		    		    	    	        	//***************************
 
-
-
 														//Delete Data From the Local Device: 20 Oct 2017
 														String UniqueID_Column = "";
 														String UniqueID = "";
@@ -428,7 +426,7 @@ public class BlockList extends AppCompatActivity {
 
 														//Delete events data from server and local temp table (UpdateEvents): 02 Dec 2013
 														String SQ = "";
-														Cursor m = C.ReadData("Select (vill||bari||hh) as hh, sno as sno, pno as pno, evtype as evtype, evdate as evdate from UpdateEvents");
+														/*Cursor m = C.ReadData("Select (vill||bari||hh) as hh, sno as sno, pno as pno, evtype as evtype, evdate as evdate from UpdateEvents");
 														m.moveToFirst();
 														while(!m.isAfterLast())
 														{
@@ -446,7 +444,7 @@ public class BlockList extends AppCompatActivity {
 
 															m.moveToNext();
 														}
-														m.close();
+														m.close();*/
 
 														//Events
 														TableName = "Events";
@@ -474,7 +472,7 @@ public class BlockList extends AppCompatActivity {
 														//19 May 2016
 														//Status: Total Bari, Household, Member
 														String CurrRound = txtRound.getSelectedItem().toString();
-														String PrevRound = String.valueOf(Integer.valueOf(CurrRound)-1);
+														String PrevRound = String.valueOf(Integer.parseInt(CurrRound)-1);
 
 														if(!C.Existence("Select count(*)Total from ClusterBlock_Status Where Cluster='"+ g.getClusterCode() +"' and Rnd='"+ PrevRound +"'")) {
 															TableName = "ClusterBlock_Status";
@@ -482,8 +480,6 @@ public class BlockList extends AppCompatActivity {
 															VariableList = "Cluster,Block,TotalBari,TotalHH,TotalMem,Rnd";
 															response = CJSon.DownloadJSON(SQL, TableName, VariableList, "Cluster,Block,TotalBari,TotalHH,TotalMem,Rnd");
 														}
-
-
 	    		    				                } catch (Exception e) { 
 	    		    				                } 
 	    		    				                progDailog.dismiss();
@@ -530,7 +526,7 @@ public class BlockList extends AppCompatActivity {
             	//*******************************************************************************            	
             	else if(position==1)
             	{            		                            
-                    if(netwoekAvailable==false)
+                    if(!netwoekAvailable)
                     {
                         Connection.MessageBox(BlockList.this, "Migration Process এর জন্য ইন্টারনেট থাকা আবশ্যক।");
                     }
@@ -587,7 +583,7 @@ public class BlockList extends AppCompatActivity {
 
 
 				    	    	//Download data from server
-								if(netwoekAvailable==true)
+								if(netwoekAvailable)
 								{
 									//C.Save("Delete from MigDatabase");
 								    CJson.ExecuteCommandOnServer("Delete from sync_management where TableName='MigDatabase' and UserId='"+ CLUSTER +"'");
@@ -771,27 +767,6 @@ public class BlockList extends AppCompatActivity {
 				R.drawable.sync,
 				R.drawable.exit
 		};
-
-
-		/*private String[] desc={
-				"আপলোড",			
-				"জি পি এস",
-				"Process Migration",
-				"Bari Update",
-				"Block Update",
-				"বাহির",
-				"Contact/Note Update"};
-		
-		//references to our images
-		private Integer[] mThumbIds = {
-				R.drawable.upload, 
-				R.drawable.gps, 
-				R.drawable.sync, 
-				R.drawable.sync,
-				R.drawable.sync, 
-				R.drawable.exit,
-				R.drawable.sync
-		};*/
 	}
 
     //GPS Reading
