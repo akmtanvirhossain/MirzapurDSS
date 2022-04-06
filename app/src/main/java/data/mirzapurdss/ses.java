@@ -315,8 +315,9 @@ public class ses extends AppCompatActivity {
         	 SQL = "Select '1'";
          }*/
 
-        SQL = "Select '2' SESNo union select distinct ifnull(SESNo,'')SESNo from ttrans where status='s' and vill||bari||hh='"+ Household +"' order by SESNo desc";
-         
+        //SQL = "Select distinct sesno from (Select '3' SESNo union Select '2' SESNo union Select '1' SESNo union select distinct ifnull(SESNo,'')SESNo from ttrans where status='s' and vill||bari||hh='"+ Household +"') order by SESNo desc";
+        SQL = "Select distinct sesno from (Select '3' SESNo union Select '2' SESNo union Select '1' SESNo) order by SESNo desc";
+
          spnSESNo.setAdapter(C.getArrayAdapter(SQL));
          //spnSESNo.setAdapter(C.getArrayAdapter("select ifnull(max(sesno),1)SESNo from ttrans where status='s' and vill||bari||hh='"+ Household +"' order by sesno desc"));
 
