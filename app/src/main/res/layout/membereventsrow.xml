@@ -8,7 +8,11 @@
 				android:id="@+id/memtab"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content" android:layout_marginRight="10sp">
-					<Button android:id="@+id/cmdDel" 
+					<Button android:id="@+id/cmdGA"
+						android:layout_width="50sp"  android:textSize="14sp"
+						android:layout_height="wrap_content"
+						android:text="GA"/>
+					<Button android:id="@+id/cmdDel"
 					        android:layout_width="50sp"  android:textSize="14sp"
 					        android:layout_height="wrap_content"
 					        android:text="del"/>

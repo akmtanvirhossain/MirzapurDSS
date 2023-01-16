@@ -1,6 +1,7 @@
 package Common;
 
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -111,6 +112,29 @@ public class Connection extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cur=db.rawQuery(SQL, null);
         return cur;
+    }
+
+    //02 Dec 2018
+    public long InsertData(String TableName, ContentValues content_value) {
+        SQLiteDatabase db = getWritableDatabase();
+        return db.insertOrThrow(TableName, null, content_value);
+    }
+
+    //02 Dec 2018
+    public boolean UpdateData(String TableName, String UniqueID_Field_Name, String UniqueID_Field_Data, ContentValues content_value) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String ID_STRING = "";
+        String[] ID_LIST = UniqueID_Field_Name.split(",");
+        String[] DATA_LIST = UniqueID_Field_Data.split(",");
+        String[] FINAL_DATA_LIST = new String[DATA_LIST.length];
+
+        for (int i=0;i<ID_LIST.length;i++)
+        {
+            ID_STRING += ID_STRING.length()==0 ? ID_LIST[i].trim()+"=?" : " and "+ ID_LIST[i].trim()+"=?";
+            FINAL_DATA_LIST[i] = DATA_LIST[i].trim();
+        }
+        db.update(TableName, content_value, ID_STRING, FINAL_DATA_LIST);
+        return true;
     }
 
     //Check existence of data in database

@@ -228,6 +228,8 @@ public class MemberEvents extends AppCompatActivity {
 			btnErrorCheck.setBackgroundResource(R.drawable.button_style_circle_line);
 			btnErrorCheck.setTextColor(Color.BLACK);
 		}
+
+		DataRetrieve(vill+bari+hhno, false,"active");
 	}
 
 	//***************************************************************************************************************************
@@ -329,7 +331,7 @@ public class MemberEvents extends AppCompatActivity {
 			}});
 
 
-		DataRetrieve(vill+bari+hhno, true,"active");
+		//DataRetrieve(vill+bari+hhno, true,"active");
 
 		Button cmdNewMem = (Button)findViewById(R.id.cmdNewMem);
 		Button cmdSES = (Button)findViewById(R.id.cmdSES);
@@ -469,20 +471,22 @@ public class MemberEvents extends AppCompatActivity {
 
 			if(ActiveOrAll.equalsIgnoreCase("active"))
 			{
-				SQLStr = "Select  (case when m.vill is null then 'n' else 'o' end)as NewOld, t.Vill, t.Bari, t.Hh, t.Sno, t.Pno, t.Name, t.Rth, t.Sex, t.BDate, Cast(((julianday(date('now'))-julianday(t.BDate))/365.25) as int) as Age,Cast(((julianday(t.ExDate)-julianday(t.BDate))/365.25) as int) as DeathAge, t.Mono, t.Fano, t.Edu,";
+				SQLStr = "Select ifnull(ga.vill,'')gage, Cast((julianday(date('now'))-julianday(t.BDate)) as int) as agedays,(case when m.vill is null then 'n' else 'o' end)as NewOld, t.Vill, t.Bari, t.Hh, t.Sno, t.Pno, t.Name, t.Rth, t.Sex, t.BDate, Cast(((julianday(date('now'))-julianday(t.BDate))/365.25) as int) as Age,Cast(((julianday(t.ExDate)-julianday(t.BDate))/365.25) as int) as DeathAge, t.Mono, t.Fano, t.Edu,";
 				SQLStr += " t.Ms, t.Pstat, t.LmpDt, t.Sp1, t.Sp2, t.Sp3, t.Sp4, t.Ocp, t.EnType, t.EnDate,";
 				SQLStr += " (case when cast(strftime('%Y', ifnull(t.ExDate,'')) as int)>=2014 and t.ExType='55' then '1' else '2' end)as deathrep,";
 				SQLStr += " ifnull(t.ExType,'')ExType,ifnull(t.ExDate,'')ExDate,cast(strftime('%Y', ifnull(t.ExDate,'')) as int)ExYear,ifnull(t.PosMig,'')PosMig,ifnull(t.PosMigDate,'')PosMigDate from tTrans t";
 				SQLStr += " left outer join member m on t.vill||t.bari||t.hh||t.sno = m.vill||m.bari||m.hh||m.sno";
+				SQLStr += " left outer join data_GAge ga on t.vill||t.bari||t.hh||t.sno = ga.vill||ga.bari||ga.hh||ga.sno";
 				SQLStr += " where t.status='m' and t.vill||t.bari||t.hh='"+ HH +"' and (length(t.extype)=0 or t.extype is null) order by cast(t.SNo as int) asc";
 			}
 			else if(ActiveOrAll.equalsIgnoreCase("all"))
 			{
-				SQLStr = "Select  (case when m.vill is null then 'n' else 'o' end)as NewOld, t.Vill, t.Bari, t.Hh, t.Sno, t.Pno, t.Name, t.Rth, t.Sex, t.BDate, Cast(((julianday(date('now'))-julianday(t.BDate))/365.25) as int) as Age, Cast(((julianday(t.ExDate)-julianday(t.BDate))/365.25) as int) as DeathAge, t.Mono, t.Fano, t.Edu,";
+				SQLStr = "Select ifnull(ga.vill,'')gage, Cast((julianday(date('now'))-julianday(t.BDate)) as int) as agedays,(case when m.vill is null then 'n' else 'o' end)as NewOld, t.Vill, t.Bari, t.Hh, t.Sno, t.Pno, t.Name, t.Rth, t.Sex, t.BDate, Cast(((julianday(date('now'))-julianday(t.BDate))/365.25) as int) as Age, Cast(((julianday(t.ExDate)-julianday(t.BDate))/365.25) as int) as DeathAge, t.Mono, t.Fano, t.Edu,";
 				SQLStr += " t.Ms, t.Pstat, t.LmpDt, t.Sp1, t.Sp2, t.Sp3, t.Sp4, t.Ocp, t.EnType, t.EnDate,";
 				SQLStr += " (case when cast(strftime('%Y', ifnull(t.ExDate,'')) as int)>=2014 and t.ExType='55' then '1' else '2' end)as deathrep,";
 				SQLStr += " ifnull(t.ExType,'')ExType,ifnull(t.ExDate,'')ExDate,cast(strftime('%Y', ifnull(t.ExDate,'')) as int)ExYear,ifnull(t.PosMig,'')PosMig,ifnull(t.PosMigDate,'')PosMigDate from tTrans t";
 				SQLStr += " left outer join member m on t.vill||t.bari||t.hh||t.sno = m.vill||m.bari||m.hh||m.sno";
+				SQLStr += " left outer join data_GAge ga on t.vill||t.bari||t.hh||t.sno = ga.vill||ga.bari||ga.hh||ga.sno";
 				SQLStr += " where t.status='m' and t.vill||t.bari||t.hh='"+ HH +"' order by cast(t.SNo as int) asc";
 			}
 
@@ -492,7 +496,7 @@ public class MemberEvents extends AppCompatActivity {
 			mylist.clear();
 
 			ListView list = (ListView) findViewById(R.id.lstMember);
-			if(heading ==true)
+			if(heading == true)
 			{
 				View header = getLayoutInflater().inflate(R.layout.membereventsheading, null);
 				list.addHeaderView(header);
@@ -508,6 +512,8 @@ public class MemberEvents extends AppCompatActivity {
 					//View header = getLayoutInflater().inflate(R.layout.membereventsheading, null);
 					//list.addHeaderView(header);	        		
 				}
+				map.put("gage", cur1.getString(cur1.getColumnIndex("gage")));
+				map.put("agedays", cur1.getString(cur1.getColumnIndex("agedays")));
 				map.put("newold", cur1.getString(cur1.getColumnIndex("NewOld")));
 				map.put("vill", cur1.getString(cur1.getColumnIndex("Vill")));
 				map.put("bari", cur1.getString(cur1.getColumnIndex("Bari")));
@@ -586,7 +592,7 @@ public class MemberEvents extends AppCompatActivity {
 				convertView = inflater.inflate(R.layout.membereventsrow, null);
 			}
 
-
+			Button cmdGA=(Button)convertView.findViewById(R.id.cmdGA);
 			TextView sno= (TextView) convertView.findViewById(R.id.sno);
 			TextView pno= (TextView) convertView.findViewById(R.id.pno);
 			TextView name= (TextView) convertView.findViewById(R.id.name);
@@ -777,7 +783,33 @@ public class MemberEvents extends AppCompatActivity {
 			final EditText lblsno = (EditText)convertView.findViewById(R.id.txtQSNo);
 			final TextView lblName = (TextView)convertView.findViewById(R.id.lblName);
 
+			if(Integer.parseInt(o.get("agedays"))<365){
+				cmdGA.setVisibility(View.VISIBLE);
+			}else{
+				cmdGA.setVisibility(View.INVISIBLE);
+			}
 
+			//Data Status
+			if(o.get("gage").length()>0){
+				cmdGA.setBackgroundColor(Color.GREEN);
+				cmdGA.setTextColor(Color.BLACK);
+			}else{
+				cmdGA.setBackgroundColor(Color.RED);
+				cmdGA.setTextColor(Color.WHITE);
+			}
+			cmdGA.setOnClickListener(new View.OnClickListener() {
+				public void onClick(View v) {
+					Bundle IDbundle = new Bundle();
+					IDbundle.putString("vill", o.get("vill"));
+					IDbundle.putString("bari", o.get("bari"));
+					IDbundle.putString("hh", o.get("hh"));
+					IDbundle.putString("sno", o.get("sno"));
+					IDbundle.putString("pno", o.get("pno"));
+					Intent f11 = new Intent(getApplicationContext(),data_GAge.class);
+					f11.putExtras(IDbundle);
+					startActivity(f11);
+				}
+			});
 
 			memtab.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {

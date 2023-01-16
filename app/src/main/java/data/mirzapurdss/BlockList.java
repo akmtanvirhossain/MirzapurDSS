@@ -335,6 +335,11 @@ public class BlockList extends AppCompatActivity {
 														VariableList = "TableName, ID, DeleteStatus, Upload, modifyDate";
 														response = CJSon.UploadJSON(TableName , VariableList , "TableName,ID");
 
+														SQL  = "select a.Vill,a.Bari,a.HH,a.SNo,a.PNo,a.GAge,a.StartTime,a.EndTime,a.DeviceID,a.EntryUser,a.Lat,a.Lon,convert(varchar(20),a.EnDt,120)modifyDate,'1' Upload,convert(varchar(20),a.modifyDate,120)modifyDate\n" +
+																" from data_GAge a inner join MDSSVill v on a.Vill=v.Vill where v.Cluster='"+ g.getClusterCode()+"' and a.Upload='3'";
+														CJSon.DownloadJSON_UpdateServer(SQL, "data_GAge", "Vill,Bari,HH,SNo,PNo,GAge,StartTime,EndTime,DeviceID,EntryUser,Lat,Lon,EnDt,Upload,modifyDate", "Vill,Bari,HH,SNo");
+
+
 														//Baris Table: 03 Jan 2017
 														SQL  = "Select b.Vill, Bari,v.Cluster, Block, BariName, BariLoc, Xdec, Xmin, Xsec, Ydec, Ymin, Ysec, b.Status, EnDt, Upload from Baris b,MDSSVill v where b.Vill=v.Vill and v.Cluster='"+ g.getClusterCode() +"' and Upload='3'";
 														CJSon.DownloadJSON_UpdateServer(SQL, "Baris", "Vill, Bari,Cluster, Block, BariName, BariLoc, Xdec, Xmin, Xsec, Ydec, Ymin, Ysec, Status, EnDt, Upload", "Vill, Bari");
@@ -383,15 +388,20 @@ public class BlockList extends AppCompatActivity {
 														CJSon.DownloadJSON_UpdatePNO(SQL, "Vill, Bari, Hh, Sno, Pno", "Vill, Bari, Hh, Sno");
 
 														//Delete Events: 02 Apr 2014
-														/*SQL = "Select d.Vill, d.Bari, d.Hh, d.Sno, d.EvType, d.EvDate,d.Rnd";
+														SQL = "Select d.Vill, d.Bari, d.Hh, d.Sno, d.EvType, d.EvDate,d.Rnd";
 														SQL += " from Household h, EventsDelete d where h.Vill+h.Bari+h.Hh=d.Vill+d.Bari+d.Hh";
 														SQL += " and h.Clust='"+ g.getClusterCode() +"' and d.DeleteNeeded='1'";
 														CJSon.DownloadJSON_EventDelete(SQL, "Vill, Bari, Hh, Sno, EvType, EvDate, Rnd", "Vill, Bari, Hh, Sno, EvType, EvDate, Rnd");
-														*/
+
 
 														//***************************
 														//  Upload data to server
 														//***************************
+
+														//Table: data_GAge
+														TableName = "data_GAge";
+														VariableList = "Vill,Bari,HH,SNo,PNo,GAge,StartTime,EndTime,DeviceID,EntryUser,Lat,Lon,EnDt,Upload,modifyDate";
+														response = CJSon.UploadJSON(TableName , VariableList , "Vill,Bari,HH,SNo");
 
 														//Table: Baris
 														TableName = "Baris";
@@ -426,7 +436,7 @@ public class BlockList extends AppCompatActivity {
 
 														//Delete events data from server and local temp table (UpdateEvents): 02 Dec 2013
 														String SQ = "";
-														/*Cursor m = C.ReadData("Select (vill||bari||hh) as hh, sno as sno, pno as pno, evtype as evtype, evdate as evdate from UpdateEvents");
+														Cursor m = C.ReadData("Select (vill||bari||hh) as hh, sno as sno, pno as pno, evtype as evtype, evdate as evdate from UpdateEvents");
 														m.moveToFirst();
 														while(!m.isAfterLast())
 														{
@@ -444,7 +454,7 @@ public class BlockList extends AppCompatActivity {
 
 															m.moveToNext();
 														}
-														m.close();*/
+														m.close();
 
 														//Events
 														TableName = "Events";
@@ -480,6 +490,8 @@ public class BlockList extends AppCompatActivity {
 															VariableList = "Cluster,Block,TotalBari,TotalHH,TotalMem,Rnd";
 															response = CJSon.DownloadJSON(SQL, TableName, VariableList, "Cluster,Block,TotalBari,TotalHH,TotalMem,Rnd");
 														}
+
+
 	    		    				                } catch (Exception e) { 
 	    		    				                } 
 	    		    				                progDailog.dismiss();

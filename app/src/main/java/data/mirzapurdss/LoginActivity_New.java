@@ -159,7 +159,7 @@ public class LoginActivity_New extends AppCompatActivity {
             //Need to update date every time whenever shared updated system
             //Format: DDMMYYYY
             //*********************************************************************
-            SystemUpdateDT = "07042022"; //old version date: "09112021"
+            SystemUpdateDT = "17012023"; //old version date: "09112021"
 
             lblSystemDate.setText(data.mirzapurdss.Global.Left(SystemUpdateDT, 2)+" - "+SystemUpdateDT.substring(2,4)+" - "+ data.mirzapurdss.Global.Right(SystemUpdateDT,4));
             //*********************************************************************
@@ -194,7 +194,7 @@ public class LoginActivity_New extends AppCompatActivity {
                 C.CreateTable("process_tab", "Create table process_tab(process_id int)");
 
                 //15 11 2018
-                if (!C.Existence("Select * from process_tab where process_id=2")) {
+                /*if (!C.Existence("Select * from process_tab where process_id=2")) {
                     Common.Connection CJson = new Common.Connection(LoginActivity_New.this);
                     String resp3 = CJson.SaveData("Drop table DatabaseTab");
                     String resp2 = CJson.SaveData("Create table DatabaseTab(TableName varchar (50),TableScript varchar(500),ColumnList varchar(500),UniqueID varchar (500),Sync_Upload char (1),Sync_Download char (1),BatchSize int,modifyDate datetime,Constraint pk_DatabaseTab Primary Key(TableName))");
@@ -231,13 +231,20 @@ public class LoginActivity_New extends AppCompatActivity {
                     C.Save("Drop table tTrans");
                     C.CreateTable("tTrans",SQL);
                     if (resp1.length() == 0) C.Save("Insert into process_tab(process_id)values(4)");
-                }
+                }*/
 
                 //08112021
                 if (!C.Existence("Select * from process_tab where process_id=5")) {
                     C.CreateTable("DataCorrectionNote", "Create table DataCorrectionNote(Vill varchar (3),Bari varchar (4),HH varchar (2),Sno varchar (2),Serial int,Note nvarchar(500),Status varchar (1),ClearDate varchar (20),Cluster varchar (2),Block varchar (2),Upload varchar (1),modifyDate datetime,Constraint pk_DataCorrectionNote Primary Key(Vill,Bari,HH,Sno,Serial))");
                     C.Save("Insert into process_tab(process_id)values(5)");
                 }
+
+                //13012023
+                if (!C.Existence("Select * from process_tab where process_id=6")) {
+                    C.CreateTable("data_GAge", "Create table data_GAge(Vill varchar (3),Bari varchar (4),HH varchar (2),SNo varchar (2),PNo varchar (10),GAge varchar (2),StartTime varchar (5),EndTime varchar (5),DeviceID varchar (10),EntryUser varchar (10),Lat varchar (20),Lon varchar (20),EnDt datetime,Upload int,modifyDate datetime,Constraint pk_data_GAge Primary Key(Vill,Bari,HH,SNo))");
+                    C.Save("Insert into process_tab(process_id)values(6)");
+                }
+
             }catch (Exception ex){
 
             }

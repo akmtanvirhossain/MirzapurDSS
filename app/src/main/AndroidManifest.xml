@@ -78,12 +78,13 @@
             android:theme="@style/CustomThemeDialog" />
         <activity android:name="map.IconGeneratorDemoActivity"
             android:label="@string/app_name"/>
+        <activity android:name=".data_GAge" />
 
-<!--
-        <activity android:name="map.IconGeneratorDemoActivity"
-            android:label="@string/app_name"
-            android:theme="@android:style/Theme.DeviceDefault.Dialog" />
--->
+        <!--
+                <activity android:name="map.IconGeneratorDemoActivity"
+                    android:label="@string/app_name"
+                    android:theme="@android:style/Theme.DeviceDefault.Dialog" />
+        -->
 
     </application>
 

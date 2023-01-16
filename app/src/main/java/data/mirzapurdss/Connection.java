@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.*;
@@ -2115,6 +2116,7 @@ public class Connection extends SQLiteOpenHelper {
 			C.Sync_Download("DataCorrectionNote", CLUSTER, "Cluster='"+ CLUSTER +"' and Rnd='"+ RND +"'");
 
 	}*/
+
 
 }
 
