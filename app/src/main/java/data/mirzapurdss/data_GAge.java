@@ -17,6 +17,9 @@
  import android.location.Location;
  import android.view.KeyEvent;
  import android.os.Bundle;
+ import android.view.Menu;
+ import android.view.MenuInflater;
+ import android.view.MenuItem;
  import android.view.View;
  import android.widget.Button;
  import android.widget.DatePicker;
@@ -46,6 +49,32 @@
              { return false; }
         else { return true;  }
     }
+
+     public boolean onCreateOptionsMenu(Menu menu) {
+         MenuInflater inflater = getMenuInflater();
+         inflater.inflate(R.menu.mnuclose, menu);
+         return true;
+     }
+
+     public boolean onOptionsItemSelected(MenuItem item) {
+         AlertDialog.Builder adb = new AlertDialog.Builder(data_GAge.this);
+         switch (item.getItemId()) {
+             case R.id.menuClose:
+                 adb.setTitle("Close");
+                 adb.setMessage("আপনি কি এই ফর্ম থেকে বের হতে চান[Yes/No]?");
+                 adb.setNegativeButton("No", null);
+                 adb.setPositiveButton("Yes", new AlertDialog.OnClickListener() {
+                     public void onClick(DialogInterface dialog, int which) {
+
+                         finish();
+                     }});
+                 adb.show();
+
+                 return true;
+
+         }
+         return false;
+     }
 
     boolean networkAvailable=false;
     Location currentLocation; 

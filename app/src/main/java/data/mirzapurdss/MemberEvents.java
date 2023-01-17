@@ -229,7 +229,7 @@ public class MemberEvents extends AppCompatActivity {
 			btnErrorCheck.setTextColor(Color.BLACK);
 		}
 
-		DataRetrieve(vill+bari+hhno, false,"active");
+		DataRetrieve(vill+bari+hhno, true,"active");
 	}
 
 	//***************************************************************************************************************************
@@ -496,11 +496,23 @@ public class MemberEvents extends AppCompatActivity {
 			mylist.clear();
 
 			ListView list = (ListView) findViewById(R.id.lstMember);
-			if(heading == true)
+			/*if(heading == true)
 			{
 				View header = getLayoutInflater().inflate(R.layout.membereventsheading, null);
+				list.removeHeaderView(header);
 				list.addHeaderView(header);
+			}*/
+
+			View headerView = getLayoutInflater().inflate(R.layout.membereventsheading, null, false);
+			headerView.setTag(this.getClass().getSimpleName() + "header");
+			if (list.getHeaderViewsCount() > 0) {
+				View oldView = list.findViewWithTag(this.getClass().getSimpleName() + "header");
+				if (oldView != null) {
+					list.removeHeaderView(oldView);
+				}
+
 			}
+			list.addHeaderView(headerView);
 
 			int i=0;
 			while(!cur1.isAfterLast())

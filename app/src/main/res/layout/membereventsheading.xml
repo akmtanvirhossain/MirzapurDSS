@@ -6,6 +6,11 @@
     android:paddingBottom="5dp"
     android:background="#D7D7D7"
     android:orientation="horizontal" >
+	<TextView
+		android:layout_width="50sp"
+		android:layout_height="wrap_content"
+		android:text=""
+		android:textSize="18sp" />
 				    <TextView
 				        android:layout_width="50sp"
 				        android:layout_height="wrap_content"
