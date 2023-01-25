@@ -317,9 +317,10 @@
              ValidationMsg += "\nRequired field: Gestational Age (Weeks).";
              secGAge.setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.color_Section_Highlight));
            }
-         if(secGAge.isShown() & (Integer.valueOf(txtGAge.getText().toString().length()==0 ? "10" : txtGAge.getText().toString()) < 10 || Integer.valueOf(txtGAge.getText().toString().length()==0 ? "50" : txtGAge.getText().toString()) > 50))
+         if(secGAge.isShown() & (Integer.parseInt(txtGAge.getText().toString().length()==0 ? "10" : txtGAge.getText().toString()) < 10 || Integer.parseInt(txtGAge.getText().toString().length()==0 ? "50" : txtGAge.getText().toString()) > 50)
+         && !txtGAge.getText().toString().equals("99"))
            {
-             ValidationMsg += "\nValue should be between 10 and 50(Gestational Age (Weeks)).";
+             ValidationMsg += "\nValue should be between 10 and 50,99(Gestational Age (Weeks)).";
              secGAge.setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.color_Section_Highlight));
            }
      }
