@@ -8,12 +8,13 @@ import android.widget.Spinner;
 
 public class Global {
 	public static String Namespace       = "http://203.190.254.42/"; 	
-	public static String Soap_Address    = "http://mchd.icddrb.org/dssjson/datasync.asmx";
+	//public static String Soap_Address    = "http://mchd.icddrb.org/dssjson/datasync.asmx";
+	public static String Soap_Address    = "http://182.160.109.210/dssjson/datasync.asmx";
 	public static char VariableSeperator = '^';
 		
-        //Database
-        public static String DatabaseFolder = "DSSDatabase";
-        public static String DatabaseName   = "DSSDatabase.db";
+	//Database
+	public static String DatabaseFolder = "DSSDatabase";
+	public static String DatabaseName   = "DSSDatabase.db";
 	public static String zipDatabaseName= "MZPDSS_Database.zip";
 
 	//Global Variables for Events
@@ -33,7 +34,6 @@ public class Global {
 	public static String settingUPcode="";
 	public static String settingAreaCode="";
 
-	
 	
 	Global()
 	{

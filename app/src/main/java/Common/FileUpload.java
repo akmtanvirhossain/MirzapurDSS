@@ -18,7 +18,7 @@ public class FileUpload extends AsyncTask<String, Integer, Void>
             FileInputStream fstrm = new FileInputStream(Environment.getExternalStorageDirectory()+ File.separator + Global.DatabaseFolder + File.separator + params[0].toString());
 
             // Set your server page url (and the file title/description)
-            HttpFileUpload hfu = new HttpFileUpload("http://mchd.icddrb.org/dssjson/fileup.aspx", params[1].toString(),"description");
+            HttpFileUpload hfu = new HttpFileUpload("http://182.160.109.210/dssjson/fileup.aspx", params[1].toString(),"description");
 
             hfu.Send_Now(fstrm);
         }
