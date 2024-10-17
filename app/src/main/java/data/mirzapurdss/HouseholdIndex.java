@@ -157,19 +157,21 @@ public class HouseholdIndex extends AppCompatActivity {
     		case R.id.mnuNewBari:
     			try
     			{
-	    			String CurrentBariNo="";
-	        		String LastBariNo = C.ReturnSingleValue("select Bari from Baris where vill=='"+ (g.getVillageCode()) +"' order by Bari desc limit 1");
-	        		if(!Global.Left(LastBariNo, 1).matches("[a-zA-z]{1}"))
+	    			//String CurrentBariNo="";
+	        		//String LastBariNo = C.ReturnSingleValue("select Bari from Baris where vill=='"+ (g.getVillageCode()) +"' order by Bari desc limit 1");
+	        		String CurrentBariNo = C.ReturnSingleValue("select substr('00000'||(ifnull(Max(Bari),0)+1),-4) from Baris where vill='"+ g.getVillageCode() +"' and substr(bari,1,1) not in('A','C','B','N','Q')");
+	        		/*if(!Global.Left(LastBariNo, 1).matches("[a-zA-z]{1}"))
 	        		{
 	        			CurrentBariNo = Global.Right("000" + String.valueOf((Integer.parseInt(LastBariNo)+1)),4);
 	        		}
 	        		else if(Global.Left(LastBariNo, 1).matches("[a-zA-z]{1}"))
 	        		{
 	        			CurrentBariNo = Global.Left(LastBariNo, 1) + Global.Right("000" + String.valueOf((Integer.parseInt(Global.Right(LastBariNo,3))+1)),3);
-	        		}
+	        		}*/
 	        		
 	        		ShowBariForm(g.getVillageCode(),CurrentBariNo,"s");
-	    			}
+
+				}
     			catch(Exception ex)
     			{
     				Connection.MessageBox(HouseholdIndex.this, ex.getMessage());
