@@ -149,7 +149,11 @@ public class Immunization extends AppCompatActivity {
             HH   = g.getHouseholdNo();
 
         spnMemList = (Spinner)findViewById(R.id.spnMemList);
-        spnMemList.setAdapter(C.getArrayAdapter("Select (SNo||':'||Name||',DOB:'||(substr(bdate,9,2)||'/'||substr(bdate,6,2)||'/'||substr(bdate,1,4))||', Age(Yr):'||cast((julianday(date('now'))-julianday(bdate))/365.25 as int))MemInfo from tTrans where status='m' and length(extype)=0 and vill||bari||hh='"+ (Vill+Bari+HH) +"' and cast((julianday(date('now'))-julianday(bdate))/30.4 as int)<=59"));
+        //spnMemList.setAdapter(C.getArrayAdapter("Select (SNo||':'||Name||',DOB:'||(substr(bdate,9,2)||'/'||substr(bdate,6,2)||'/'||substr(bdate,1,4))||', Age(Yr):'||cast((julianday(date('now'))-julianday(bdate))/365.25 as int))MemInfo from tTrans where status='m' and length(extype)=0 and vill||bari||hh='"+ (Vill+Bari+HH) +"' " +
+        //        " and cast((julianday(date('now'))-julianday(bdate))/30.4 as int)<=59"));
+
+        spnMemList.setAdapter(C.getArrayAdapter("Select (SNo||':'||Name||',DOB:'||(substr(bdate,9,2)||'/'||substr(bdate,6,2)||'/'||substr(bdate,1,4))||', Age(Yr):'||cast((julianday(date('now'))-julianday(bdate))/365.25 as int))MemInfo from tTrans where status='m' and vill||bari||hh='"+ (Vill+Bari+HH) +"' " +
+                " and cast((julianday(date('now'))-julianday(bdate))/30.4 as int)<=180"));
 
         ArrayAdapter listVaccineStatus = ArrayAdapter.createFromResource(this, R.array.listVaccineStatus, android.R.layout.simple_spinner_item);
         listVaccineStatus.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

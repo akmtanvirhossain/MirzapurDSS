@@ -145,7 +145,7 @@ public class LoginActivity_New extends AppCompatActivity {
             final EditText pass    = (EditText)findViewById(R.id.pass);
             TextView lblSystemDate = (TextView)findViewById(R.id.lblSystemDate);
 
-            lblSystemDate.setText("Version: 1.0, Built on: "+ SystemUpdateDT);
+
 
             //Check for Internet connectivity
             networkAvailable = Connection.haveNetworkConnection(LoginActivity_New.this);
@@ -159,7 +159,9 @@ public class LoginActivity_New extends AppCompatActivity {
             //Need to update date every time whenever shared updated system
             //Format: DDMMYYYY
             //*********************************************************************
-            SystemUpdateDT = "13032023"; //old version date: "09112021"
+            SystemUpdateDT = "30102024"; //old version date: "09112021"
+
+            lblSystemDate.setText("Version: 1.0, Built on: "+ SystemUpdateDT);
 
             lblSystemDate.setText(data.mirzapurdss.Global.Left(SystemUpdateDT, 2)+" - "+SystemUpdateDT.substring(2,4)+" - "+ data.mirzapurdss.Global.Right(SystemUpdateDT,4));
             //*********************************************************************
