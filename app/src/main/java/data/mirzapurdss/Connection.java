@@ -78,7 +78,8 @@ public class Connection extends SQLiteOpenHelper {
 		if(!isFieldExist("Mig_PregHis","modifydate")){
 			Save("Alter table Mig_PregHis add column modifydate datetime");
 		}
-		SQL = "CREATE TABLE Mig_Immunization(";
+
+		/*SQL = "CREATE TABLE Mig_Immunization(";
 		SQL += " Vill varchar(3),Bari varchar(4),HH varchar(2),Sno varchar(2),PNO varchar(8),Status varchar(2),BCG varchar(1),BCGDT varchar(10),BCGSource varchar(2),Penta1 varchar(1),Penta1DT varchar(10),Penta1Source varchar(2),";
 		SQL += "Penta2 varchar(1),Penta2DT varchar(10),Penta2Source varchar(2),Penta3 varchar(1),Penta3DT varchar(10),Penta3Source varchar(2),PCV1 varchar(1),PCV1DT varchar(10),PCV1Source varchar(2),PCV2 varchar(1),PCV2DT varchar(10),";
 		SQL += "PCV2Source varchar(2),PCV3 varchar(1),PCV3DT varchar(10),PCV3Source varchar(2),OPV0 varchar(1),OPV0DT varchar(10),OPV0Source varchar(2),OPV1 varchar(1),OPV1DT varchar(10),OPV1Source varchar(2),OPV2 varchar(1),";
@@ -86,6 +87,18 @@ public class Connection extends SQLiteOpenHelper {
 		SQL += "MR varchar(1),MRDT varchar(10),MRSource varchar(2),Rota varchar(1),RotaDT varchar(10),RotaSource varchar(2),MMR varchar(1),MMRDT varchar(10),MMRSource varchar(2),Typhoid varchar(1),TyphoidDT varchar(10),TyphoidSource varchar(2),";
 		SQL += "Influ varchar(1),InfluDT varchar(10),InfluSource varchar(2),HepaA varchar(1),HepaADT varchar(10),HepaASource varchar(2),ChickenPox varchar(1),ChickenPoxDT varchar(10),ChickenPoxSource varchar(2),Rabies varchar(1),";
 		SQL += "RabiesDT varchar(10),RabiesSource varchar(2),IPV varchar(1),IPVDT varchar(10),IPVSource varchar(2),VitaminA varchar(1),VitaminADT varchar(10),VitaminASource varchar(2),EnDt varchar(20),Upload varchar(1))";
+		*/
+
+		SQL = "CREATE TABLE Mig_Immunization(";
+		SQL += " Vill varchar(3),Bari varchar(4),HH varchar(2),Sno varchar(2),PNO varchar(8),Status varchar(2),BCG varchar(1),BCGDT varchar(10), BCGDTDk varchar(1),BCGSource varchar(2),Penta1 varchar(1),Penta1DT varchar(10), Penta1DTDK varchar(1),Penta1Source varchar(2),";
+		SQL += "Penta2 varchar(1),Penta2DT varchar(10), Penta2DTDK varchar(1),Penta2Source varchar(2),Penta3 varchar(1),Penta3DT varchar(10), Penta3DTDK varchar(1),Penta3Source varchar(2),PCV1 varchar(1),PCV1DT varchar(10), PCV1DTDK varchar(1),PCV1Source varchar(2),PCV2 varchar(1),PCV2DT varchar(10), PCV2DTDK varchar(1),";
+		SQL += "PCV2Source varchar(2),PCV3 varchar(1),PCV3DT varchar(10), PCV3DTDK varchar(1),PCV3Source varchar(2),OPV0 varchar(1),OPV0DT varchar(10), OPV0DTDK varchar(1),OPV0Source varchar(2),OPV1 varchar(1),OPV1DT varchar(10), OPV1DTDK varchar(1),OPV1Source varchar(2),OPV2 varchar(1),";
+		SQL += "OPV2DT varchar(10), OPV2DTDK varchar(1),OPV2Source varchar(2),OPV3 varchar(1),OPV3DT varchar(10), OPV3DTDK varchar(1),OPV3Source varchar(2),OPV4 varchar(1),OPV4DT varchar(10),OPV4DTDK varchar(1),OPV4Source varchar(2),Measles varchar(1),MeaslesDT varchar(10),MeaslesDTDK varchar(1),MeaslesSource varchar(2),";
+		SQL += "MR varchar(1),MRDT varchar(10),MRDTDK varchar(1),MRSource varchar(2),Rota varchar(1),RotaDT varchar(10), RotaDTDK varchar(1),RotaSource varchar(2),MMR varchar(1),MMRDT varchar(10), MMRDTDK varchar(1),MMRSource varchar(2),Typhoid varchar(1),TyphoidDT varchar(10),TyphoidDTDK varchar(1),TyphoidSource varchar(2),";
+		SQL += "Influ varchar(1),InfluDT varchar(10), InfluDTDK varchar(1),InfluSource varchar(2),HepaA varchar(1),HepaADT varchar(10), HepaADTDk varchar(1),HepaASource varchar(2),ChickenPox varchar(1),ChickenPoxDT varchar(10), ChickenPoxDTDk varchar(1),ChickenPoxSource varchar(2),Rabies varchar(1),";
+		SQL += "RabiesDT varchar(10), RabiesDTDk varchar(1),RabiesSource varchar(2),IPV varchar(1),IPVDT varchar(10),IPVDTDk varchar(1),IPVSource varchar(2), fIPV1 varchar (1),fIPVDT1 varchar (10), Fipvdt1dk varchar(1),fIPVSource1 varchar (2),fIPV2 varchar (1),fIPVDT2 varchar (10),fIPVSource2 varchar (2),";
+		SQL += "VitaminA varchar(1),VitaminADT varchar(10), VitaminADTDk varchar(1),VitaminASource varchar(2),EnDt varchar(20),Upload varchar(1))";
+
 		CreateTable("Mig_Immunization",SQL);
 		if(!isFieldExist("Mig_Immunization","modifydate")){
 			Save("Alter table Mig_Immunization add column modifydate datetime");
@@ -146,6 +159,33 @@ public class Connection extends SQLiteOpenHelper {
 				Save("Alter table Immunization add column VitaminADT varchar(10)");
 				Save("Alter table Immunization add column VitaminASource varchar(2)");
 
+				 Save("Alter table Immunization add column BCGDTDk varchar(1)");
+				 Save("Alter table Immunization add column Penta1DTDK varchar(1)");
+				 Save("Alter table Immunization add column Penta2DTDK varchar(1)");
+				 Save("Alter table Immunization add column Penta3DTDK varchar(1)");
+				 Save("Alter table Immunization add column PCV1DTDK varchar(1)");
+				 Save("Alter table Immunization add column PCV2DTDK varchar(1)");
+				 Save("Alter table Immunization add column PCV3DTDK varchar(1)");
+				 Save("Alter table Immunization add column OPV0DTDK varchar(1)");
+				 Save("Alter table Immunization add column OPV1DTDK varchar(1)");
+				 Save("Alter table Immunization add column OPV2DTDK varchar(1)");
+				 Save("Alter table Immunization add column OPV3DTDK varchar(1)");
+				 Save("Alter table Immunization add column OPV4DTDK varchar(1)");
+				 Save("Alter table Immunization add column MeaslesDTDK varchar(1)");
+				 Save("Alter table Immunization add column MRDTDK varchar(1)");
+				 Save("Alter table Immunization add column RotaDTDK varchar(1)");
+				 Save("Alter table Immunization add column MMRDTDK varchar(1)");
+				 Save("Alter table Immunization add column TyphoidDTDK varchar(1)");
+				 Save("Alter table Immunization add column InfluDTDK varchar(1)");
+				 Save("Alter table Immunization add column HepaADTDk varchar(1)");
+				 Save("Alter table Immunization add column ChickenPoxDTDk varchar(1)");
+				 Save("Alter table Immunization add column RabiesDTDk varchar(1)");
+				 Save("Alter table Immunization add column IPVDTDk varchar(1)");
+				 Save("Alter table Immunization add column Fipvdt1dk varchar(1)");
+				 Save("Alter table Immunization add column Fipvdt2Dk varchar(1)");
+				 Save("Alter table Immunization add column VitaminADTDk varchar(1)");
+
+
 				Save("Alter table ImmunizationTemp add column IPV varchar(1)");
 				Save("Alter table ImmunizationTemp add column IPVDT varchar(10)");
 				Save("Alter table ImmunizationTemp add column IPVSource varchar(2)");
@@ -154,6 +194,31 @@ public class Connection extends SQLiteOpenHelper {
 				Save("Alter table ImmunizationTemp add column VitaminADT varchar(10)");
 				Save("Alter table ImmunizationTemp add column VitaminASource varchar(2)");
 
+				 Save("Alter table ImmunizationTemp add column BCGDTDk varchar(1)");
+				 Save("Alter table ImmunizationTemp add column Penta1DTDK varchar(1)");
+				 Save("Alter table ImmunizationTemp add column Penta2DTDK varchar(1)");
+				 Save("Alter table ImmunizationTemp add column Penta3DTDK varchar(1)");
+				 Save("Alter table ImmunizationTemp add column PCV1DTDK varchar(1)");
+				 Save("Alter table ImmunizationTemp add column PCV2DTDK varchar(1)");
+				 Save("Alter table ImmunizationTemp add column PCV3DTDK varchar(1)");
+				 Save("Alter table ImmunizationTemp add column OPV0DTDK varchar(1)");
+				 Save("Alter table ImmunizationTemp add column OPV1DTDK varchar(1)");
+				 Save("Alter table ImmunizationTemp add column OPV2DTDK varchar(1)");
+				 Save("Alter table ImmunizationTemp add column OPV3DTDK varchar(1)");
+				 Save("Alter table ImmunizationTemp add column OPV4DTDK varchar(1)");
+				 Save("Alter table ImmunizationTemp add column MeaslesDTDK varchar(1)");
+				 Save("Alter table ImmunizationTemp add column MRDTDK varchar(1)");
+				 Save("Alter table ImmunizationTemp add column RotaDTDK varchar(1)");
+				 Save("Alter table ImmunizationTemp add column MMRDTDK varchar(1)");
+				 Save("Alter table ImmunizationTemp add column TyphoidDTDK varchar(1)");
+				 Save("Alter table ImmunizationTemp add column InfluDTDK varchar(1)");
+				 Save("Alter table ImmunizationTemp add column HepaADTDk varchar(1)");
+				 Save("Alter table ImmunizationTemp add column ChickenPoxDTDk varchar(1)");
+				 Save("Alter table ImmunizationTemp add column RabiesDTDk varchar(1)");
+				 Save("Alter table ImmunizationTemp add column IPVDTDk varchar(1)");
+				 Save("Alter table ImmunizationTemp add column Fipvdt1dk varchar(1)");
+				 Save("Alter table ImmunizationTemp add column Fipvdt2Dk varchar(1)");
+				 Save("Alter table ImmunizationTemp add column VitaminADTDk varchar(1)");
 		 }
 		d2.close();
 
