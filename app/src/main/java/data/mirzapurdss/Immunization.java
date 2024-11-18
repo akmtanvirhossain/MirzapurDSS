@@ -1,9 +1,12 @@
 package data.mirzapurdss;
 
+import static data.mirzapurdss.MemberEvents.DATE_DIALOG;
+
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.database.Cursor;
@@ -13,6 +16,7 @@ import android.os.Environment;
 import android.os.StrictMode;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -20,6 +24,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -131,7 +136,11 @@ public class Immunization extends AppCompatActivity {
     Spinner  spnMemList;
     ArrayAdapter dataSource;
     Spinner  spnVaccineStatus;
+    String VariableID;
 
+    private int mDay;
+    private int mMonth;
+    private int mYear;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -933,6 +942,22 @@ public class Immunization extends AppCompatActivity {
                 }
             });
 
+            BCGDT.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+
+                    final int DRAWABLE_RIGHT = 2;
+                    if (event.getAction() == MotionEvent.ACTION_UP) {
+                        if (event.getRawX() >= (BCGDT.getRight() - BCGDT.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                            VariableID = "BCGDT";
+                            showDialog(DATE_DIALOG);
+
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            });
 
         spnMemList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -949,13 +974,13 @@ public class Immunization extends AppCompatActivity {
                         {
                         }
                     
-                        if(PNoAvailable.equals("1"))
-                                PNumber = C.ReturnSingleValue("Select PNo from tTrans Where Status='m' and Vill||Bari||HH||SNo='"+ Vill+Bari+HH+SN +"'");
-                        else
-                                PNumber = "";
-                    
+                        if(PNoAvailable.equals("1")) {
+                            PNumber = C.ReturnSingleValue("Select PNo from tTrans Where Status='m' and Vill||Bari||HH||SNo='" + Vill + Bari + HH + SN + "'");
+                        }else {
+                            PNumber = "";
+                        }
                             //if(PNumber.length()==0) return;
-                            
+
                             chkBCG.setChecked(false);
                             chkBCGDTDk.setChecked(false);
 
@@ -1000,14 +1025,14 @@ public class Immunization extends AppCompatActivity {
                             chkChickenPoxDTDk.setChecked(false);
                             chkRabies.setChecked(false);
                             chkRabiesDTDk.setChecked(false);
-                            chkIPV.setChecked( false );
-                            chkIPVDTDk.setChecked( false );
-                            chkfIPV1.setChecked( false );
-                            chkFipvdt1dk.setChecked( false );
-                            chkfIPV2.setChecked( false );
-                            chkFipvdt2Dk.setChecked( false );
-                            chkVitaminA.setChecked( false );
-                            chkVitaminADTDk.setChecked( false );
+                            chkIPV.setChecked(false);
+                            chkIPVDTDk.setChecked(false);
+                            chkfIPV1.setChecked(false);
+                            chkFipvdt1dk.setChecked(false);
+                            chkfIPV2.setChecked(false);
+                            chkFipvdt2Dk.setChecked(false);
+                            chkVitaminA.setChecked(false);
+                            chkVitaminADTDk.setChecked(false);
 
                             BCGDT.setText("");
                             spnBCG.setSelection(0);
@@ -1083,348 +1108,296 @@ public class Immunization extends AppCompatActivity {
 
                             VitaminADT.setText("");
                             spnVitaminA.setSelection(0);
-                        
+
                             Cursor cur = null;
-                            if(PNoAvailable.equals("1"))
-                            {
+                            if (PNoAvailable.equals("1")) {
                                 cur = C.ReadData("Select Vill,Bari,HH,Sno,PNO,Status,BCG,BCGDT,BCGSource,Penta1,Penta1DT,Penta1Source,Penta2,Penta2DT,Penta2Source,Penta3,Penta3DT,Penta3Source,PCV1,PCV1DT,PCV1Source,PCV2,PCV2DT,PCV2Source,PCV3,PCV3DT,PCV3Source,OPV0,OPV0DT,OPV0Source,OPV1,OPV1DT,OPV1Source,OPV2,OPV2DT,OPV2Source,OPV3,OPV3DT,OPV3Source,\n" +
                                         "OPV4,OPV4DT,OPV4Source,Measles,MeaslesDT,MeaslesSource,MR,MRDT,MRSource,Rota,RotaDT,RotaSource,MMR,MMRDT,MMRSource,Typhoid,TyphoidDT,TyphoidSource,Influ,InfluDT,InfluSource,HepaA,HepaADT,HepaASource,ChickenPox,ChickenPoxDT,ChickenPoxSource,Rabies,RabiesDT,RabiesSource,IPV,IPVDT,IPVSource,fIPV1,fIPVDT1,\n" +
                                         "fIPVSource1,fIPV2,fIPVDT2,fIPVSource2,VitaminA,VitaminADT,VitaminASource,ifnull(BCGDTDk,'')BCGDTDk,ifnull(Penta1DTDK,'')Penta1DTDK,ifnull(Penta2DTDK,'')Penta2DTDK,ifnull(Penta3DTDK,'')Penta3DTDK,ifnull(PCV1DTDK,'')PCV1DTDK,ifnull(PCV2DTDK,'')PCV2DTDK,ifnull(PCV3DTDK,'')PCV3DTDK,ifnull(OPV0DTDK,'')OPV0DTDK,\n" +
                                         "ifnull(OPV1DTDK,'')OPV1DTDK, ifnull(OPV2DTDK,'')OPV2DTDK,ifnull(OPV3DTDK,'')OPV3DTDK,ifnull(OPV4DTDK,'')OPV4DTDK,ifnull(MeaslesDTDK,'')MeaslesDTDK,ifnull(MRDTDK,'')MRDTDK,ifnull(RotaDTDK,'')RotaDTDK,ifnull(MMRDTDK,'')MMRDTDK,ifnull(TyphoidDTDK,'')TyphoidDTDK, ifnull(InfluDTDK,'')InfluDTDK,ifnull(HepaADTDk,'')HepaADTDk,\n" +
                                         "ifnull(ChickenPoxDTDk,'')ChickenPoxDTDk,ifnull(RabiesDTDk,'')RabiesDTDk,ifnull(IPVDTDk,'')IPVDTDk,ifnull(IPVDTDk,'')IPVDTDk,ifnull(Fipvdt1dk,'')Fipvdt1dk,ifnull(Fipvdt2Dk,'')Fipvdt2Dk,ifnull(VitaminADTDk,'')VitaminADTDk\n " +
-                                        " from ImmunizationTemp where PNo='"+ PNumber +"'");
-                            }
-                            else
-                            {
+                                        " from ImmunizationTemp where PNo='" + PNumber + "'");
+                            } else {
                                 cur = C.ReadData("Select Vill,Bari,HH,Sno,PNO,Status,BCG,BCGDT,BCGSource,Penta1,Penta1DT,Penta1Source,Penta2,Penta2DT,Penta2Source,Penta3,Penta3DT,Penta3Source,PCV1,PCV1DT,PCV1Source,PCV2,PCV2DT,PCV2Source,PCV3,PCV3DT,PCV3Source,OPV0,OPV0DT,OPV0Source,OPV1,OPV1DT,OPV1Source,OPV2,OPV2DT,OPV2Source,OPV3,OPV3DT,OPV3Source,\n" +
                                         "OPV4,OPV4DT,OPV4Source,Measles,MeaslesDT,MeaslesSource,MR,MRDT,MRSource,Rota,RotaDT,RotaSource,MMR,MMRDT,MMRSource,Typhoid,TyphoidDT,TyphoidSource,Influ,InfluDT,InfluSource,HepaA,HepaADT,HepaASource,ChickenPox,ChickenPoxDT,ChickenPoxSource,Rabies,RabiesDT,RabiesSource,IPV,IPVDT,IPVSource,fIPV1,fIPVDT1,\n" +
                                         "fIPVSource1,fIPV2,fIPVDT2,fIPVSource2,VitaminA,VitaminADT,VitaminASource,ifnull(BCGDTDk,'')BCGDTDk,ifnull(Penta1DTDK,'')Penta1DTDK,ifnull(Penta2DTDK,'')Penta2DTDK,ifnull(Penta3DTDK,'')Penta3DTDK,ifnull(PCV1DTDK,'')PCV1DTDK,ifnull(PCV2DTDK,'')PCV2DTDK,ifnull(PCV3DTDK,'')PCV3DTDK,ifnull(OPV0DTDK,'')OPV0DTDK,\n" +
                                         "ifnull(OPV1DTDK,'')OPV1DTDK, ifnull(OPV2DTDK,'')OPV2DTDK,ifnull(OPV3DTDK,'')OPV3DTDK,ifnull(OPV4DTDK,'')OPV4DTDK,ifnull(MeaslesDTDK,'')MeaslesDTDK,ifnull(MRDTDK,'')MRDTDK,ifnull(RotaDTDK,'')RotaDTDK,ifnull(MMRDTDK,'')MMRDTDK,ifnull(TyphoidDTDK,'')TyphoidDTDK, ifnull(InfluDTDK,'')InfluDTDK,ifnull(HepaADTDk,'')HepaADTDk,\n" +
                                         "ifnull(ChickenPoxDTDk,'')ChickenPoxDTDk,ifnull(RabiesDTDk,'')RabiesDTDk,ifnull(IPVDTDk,'')IPVDTDk,ifnull(IPVDTDk,'')IPVDTDk,ifnull(Fipvdt1dk,'')Fipvdt1dk,ifnull(Fipvdt2Dk,'')Fipvdt2Dk,ifnull(VitaminADTDk,'')VitaminADTDk\n" +
-                                        " from ImmunizationTemp where Vill||Bari||HH='"+ Vill+Bari+HH +"' and SNo='"+ SN +"'");
+                                        " from ImmunizationTemp where Vill||Bari||HH='" + Vill + Bari + HH + "' and SNo='" + SN + "'");
                             }
                             //Cursor cur=C.ReadData("Select * from ImmunizationTemp where Vill||Bari||HH='"+ Vill+Bari+HH +"' and SNo='"+ SN +"'");
                             //Cursor cur=C.ReadData("Select * from ImmunizationTemp where PNo='"+ PNumber +"'");
-                            
-                                    cur.moveToFirst();
-                                    while(!cur.isAfterLast())
-                                    {                               
-                                            spnVaccineStatus.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("Status"))));
-                                            
-                                            if(cur.getString(cur.getColumnIndex("BCG")).equals("1"))
-                                            {
-                                                chkBCG.setChecked(true);
-                                                BCGDT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("BCGDT"))));
-                                                spnBCG.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("BCGSource"))));
 
-                                                if(cur.getString(cur.getColumnIndex("BCGDTDk")).equals("1")){
-                                                    chkBCGDTDk.setChecked(true);
-                                                }
-                                                else {
-                                                    chkBCGDTDk.setChecked(false);
-                                                }
-                                            }
-                                            if(cur.getString(cur.getColumnIndex("Penta1")).equals("1"))
-                                            {
-                                                chkPenta1.setChecked(true);
-                                                Penta1DT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("Penta1DT"))));
-                                                spnPenta1.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("Penta1Source"))));
+                            cur.moveToFirst();
+                            while (!cur.isAfterLast()) {
+                                spnVaccineStatus.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("Status"))));
 
-                                                if(cur.getString(cur.getColumnIndex("Penta1DTDK")).equals("1")){
-                                                    chkPenta1DTDK.setChecked(true);
-                                                }
-                                                else {
-                                                    chkPenta1DTDK.setChecked(false);
-                                                }
+                                if (cur.getString(cur.getColumnIndex("BCG")).equals("1")) {
+                                    chkBCG.setChecked(true);
+                                    BCGDT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("BCGDT"))));
+                                    spnBCG.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("BCGSource"))));
 
-                                            }
-                                            if(cur.getString(cur.getColumnIndex("Penta2")).equals("1"))
-                                            {
-                                                chkPenta2.setChecked(true);
-                                                Penta2DT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("Penta2DT"))));
-                                                spnPenta2.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("Penta2Source"))));
-                                                if(cur.getString(cur.getColumnIndex("Penta2DTDK")).equals("1")){
-                                                    chkPenta2DTDK.setChecked(true);
-                                                }
-                                                else {
-                                                    chkPenta2DTDK.setChecked(false);
-                                                }
-                                            }
-                                            if(cur.getString(cur.getColumnIndex("Penta3")).equals("1"))
-                                            {
-                                                chkPenta3.setChecked(true);
-                                                Penta3DT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("Penta3DT"))));
-                                                spnPenta3.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("Penta3Source"))));
-                                                if(cur.getString(cur.getColumnIndex("Penta3DTDK")).equals("1")){
-                                                    chkPenta3DTDK.setChecked(true);
-                                                }
-                                                else {
-                                                    chkPenta3DTDK.setChecked(false);
-                                                }
-                                            }
-                                            if(cur.getString(cur.getColumnIndex("PCV1")).equals("1"))
-                                            {
-                                                chkPCV1.setChecked(true);
-                                                PCV1DT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("PCV1DT"))));
-                                                spnPCV1.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("PCV1Source"))));
-                                                if(cur.getString(cur.getColumnIndex("PCV1DTDK")).equals("1")){
-                                                    chkPCV1DTDK.setChecked(true);
-                                                }
-                                                else {
-                                                    chkPCV1DTDK.setChecked(false);
-                                                }
-                                            }
-                                            if(cur.getString(cur.getColumnIndex("PCV2")).equals("1"))
-                                            {
-                                                chkPCV2.setChecked(true);
-                                                PCV2DT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("PCV2DT"))));
-                                                spnPCV2.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("PCV2Source"))));
-                                                if(cur.getString(cur.getColumnIndex("PCV2DTDK")).equals("1")){
-                                                    chkPCV2DTDK.setChecked(true);
-                                                }
-                                                else {
-                                                    chkPCV2DTDK.setChecked(false);
-                                                }
-                                            }
-                                            if(cur.getString(cur.getColumnIndex("PCV3")).equals("1"))
-                                            {
-                                                chkPCV3.setChecked(true);
-                                                PCV3DT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("PCV3DT"))));
-                                                spnPCV3.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("PCV3Source"))));
-                                                if(cur.getString(cur.getColumnIndex("PCV3DTDK")).equals("1")){
-                                                    chkPCV3DTDK.setChecked(true);
-                                                }
-                                                else {
-                                                    chkPCV3DTDK.setChecked(false);
-                                                }
-                                            }
-                                            if(cur.getString(cur.getColumnIndex("OPV0")).equals("1"))
-                                            {
-                                                chkOPV0.setChecked(true);
-                                                OPV0DT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("OPV0DT"))));
-                                                spnOPV0.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("OPV0Source"))));
-                                                if(cur.getString(cur.getColumnIndex("OPV0DTDK")).equals("1")){
-                                                    chkOPV0DTDK.setChecked(true);
-                                                }
-                                                else {
-                                                    chkOPV0DTDK.setChecked(false);
-                                                }
-                                            }
-                                            if(cur.getString(cur.getColumnIndex("OPV1")).equals("1"))
-                                            {
-                                                chkOPV1.setChecked(true);
-                                                OPV1DT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("OPV1DT"))));
-                                                spnOPV1.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("OPV1Source"))));
-                                                if(cur.getString(cur.getColumnIndex("OPV1DTDK")).equals("1")){
-                                                    chkOPV1DTDK.setChecked(true);
-                                                }
-                                                else {
-                                                    chkOPV1DTDK.setChecked(false);
-                                                }
-                                            }
-                                            if(cur.getString(cur.getColumnIndex("OPV2")).equals("1"))
-                                            {
-                                                chkOPV2.setChecked(true);
-                                                OPV2DT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("OPV2DT"))));
-                                                spnOPV2.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("OPV2Source"))));
-                                                if(cur.getString(cur.getColumnIndex("OPV2DTDK")).equals("1")){
-                                                    chkOPV2DTDK.setChecked(true);
-                                                }
-                                                else {
-                                                    chkOPV2DTDK.setChecked(false);
-                                                }
-                                            }
-                                            if(cur.getString(cur.getColumnIndex("OPV3")).equals("1"))
-                                            {
-                                                chkOPV3.setChecked(true);
-                                                OPV3DT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("OPV3DT"))));
-                                                spnOPV3.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("OPV3Source"))));
-                                                if(cur.getString(cur.getColumnIndex("OPV3DTDK")).equals("1")){
-                                                    chkOPV3DTDK.setChecked(true);
-                                                }
-                                                else {
-                                                    chkOPV3DTDK.setChecked(false);
-                                                }
-                                            }
-                                            if(cur.getString(cur.getColumnIndex("OPV4")).equals("1"))
-                                            {
-                                                chkOPV4.setChecked(true);
-                                                OPV4DT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("OPV4DT"))));
-                                                spnOPV4.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("OPV4Source"))));
-                                                if(cur.getString(cur.getColumnIndex("OPV4DTDK")).equals("1")){
-                                                    chkOPV4DTDK.setChecked(true);
-                                                }
-                                                else {
-                                                    chkOPV4DTDK.setChecked(false);
-                                                }
-                                            }
-                                            if(cur.getString(cur.getColumnIndex("Measles")).equals("1"))
-                                            {
-                                                chkMeasles.setChecked(true);
-                                                MeaslesDT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("MeaslesDT"))));
-                                                spnMeasles.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("MeaslesSource"))));
-                                                if(cur.getString(cur.getColumnIndex("MeaslesDTDK")).equals("1")){
-                                                    chkMeaslesDTDK.setChecked(true);
-                                                }
-                                                else {
-                                                    chkMeaslesDTDK.setChecked(false);
-                                                }
-                                            }
-                                            if(cur.getString(cur.getColumnIndex("MR")).equals("1"))
-                                            {
-                                                chkMR.setChecked(true);
-                                                MRDT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("MRDT"))));
-                                                spnMR.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("MRSource"))));
-                                                if(cur.getString(cur.getColumnIndex("MRDTDK")).equals("1")){
-                                                    chkMRDTDK.setChecked(true);
-                                                }
-                                                else {
-                                                    chkMRDTDK.setChecked(false);
-                                                }
-                                            }
-                                            if(cur.getString(cur.getColumnIndex("Rota")).equals("1"))
-                                            {
-                                                chkRota.setChecked(true);
-                                                RotaDT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("RotaDT"))));
-                                                spnRota.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("RotaSource"))));
-                                                if(cur.getString(cur.getColumnIndex("RotaDTDK")).equals("1")){
-                                                    chkRotaDTDK.setChecked(true);
-                                                }
-                                                else {
-                                                    chkRotaDTDK.setChecked(false);
-                                                }
-                                            }
-                                            if(cur.getString(cur.getColumnIndex("MMR")).equals("1"))
-                                            {
-                                                chkMMR.setChecked(true);
-                                                MMRDT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("MMRDT"))));
-                                                spnMMR.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("MMRSource"))));
-                                                if(cur.getString(cur.getColumnIndex("MMRDTDK")).equals("1")){
-                                                    chkMMRDTDK.setChecked(true);
-                                                }
-                                                else {
-                                                    chkMMRDTDK.setChecked(false);
-                                                }
-                                            }
-                                            if(cur.getString(cur.getColumnIndex("Typhoid")).equals("1"))
-                                            {
-                                                chkTyphoid.setChecked(true);
-                                                TyphoidDT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("TyphoidDT"))));
-                                                spnTyphoid.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("TyphoidSource"))));
-                                                if(cur.getString(cur.getColumnIndex("TyphoidDTDK")).equals("1")){
-                                                    chkTyphoidDTDK.setChecked(true);
-                                                }
-                                                else {
-                                                    chkTyphoidDTDK.setChecked(false);
-                                                }
-                                            }
-                                            if(cur.getString(cur.getColumnIndex("MMR")).equals("1"))
-                                            {
-                                                chkInflu.setChecked(true);
-                                                InfluDT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("InfluDT"))));
-                                                spnInflu.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("InfluSource"))));
-                                                if(cur.getString(cur.getColumnIndex("InfluDTDK")).equals("1")){
-                                                    chkInfluDTDK.setChecked(true);
-                                                }
-                                                else {
-                                                    chkInfluDTDK.setChecked(false);
-                                                }
-                                            }
-                                            if(cur.getString(cur.getColumnIndex("HepaA")).equals("1"))
-                                            {
-                                                chkHepaA.setChecked(true);
-                                                HepaADT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("HepaADT"))));
-                                                spnHepaA.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("HepaASource"))));
-                                                if(cur.getString(cur.getColumnIndex("HepaADTDk")).equals("1")){
-                                                    chkHepaADTDk.setChecked(true);
-                                                }
-                                                else {
-                                                    chkHepaADTDk.setChecked(false);
-                                                }
-                                            }
-                                            if(cur.getString(cur.getColumnIndex("ChickenPox")).equals("1"))
-                                            {
-                                                chkChickenPox.setChecked(true);
-                                                ChickenPoxDT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("ChickenPoxDT"))));
-                                                spnChickenPox.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("ChickenPoxSource"))));
-                                                if(cur.getString(cur.getColumnIndex("ChickenPoxDTDk")).equals("1")){
-                                                    chkChickenPoxDTDk.setChecked(true);
-                                                }
-                                                else {
-                                                    chkChickenPoxDTDk.setChecked(false);
-                                                }
-                                            }
-                                            if(cur.getString(cur.getColumnIndex("Rabies")).equals("1"))
-                                            {
-                                                chkRabies.setChecked(true);
-                                                RabiesDT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("RabiesDT"))));
-                                                spnRabies.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("RabiesSource"))));
-                                                if(cur.getString(cur.getColumnIndex("RabiesDTDk")).equals("1")){
-                                                    chkRabiesDTDk.setChecked(true);
-                                                }
-                                                else {
-                                                    chkRabiesDTDk.setChecked(false);
-                                                }
-                                            }
-                                            if(cur.getString(cur.getColumnIndex("IPV")).equals("1"))
-                                            {
-                                                chkIPV.setChecked(true);
-                                                IPVDT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("IPVDT"))));
-                                                spnIPV.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("IPVSource"))));
-                                                if(cur.getString(cur.getColumnIndex("IPVDTDk")).equals("1")){
-                                                    chkIPVDTDk.setChecked(true);
-                                                }
-                                                else {
-                                                    chkIPVDTDk.setChecked(false);
-                                                }
-                                            }
-
-                                            //23 apr 2018
-                                            if(cur.getString(cur.getColumnIndex("fIPV1")).equals("1"))
-                                            {
-                                                chkfIPV1.setChecked(true);
-                                                fIPVDT1.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("fIPVDT1"))));
-                                                spnfIPV1.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("fIPVSource1"))));
-                                                if(cur.getString(cur.getColumnIndex("Fipvdt1dk")).equals("1")){
-                                                    chkFipvdt1dk.setChecked(true);
-                                                }
-                                                else {
-                                                    chkFipvdt1dk.setChecked(false);
-                                                }
-                                            }
-
-                                            if(cur.getString(cur.getColumnIndex("fIPV2")).equals("1"))
-                                            {
-                                                chkfIPV2.setChecked(true);
-                                                fIPVDT2.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("fIPVDT2"))));
-                                                spnfIPV2.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("fIPVSource2"))));
-                                                if(cur.getString(cur.getColumnIndex("Fipvdt2Dk")).equals("1")){
-                                                    chkFipvdt2Dk.setChecked(true);
-                                                }
-                                                else {
-                                                    chkFipvdt2Dk.setChecked(false);
-                                                }
-                                            }
-                                            if(cur.getString(cur.getColumnIndex("VitaminA")).equals("1"))
-                                            {
-                                                chkVitaminA.setChecked(true);
-                                                VitaminADT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("VitaminADT"))));
-                                                spnVitaminA.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("VitaminASource"))));
-                                                if(cur.getString(cur.getColumnIndex("VitaminADTDk")).equals("1")){
-                                                    chkVitaminADTDk.setChecked(true);
-                                                }
-                                                else {
-                                                    chkVitaminADTDk.setChecked(false);
-                                                }
-                                            }
-
-                                            cur.moveToNext();
+                                    if (cur.getString(cur.getColumnIndex("BCGDTDk")).equals("1")) {
+                                        chkBCGDTDk.setChecked(true);
+                                    } else {
+                                        chkBCGDTDk.setChecked(false);
                                     }
-                                    cur.close();
+                                }
+                                if (cur.getString(cur.getColumnIndex("Penta1")).equals("1")) {
+                                    chkPenta1.setChecked(true);
+                                    Penta1DT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("Penta1DT"))));
+                                    spnPenta1.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("Penta1Source"))));
+
+                                    if (cur.getString(cur.getColumnIndex("Penta1DTDK")).equals("1")) {
+                                        chkPenta1DTDK.setChecked(true);
+                                    } else {
+                                        chkPenta1DTDK.setChecked(false);
+                                    }
+
+                                }
+                                if (cur.getString(cur.getColumnIndex("Penta2")).equals("1")) {
+                                    chkPenta2.setChecked(true);
+                                    Penta2DT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("Penta2DT"))));
+                                    spnPenta2.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("Penta2Source"))));
+                                    if (cur.getString(cur.getColumnIndex("Penta2DTDK")).equals("1")) {
+                                        chkPenta2DTDK.setChecked(true);
+                                    } else {
+                                        chkPenta2DTDK.setChecked(false);
+                                    }
+                                }
+                                if (cur.getString(cur.getColumnIndex("Penta3")).equals("1")) {
+                                    chkPenta3.setChecked(true);
+                                    Penta3DT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("Penta3DT"))));
+                                    spnPenta3.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("Penta3Source"))));
+                                    if (cur.getString(cur.getColumnIndex("Penta3DTDK")).equals("1")) {
+                                        chkPenta3DTDK.setChecked(true);
+                                    } else {
+                                        chkPenta3DTDK.setChecked(false);
+                                    }
+                                }
+                                if (cur.getString(cur.getColumnIndex("PCV1")).equals("1")) {
+                                    chkPCV1.setChecked(true);
+                                    PCV1DT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("PCV1DT"))));
+                                    spnPCV1.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("PCV1Source"))));
+                                    if (cur.getString(cur.getColumnIndex("PCV1DTDK")).equals("1")) {
+                                        chkPCV1DTDK.setChecked(true);
+                                    } else {
+                                        chkPCV1DTDK.setChecked(false);
+                                    }
+                                }
+                                if (cur.getString(cur.getColumnIndex("PCV2")).equals("1")) {
+                                    chkPCV2.setChecked(true);
+                                    PCV2DT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("PCV2DT"))));
+                                    spnPCV2.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("PCV2Source"))));
+                                    if (cur.getString(cur.getColumnIndex("PCV2DTDK")).equals("1")) {
+                                        chkPCV2DTDK.setChecked(true);
+                                    } else {
+                                        chkPCV2DTDK.setChecked(false);
+                                    }
+                                }
+                                if (cur.getString(cur.getColumnIndex("PCV3")).equals("1")) {
+                                    chkPCV3.setChecked(true);
+                                    PCV3DT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("PCV3DT"))));
+                                    spnPCV3.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("PCV3Source"))));
+                                    if (cur.getString(cur.getColumnIndex("PCV3DTDK")).equals("1")) {
+                                        chkPCV3DTDK.setChecked(true);
+                                    } else {
+                                        chkPCV3DTDK.setChecked(false);
+                                    }
+                                }
+                                if (cur.getString(cur.getColumnIndex("OPV0")).equals("1")) {
+                                    chkOPV0.setChecked(true);
+                                    OPV0DT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("OPV0DT"))));
+                                    spnOPV0.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("OPV0Source"))));
+                                    if (cur.getString(cur.getColumnIndex("OPV0DTDK")).equals("1")) {
+                                        chkOPV0DTDK.setChecked(true);
+                                    } else {
+                                        chkOPV0DTDK.setChecked(false);
+                                    }
+                                }
+                                if (cur.getString(cur.getColumnIndex("OPV1")).equals("1")) {
+                                    chkOPV1.setChecked(true);
+                                    OPV1DT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("OPV1DT"))));
+                                    spnOPV1.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("OPV1Source"))));
+                                    if (cur.getString(cur.getColumnIndex("OPV1DTDK")).equals("1")) {
+                                        chkOPV1DTDK.setChecked(true);
+                                    } else {
+                                        chkOPV1DTDK.setChecked(false);
+                                    }
+                                }
+                                if (cur.getString(cur.getColumnIndex("OPV2")).equals("1")) {
+                                    chkOPV2.setChecked(true);
+                                    OPV2DT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("OPV2DT"))));
+                                    spnOPV2.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("OPV2Source"))));
+                                    if (cur.getString(cur.getColumnIndex("OPV2DTDK")).equals("1")) {
+                                        chkOPV2DTDK.setChecked(true);
+                                    } else {
+                                        chkOPV2DTDK.setChecked(false);
+                                    }
+                                }
+                                if (cur.getString(cur.getColumnIndex("OPV3")).equals("1")) {
+                                    chkOPV3.setChecked(true);
+                                    OPV3DT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("OPV3DT"))));
+                                    spnOPV3.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("OPV3Source"))));
+                                    if (cur.getString(cur.getColumnIndex("OPV3DTDK")).equals("1")) {
+                                        chkOPV3DTDK.setChecked(true);
+                                    } else {
+                                        chkOPV3DTDK.setChecked(false);
+                                    }
+                                }
+                                if (cur.getString(cur.getColumnIndex("OPV4")).equals("1")) {
+                                    chkOPV4.setChecked(true);
+                                    OPV4DT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("OPV4DT"))));
+                                    spnOPV4.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("OPV4Source"))));
+                                    if (cur.getString(cur.getColumnIndex("OPV4DTDK")).equals("1")) {
+                                        chkOPV4DTDK.setChecked(true);
+                                    } else {
+                                        chkOPV4DTDK.setChecked(false);
+                                    }
+                                }
+                                if (cur.getString(cur.getColumnIndex("Measles")).equals("1")) {
+                                    chkMeasles.setChecked(true);
+                                    MeaslesDT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("MeaslesDT"))));
+                                    spnMeasles.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("MeaslesSource"))));
+                                    if (cur.getString(cur.getColumnIndex("MeaslesDTDK")).equals("1")) {
+                                        chkMeaslesDTDK.setChecked(true);
+                                    } else {
+                                        chkMeaslesDTDK.setChecked(false);
+                                    }
+                                }
+                                if (cur.getString(cur.getColumnIndex("MR")).equals("1")) {
+                                    chkMR.setChecked(true);
+                                    MRDT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("MRDT"))));
+                                    spnMR.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("MRSource"))));
+                                    if (cur.getString(cur.getColumnIndex("MRDTDK")).equals("1")) {
+                                        chkMRDTDK.setChecked(true);
+                                    } else {
+                                        chkMRDTDK.setChecked(false);
+                                    }
+                                }
+                                if (cur.getString(cur.getColumnIndex("Rota")).equals("1")) {
+                                    chkRota.setChecked(true);
+                                    RotaDT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("RotaDT"))));
+                                    spnRota.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("RotaSource"))));
+                                    if (cur.getString(cur.getColumnIndex("RotaDTDK")).equals("1")) {
+                                        chkRotaDTDK.setChecked(true);
+                                    } else {
+                                        chkRotaDTDK.setChecked(false);
+                                    }
+                                }
+                                if (cur.getString(cur.getColumnIndex("MMR")).equals("1")) {
+                                    chkMMR.setChecked(true);
+                                    MMRDT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("MMRDT"))));
+                                    spnMMR.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("MMRSource"))));
+                                    if (cur.getString(cur.getColumnIndex("MMRDTDK")).equals("1")) {
+                                        chkMMRDTDK.setChecked(true);
+                                    } else {
+                                        chkMMRDTDK.setChecked(false);
+                                    }
+                                }
+                                if (cur.getString(cur.getColumnIndex("Typhoid")).equals("1")) {
+                                    chkTyphoid.setChecked(true);
+                                    TyphoidDT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("TyphoidDT"))));
+                                    spnTyphoid.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("TyphoidSource"))));
+                                    if (cur.getString(cur.getColumnIndex("TyphoidDTDK")).equals("1")) {
+                                        chkTyphoidDTDK.setChecked(true);
+                                    } else {
+                                        chkTyphoidDTDK.setChecked(false);
+                                    }
+                                }
+                                if (cur.getString(cur.getColumnIndex("MMR")).equals("1")) {
+                                    chkInflu.setChecked(true);
+                                    InfluDT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("InfluDT"))));
+                                    spnInflu.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("InfluSource"))));
+                                    if (cur.getString(cur.getColumnIndex("InfluDTDK")).equals("1")) {
+                                        chkInfluDTDK.setChecked(true);
+                                    } else {
+                                        chkInfluDTDK.setChecked(false);
+                                    }
+                                }
+                                if (cur.getString(cur.getColumnIndex("HepaA")).equals("1")) {
+                                    chkHepaA.setChecked(true);
+                                    HepaADT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("HepaADT"))));
+                                    spnHepaA.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("HepaASource"))));
+                                    if (cur.getString(cur.getColumnIndex("HepaADTDk")).equals("1")) {
+                                        chkHepaADTDk.setChecked(true);
+                                    } else {
+                                        chkHepaADTDk.setChecked(false);
+                                    }
+                                }
+                                if (cur.getString(cur.getColumnIndex("ChickenPox")).equals("1")) {
+                                    chkChickenPox.setChecked(true);
+                                    ChickenPoxDT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("ChickenPoxDT"))));
+                                    spnChickenPox.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("ChickenPoxSource"))));
+                                    if (cur.getString(cur.getColumnIndex("ChickenPoxDTDk")).equals("1")) {
+                                        chkChickenPoxDTDk.setChecked(true);
+                                    } else {
+                                        chkChickenPoxDTDk.setChecked(false);
+                                    }
+                                }
+                                if (cur.getString(cur.getColumnIndex("Rabies")).equals("1")) {
+                                    chkRabies.setChecked(true);
+                                    RabiesDT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("RabiesDT"))));
+                                    spnRabies.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("RabiesSource"))));
+                                    if (cur.getString(cur.getColumnIndex("RabiesDTDk")).equals("1")) {
+                                        chkRabiesDTDk.setChecked(true);
+                                    } else {
+                                        chkRabiesDTDk.setChecked(false);
+                                    }
+                                }
+                                if (cur.getString(cur.getColumnIndex("IPV")).equals("1")) {
+                                    chkIPV.setChecked(true);
+                                    IPVDT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("IPVDT"))));
+                                    spnIPV.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("IPVSource"))));
+                                    if (cur.getString(cur.getColumnIndex("IPVDTDk")).equals("1")) {
+                                        chkIPVDTDk.setChecked(true);
+                                    } else {
+                                        chkIPVDTDk.setChecked(false);
+                                    }
+                                }
+
+                                //23 apr 2018
+                                if (cur.getString(cur.getColumnIndex("fIPV1")).equals("1")) {
+                                    chkfIPV1.setChecked(true);
+                                    fIPVDT1.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("fIPVDT1"))));
+                                    spnfIPV1.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("fIPVSource1"))));
+                                    if (cur.getString(cur.getColumnIndex("Fipvdt1dk")).equals("1")) {
+                                        chkFipvdt1dk.setChecked(true);
+                                    } else {
+                                        chkFipvdt1dk.setChecked(false);
+                                    }
+                                }
+
+                                if (cur.getString(cur.getColumnIndex("fIPV2")).equals("1")) {
+                                    chkfIPV2.setChecked(true);
+                                    fIPVDT2.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("fIPVDT2"))));
+                                    spnfIPV2.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("fIPVSource2"))));
+                                    if (cur.getString(cur.getColumnIndex("Fipvdt2Dk")).equals("1")) {
+                                        chkFipvdt2Dk.setChecked(true);
+                                    } else {
+                                        chkFipvdt2Dk.setChecked(false);
+                                    }
+                                }
+                                if (cur.getString(cur.getColumnIndex("VitaminA")).equals("1")) {
+                                    chkVitaminA.setChecked(true);
+                                    VitaminADT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("VitaminADT"))));
+                                    spnVitaminA.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("VitaminASource"))));
+                                    if (cur.getString(cur.getColumnIndex("VitaminADTDk")).equals("1")) {
+                                        chkVitaminADTDk.setChecked(true);
+                                    } else {
+                                        chkVitaminADTDk.setChecked(false);
+                                    }
+                                }
+
+                                cur.moveToNext();
+                            }
+                            cur.close();
+
                     }
                     catch(Exception ex)
                     {
-                            //Connection.MessageBox(Immunization.this, ex.getMessage());
+                        //ex.printStackTrace();
+                            Connection.MessageBox(Immunization.this, ex.getMessage());
                     }
 
         }
@@ -3230,6 +3203,28 @@ protected void onRestoreInstanceState(Bundle savedInstanceState) {
 }
 */
 
+    private DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            mYear = year; mMonth = monthOfYear+1; mDay = dayOfMonth;
+            EditText dtpDate;
+
+
+            dtpDate = (EditText)findViewById(R.id.BCGDT);
+            if (VariableID.equals("BCGDT"))
+            {
+                dtpDate = (EditText)findViewById(R.id.BCGDT);
+            }
+            /*else if (VariableID.equals("btnExDate"))
+            {
+                dtpDate = (EditText)findViewById(R.id.dtpExDate);
+            }*/
+
+            dtpDate.setText(new StringBuilder()
+                    .append(Common.Global.Right("00"+mDay,2)).append("/")
+                    .append(Common.Global.Right("00"+mMonth,2)).append("/")
+                    .append(mYear));
+        }
+    };
 //private static int TAKE_PICTURE = 1;
 //private Uri outputFileUri;
 public void TakePhoto(String PhotoName)

@@ -39,12 +39,16 @@
 	    <TextView android:text="Date" android:layout_width="60sp" android:paddingLeft="10sp"
 			    android:layout_height="wrap_content"/>    
  		<EditText
-			    android:id="@+id/BCGDT" style="@style/customEdit"
+			    android:id="@+id/BCGDT"
+				style="@style/customEdit"
 			    android:layout_width="170sp"
 			    android:layout_height="wrap_content"
 			    android:ems="10"
 			    android:maxLength="10"
-			    android:inputType="text"  android:digits="0123456789/"/>
+			    android:inputType="text"
+				android:focusable="false"
+				android:drawableRight="@drawable/calendersmall"
+				android:digits="0123456789/"/>
 		<CheckBox android:id="@+id/chkBCGDTDk" android:layout_width="70sp" android:inputType="text" android:layout_height="wrap_content" android:layout_marginRight="10sp"  android:text="DK"/>
 
 		<TextView android:text="Source" android:layout_width="80sp" android:paddingLeft="10sp"
