@@ -46,8 +46,6 @@
 			    android:ems="10"
 			    android:maxLength="10"
 			    android:inputType="text"
-				android:focusable="false"
-				android:drawableRight="@drawable/calendersmall"
 				android:digits="0123456789/"/>
 		<CheckBox android:id="@+id/chkBCGDTDk" android:layout_width="70sp" android:inputType="text" android:layout_height="wrap_content" android:layout_marginRight="10sp"  android:text="DK"/>
 

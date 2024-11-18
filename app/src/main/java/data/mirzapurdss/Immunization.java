@@ -942,7 +942,7 @@ public class Immunization extends AppCompatActivity {
                 }
             });
 
-            BCGDT.setOnTouchListener(new View.OnTouchListener() {
+           /* BCGDT.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
 
@@ -957,7 +957,7 @@ public class Immunization extends AppCompatActivity {
                     }
                     return false;
                 }
-            });
+            });*/
 
         spnMemList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -3214,11 +3214,6 @@ protected void onRestoreInstanceState(Bundle savedInstanceState) {
             {
                 dtpDate = (EditText)findViewById(R.id.BCGDT);
             }
-            /*else if (VariableID.equals("btnExDate"))
-            {
-                dtpDate = (EditText)findViewById(R.id.dtpExDate);
-            }*/
-
             dtpDate.setText(new StringBuilder()
                     .append(Common.Global.Right("00"+mDay,2)).append("/")
                     .append(Common.Global.Right("00"+mMonth,2)).append("/")

@@ -1238,7 +1238,7 @@ public class HouseholdIndex extends AppCompatActivity {
 
 				//20 May 2016
 				SQL = " Insert into ImmunizationTemp Select * from Immunization "; //where PNo in(Select PNO from Member Where Vill||Bari||HH = '"+ VillBariHH +"') limit 1";
-				SQL += " where PNo in(Select pno from Member where length(extype)=0 and vill||bari||hh='"+ VillBariHH +"' and cast((julianday(date('now'))-julianday(bdate))/30.44 as int)<=59)";
+				SQL += " where PNo in(Select pno from Member where length(extype)=0 and vill||bari||hh='"+ VillBariHH +"' and cast((julianday(date('now'))-julianday(bdate))/30.44 as int)<=180)";
 				C.Save(SQL);
 				
 				//Death

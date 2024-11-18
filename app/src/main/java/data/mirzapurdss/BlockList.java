@@ -388,7 +388,7 @@ public class BlockList extends AppCompatActivity {
 																" OPV0, i.OPV0DT, i.OPV0Source, i.OPV1, i.OPV1DT, i.OPV1Source, i.OPV2, i.OPV2DT, i.OPV2Source, i.OPV3, i.OPV3DT, i.OPV3Source, i.OPV4, i.OPV4DT, i.OPV4Source, i. Measles, i.MeaslesDT, i.MeaslesSource, i.MR, i.MRDT, i.MRSource, i.Rota, i.RotaDT, i.RotaSource, i.MMR, i.MMRDT, i.MMRSource, i.\n" +
 																" Typhoid, i.TyphoidDT, i.TyphoidSource, i.Influ, i.InfluDT, i.InfluSource, i.HepaA, i.HepaADT, i.HepaASource, i.ChickenPox, i.ChickenPoxDT, i.ChickenPoxSource, i.Rabies, i.RabiesDT, i.RabiesSource, i.IPV, i.IPVDT, i.IPVSource, i.VitaminA, i.VitaminADT, i.VitaminASource, i.\n" +
 																" fIPV1, i.fIPVDT1, i.fIPVSource1, i.fIPV2, i.fIPVDT2, i.fIPVSource2, i.BCGDTDk, i.Penta1DTDK, i.Penta2DTDK, i.Penta3DTDK, i.PCV1DTDK, i.PCV2DTDK, i.PCV3DTDK, i.OPV0DTDK, i.OPV1DTDK, i.OPV2DTDK, i.OPV3DTDK, i.OPV4DTDK, i.MeaslesDTDK, i.MRDTDK, i.RotaDTDK, i.MMRDTDK, i.TyphoidDTDK, i.\n" +
-																" InfluDTDK, i.HepaADTDk, i.ChickenPoxDTDk, i.RabiesDTDk, i.IPVDTDk, i.Fipvdt1dk, i.Fipvdt2Dk, i.VitaminADTDk, i.EnDt, i.Upload from Immunization s\n" +
+																" InfluDTDK, i.HepaADTDk, i.ChickenPoxDTDk, i.RabiesDTDk, i.IPVDTDk, i.Fipvdt1dk, i.Fipvdt2Dk, i.VitaminADTDk, i.EnDt, i.Upload from Immunization i\n" +
 																" inner join Baris b on i.vill=b.vill and i.bari=b.bari\n" +
 																" inner join MDSSVill c on b.vill=c.Vill \n" +
 																" where c.cluster='"+ g.getClusterCode() +"' and i.Upload=3";

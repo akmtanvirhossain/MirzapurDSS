@@ -149,15 +149,14 @@ public class Connection extends SQLiteOpenHelper {
 		d1.close();
 
 		Cursor d2=db.rawQuery("Select * from Immunization limit 1",null);
-		if(d2.getColumnCount()==71)
+		if(d2.getColumnCount()==83)
 		 {
-				Save("Alter table Immunization add column IPV varchar(1)");
+				/*Save("Alter table Immunization add column IPV varchar(1)");
 				Save("Alter table Immunization add column IPVDT varchar(10)");
 				Save("Alter table Immunization add column IPVSource varchar(2)");
-
 				Save("Alter table Immunization add column VitaminA varchar(1)");
 				Save("Alter table Immunization add column VitaminADT varchar(10)");
-				Save("Alter table Immunization add column VitaminASource varchar(2)");
+				Save("Alter table Immunization add column VitaminASource varchar(2)");*/
 
 				 Save("Alter table Immunization add column BCGDTDk varchar(1)");
 				 Save("Alter table Immunization add column Penta1DTDK varchar(1)");
@@ -186,13 +185,12 @@ public class Connection extends SQLiteOpenHelper {
 				 Save("Alter table Immunization add column VitaminADTDk varchar(1)");
 
 
-				Save("Alter table ImmunizationTemp add column IPV varchar(1)");
+				/*Save("Alter table ImmunizationTemp add column IPV varchar(1)");
 				Save("Alter table ImmunizationTemp add column IPVDT varchar(10)");
 				Save("Alter table ImmunizationTemp add column IPVSource varchar(2)");
-
 				Save("Alter table ImmunizationTemp add column VitaminA varchar(1)");
 				Save("Alter table ImmunizationTemp add column VitaminADT varchar(10)");
-				Save("Alter table ImmunizationTemp add column VitaminASource varchar(2)");
+				Save("Alter table ImmunizationTemp add column VitaminASource varchar(2)");*/
 
 				 Save("Alter table ImmunizationTemp add column BCGDTDk varchar(1)");
 				 Save("Alter table ImmunizationTemp add column Penta1DTDK varchar(1)");
