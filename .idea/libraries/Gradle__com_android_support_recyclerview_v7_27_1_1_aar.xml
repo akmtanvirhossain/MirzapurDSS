@@ -1,13 +1,13 @@
 <component name="libraryTable">
-  <library name="Gradle: com.android.support:recyclerview-v7:27.1.1@aar">
+  <library name="Gradle: com.android.support:recyclerview-v7:27.1.1@aar" external-system-id="GRADLE">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../SMPNS_Midterm/caches/transforms-2/files-2.1/7e2db4dec402e7c687f810c1943ef6a0/recyclerview-v7-27.1.1/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../SMPNS_Midterm/caches/transforms-2/files-2.1/7e2db4dec402e7c687f810c1943ef6a0/recyclerview-v7-27.1.1/res" />
-      <root url="file://$PROJECT_DIR$/../SMPNS_Midterm/caches/transforms-2/files-2.1/7e2db4dec402e7c687f810c1943ef6a0/recyclerview-v7-27.1.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/4a2b6db57af3b8b095e5e0f85c873052/transformed/recyclerview-v7-27.1.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4a2b6db57af3b8b095e5e0f85c873052/transformed/recyclerview-v7-27.1.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4a2b6db57af3b8b095e5e0f85c873052/transformed/recyclerview-v7-27.1.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/../SMPNS_Midterm/caches/modules-2/files-2.1/com.android.support/recyclerview-v7/27.1.1/ad225a74247e675db0b05ea4f8b17202acbb7f9d/recyclerview-v7-27.1.1-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.support/recyclerview-v7/27.1.1/ad225a74247e675db0b05ea4f8b17202acbb7f9d/recyclerview-v7-27.1.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
