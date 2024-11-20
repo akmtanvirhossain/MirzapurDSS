@@ -2180,10 +2180,10 @@ public class Immunization extends AppCompatActivity {
                     }
                     else
                     {
-                        SQL +="MR='',";
-                        SQL +="MRDT='',";
-                        SQL +="MRSource='',";
-                        SQL +="MRDTDK='',";
+                        SQL +="Rota='',";
+                        SQL +="RotaDT='',";
+                        SQL +="RotaSource='',";
+                        SQL +="RotaDTDK='',";
                     }
                     
                     if(chkMMR.isChecked()==true)
