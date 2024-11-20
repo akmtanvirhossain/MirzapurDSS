@@ -181,8 +181,14 @@ public class reproductive_history extends AppCompatActivity {
 	    VlblQ102=(TextView) findViewById(R.id.VlblQ102);
 	    txtQ102SL=(Spinner) findViewById(R.id.txtQ102SL);
 	    //txtQ102SL.setAdapter(C.getArrayAdapter("select (Sno||'-'||Name)Name from tTrans where status='m' and Vill||Bari||Hh='"+ (VillageCode+BariCode+HHCode) +"' and Sex='2' and ms<>'30' and ((julianday(date('now'))-julianday(bdate))/365.25)<50 and length(extype)=0 order by Name asc"));
-		txtQ102SL.setAdapter(C.getArrayAdapter("select (Sno||'-'||Name)Name from tTrans where status='m' and Vill||Bari||Hh='"+ (VillageCode+BariCode+HHCode) +"' and Sex='2' and ms<>'30' and ((julianday(date('now'))-julianday(bdate))/365.25)<50 order by Name asc"));
-	    
+		//txtQ102SL.setAdapter(C.getArrayAdapter("select (Sno||'-'||Name)Name from tTrans where status='m' and Vill||Bari||Hh='"+ (VillageCode+BariCode+HHCode) +"' and Sex='2' and ms<>'30' and ((julianday(date('now'))-julianday(bdate))/365.25)<50 order by Name asc"));
+
+		//20 Nov 2024
+		String SQL = "select (Sno||'-'||Name)Name from tTrans where status='m' and Vill||Bari||Hh='"+ (VillageCode+BariCode+HHCode) +"' and Sex='2' and ms<>'30' and ((julianday(date('now'))-julianday(bdate))/365.25)<50 \n" +
+				" union select (Sno||'-'||Name)Name from tTrans where status='m' and Vill||Bari||Hh='"+ (VillageCode+BariCode+HHCode) +"' and Sex='2' and ((julianday(date('now'))-julianday(bdate))/365.25)>=50\n" +
+				" and exists(select * from PregHis where pno=ttrans.pno)";
+		txtQ102SL.setAdapter(C.getArrayAdapter(SQL));
+
         VlblQ103=(TextView) findViewById(R.id.VlblQ103);
         spnQ103=(Spinner) findViewById(R.id.spnQ103);        
         VlblQ104MM=(TextView) findViewById(R.id.VlblQ104MM);
@@ -653,28 +659,28 @@ public class reproductive_history extends AppCompatActivity {
 
 					if(spnQ103.getSelectedItemPosition()==0)
 					{
-						Connection.MessageBox(reproductive_history.this, "সাক্ষাৎ এর অবস্থা কি তথ্য খালি রাখা যাবে না");
+						Connection.MessageBox(reproductive_history.this, "103. সাক্ষাৎ এর অবস্থা কি তথ্য খালি রাখা যাবে না");
 						return;
 					}
 					if(spnQ103.getSelectedItemPosition()==1 & txtQ104MM.getText().toString().length()==0)
 					{
-						Connection.MessageBox(reproductive_history.this, "গর্ভবতী মায়ের কোন মাসে বিয়ে হয়েছিল তথ্য খালি রাখা যাবে না");
+						Connection.MessageBox(reproductive_history.this, "104. গর্ভবতী মায়ের কোন মাসে বিয়ে হয়েছিল তথ্য খালি রাখা যাবে না");
 						return;
 					}
 					if(spnQ103.getSelectedItemPosition()==1 & txtQ104MM.getText().toString().length()!=2)
 					{
-						Connection.MessageBox(reproductive_history.this, "বিবাহের মাস অবশ্যই ২ সংখ্যার হতে হবে।");
+						Connection.MessageBox(reproductive_history.this, "104. বিবাহের মাস অবশ্যই ২ সংখ্যার হতে হবে।");
 						return;
 					}
 
 					if(spnQ103.getSelectedItemPosition()==1 & txtQ104YY.getText().toString().length()==0)
 					{
-						Connection.MessageBox(reproductive_history.this, "গর্ভবতী মায়ের কোন বছরে বিয়ে হয়েছিল এ তথ্য খালি রাখা যাবে না");
+						Connection.MessageBox(reproductive_history.this, "104. গর্ভবতী মায়ের কোন বছরে বিয়ে হয়েছিল এ তথ্য খালি রাখা যাবে না");
 						return;
 					}
 					if(spnQ103.getSelectedItemPosition()==1 & txtQ104YY.getText().toString().length()!=4)
 					{
-						Connection.MessageBox(reproductive_history.this, "বিবাহের বৎসর অবশ্যই ৪ সংখ্যার হতে হবে। ");
+						Connection.MessageBox(reproductive_history.this, "104. বিবাহের বৎসর অবশ্যই ৪ সংখ্যার হতে হবে। ");
 						return;
 					}
 
@@ -688,7 +694,7 @@ public class reproductive_history extends AppCompatActivity {
 	  			  		        Date date2 = sdf.parse(txtQ104YY.getText().toString()+"-"+txtQ104MM.getText().toString()+"-"+"1");
 	  			  		        if(date2.after(date1))
 	  					        {
-	  					        	Connection.MessageBox(reproductive_history.this, "বিয়ের তারিখ বর্তমান তারিখের থেকে বড় হবে না");
+	  					        	Connection.MessageBox(reproductive_history.this, "104. বিয়ের তারিখ বর্তমান তারিখের থেকে বড় হবে না");
 	  					        	return;
 	  					        }
 	  			  		       /*
@@ -794,7 +800,7 @@ public class reproductive_history extends AppCompatActivity {
 
 						if(!rdoYQ105.isChecked() && !rdoNQ105.isChecked())
 						{
-							Connection.MessageBox(reproductive_history.this, "মা কখনও কোন সন্তান জন্ম দিয়েছেন কি না তথ্য খালি রাখা যাবে না");
+							Connection.MessageBox(reproductive_history.this, "105. মা কখনও কোন সন্তান জন্ম দিয়েছেন কি না তথ্য খালি রাখা যাবে না");
 							return;
 						}
 
@@ -804,7 +810,7 @@ public class reproductive_history extends AppCompatActivity {
 							VQ105="1";
 							if(!rdoYQ106.isChecked() && !rdoNQ106.isChecked())
 							{
-								Connection.MessageBox(reproductive_history.this, "বর্তমানে সন্তানরা মায়ের কাছে থাকে কি না তথ্য খালি রাখা যাবে না");
+								Connection.MessageBox(reproductive_history.this, "106. বর্তমানে সন্তানরা মায়ের কাছে থাকে কি না তথ্য খালি রাখা যাবে না");
 								return;
 							}
 							else if(rdoYQ106.isChecked())
@@ -837,12 +843,12 @@ public class reproductive_history extends AppCompatActivity {
 							{
 								if(txtQ107A.getText().toString().length()==0)
 								{
-									Connection.MessageBox(reproductive_history.this, "কতজন ছেলে আপনার সাথে থাকে তথ্য ফাকা রাখা যাবে না");
+									Connection.MessageBox(reproductive_history.this, "106. কতজন ছেলে আপনার সাথে থাকে তথ্য ফাকা রাখা যাবে না");
 									return;
 								}
 								if(txtQ107B.getText().toString().length()==0)
 								{
-									Connection.MessageBox(reproductive_history.this, "কতজন মেয়ে আপনার সাথে থাকে তথ্য ফাকা রাখা যাবে না");
+									Connection.MessageBox(reproductive_history.this, "107. কতজন মেয়ে আপনার সাথে থাকে তথ্য ফাকা রাখা যাবে না");
 									return;
 								}
 								SQL="Update tTrans set Births='" + VQ105 + "', LiveHh='" + VQ106 + "', SLiveHh='" + txtQ107A.getText().toString() + "', DLiveHh='" + txtQ107B.getText().toString() + "' ";
@@ -868,24 +874,12 @@ public class reproductive_history extends AppCompatActivity {
 
 						}
 
-						if(rdoYQ105.isChecked())
-						{
-
-							//return;
-						}
-						else
-						{
-
-							//return;
-						}
-
-
 
 						if(rdoYQ105.isChecked())
 						{
 							if(!rdoYQ108.isChecked() && !rdoNQ108.isChecked())
 							{
-								Connection.MessageBox(reproductive_history.this, "মা সন্তান জন্ম দিয়েছেন কিন্তু তার কাছে থাকে না এই তথ্য খালি রাখা যাবে না");
+								Connection.MessageBox(reproductive_history.this, "108. মা সন্তান জন্ম দিয়েছেন কিন্তু তার কাছে থাকে না এই তথ্য খালি রাখা যাবে না");
 								return;
 							}
 
@@ -894,12 +888,12 @@ public class reproductive_history extends AppCompatActivity {
 								VQ108="1";
 								if(txtQ109A.getText().toString().length()==0)
 								{
-									Connection.MessageBox(reproductive_history.this, "কতজন ছেলে অন্য কোথাও থাকে তথ্য ফাকা রাখা যাবে না");
+									Connection.MessageBox(reproductive_history.this, "109. কতজন ছেলে অন্য কোথাও থাকে তথ্য ফাকা রাখা যাবে না");
 									return;
 								}
 								if(txtQ109B.getText().toString().length()==0)
 								{
-									Connection.MessageBox(reproductive_history.this, "কতজন মেয়েঅন্য কোথাও  থাকে তথ্য ফাকা রাখা যাবে না");
+									Connection.MessageBox(reproductive_history.this, "109. কতজন মেয়েঅন্য কোথাও  থাকে তথ্য ফাকা রাখা যাবে না");
 									return;
 								}
 								VQ109A=txtQ109A.getText().toString();
@@ -918,9 +912,9 @@ public class reproductive_history extends AppCompatActivity {
 							VQ109A="";
 							VQ109B="";
 						}
-						if(rdoYQ105.isChecked())
+						/*if(rdoYQ105.isChecked())
 						{
-							if(!rdoYQ110.isChecked() && !rdoNQ110.isChecked())
+							if(spnQ103.getSelectedItemPosition()==1 && !rdoYQ110.isChecked() && !rdoNQ110.isChecked())
 							{
 								Connection.MessageBox(reproductive_history.this, "মা সন্তান জন্ম দিয়েছেন কিন্তু পরে মারা গিয়েছেন এই তথ্য খালি রাখা যাবে না");
 								return;
@@ -948,9 +942,32 @@ public class reproductive_history extends AppCompatActivity {
 								VQ111A="";
 								VQ111B="";
 							}
-						}
+						}*/
 
+							if(spnQ103.getSelectedItemPosition()==1 && !rdoYQ110.isChecked() && !rdoNQ110.isChecked())
+							{
+								Connection.MessageBox(reproductive_history.this, "110. মা সন্তান জন্ম দিয়েছেন কিন্তু পরে মারা গিয়েছেন এই তথ্য খালি রাখা যাবে না");
+								return;
+							}else {
 
+								if (rdoYQ110.isChecked()) {
+									VQ110 = "1";
+									if (txtQ111A.getText().toString().length() == 0) {
+										Connection.MessageBox(reproductive_history.this, "111. কতজন ছেলে অন্য কোথাও থাকে তথ্য ফাকা রাখা যাবে না");
+										return;
+									}
+									if (txtQ111B.getText().toString().length() == 0) {
+										Connection.MessageBox(reproductive_history.this, "111. কতজন মেয়ে অন্য কোথাও  থাকে তথ্য ফাকা রাখা যাবে না");
+										return;
+									}
+									VQ111A = txtQ111A.getText().toString();
+									VQ111B = txtQ111B.getText().toString();
+								} else {
+									VQ110 = "2";
+									VQ111A = "";
+									VQ111B = "";
+								}
+							}
 
 
 						Integer V107A=0,V107B=0;
@@ -974,7 +991,7 @@ public class reproductive_history extends AppCompatActivity {
 						{
 							if(!rdoYQ112.isChecked() && !rdoNQ112.isChecked())
 							{
-								Connection.MessageBox(reproductive_history.this, "মায়ের কোন গর্ভপাত/ গর্ভনষ্ট বা মৃত জন্ম দিয়েছিল কি না এই তথ্য ফাকা রাখা যাবে না");
+								Connection.MessageBox(reproductive_history.this, "112. মায়ের কোন গর্ভপাত/ গর্ভনষ্ট বা মৃত জন্ম দিয়েছিল কি না এই তথ্য ফাকা রাখা যাবে না");
 								return;
 							}
 						}
@@ -984,7 +1001,7 @@ public class reproductive_history extends AppCompatActivity {
 							VQ112="1";
 							if(txtQ113.getText().toString().length()==0)
 							{
-								Connection.MessageBox(reproductive_history.this, "কতজন গর্ভপাত/ গর্ভনষ্ট বা মৃত জন্ম হয়েছে তথ্য ফাকা রাখা যাবে না");
+								Connection.MessageBox(reproductive_history.this, "113. কতজন গর্ভপাত/ গর্ভনষ্ট বা মৃত জন্ম হয়েছে তথ্য ফাকা রাখা যাবে না");
 								return;
 							}
 							VQ113=txtQ113.getText().toString();
@@ -996,7 +1013,7 @@ public class reproductive_history extends AppCompatActivity {
 						}
 						if(txtQ114.getText().toString().length()==0)
 						{
-							Connection.MessageBox(reproductive_history.this, "উত্তরগুলোর যোগফল ফাকা রাখা যাবে না");
+							Connection.MessageBox(reproductive_history.this, "114. উত্তরগুলোর যোগফল ফাকা রাখা যাবে না");
 							return;
 						}
 						//02 Jan 2015

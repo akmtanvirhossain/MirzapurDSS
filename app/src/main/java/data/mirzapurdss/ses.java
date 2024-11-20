@@ -669,8 +669,10 @@ public class ses extends AppCompatActivity {
 					boolean available = false;
 
 					try {
-						//3-Absent, 7-Incomplete
-						if (Global.Left(spnVisit.getSelectedItem().toString(), 1).equals("3") | Global.Left(spnVisit.getSelectedItem().toString(), 1).equals("7")) {
+						//2-Refused, 3-Absent, 7-Incomplete
+						if (Global.Left(spnVisit.getSelectedItem().toString(), 1).equals("2") |
+								Global.Left(spnVisit.getSelectedItem().toString(), 1).equals("3") |
+								Global.Left(spnVisit.getSelectedItem().toString(), 1).equals("7")) {
 							SQL = "Select Vill from tTrans Where ";
 							SQL += " status='s' and Vill||Bari||HH = '" + Household + "'";
 							SQL += " and SESNo='" + spnSESNo.getSelectedItem().toString() + "'";
@@ -808,543 +810,546 @@ public class ses extends AppCompatActivity {
 						}
 
 
+						else {
 
-						available = false;
+							available = false;
 
-						//for 1-completed visit
-						String VQ015A = "", VQ015B = "", VQ015C = "", VQ016A = "", VQ016B = "", VQ016C = "";
+							//for 1-completed visit
+							String VQ015A = "", VQ015B = "", VQ015C = "", VQ016A = "", VQ016B = "", VQ016C = "";
 
-						if (spnQ015a.getSelectedItemPosition() == 0) {
-							Connection.MessageBox(ses.this, "খানায় ধোয়া-মোছার জন্য কোথাকার পানি ব্যবহার করা হয় তথ্য খালি রাখা যাবে না ");
-							return;
-						} else if (spnQ015a.getSelectedItemPosition() == 1) {
-							VQ015A = "11";
-						} else if (spnQ015a.getSelectedItemPosition() == 2) {
-							VQ015A = "12";
-						} else if (spnQ015a.getSelectedItemPosition() == 3) {
-							VQ015A = "21";
-						} else if (spnQ015a.getSelectedItemPosition() == 4) {
-							VQ015A = "22";
-						} else if (spnQ015a.getSelectedItemPosition() == 5) {
-							VQ015A = "23";
-						} else if (spnQ015a.getSelectedItemPosition() == 6) {
-							VQ015A = "31";
-						} else if (spnQ015a.getSelectedItemPosition() == 7) {
-							VQ015A = "32";
-						} else if (spnQ015a.getSelectedItemPosition() == 8) {
-							VQ015A = "41";
-						} else if (spnQ015a.getSelectedItemPosition() == 9) {
-							VQ015A = "51";
-						} else if (spnQ015a.getSelectedItemPosition() == 10) {
-							VQ015A = "61";
-						} else if (spnQ015a.getSelectedItemPosition() == 11) {
-							VQ015A = "77";
-						}
-						if (spnQ015b.getSelectedItemPosition() == 0) {
-							Connection.MessageBox(ses.this, "খানায় গোসলের জন্য কোথাকার পানি ব্যবহার করা হয় তথ্য খালি রাখা যাবে না");
-							return;
-						} else if (spnQ015b.getSelectedItemPosition() == 1) {
-							VQ015B = "11";
-						} else if (spnQ015b.getSelectedItemPosition() == 2) {
-							VQ015B = "12";
-						} else if (spnQ015b.getSelectedItemPosition() == 3) {
-							VQ015B = "21";
-						} else if (spnQ015b.getSelectedItemPosition() == 4) {
-							VQ015B = "22";
-						} else if (spnQ015b.getSelectedItemPosition() == 5) {
-							VQ015B = "23";
-						} else if (spnQ015b.getSelectedItemPosition() == 6) {
-							VQ015B = "31";
-						} else if (spnQ015b.getSelectedItemPosition() == 7) {
-							VQ015B = "32";
-						} else if (spnQ015b.getSelectedItemPosition() == 8) {
-							VQ015B = "41";
-						} else if (spnQ015b.getSelectedItemPosition() == 9) {
-							VQ015B = "51";
-						} else if (spnQ015b.getSelectedItemPosition() == 10) {
-							VQ015B = "61";
-						} else if (spnQ015b.getSelectedItemPosition() == 11) {
-							VQ016B = "77";
-						}
-						if (spnQ015c.getSelectedItemPosition() == 0) {
-							Connection.MessageBox(ses.this, "খানায় খাবার জন্য কোথাকার পানি ব্যবহার করা হয় তথ্য খালি রাখা যাবে না ");
-							return;
-						} else if (spnQ015c.getSelectedItemPosition() == 1) {
-							VQ015C = "11";
-						} else if (spnQ015c.getSelectedItemPosition() == 2) {
-							VQ015C = "12";
-						} else if (spnQ015c.getSelectedItemPosition() == 3) {
-							VQ015C = "21";
-						} else if (spnQ015c.getSelectedItemPosition() == 4) {
-							VQ015C = "22";
-						} else if (spnQ015c.getSelectedItemPosition() == 5) {
-							VQ015C = "23";
-						} else if (spnQ015c.getSelectedItemPosition() == 6) {
-							VQ015C = "31";
-						} else if (spnQ015c.getSelectedItemPosition() == 7) {
-							VQ015C = "32";
-						} else if (spnQ015c.getSelectedItemPosition() == 8) {
-							VQ015C = "41";
-						} else if (spnQ015c.getSelectedItemPosition() == 9) {
-							VQ015C = "51";
-						} else if (spnQ015c.getSelectedItemPosition() == 10) {
-							VQ015C = "61";
-						} else if (spnQ015c.getSelectedItemPosition() == 11) {
-							VQ015C = "77";
-						}
+							if (spnQ015a.getSelectedItemPosition() == 0) {
+								Connection.MessageBox(ses.this, "খানায় ধোয়া-মোছার জন্য কোথাকার পানি ব্যবহার করা হয় তথ্য খালি রাখা যাবে না ");
+								return;
+							}
 
-						if (!rdoYQ016a.isChecked() && !rdoNQ016a.isChecked() && !rdoDKQ016a.isChecked()) {
-							Connection.MessageBox(ses.this, "অন্য কোন খানার সদস্য এই পানি  ধোয়া-মোছার জন্য ব্যবহার  করে কি না তথ্য খালি রাখা যাবে না ");
-							return;
-						}
+							if (spnQ015a.getSelectedItemPosition() == 1) {
+								VQ015A = "11";
+							} else if (spnQ015a.getSelectedItemPosition() == 2) {
+								VQ015A = "12";
+							} else if (spnQ015a.getSelectedItemPosition() == 3) {
+								VQ015A = "21";
+							} else if (spnQ015a.getSelectedItemPosition() == 4) {
+								VQ015A = "22";
+							} else if (spnQ015a.getSelectedItemPosition() == 5) {
+								VQ015A = "23";
+							} else if (spnQ015a.getSelectedItemPosition() == 6) {
+								VQ015A = "31";
+							} else if (spnQ015a.getSelectedItemPosition() == 7) {
+								VQ015A = "32";
+							} else if (spnQ015a.getSelectedItemPosition() == 8) {
+								VQ015A = "41";
+							} else if (spnQ015a.getSelectedItemPosition() == 9) {
+								VQ015A = "51";
+							} else if (spnQ015a.getSelectedItemPosition() == 10) {
+								VQ015A = "61";
+							} else if (spnQ015a.getSelectedItemPosition() == 11) {
+								VQ015A = "77";
+							}
+							if (spnQ015b.getSelectedItemPosition() == 0) {
+								Connection.MessageBox(ses.this, "খানায় গোসলের জন্য কোথাকার পানি ব্যবহার করা হয় তথ্য খালি রাখা যাবে না");
+								return;
+							} else if (spnQ015b.getSelectedItemPosition() == 1) {
+								VQ015B = "11";
+							} else if (spnQ015b.getSelectedItemPosition() == 2) {
+								VQ015B = "12";
+							} else if (spnQ015b.getSelectedItemPosition() == 3) {
+								VQ015B = "21";
+							} else if (spnQ015b.getSelectedItemPosition() == 4) {
+								VQ015B = "22";
+							} else if (spnQ015b.getSelectedItemPosition() == 5) {
+								VQ015B = "23";
+							} else if (spnQ015b.getSelectedItemPosition() == 6) {
+								VQ015B = "31";
+							} else if (spnQ015b.getSelectedItemPosition() == 7) {
+								VQ015B = "32";
+							} else if (spnQ015b.getSelectedItemPosition() == 8) {
+								VQ015B = "41";
+							} else if (spnQ015b.getSelectedItemPosition() == 9) {
+								VQ015B = "51";
+							} else if (spnQ015b.getSelectedItemPosition() == 10) {
+								VQ015B = "61";
+							} else if (spnQ015b.getSelectedItemPosition() == 11) {
+								VQ016B = "77";
+							}
+							if (spnQ015c.getSelectedItemPosition() == 0) {
+								Connection.MessageBox(ses.this, "খানায় খাবার জন্য কোথাকার পানি ব্যবহার করা হয় তথ্য খালি রাখা যাবে না ");
+								return;
+							} else if (spnQ015c.getSelectedItemPosition() == 1) {
+								VQ015C = "11";
+							} else if (spnQ015c.getSelectedItemPosition() == 2) {
+								VQ015C = "12";
+							} else if (spnQ015c.getSelectedItemPosition() == 3) {
+								VQ015C = "21";
+							} else if (spnQ015c.getSelectedItemPosition() == 4) {
+								VQ015C = "22";
+							} else if (spnQ015c.getSelectedItemPosition() == 5) {
+								VQ015C = "23";
+							} else if (spnQ015c.getSelectedItemPosition() == 6) {
+								VQ015C = "31";
+							} else if (spnQ015c.getSelectedItemPosition() == 7) {
+								VQ015C = "32";
+							} else if (spnQ015c.getSelectedItemPosition() == 8) {
+								VQ015C = "41";
+							} else if (spnQ015c.getSelectedItemPosition() == 9) {
+								VQ015C = "51";
+							} else if (spnQ015c.getSelectedItemPosition() == 10) {
+								VQ015C = "61";
+							} else if (spnQ015c.getSelectedItemPosition() == 11) {
+								VQ015C = "77";
+							}
 
-						if (!rdoYQ016b.isChecked() && !rdoNQ016b.isChecked() && !rdoDKQ016b.isChecked()) {
-							Connection.MessageBox(ses.this, "অন্য কোন খানার সদস্য এই পানি  গোসলের জন্য ব্যবহার  করে কি না তথ্য খালি রাখা যাবে না ");
-							return;
-						}
-						if (!rdoYQ016c.isChecked() && !rdoNQ016c.isChecked() && !rdoDKQ016c.isChecked()) {
-							Connection.MessageBox(ses.this, "অন্য কোন খানার সদস্য এই পানি  খাবার  জন্য ব্যবহার  করে কি না তথ্য খালি রাখা যাবে না ");
-							return;
-						}
-						if (rdoYQ016a.isChecked()) {
-							VQ016A = "1";
-						} else if (rdoNQ016a.isChecked()) {
-							VQ016A = "2";
-						} else if (rdoDKQ016a.isChecked()) {
-							VQ016A = "9";
-						}
-						if (rdoYQ016b.isChecked()) {
-							VQ016B = "1";
-						} else if (rdoNQ016b.isChecked()) {
-							VQ016B = "2";
-						} else if (rdoDKQ016b.isChecked()) {
-							VQ016B = "9";
-						}
-						if (rdoYQ016c.isChecked()) {
-							VQ016C = "1";
-						} else if (rdoNQ016c.isChecked()) {
-							VQ016C = "2";
-						} else if (rdoDKQ016c.isChecked()) {
-							VQ016C = "9";
-						}
+							if (!rdoYQ016a.isChecked() && !rdoNQ016a.isChecked() && !rdoDKQ016a.isChecked()) {
+								Connection.MessageBox(ses.this, "অন্য কোন খানার সদস্য এই পানি  ধোয়া-মোছার জন্য ব্যবহার  করে কি না তথ্য খালি রাখা যাবে না ");
+								return;
+							}
+
+							if (!rdoYQ016b.isChecked() && !rdoNQ016b.isChecked() && !rdoDKQ016b.isChecked()) {
+								Connection.MessageBox(ses.this, "অন্য কোন খানার সদস্য এই পানি  গোসলের জন্য ব্যবহার  করে কি না তথ্য খালি রাখা যাবে না ");
+								return;
+							}
+							if (!rdoYQ016c.isChecked() && !rdoNQ016c.isChecked() && !rdoDKQ016c.isChecked()) {
+								Connection.MessageBox(ses.this, "অন্য কোন খানার সদস্য এই পানি  খাবার  জন্য ব্যবহার  করে কি না তথ্য খালি রাখা যাবে না ");
+								return;
+							}
+							if (rdoYQ016a.isChecked()) {
+								VQ016A = "1";
+							} else if (rdoNQ016a.isChecked()) {
+								VQ016A = "2";
+							} else if (rdoDKQ016a.isChecked()) {
+								VQ016A = "9";
+							}
+							if (rdoYQ016b.isChecked()) {
+								VQ016B = "1";
+							} else if (rdoNQ016b.isChecked()) {
+								VQ016B = "2";
+							} else if (rdoDKQ016b.isChecked()) {
+								VQ016B = "9";
+							}
+							if (rdoYQ016c.isChecked()) {
+								VQ016C = "1";
+							} else if (rdoNQ016c.isChecked()) {
+								VQ016C = "2";
+							} else if (rdoDKQ016c.isChecked()) {
+								VQ016C = "9";
+							}
 
 
-						SQL = "Select Vill from tTrans Where ";
-						SQL += " status='s' and Vill||Bari||HH = '" + Household + "'";
-						SQL += " and SESNo='" + spnSESNo.getSelectedItem().toString() + "'";
+							SQL = "Select Vill from tTrans Where ";
+							SQL += " status='s' and Vill||Bari||HH = '" + Household + "'";
+							SQL += " and SESNo='" + spnSESNo.getSelectedItem().toString() + "'";
 
-						available = C.Existence(SQL);
-						try {
-							if (!available) {
-								SQL = "Insert into tTrans";
-								SQL += "(Status,Vill, Bari, HH,SESNo,Visit,Q015a, Q015b, Q015c, Q016a, Q016b, Q016c,VDate,Rnd,PageNo,Upload,Lat,Lon) values(";
-								SQL += "'s',";
-								SQL += "'" + VillageCode + "',";
-								SQL += "'" + BariCode + "',";
-								SQL += "'" + HHCode + "',";
-								SQL += "'" + spnSESNo.getSelectedItem().toString() + "',";
-								SQL += "'" + Global.Left(spnVisit.getSelectedItem().toString(), 1) + "',";
-								SQL += "'" + VQ015A + "','" + VQ015B + "','" + VQ015C + "','" + VQ016A + "','" + VQ016B + "','" + VQ016C + "',";
-								SQL += "'" + g.CurrentDateYYYYMMDD + "',";
-								SQL += "'" + g.getRoundNumber() + "',";
-								SQL += "'0','2','','')";
+							available = C.Existence(SQL);
+							try {
+								if (!available) {
+									SQL = "Insert into tTrans";
+									SQL += "(Status,Vill, Bari, HH,SESNo,Visit,Q015a, Q015b, Q015c, Q016a, Q016b, Q016c,VDate,Rnd,PageNo,Upload,Lat,Lon) values(";
+									SQL += "'s',";
+									SQL += "'" + VillageCode + "',";
+									SQL += "'" + BariCode + "',";
+									SQL += "'" + HHCode + "',";
+									SQL += "'" + spnSESNo.getSelectedItem().toString() + "',";
+									SQL += "'" + Global.Left(spnVisit.getSelectedItem().toString(), 1) + "',";
+									SQL += "'" + VQ015A + "','" + VQ015B + "','" + VQ015C + "','" + VQ016A + "','" + VQ016B + "','" + VQ016C + "',";
+									SQL += "'" + g.CurrentDateYYYYMMDD + "',";
+									SQL += "'" + g.getRoundNumber() + "',";
+									SQL += "'0','2','','')";
 
-								C.Save(SQL);
+									C.Save(SQL);
+								} else {
+									SQL = "Update tTrans set Visit='" + Global.Left(spnVisit.getSelectedItem().toString(), 1) + "', Q015a='" + VQ015A + "',Q015b='" + VQ015B + "',Q015c='" + VQ015C + "',Q016a='" + VQ016A + "',Q016b='" + VQ016B + "',Q016c='" + VQ016C + "' where ";
+									SQL += " status='s' and Vill||Bari||HH = '" + Household + "'";
+									SQL += " and SESNo='" + spnSESNo.getSelectedItem().toString() + "'";
+									C.Save(SQL);
+								}
+							} catch (Exception ex) {
+								Connection.MessageBox(ses.this, ex.getMessage());
+								return;
+							}
+
+
+							String VQ017 = "", VQ018 = "";
+							if (spnQ017.getSelectedItemPosition() == 0) {
+								Connection.MessageBox(ses.this, "খানায় পায়খানা করার কি বাবস্থা আছে তথ্য খালি রাখা যাবে না ");
+								return;
+							} else if (spnQ017.getSelectedItemPosition() == 1) {
+								VQ017 = "11";
+							} else if (spnQ017.getSelectedItemPosition() == 2) {
+								VQ017 = "21";
+							} else if (spnQ017.getSelectedItemPosition() == 3) {
+								VQ017 = "22";
+							} else if (spnQ017.getSelectedItemPosition() == 4) {
+								VQ017 = "23";
+							} else if (spnQ017.getSelectedItemPosition() == 5) {
+								VQ017 = "24";
+							} else if (spnQ017.getSelectedItemPosition() == 6) {
+								VQ017 = "31";
+							} else if (spnQ017.getSelectedItemPosition() == 7) {
+								VQ017 = "77";
+							}
+							if (!rdoYQ018.isChecked() && !rdoNQ018.isChecked()) {
+								Connection.MessageBox(ses.this, "আপনার খানায় বিদ্যুৎ আছে কি না তথ্য খালি রাখা যাবে না");
+								return;
+							}
+							if (rdoYQ018.isChecked()) {
+								VQ018 = "1";
 							} else {
-								SQL = "Update tTrans set Visit='" + Global.Left(spnVisit.getSelectedItem().toString(), 1) + "', Q015a='" + VQ015A + "',Q015b='" + VQ015B + "',Q015c='" + VQ015C + "',Q016a='" + VQ016A + "',Q016b='" + VQ016B + "',Q016c='" + VQ016C + "' where ";
+								VQ018 = "2";
+							}
+
+							try {
+								SQL = "Update tTrans set Q017='" + VQ017 + "',Q018='" + VQ018 + "',PageNo='1' where ";
 								SQL += " status='s' and Vill||Bari||HH = '" + Household + "'";
 								SQL += " and SESNo='" + spnSESNo.getSelectedItem().toString() + "'";
+
 								C.Save(SQL);
+							} catch (Exception ex) {
+								Connection.MessageBox(ses.this, ex.getMessage());
+								return;
 							}
-						} catch (Exception ex) {
-							Connection.MessageBox(ses.this, ex.getMessage());
-							return;
-						}
 
+							if (txtQ019a.getText().length() == 0) {
+								Connection.MessageBox(ses.this, "খানায় কয়টা আলমারি আছে তথ্য খালি রাখা যাবে না ");
+								return;
+							}
+							if (txtQ019b.getText().length() == 0) {
+								Connection.MessageBox(ses.this, "খানায় কয়টা টেবিল আছে তথ্য খালি রাখা যাবে না ");
+								return;
+							}
+							if (txtQ019c.getText().length() == 0) {
+								Connection.MessageBox(ses.this, "খানায় কয়টা ব্রেঞ্ছ/চেয়ার আছে তথ্য খালি রাখা যাবে না ");
+								return;
+							}
+							if (txtQ019d.getText().length() == 0) {
+								Connection.MessageBox(ses.this, "খানায় কয়টা ডাইনিং টেবিল আছে তথ্য খালি রাখা যাবে না ");
+								return;
+							}
+							if (txtQ019e.getText().length() == 0) {
+								Connection.MessageBox(ses.this, "খানায় কয়টা সোফা আছে তথ্য খালি রাখা যাবে না ");
+								return;
+							}
+							try {
+								SQL = "Update tTrans set Q019a='" + txtQ019a.getText() + "', Q019b='" + txtQ019b.getText() + "', Q019c='" + txtQ019c.getText() + "', Q019d='" + txtQ019d.getText() + "', Q019e='" + txtQ019e.getText() + "',PageNo='2' where ";
+								SQL += " status='s' and Vill||Bari||HH = '" + Household + "'";
+								SQL += " and SESNo='" + spnSESNo.getSelectedItem().toString() + "'";
 
-						String VQ017 = "", VQ018 = "";
-						if (spnQ017.getSelectedItemPosition() == 0) {
-							Connection.MessageBox(ses.this, "খানায় পায়খানা করার কি বাবস্থা আছে তথ্য খালি রাখা যাবে না ");
-							return;
-						} else if (spnQ017.getSelectedItemPosition() == 1) {
-							VQ017 = "11";
-						} else if (spnQ017.getSelectedItemPosition() == 2) {
-							VQ017 = "21";
-						} else if (spnQ017.getSelectedItemPosition() == 3) {
-							VQ017 = "22";
-						} else if (spnQ017.getSelectedItemPosition() == 4) {
-							VQ017 = "23";
-						} else if (spnQ017.getSelectedItemPosition() == 5) {
-							VQ017 = "24";
-						} else if (spnQ017.getSelectedItemPosition() == 6) {
-							VQ017 = "31";
-						} else if (spnQ017.getSelectedItemPosition() == 7) {
-							VQ017 = "77";
-						}
-						if (!rdoYQ018.isChecked() && !rdoNQ018.isChecked()) {
-							Connection.MessageBox(ses.this, "আপনার খানায় বিদ্যুৎ আছে কি না তথ্য খালি রাখা যাবে না");
-							return;
-						}
-						if (rdoYQ018.isChecked()) {
-							VQ018 = "1";
-						} else {
-							VQ018 = "2";
-						}
+								C.Save(SQL);
+							} catch (Exception ex) {
+								Connection.MessageBox(ses.this, ex.getMessage());
+								return;
+							}
 
-						try {
-							SQL = "Update tTrans set Q017='" + VQ017 + "',Q018='" + VQ018 + "',PageNo='1' where ";
-							SQL += " status='s' and Vill||Bari||HH = '" + Household + "'";
-							SQL += " and SESNo='" + spnSESNo.getSelectedItem().toString() + "'";
+							if (txtQ019f.getText().length() == 0) {
+								Connection.MessageBox(ses.this, "খানায় কয়টা খাট/চৌকি আছে তথ্য খালি রাখা যাবে না ");
+								return;
+							}
+							if (txtQ019g.getText().length() == 0) {
+								Connection.MessageBox(ses.this, "খানায় কয়টা আলনা আছে তথ্য খালি রাখা যাবে না ");
+								return;
+							}
+							if (txtQ019h.getText().length() == 0) {
+								Connection.MessageBox(ses.this, "খানায় কয়টা লেপ/কম্বল আছে তথ্য খালি রাখা যাবে না ");
+								return;
+							}
+							if (txtQ019i.getText().length() == 0) {
+								Connection.MessageBox(ses.this, "খানায় কয়টা তোষক/জাযিম/ফোম আছে তথ্য খালি রাখা যাবে না ");
+								return;
+							}
+							if (txtQ019j.getText().length() == 0) {
+								Connection.MessageBox(ses.this, "খানায় কয়টা সেলাই মেশিন আছে তথ্য খালি রাখা যাবে না ");
+								return;
+							}
+							try {
+								SQL = "Update tTrans set Q019f='" + txtQ019f.getText() + "', Q019g='" + txtQ019g.getText() + "', Q019h='" + txtQ019h.getText() + "', Q019i='" + txtQ019i.getText() + "', Q019j='" + txtQ019j.getText() + "',PageNo='3' where ";
+								SQL += " status='s' and Vill||Bari||HH = '" + Household + "'";
+								SQL += " and SESNo='" + spnSESNo.getSelectedItem().toString() + "'";
 
-							C.Save(SQL);
-						} catch (Exception ex) {
-							Connection.MessageBox(ses.this, ex.getMessage());
-							return;
-						}
+								C.Save(SQL);
+							} catch (Exception ex) {
+								Connection.MessageBox(ses.this, ex.getMessage());
+								return;
+							}
 
-						if (txtQ019a.getText().length() == 0) {
-							Connection.MessageBox(ses.this, "খানায় কয়টা আলমারি আছে তথ্য খালি রাখা যাবে না ");
-							return;
-						}
-						if (txtQ019b.getText().length() == 0) {
-							Connection.MessageBox(ses.this, "খানায় কয়টা টেবিল আছে তথ্য খালি রাখা যাবে না ");
-							return;
-						}
-						if (txtQ019c.getText().length() == 0) {
-							Connection.MessageBox(ses.this, "খানায় কয়টা ব্রেঞ্ছ/চেয়ার আছে তথ্য খালি রাখা যাবে না ");
-							return;
-						}
-						if (txtQ019d.getText().length() == 0) {
-							Connection.MessageBox(ses.this, "খানায় কয়টা ডাইনিং টেবিল আছে তথ্য খালি রাখা যাবে না ");
-							return;
-						}
-						if (txtQ019e.getText().length() == 0) {
-							Connection.MessageBox(ses.this, "খানায় কয়টা সোফা আছে তথ্য খালি রাখা যাবে না ");
-							return;
-						}
-						try {
-							SQL = "Update tTrans set Q019a='" + txtQ019a.getText() + "', Q019b='" + txtQ019b.getText() + "', Q019c='" + txtQ019c.getText() + "', Q019d='" + txtQ019d.getText() + "', Q019e='" + txtQ019e.getText() + "',PageNo='2' where ";
-							SQL += " status='s' and Vill||Bari||HH = '" + Household + "'";
-							SQL += " and SESNo='" + spnSESNo.getSelectedItem().toString() + "'";
+							if (txtQ019k.getText().length() == 0) {
+								Connection.MessageBox(ses.this, "খানায় কয়টা হাত ঘড়ি/দেয়াল ঘড়ি আছে তথ্য খালি রাখা যাবে না ");
+								return;
+							}
+							if (txtQ019l.getText().length() == 0) {
+								Connection.MessageBox(ses.this, "খানায় কয়টা রেডিও আছে তথ্য খালি রাখা যাবে না ");
+								return;
+							}
+							if (txtQ019m.getText().length() == 0) {
+								Connection.MessageBox(ses.this, "খানায় কয়টা  টেলিভিশন আছে তথ্য খালি রাখা যাবে না ");
+								return;
+							}
+							if (txtQ019n.getText().length() == 0) {
+								Connection.MessageBox(ses.this, "খানায় কয়টা ফ্রিজ আছে তথ্য খালি রাখা যাবে না ");
+								return;
+							}
+							if (txtQ019o.getText().length() == 0) {
+								Connection.MessageBox(ses.this, "খানায় কয়টা  বৈদ্যুতিক ফ্যান আছে তথ্য খালি রাখা যাবে না ");
+								return;
+							}
+							try {
+								SQL = "Update tTrans set Q019k='" + txtQ019k.getText() + "', Q019l='" + txtQ019l.getText() + "', Q019m='" + txtQ019m.getText() + "', Q019n='" + txtQ019n.getText() + "', Q019o='" + txtQ019o.getText() + "',PageNo='4' where ";
+								SQL += " status='s' and Vill||Bari||HH = '" + Household + "'";
+								SQL += " and SESNo='" + spnSESNo.getSelectedItem().toString() + "'";
 
-							C.Save(SQL);
-						} catch (Exception ex) {
-							Connection.MessageBox(ses.this, ex.getMessage());
-							return;
-						}
+								C.Save(SQL);
+							} catch (Exception ex) {
+								Connection.MessageBox(ses.this, ex.getMessage());
+								return;
+							}
 
-						if (txtQ019f.getText().length() == 0) {
-							Connection.MessageBox(ses.this, "খানায় কয়টা খাট/চৌকি আছে তথ্য খালি রাখা যাবে না ");
-							return;
-						}
-						if (txtQ019g.getText().length() == 0) {
-							Connection.MessageBox(ses.this, "খানায় কয়টা আলনা আছে তথ্য খালি রাখা যাবে না ");
-							return;
-						}
-						if (txtQ019h.getText().length() == 0) {
-							Connection.MessageBox(ses.this, "খানায় কয়টা লেপ/কম্বল আছে তথ্য খালি রাখা যাবে না ");
-							return;
-						}
-						if (txtQ019i.getText().length() == 0) {
-							Connection.MessageBox(ses.this, "খানায় কয়টা তোষক/জাযিম/ফোম আছে তথ্য খালি রাখা যাবে না ");
-							return;
-						}
-						if (txtQ019j.getText().length() == 0) {
-							Connection.MessageBox(ses.this, "খানায় কয়টা সেলাই মেশিন আছে তথ্য খালি রাখা যাবে না ");
-							return;
-						}
-						try {
-							SQL = "Update tTrans set Q019f='" + txtQ019f.getText() + "', Q019g='" + txtQ019g.getText() + "', Q019h='" + txtQ019h.getText() + "', Q019i='" + txtQ019i.getText() + "', Q019j='" + txtQ019j.getText() + "',PageNo='3' where ";
-							SQL += " status='s' and Vill||Bari||HH = '" + Household + "'";
-							SQL += " and SESNo='" + spnSESNo.getSelectedItem().toString() + "'";
+							//stop: 06 mar 2014
+							//if(txtQ019p.getText().length()==0)
+							//{
+							//	Connection.MessageBox(ses.this, "খানায় কয়টা বৈদ্যুতিক লাইট আছে তথ্য খালি রাখা যাবে না ");
+							//	return;
+							//}
+							if (txtQ019q.getText().length() == 0) {
+								Connection.MessageBox(ses.this, "খানায় কয়টা কুপি/হারিকেন আছে তথ্য খালি রাখা যাবে না ");
+								return;
+							}
+							if (txtQ019r.getText().length() == 0) {
+								Connection.MessageBox(ses.this, "খানায় কয়টা মোটর সাইকেল আছে তথ্য খালি রাখা যাবে না ");
+								return;
+							}
+							if (txtQ019s.getText().length() == 0) {
+								Connection.MessageBox(ses.this, "খানায় কয়টা টেলিফোন আছে তথ্য খালি রাখা যাবে না ");
+								return;
+							}
+							if (txtQ019t.getText().length() == 0) {
+								Connection.MessageBox(ses.this, "খানায় কয়টা মোবাইল ফোন আছে তথ্য খালি রাখা যাবে না ");
+								return;
+							}
+							try {
+								SQL = "Update tTrans set Q019p='', Q019q='" + txtQ019q.getText() + "', Q019r='" + txtQ019r.getText() + "', Q019s='" + txtQ019s.getText() + "', Q019t='" + txtQ019t.getText() + "',PageNo='5' where ";
+								SQL += " status='s' and Vill||Bari||HH = '" + Household + "'";
+								SQL += " and SESNo='" + spnSESNo.getSelectedItem().toString() + "'";
 
-							C.Save(SQL);
-						} catch (Exception ex) {
-							Connection.MessageBox(ses.this, ex.getMessage());
-							return;
-						}
+								C.Save(SQL);
+							} catch (Exception ex) {
+								Connection.MessageBox(ses.this, ex.getMessage());
+								return;
+							}
 
-						if (txtQ019k.getText().length() == 0) {
-							Connection.MessageBox(ses.this, "খানায় কয়টা হাত ঘড়ি/দেয়াল ঘড়ি আছে তথ্য খালি রাখা যাবে না ");
-							return;
-						}
-						if (txtQ019l.getText().length() == 0) {
-							Connection.MessageBox(ses.this, "খানায় কয়টা রেডিও আছে তথ্য খালি রাখা যাবে না ");
-							return;
-						}
-						if (txtQ019m.getText().length() == 0) {
-							Connection.MessageBox(ses.this, "খানায় কয়টা  টেলিভিশন আছে তথ্য খালি রাখা যাবে না ");
-							return;
-						}
-						if (txtQ019n.getText().length() == 0) {
-							Connection.MessageBox(ses.this, "খানায় কয়টা ফ্রিজ আছে তথ্য খালি রাখা যাবে না ");
-							return;
-						}
-						if (txtQ019o.getText().length() == 0) {
-							Connection.MessageBox(ses.this, "খানায় কয়টা  বৈদ্যুতিক ফ্যান আছে তথ্য খালি রাখা যাবে না ");
-							return;
-						}
-						try {
-							SQL = "Update tTrans set Q019k='" + txtQ019k.getText() + "', Q019l='" + txtQ019l.getText() + "', Q019m='" + txtQ019m.getText() + "', Q019n='" + txtQ019n.getText() + "', Q019o='" + txtQ019o.getText() + "',PageNo='4' where ";
-							SQL += " status='s' and Vill||Bari||HH = '" + Household + "'";
-							SQL += " and SESNo='" + spnSESNo.getSelectedItem().toString() + "'";
+							if (txtQ019u.getText().length() == 0) {
+								Connection.MessageBox(ses.this, "খানায় কয়টা সাইকেল আছে তথ্য খালি রাখা যাবে না ");
+								return;
+							}
+							if (txtQ019v.getText().length() == 0) {
+								Connection.MessageBox(ses.this, "খানায় কয়টা গাড়ী/মাইক্রোবাস/ভ্যান আছে তথ্য খালি রাখা যাবে না ");
+								return;
+							}
+							if (txtQ019w.getText().length() == 0) {
+								Connection.MessageBox(ses.this, "খানায় কয়টা রিকশা/রিকশা ভ্যান আছে তথ্য খালি রাখা যাবে না ");
+								return;
+							}
+							if (txtQ019x.getText().length() == 0) {
+								Connection.MessageBox(ses.this, "খানায় কয়টা নৌকা আছে তথ্য খালি রাখা যাবে না ");
+								return;
+							}
+							if (txtQ019y.getText().length() == 0) {
+								Connection.MessageBox(ses.this, "খানায় কয়টা যন্ত্রচালিত নৌকা আছে তথ্য খালি রাখা যাবে না ");
+								return;
+							}
+							if (txtQ019z.getText().length() == 0) {
+								Connection.MessageBox(ses.this, "খানায় কয়টা কলের লাঙ্গল আছে তথ্য খালি রাখা যাবে না ");
+								return;
+							}
+							try {
+								SQL = "Update tTrans set Q019u='" + txtQ019u.getText() + "', Q019v='" + txtQ019v.getText() + "', Q019w='" + txtQ019w.getText() + "', Q019x='" + txtQ019x.getText() + "', Q019y='" + txtQ019y.getText() + "', Q019z='" + txtQ019z.getText() + "',PageNo='6' where ";
+								SQL += " status='s' and Vill||Bari||HH = '" + Household + "'";
+								SQL += " and SESNo='" + spnSESNo.getSelectedItem().toString() + "'";
 
-							C.Save(SQL);
-						} catch (Exception ex) {
-							Connection.MessageBox(ses.this, ex.getMessage());
-							return;
-						}
+								C.Save(SQL);
+							} catch (Exception ex) {
+								Connection.MessageBox(ses.this, ex.getMessage());
+								return;
+							}
 
-						//stop: 06 mar 2014
-						//if(txtQ019p.getText().length()==0)
-						//{
-						//	Connection.MessageBox(ses.this, "খানায় কয়টা বৈদ্যুতিক লাইট আছে তথ্য খালি রাখা যাবে না ");
-						//	return;
-						//}
-						if (txtQ019q.getText().length() == 0) {
-							Connection.MessageBox(ses.this, "খানায় কয়টা কুপি/হারিকেন আছে তথ্য খালি রাখা যাবে না ");
-							return;
-						}
-						if (txtQ019r.getText().length() == 0) {
-							Connection.MessageBox(ses.this, "খানায় কয়টা মোটর সাইকেল আছে তথ্য খালি রাখা যাবে না ");
-							return;
-						}
-						if (txtQ019s.getText().length() == 0) {
-							Connection.MessageBox(ses.this, "খানায় কয়টা টেলিফোন আছে তথ্য খালি রাখা যাবে না ");
-							return;
-						}
-						if (txtQ019t.getText().length() == 0) {
-							Connection.MessageBox(ses.this, "খানায় কয়টা মোবাইল ফোন আছে তথ্য খালি রাখা যাবে না ");
-							return;
-						}
-						try {
-							SQL = "Update tTrans set Q019p='', Q019q='" + txtQ019q.getText() + "', Q019r='" + txtQ019r.getText() + "', Q019s='" + txtQ019s.getText() + "', Q019t='" + txtQ019t.getText() + "',PageNo='5' where ";
-							SQL += " status='s' and Vill||Bari||HH = '" + Household + "'";
-							SQL += " and SESNo='" + spnSESNo.getSelectedItem().toString() + "'";
+							if (txtQ020a.getText().length() == 0) {
+								Connection.MessageBox(ses.this, "খানায় কয়টা গরু আছে তথ্য খালি রাখা যাবে না ");
+								return;
+							} else if (Integer.parseInt(txtQ020a.getText().toString()) > 88 & Integer.parseInt(txtQ020a.getText().toString()) < 99) {
+								Connection.MessageBox(ses.this, "খানায় ৮৮ টি  গরুর বেশী হলে ৮৮ রেকর্ড করুন");
+								return;
+							}
+							if (txtQ020b.getText().length() == 0) {
+								Connection.MessageBox(ses.this, "খানায় কয়টা মহিষ আছে তথ্য খালি রাখা যাবে না ");
+								return;
+							} else if (Integer.parseInt(txtQ020b.getText().toString()) > 88 & Integer.parseInt(txtQ020b.getText().toString()) < 99) {
+								Connection.MessageBox(ses.this, "খানায় ৮৮ টি  মহিষের বেশী হলে ৮৮ রেকর্ড করুন");
+								return;
+							}
+							if (txtQ020c.getText().length() == 0) {
+								Connection.MessageBox(ses.this, "খানায় কয়টা ছাগল আছে তথ্য খালি রাখা যাবে না ");
+								return;
+							} else if (Integer.parseInt(txtQ020c.getText().toString()) > 88 & Integer.parseInt(txtQ020c.getText().toString()) < 99) {
+								Connection.MessageBox(ses.this, "খানায় ৮৮ টি  ছাগলের বেশী হলে ৮৮ রেকর্ড করুন");
+								return;
+							}
+							if (txtQ020d.getText().length() == 0) {
+								Connection.MessageBox(ses.this, "খানায় কয়টা ভেড়া আছে তথ্য খালি রাখা যাবে না ");
+								return;
+							} else if (Integer.parseInt(txtQ020d.getText().toString()) > 88 & Integer.parseInt(txtQ020d.getText().toString()) < 99) {
+								Connection.MessageBox(ses.this, "খানায় ৮৮ টি  ভেড়ার বেশী হলে ৮৮ রেকর্ড করুন");
+								return;
+							}
+							if (txtQ020e.getText().length() == 0) {
+								Connection.MessageBox(ses.this, "খানায় কয়টা মুরগী আছে তথ্য খালি রাখা যাবে না ");
+								return;
+							} else if (Integer.parseInt(txtQ020e.getText().toString()) > 88 & Integer.parseInt(txtQ020e.getText().toString()) < 99) {
+								Connection.MessageBox(ses.this, "খানায় ৮৮ টি  মুরগীর বেশী হলে ৮৮ রেকর্ড করুন");
+								return;
+							}
+							if (txtQ020f.getText().length() == 0) {
+								Connection.MessageBox(ses.this, "খানায় কয়টা হাঁস আছে তথ্য খালি রাখা যাবে না ");
+								return;
+							} else if (Integer.parseInt(txtQ020f.getText().toString()) > 88 & Integer.parseInt(txtQ020f.getText().toString()) < 99) {
+								Connection.MessageBox(ses.this, "খানায় ৮৮ টি  হাঁসের বেশী হলে ৮৮ রেকর্ড করুন");
+								return;
+							}
+							if (txtQ020g.getText().length() == 0) {
+								Connection.MessageBox(ses.this, "খানায় কয়টা কবুতর আছে তথ্য খালি রাখা যাবে না ");
+								return;
+							} else if (Integer.parseInt(txtQ020g.getText().toString()) > 88 & Integer.parseInt(txtQ020g.getText().toString()) < 99) {
+								Connection.MessageBox(ses.this, "খানায় ৮৮ টি  কবুতরের বেশী হলে ৮৮ রেকর্ড করুন");
+								return;
+							}
+							if (txtQ020h.getText().length() == 0) {
+								Connection.MessageBox(ses.this, "খানায় কয়টা ঘোড়া আছে তথ্য খালি রাখা যাবে না ");
+								return;
+							} else if (Integer.parseInt(txtQ020h.getText().toString()) > 88 & Integer.parseInt(txtQ020h.getText().toString()) < 99) {
+								Connection.MessageBox(ses.this, "খানায় ৮৮ টি  ঘোড়ার বেশী হলে ৮৮ রেকর্ড করুন");
+								return;
+							}
+							try {
+								SQL = "Update tTrans set Q020a='" + txtQ020a.getText() + "', Q020b='" + txtQ020b.getText() + "', Q020c='" + txtQ020c.getText() + "', Q020d='" + txtQ020d.getText() + "', Q020e='" + txtQ020e.getText() + "', Q020f='" + txtQ020f.getText() + "', Q020g='" + txtQ020g.getText() + "', Q020h='" + txtQ020h.getText() + "',PageNo='7' where ";
+								SQL += " status='s' and Vill||Bari||HH = '" + Household + "'";
+								SQL += " and SESNo='" + spnSESNo.getSelectedItem().toString() + "'";
 
-							C.Save(SQL);
-						} catch (Exception ex) {
-							Connection.MessageBox(ses.this, ex.getMessage());
-							return;
-						}
+								C.Save(SQL);
+							} catch (Exception ex) {
+								Connection.MessageBox(ses.this, ex.getMessage());
+								return;
+							}
 
-						if (txtQ019u.getText().length() == 0) {
-							Connection.MessageBox(ses.this, "খানায় কয়টা সাইকেল আছে তথ্য খালি রাখা যাবে না ");
+							if (txtQ021.getText().length() == 0 || Integer.parseInt(txtQ021.getText().toString()) > 30) {
+								Connection.MessageBox(ses.this, "খানায় কয়টা রুম আছে তথ্য খালি রাখা  বা ৩০ এর বেশী হতে পারে না ");
+								return;
+							}
+							if (spnQ022a.getSelectedItemPosition() == 0) {
+								Connection.MessageBox(ses.this, "প্রধান বসত ঘরের চালের নির্মাণ সামগ্রী কোনটা তথ্য খালি রাখা যাবে না ");
+								return;
+							}
+							if (spnQ022b.getSelectedItemPosition() == 0) {
+								Connection.MessageBox(ses.this, "প্রধান বসত ঘরের দেওয়ালের নির্মাণ সামগ্রী কোনটা তথ্য খালি রাখা যাবে না ");
+								return;
+							}
+							if (spnQ022c.getSelectedItemPosition() == 0) {
+								Connection.MessageBox(ses.this, "প্রধান বসত ঘরের মেঝের নির্মাণ সামগ্রী কোনটা তথ্য খালি রাখা যাবে না ");
+								return;
+							}
+						/*if (spnQ022a.getSelectedItemPosition() == 6 && spnQ022b.getSelectedItemPosition() != 6) {
+							Connection.MessageBox(ses.this, "প্রধান বসত ঘরের চালের নির্মাণ সামগ্রী সিমেন্ট/ইট/বালি তাই  ঘরের মেঝের নির্মাণ সামগ্রী সিমেন্ট/ইট দিতে হবে");
 							return;
-						}
-						if (txtQ019v.getText().length() == 0) {
-							Connection.MessageBox(ses.this, "খানায় কয়টা গাড়ী/মাইক্রোবাস/ভ্যান আছে তথ্য খালি রাখা যাবে না ");
-							return;
-						}
-						if (txtQ019w.getText().length() == 0) {
-							Connection.MessageBox(ses.this, "খানায় কয়টা রিকশা/রিকশা ভ্যান আছে তথ্য খালি রাখা যাবে না ");
-							return;
-						}
-						if (txtQ019x.getText().length() == 0) {
-							Connection.MessageBox(ses.this, "খানায় কয়টা নৌকা আছে তথ্য খালি রাখা যাবে না ");
-							return;
-						}
-						if (txtQ019y.getText().length() == 0) {
-							Connection.MessageBox(ses.this, "খানায় কয়টা যন্ত্রচালিত নৌকা আছে তথ্য খালি রাখা যাবে না ");
-							return;
-						}
-						if (txtQ019z.getText().length() == 0) {
-							Connection.MessageBox(ses.this, "খানায় কয়টা কলের লাঙ্গল আছে তথ্য খালি রাখা যাবে না ");
-							return;
-						}
-						try {
-							SQL = "Update tTrans set Q019u='" + txtQ019u.getText() + "', Q019v='" + txtQ019v.getText() + "', Q019w='" + txtQ019w.getText() + "', Q019x='" + txtQ019x.getText() + "', Q019y='" + txtQ019y.getText() + "', Q019z='" + txtQ019z.getText() + "',PageNo='6' where ";
-							SQL += " status='s' and Vill||Bari||HH = '" + Household + "'";
-							SQL += " and SESNo='" + spnSESNo.getSelectedItem().toString() + "'";
+						}*/
+							try {
+								SQL = "Update tTrans set Q021='" + txtQ021.getText() + "', Q022a='" + String.valueOf(spnQ022a.getSelectedItemPosition()) + "', Q022b='" + String.valueOf(spnQ022b.getSelectedItemPosition()) + "', Q022c='" + String.valueOf(spnQ022c.getSelectedItemPosition()) + "',PageNo='8' where ";
+								SQL += " status='s' and Vill||Bari||HH = '" + Household + "'";
+								SQL += " and SESNo='" + spnSESNo.getSelectedItem().toString() + "'";
 
-							C.Save(SQL);
-						} catch (Exception ex) {
-							Connection.MessageBox(ses.this, ex.getMessage());
-							return;
-						}
+								C.Save(SQL);
+							} catch (Exception ex) {
+								Connection.MessageBox(ses.this, ex.getMessage());
+								return;
+							}
 
-						if (txtQ020a.getText().length() == 0) {
-							Connection.MessageBox(ses.this, "খানায় কয়টা গরু আছে তথ্য খালি রাখা যাবে না ");
-							return;
-						} else if (Integer.parseInt(txtQ020a.getText().toString()) > 88 & Integer.parseInt(txtQ020a.getText().toString()) < 99) {
-							Connection.MessageBox(ses.this, "খানায় ৮৮ টি  গরুর বেশী হলে ৮৮ রেকর্ড করুন");
-							return;
-						}
-						if (txtQ020b.getText().length() == 0) {
-							Connection.MessageBox(ses.this, "খানায় কয়টা মহিষ আছে তথ্য খালি রাখা যাবে না ");
-							return;
-						} else if (Integer.parseInt(txtQ020b.getText().toString()) > 88 & Integer.parseInt(txtQ020b.getText().toString()) < 99) {
-							Connection.MessageBox(ses.this, "খানায় ৮৮ টি  মহিষের বেশী হলে ৮৮ রেকর্ড করুন");
-							return;
-						}
-						if (txtQ020c.getText().length() == 0) {
-							Connection.MessageBox(ses.this, "খানায় কয়টা ছাগল আছে তথ্য খালি রাখা যাবে না ");
-							return;
-						} else if (Integer.parseInt(txtQ020c.getText().toString()) > 88 & Integer.parseInt(txtQ020c.getText().toString()) < 99) {
-							Connection.MessageBox(ses.this, "খানায় ৮৮ টি  ছাগলের বেশী হলে ৮৮ রেকর্ড করুন");
-							return;
-						}
-						if (txtQ020d.getText().length() == 0) {
-							Connection.MessageBox(ses.this, "খানায় কয়টা ভেড়া আছে তথ্য খালি রাখা যাবে না ");
-							return;
-						} else if (Integer.parseInt(txtQ020d.getText().toString()) > 88 & Integer.parseInt(txtQ020d.getText().toString()) < 99) {
-							Connection.MessageBox(ses.this, "খানায় ৮৮ টি  ভেড়ার বেশী হলে ৮৮ রেকর্ড করুন");
-							return;
-						}
-						if (txtQ020e.getText().length() == 0) {
-							Connection.MessageBox(ses.this, "খানায় কয়টা মুরগী আছে তথ্য খালি রাখা যাবে না ");
-							return;
-						} else if (Integer.parseInt(txtQ020e.getText().toString()) > 88 & Integer.parseInt(txtQ020e.getText().toString()) < 99) {
-							Connection.MessageBox(ses.this, "খানায় ৮৮ টি  মুরগীর বেশী হলে ৮৮ রেকর্ড করুন");
-							return;
-						}
-						if (txtQ020f.getText().length() == 0) {
-							Connection.MessageBox(ses.this, "খানায় কয়টা হাঁস আছে তথ্য খালি রাখা যাবে না ");
-							return;
-						} else if (Integer.parseInt(txtQ020f.getText().toString()) > 88 & Integer.parseInt(txtQ020f.getText().toString()) < 99) {
-							Connection.MessageBox(ses.this, "খানায় ৮৮ টি  হাঁসের বেশী হলে ৮৮ রেকর্ড করুন");
-							return;
-						}
-						if (txtQ020g.getText().length() == 0) {
-							Connection.MessageBox(ses.this, "খানায় কয়টা কবুতর আছে তথ্য খালি রাখা যাবে না ");
-							return;
-						} else if (Integer.parseInt(txtQ020g.getText().toString()) > 88 & Integer.parseInt(txtQ020g.getText().toString()) < 99) {
-							Connection.MessageBox(ses.this, "খানায় ৮৮ টি  কবুতরের বেশী হলে ৮৮ রেকর্ড করুন");
-							return;
-						}
-						if (txtQ020h.getText().length() == 0) {
-							Connection.MessageBox(ses.this, "খানায় কয়টা ঘোড়া আছে তথ্য খালি রাখা যাবে না ");
-							return;
-						} else if (Integer.parseInt(txtQ020h.getText().toString()) > 88 & Integer.parseInt(txtQ020h.getText().toString()) < 99) {
-							Connection.MessageBox(ses.this, "খানায় ৮৮ টি  ঘোড়ার বেশী হলে ৮৮ রেকর্ড করুন");
-							return;
-						}
-						try {
-							SQL = "Update tTrans set Q020a='" + txtQ020a.getText() + "', Q020b='" + txtQ020b.getText() + "', Q020c='" + txtQ020c.getText() + "', Q020d='" + txtQ020d.getText() + "', Q020e='" + txtQ020e.getText() + "', Q020f='" + txtQ020f.getText() + "', Q020g='" + txtQ020g.getText() + "', Q020h='" + txtQ020h.getText() + "',PageNo='7' where ";
-							SQL += " status='s' and Vill||Bari||HH = '" + Household + "'";
-							SQL += " and SESNo='" + spnSESNo.getSelectedItem().toString() + "'";
+							if (txtQ023a.getText().length() == 0 || txtQ023b.getText().length() == 0) {
+								Connection.MessageBox(ses.this, "খানায় বসত ভিটার জন্য কতটুক  জমি আছে তথ্য খালি রাখা যাবে না ");
+								return;
+							}
+							if (txtQ024a.getText().length() == 0 || txtQ024b.getText().length() == 0) {
+								Connection.MessageBox(ses.this, "খানায় চাষের জন্য কতটুক  জমি আছে তথ্য খালি রাখা যাবে না ");
+								return;
+							}
+							if (txtQ025a.getText().length() == 0 || txtQ025b.getText().length() == 0) {
+								Connection.MessageBox(ses.this, "খানায় বসত ভিটা ও চাষের জমি ছাড়া কতটুক  জমি আছে তথ্য খালি রাখা যাবে না ");
+								return;
+							}
 
-							C.Save(SQL);
-						} catch (Exception ex) {
-							Connection.MessageBox(ses.this, ex.getMessage());
-							return;
-						}
+							try {
+								SQL = "Update tTrans set Q023a='" + txtQ023a.getText() + "', Q023b='" + txtQ023b.getText() + "', Q024a='" + txtQ024a.getText() + "', Q024b='" + txtQ024b.getText() + "',Q025a='" + txtQ025a.getText() + "', Q025b='" + txtQ025b.getText() + "',PageNo='9' where ";
+								SQL += " status='s' and Vill||Bari||HH = '" + Household + "'";
+								SQL += " and SESNo='" + spnSESNo.getSelectedItem().toString() + "'";
 
-						if (txtQ021.getText().length() == 0 || Integer.parseInt(txtQ021.getText().toString()) > 30) {
-							Connection.MessageBox(ses.this, "খানায় কয়টা রুম আছে তথ্য খালি রাখা  বা ৩০ এর বেশী হতে পারে না ");
-							return;
-						}
-						if (spnQ022a.getSelectedItemPosition() == 0) {
-							Connection.MessageBox(ses.this, "প্রধান বসত ঘরের চালের নির্মাণ সামগ্রী কোনটা তথ্য খালি রাখা যাবে না ");
-							return;
-						}
-						if (spnQ022b.getSelectedItemPosition() == 0) {
-							Connection.MessageBox(ses.this, "প্রধান বসত ঘরের দেওয়ালের নির্মাণ সামগ্রী কোনটা তথ্য খালি রাখা যাবে না ");
-							return;
-						}
-						if (spnQ022c.getSelectedItemPosition() == 0) {
-							Connection.MessageBox(ses.this, "প্রধান বসত ঘরের মেঝের নির্মাণ সামগ্রী কোনটা তথ্য খালি রাখা যাবে না ");
-							return;
-						}
-						if (spnQ022a.getSelectedItemPosition() == 6 && spnQ022b.getSelectedItemPosition() != 6) {
-							Connection.MessageBox(ses.this, "প্রধান বসত ঘরের চালের নির্মাণ সামগ্রী সিমেন্ট/ইট/ বালি তাই  ঘরের মেঝের নির্মাণ সামগ্রী সিমেন্ট/ইট দিতে হবে");
-							return;
-						}
-						try {
-							SQL = "Update tTrans set Q021='" + txtQ021.getText() + "', Q022a='" + String.valueOf(spnQ022a.getSelectedItemPosition()) + "', Q022b='" + String.valueOf(spnQ022b.getSelectedItemPosition()) + "', Q022c='" + String.valueOf(spnQ022c.getSelectedItemPosition()) + "',PageNo='8' where ";
-							SQL += " status='s' and Vill||Bari||HH = '" + Household + "'";
-							SQL += " and SESNo='" + spnSESNo.getSelectedItem().toString() + "'";
+								C.Save(SQL);
+							} catch (Exception ex) {
+								Connection.MessageBox(ses.this, ex.getMessage());
+								return;
+							}
 
-							C.Save(SQL);
-						} catch (Exception ex) {
-							Connection.MessageBox(ses.this, ex.getMessage());
-							return;
-						}
-
-						if (txtQ023a.getText().length() == 0 || txtQ023b.getText().length() == 0) {
-							Connection.MessageBox(ses.this, "খানায় বসত ভিটার জন্য কতটুক  জমি আছে তথ্য খালি রাখা যাবে না ");
-							return;
-						}
-						if (txtQ024a.getText().length() == 0 || txtQ024b.getText().length() == 0) {
-							Connection.MessageBox(ses.this, "খানায় চাষের জন্য কতটুক  জমি আছে তথ্য খালি রাখা যাবে না ");
-							return;
-						}
-						if (txtQ025a.getText().length() == 0 || txtQ025b.getText().length() == 0) {
-							Connection.MessageBox(ses.this, "খানায় বসত ভিটা ও চাষের জমি ছাড়া কতটুক  জমি আছে তথ্য খালি রাখা যাবে না ");
-							return;
-						}
-
-						try {
-							SQL = "Update tTrans set Q023a='" + txtQ023a.getText() + "', Q023b='" + txtQ023b.getText() + "', Q024a='" + txtQ024a.getText() + "', Q024b='" + txtQ024b.getText() + "',Q025a='" + txtQ025a.getText() + "', Q025b='" + txtQ025b.getText() + "',PageNo='9' where ";
-							SQL += " status='s' and Vill||Bari||HH = '" + Household + "'";
-							SQL += " and SESNo='" + spnSESNo.getSelectedItem().toString() + "'";
-
-							C.Save(SQL);
-						} catch (Exception ex) {
-							Connection.MessageBox(ses.this, ex.getMessage());
-							return;
-						}
-
-						if (!rdoYQ026.isChecked() && !rdoNQ026.isChecked()) {
-							Connection.MessageBox(ses.this, "সদস্যের কোন আত্মীয়স্বজন বিদেশে থাকে/ কাজ করে কি না তথ্য খালি রাখা যাবে না ");
-							return;
-						}
-						String VQ026 = "";
-						if (rdoYQ026.isChecked()) {
-							VQ026 = "1";
-						} else {
-							VQ026 = "2";
-						}
-
-						try {
+							if (!rdoYQ026.isChecked() && !rdoNQ026.isChecked()) {
+								Connection.MessageBox(ses.this, "সদস্যের কোন আত্মীয়স্বজন বিদেশে থাকে/ কাজ করে কি না তথ্য খালি রাখা যাবে না ");
+								return;
+							}
+							String VQ026 = "";
 							if (rdoYQ026.isChecked()) {
-								String V27A = "", V27B = "", V27C = "", V27D = "", V27E = "";
-								if (chkQ027a.isChecked()) {
-									V27A = "1";
-								} else {
-									V27A = "2";
-								}
-								if (chkQ027b.isChecked()) {
-									V27B = "1";
-								} else {
-									V27B = "2";
-								}
-								if (chkQ027c.isChecked()) {
-									V27C = "1";
-								} else {
-									V27C = "2";
-								}
-								if (chkQ027d.isChecked()) {
-									V27D = "1";
-								} else {
-									V27D = "2";
-								}
-								if (chkQ027e.isChecked()) {
-									V27E = "1";
-								} else {
-									V27E = "2";
-								}
-
-								SQL = "Update tTrans set Q026='" + VQ026 + "', Q027a='" + V27A + "', Q027b='" + V27B + "', Q027c='" + V27C + "', Q027d='" + V27D + "', Q027e='" + V27E + "',PageNo='10' where ";
-								SQL += " status='s' and Vill||Bari||HH = '" + Household + "'";
-								SQL += " and SESNo='" + spnSESNo.getSelectedItem().toString() + "'";
-
-								C.Save(SQL);
-
+								VQ026 = "1";
 							} else {
-								SQL = "Update tTrans set Q026='" + VQ026 + "', Q027a='', Q027b='', Q027c='', Q027d='', Q027e='', Q027f='', Q027g='', Q027h='', Q027i='', Q027j='', Q027y='', Q027z='', Q028a='', Q028b='', Q028c='', Q028d='', Q028e='', Q028y='', Q029='',PageNo='10' where ";
-								SQL += " status='s' and Vill||Bari||HH = '" + Household + "'";
-								SQL += " and SESNo='" + spnSESNo.getSelectedItem().toString() + "'";
-								C.Save(SQL);
-
+								VQ026 = "2";
 							}
-						} catch (Exception ex) {
-							Connection.MessageBox(ses.this, ex.getMessage());
-							return;
-						}
 
-						if (rdoYQ026.isChecked()) {
-							//stop: 23 apr 2018
+							try {
+								if (rdoYQ026.isChecked()) {
+									String V27A = "", V27B = "", V27C = "", V27D = "", V27E = "";
+									if (chkQ027a.isChecked()) {
+										V27A = "1";
+									} else {
+										V27A = "2";
+									}
+									if (chkQ027b.isChecked()) {
+										V27B = "1";
+									} else {
+										V27B = "2";
+									}
+									if (chkQ027c.isChecked()) {
+										V27C = "1";
+									} else {
+										V27C = "2";
+									}
+									if (chkQ027d.isChecked()) {
+										V27D = "1";
+									} else {
+										V27D = "2";
+									}
+									if (chkQ027e.isChecked()) {
+										V27E = "1";
+									} else {
+										V27E = "2";
+									}
+
+									SQL = "Update tTrans set Q026='" + VQ026 + "', Q027a='" + V27A + "', Q027b='" + V27B + "', Q027c='" + V27C + "', Q027d='" + V27D + "', Q027e='" + V27E + "',PageNo='10' where ";
+									SQL += " status='s' and Vill||Bari||HH = '" + Household + "'";
+									SQL += " and SESNo='" + spnSESNo.getSelectedItem().toString() + "'";
+
+									C.Save(SQL);
+
+								} else {
+									SQL = "Update tTrans set Q026='" + VQ026 + "', Q027a='', Q027b='', Q027c='', Q027d='', Q027e='', Q027f='', Q027g='', Q027h='', Q027i='', Q027j='', Q027y='', Q027z='', Q028a='', Q028b='', Q028c='', Q028d='', Q028e='', Q028y='', Q029='',PageNo='10' where ";
+									SQL += " status='s' and Vill||Bari||HH = '" + Household + "'";
+									SQL += " and SESNo='" + spnSESNo.getSelectedItem().toString() + "'";
+									C.Save(SQL);
+
+								}
+							} catch (Exception ex) {
+								Connection.MessageBox(ses.this, ex.getMessage());
+								return;
+							}
+
+							if (rdoYQ026.isChecked()) {
+								//stop: 23 apr 2018
 							/*if ((chkQ027z.isChecked()) && (chkQ027a.isChecked() || chkQ027b.isChecked() || chkQ027c.isChecked() || chkQ027d.isChecked() || chkQ027e.isChecked() || chkQ027f.isChecked() || chkQ027g.isChecked() || chkQ027h.isChecked() || chkQ027i.isChecked() || chkQ027j.isChecked() || chkQ027y.isChecked())) {
 								Connection.MessageBox(ses.this, "খানা প্রধানের সাথে বিদেশ অবস্থান কারী আত্মীয়ের সম্পক আছে তাই জানা নাই টিক হবে না");
 								return;
@@ -1352,58 +1357,58 @@ public class ses extends AppCompatActivity {
 								Connection.MessageBox(ses.this, "খানা প্রধানের সাথে বিদেশ অবস্থান কারী আত্মীয়ের সম্পক কি তা জানা নাই, তাই জানা নাই টিক হবে ");
 								return;
 							}*/
-							String V27F = "", V27G = "", V27H = "", V27I = "", V27J = "", V27Y = "", V27Z = "";
-							if (chkQ027f.isChecked()) {
-								V27F = "1";
-							} else {
-								V27F = "2";
-							}
-							if (chkQ027g.isChecked()) {
-								V27G = "1";
-							} else {
-								V27G = "2";
-							}
-							if (chkQ027h.isChecked()) {
-								V27H = "1";
-							} else {
-								V27H = "2";
-							}
-							if (chkQ027i.isChecked()) {
-								V27I = "1";
-							} else {
-								V27I = "2";
-							}
-							if (chkQ027j.isChecked()) {
-								V27J = "1";
-							} else {
-								V27J = "2";
-							}
-							if (chkQ027y.isChecked()) {
-								V27Y = "1";
-							} else {
-								V27Y = "2";
-							}
-							if (chkQ027z.isChecked()) {
-								V27Z = "1";
-							} else {
-								V27Z = "2";
+								String V27F = "", V27G = "", V27H = "", V27I = "", V27J = "", V27Y = "", V27Z = "";
+								if (chkQ027f.isChecked()) {
+									V27F = "1";
+								} else {
+									V27F = "2";
+								}
+								if (chkQ027g.isChecked()) {
+									V27G = "1";
+								} else {
+									V27G = "2";
+								}
+								if (chkQ027h.isChecked()) {
+									V27H = "1";
+								} else {
+									V27H = "2";
+								}
+								if (chkQ027i.isChecked()) {
+									V27I = "1";
+								} else {
+									V27I = "2";
+								}
+								if (chkQ027j.isChecked()) {
+									V27J = "1";
+								} else {
+									V27J = "2";
+								}
+								if (chkQ027y.isChecked()) {
+									V27Y = "1";
+								} else {
+									V27Y = "2";
+								}
+								if (chkQ027z.isChecked()) {
+									V27Z = "1";
+								} else {
+									V27Z = "2";
+								}
+
+								try {
+									SQL = "Update tTrans set  Q027f='" + V27F + "', Q027g='" + V27G + "', Q027h='" + V27H + "', Q027i='" + V27I + "', Q027j='" + V27J + "', Q027y='" + V27Y + "', Q027z='" + V27Z + "',PageNo='11' where ";
+									SQL += " status='s' and Vill||Bari||HH = '" + Household + "'";
+									SQL += " and SESNo='" + spnSESNo.getSelectedItem().toString() + "'";
+									C.Save(SQL);
+								} catch (Exception ex) {
+									Connection.MessageBox(ses.this, ex.getMessage());
+									return;
+								}
+
 							}
 
-							try {
-								SQL = "Update tTrans set  Q027f='" + V27F + "', Q027g='" + V27G + "', Q027h='" + V27H + "', Q027i='" + V27I + "', Q027j='" + V27J + "', Q027y='" + V27Y + "', Q027z='" + V27Z + "',PageNo='11' where ";
-								SQL += " status='s' and Vill||Bari||HH = '" + Household + "'";
-								SQL += " and SESNo='" + spnSESNo.getSelectedItem().toString() + "'";
-								C.Save(SQL);
-							} catch (Exception ex) {
-								Connection.MessageBox(ses.this, ex.getMessage());
-								return;
-							}
 
-						}
-
-
-						if (rdoYQ026.isChecked()) {
-							//stop : 23apr2018
+							if (rdoYQ026.isChecked()) {
+								//stop : 23apr2018
 							/*if (txtQ028a.getText().length() == 0) {
 								Connection.MessageBox(ses.this, "সদস্যের কতজন আত্মীয় যুক্তরাজ্য/লন্ডন/ইউরপে থাকে তথ্য খালি রাখা যাবে না ");
 								return;
@@ -1428,21 +1433,66 @@ public class ses extends AppCompatActivity {
 								Connection.MessageBox(ses.this, "সদস্যের কতজন আত্মীয় অন্যান্য জায়গাই থাকে তথ্য খালি রাখা যাবে না ");
 								return;
 							}*/
-							String V29 = "";
-							if (!rdoYQ029.isChecked() & !rdoNQ029.isChecked() && !rdoDKQ029.isChecked()) {
-								Connection.MessageBox(ses.this, "যে সকল আত্মীয়স্বজন দেশের বাইরে থাকে তারা টাকা পাঠায় কি না তথ্য খালি রাখা যাবে না ");
-								return;
+								String V29 = "";
+								if (!rdoYQ029.isChecked() & !rdoNQ029.isChecked() && !rdoDKQ029.isChecked()) {
+									Connection.MessageBox(ses.this, "যে সকল আত্মীয়স্বজন দেশের বাইরে থাকে তারা টাকা পাঠায় কি না তথ্য খালি রাখা যাবে না ");
+									return;
+								}
+								if (rdoYQ029.isChecked()) {
+									V29 = "1";
+								} else if (rdoNQ029.isChecked()) {
+									V29 = "2";
+								} else {
+									V29 = "9";
+								}
+
+								try {
+									SQL = "Update tTrans set  Q028a='" + txtQ028a.getText() + "',Q028b='" + txtQ028b.getText() + "',Q028c='" + txtQ028c.getText() + "',Q028d='" + txtQ028d.getText() + "',Q028e='" + txtQ028e.getText() + "',Q028y='" + txtQ028y.getText() + "',Q029='" + V29 + "',PageNo='12' where ";
+									SQL += " status='s' and Vill||Bari||HH = '" + Household + "'";
+									SQL += " and SESNo='" + spnSESNo.getSelectedItem().toString() + "'";
+									C.Save(SQL);
+								} catch (Exception ex) {
+									Connection.MessageBox(ses.this, ex.getMessage());
+									return;
+								}
+
 							}
-							if (rdoYQ029.isChecked()) {
-								V29 = "1";
-							} else if (rdoNQ029.isChecked()) {
-								V29 = "2";
+
+
+							String V30A = "", V30B = "", V30C = "", V30D = "", V30E = "", V30F = "";
+							if (chkQ030a.isChecked()) {
+								V30A = "1";
 							} else {
-								V29 = "9";
+								V30A = "2";
+							}
+							if (chkQ030b.isChecked()) {
+								V30B = "1";
+							} else {
+								V30B = "2";
+							}
+							if (chkQ030c.isChecked()) {
+								V30C = "1";
+							} else {
+								V30C = "2";
+							}
+							if (chkQ030d.isChecked()) {
+								V30D = "1";
+							} else {
+								V30D = "2";
+							}
+							if (chkQ030e.isChecked()) {
+								V30E = "1";
+							} else {
+								V30E = "2";
+							}
+							if (chkQ030f.isChecked()) {
+								V30F = "1";
+							} else {
+								V30F = "2";
 							}
 
 							try {
-								SQL = "Update tTrans set  Q028a='" + txtQ028a.getText() + "',Q028b='" + txtQ028b.getText() + "',Q028c='" + txtQ028c.getText() + "',Q028d='" + txtQ028d.getText() + "',Q028e='" + txtQ028e.getText() + "',Q028y='" + txtQ028y.getText() + "',Q029='" + V29 + "',PageNo='12' where ";
+								SQL = "Update tTrans set Q030a='" + V30A + "',Q030b='" + V30B + "',Q030c='" + V30C + "',Q030d='" + V30D + "',Q030e='" + V30E + "',Q030f='" + V30F + "',PageNo='13' where ";
 								SQL += " status='s' and Vill||Bari||HH = '" + Household + "'";
 								SQL += " and SESNo='" + spnSESNo.getSelectedItem().toString() + "'";
 								C.Save(SQL);
@@ -1451,109 +1501,65 @@ public class ses extends AppCompatActivity {
 								return;
 							}
 
-						}
+							if ((chkQ030z.isChecked()) && (chkQ030a.isChecked() || chkQ030b.isChecked() || chkQ030c.isChecked() || chkQ030d.isChecked() || chkQ030e.isChecked() || chkQ030f.isChecked() || chkQ030g.isChecked() || chkQ030h.isChecked())) {
+								Connection.MessageBox(ses.this, "খানার সদস্য নিম্নের সংস্থার সদস্য, তাই কোন সংস্থার সদস্য নয় টিক হবে না");
+								return;
+							} else if (!chkQ030z.isChecked() && !chkQ030a.isChecked() && !chkQ030b.isChecked() && !chkQ030c.isChecked() && !chkQ030d.isChecked() && !chkQ030e.isChecked() && !chkQ030f.isChecked() && !chkQ030g.isChecked() && !chkQ030h.isChecked()) {
+								Connection.MessageBox(ses.this, "খানার সদস্য নিম্নের সংস্থার সদস্য নয়, তাই কোন সংস্থার সদস্য নয় টিক হবে ");
+								return;
+							}
 
+							String V30G = "", V30H = "", V30Z = "", V31 = "";
+							if (chkQ030g.isChecked()) {
+								V30G = "1";
+							} else {
+								V30G = "2";
+							}
+							if (chkQ030h.isChecked()) {
+								V30H = "1";
+							} else {
+								V30H = "2";
+							}
+							if (chkQ030z.isChecked()) {
+								V30Z = "1";
+							} else {
+								V30Z = "2";
+							}
+							if (spnQ031.getSelectedItemPosition() == 0) {
+								Connection.MessageBox(ses.this, "আপনার পরিবারের কুমুদিনি হাসপাতালের  Prescription/Ticket আছে কি? তথ্য ফাকা রাখে যাবে না");
+								return;
+							}
+							if (spnQ031.getSelectedItemPosition() > 3) {
+								V31 = "9";
+							} else {
+								V31 = String.valueOf(spnQ031.getSelectedItemPosition());
+							}
 
-						String V30A = "", V30B = "", V30C = "", V30D = "", V30E = "", V30F = "";
-						if (chkQ030a.isChecked()) {
-							V30A = "1";
-						} else {
-							V30A = "2";
+							try {
+								SQL = "Update tTrans set Q030g='" + V30G + "',Q030h='" + V30H + "',Q030z='" + V30Z + "',Q031='" + V31 + "',PageNo='14',Upload='2' where ";
+								SQL += " status='s' and Vill||Bari||HH = '" + Household + "'";
+								SQL += " and SESNo='" + spnSESNo.getSelectedItem().toString() + "'";
+								C.Save(SQL);
+							} catch (Exception ex) {
+								Connection.MessageBox(ses.this, ex.getMessage());
+								return;
+							}
+							//Connection.MessageBox(ses.this, "সকল তথ্য সঠিকভাবে সেভ হয়েছে।");
+							finish();
+							//flipper.setDisplayedChild(0);
+							//return;
 						}
-						if (chkQ030b.isChecked()) {
-							V30B = "1";
-						} else {
-							V30B = "2";
-						}
-						if (chkQ030c.isChecked()) {
-							V30C = "1";
-						} else {
-							V30C = "2";
-						}
-						if (chkQ030d.isChecked()) {
-							V30D = "1";
-						} else {
-							V30D = "2";
-						}
-						if (chkQ030e.isChecked()) {
-							V30E = "1";
-						} else {
-							V30E = "2";
-						}
-						if (chkQ030f.isChecked()) {
-							V30F = "1";
-						} else {
-							V30F = "2";
-						}
-
-						try {
-							SQL = "Update tTrans set Q030a='" + V30A + "',Q030b='" + V30B + "',Q030c='" + V30C + "',Q030d='" + V30D + "',Q030e='" + V30E + "',Q030f='" + V30F + "',PageNo='13' where ";
-							SQL += " status='s' and Vill||Bari||HH = '" + Household + "'";
-							SQL += " and SESNo='" + spnSESNo.getSelectedItem().toString() + "'";
-							C.Save(SQL);
-						} catch (Exception ex) {
-							Connection.MessageBox(ses.this, ex.getMessage());
-							return;
-						}
-
-						if ((chkQ030z.isChecked()) && (chkQ030a.isChecked() || chkQ030b.isChecked() || chkQ030c.isChecked() || chkQ030d.isChecked() || chkQ030e.isChecked() || chkQ030f.isChecked() || chkQ030g.isChecked() || chkQ030h.isChecked())) {
-							Connection.MessageBox(ses.this, "খানার সদস্য নিম্নের সংস্থার সদস্য, তাই কোন সংস্থার সদস্য নয় টিক হবে না");
-							return;
-						} else if (!chkQ030z.isChecked() && !chkQ030a.isChecked() && !chkQ030b.isChecked() && !chkQ030c.isChecked() && !chkQ030d.isChecked() && !chkQ030e.isChecked() && !chkQ030f.isChecked() && !chkQ030g.isChecked() && !chkQ030h.isChecked()) {
-							Connection.MessageBox(ses.this, "খানার সদস্য নিম্নের সংস্থার সদস্য নয়, তাই কোন সংস্থার সদস্য নয় টিক হবে ");
-							return;
-						}
-
-						String V30G = "", V30H = "", V30Z = "", V31 = "";
-						if (chkQ030g.isChecked()) {
-							V30G = "1";
-						} else {
-							V30G = "2";
-						}
-						if (chkQ030h.isChecked()) {
-							V30H = "1";
-						} else {
-							V30H = "2";
-						}
-						if (chkQ030z.isChecked()) {
-							V30Z = "1";
-						} else {
-							V30Z = "2";
-						}
-						if (spnQ031.getSelectedItemPosition() == 0) {
-							Connection.MessageBox(ses.this, "আপনার পরিবারের কুমুদিনি হাসপাতালের  Prescription/Ticket আছে কি? তথ্য ফাকা রাখে যাবে না");
-							return;
-						}
-						if (spnQ031.getSelectedItemPosition() > 3) {
-							V31 = "9";
-						} else {
-							V31 = String.valueOf(spnQ031.getSelectedItemPosition());
-						}
-
-						try {
-							SQL = "Update tTrans set Q030g='" + V30G + "',Q030h='" + V30H + "',Q030z='" + V30Z + "',Q031='" + V31 + "',PageNo='14',Upload='2' where ";
-							SQL += " status='s' and Vill||Bari||HH = '" + Household + "'";
-							SQL += " and SESNo='" + spnSESNo.getSelectedItem().toString() + "'";
-							C.Save(SQL);
-						} catch (Exception ex) {
-							Connection.MessageBox(ses.this, ex.getMessage());
-							return;
-						}
-						//Connection.MessageBox(ses.this, "সকল তথ্য সঠিকভাবে সেভ হয়েছে।");
-						finish();
-						//flipper.setDisplayedChild(0);
-						//return;
 					}
 					catch (Exception e) {
                         if (spnVisit.getSelectedItem().toString().isEmpty() || spnVisit.getSelectedItem().toString()==null) {
-                            Connection.MessageBox(ses.this, "STATUS Empty");
+                            Connection.MessageBox(ses.this, "Status Empty");
                         }
                         else
                             Connection.MessageBox(ses.this,"Error");
 					}
 
 				}
-	  		  	
+
 	    	});
   		
 			spnSESNo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -1716,10 +1722,12 @@ public class ses extends AppCompatActivity {
 
 	        		if(cur.getString(cur.getColumnIndex("Visit")).equals("1"))
 	        			spnVisit.setSelection(1);
+					else if(cur.getString(cur.getColumnIndex("Visit")).equals("2"))
+						spnVisit.setSelection(2);
 	        		else if(cur.getString(cur.getColumnIndex("Visit")).equals("3"))
-	        			spnVisit.setSelection(2);
-	        		else if(cur.getString(cur.getColumnIndex("Visit")).equals("7"))
 	        			spnVisit.setSelection(3);
+	        		else if(cur.getString(cur.getColumnIndex("Visit")).equals("7"))
+	        			spnVisit.setSelection(7);
 	        		else
 	        			spnVisit.setSelection(0);
 	        		

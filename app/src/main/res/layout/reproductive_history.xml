@@ -3,13 +3,13 @@
         <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
             <TextView android:id="@+id/lblQ102" android:text="102." android:layout_width="60sp" android:layout_height="wrap_content" android:textSize="20sp" />
             <TextView android:id="@+id/VlblQ102" android:text="মহিলার সিরিয়াল নম্বরঃ " android:layout_width="200dp" android:layout_height="wrap_content" android:textSize="20sp" />
-            <Spinner android:id="@+id/txtQ102SL" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="10sp" android:textSize="20sp" android:drawSelectorOnTop="true"/>
+            <Spinner android:id="@+id/txtQ102SL" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginRight="10sp" android:textSize="20sp" android:drawSelectorOnTop="true"/>
         </LinearLayout>
         <View android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
         <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="@style/rowStyle0">
             <TextView android:id="@+id/lblQ103" android:text="103." android:layout_width="60sp" android:layout_height="wrap_content" android:textSize="20sp" />
             <TextView android:id="@+id/VlblQ103" android:text="সাক্ষাতের অবস্থা" android:layout_width="200dp" android:layout_height="wrap_content" android:textSize="20sp" />
-            <Spinner android:id="@+id/spnQ103" android:drawSelectorOnTop="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="0" android:prompt="@string/planet_prompt" android:textSize="20sp" />
+            <Spinner android:id="@+id/spnQ103" android:drawSelectorOnTop="true" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_weight="0" android:prompt="@string/planet_prompt" android:textSize="20sp" />
 
         </LinearLayout>
         <View android:layout_width="wrap_content" android:layout_height="1dip" android:background="#CCCCCC" />
