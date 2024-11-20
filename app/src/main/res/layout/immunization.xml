@@ -27,7 +27,7 @@
 		    android:layout_height="wrap_content"
 		    android:orientation="horizontal" >
    	
-	<ScrollView  android:layout_width="fill_parent" android:layout_height="480sp" android:overScrollMode="always" android:isScrollContainer="true"         android:scrollbarAlwaysDrawVerticalTrack="true"         android:scrollbarStyle="outsideInset"         android:scrollbars="vertical">
+	<ScrollView  android:layout_width="fill_parent" android:layout_height="400sp" android:overScrollMode="always" android:isScrollContainer="true"         android:scrollbarAlwaysDrawVerticalTrack="true"         android:scrollbarStyle="outsideInset"         android:scrollbars="vertical">
 	    
 	<LinearLayout android:id="@+id/secVaccine1"  android:orientation="vertical" android:layout_width="fill_parent"    android:layout_marginLeft="10sp" android:layout_marginRight="10sp"    android:layout_height="wrap_content" android:scrollbars="vertical">  
  
