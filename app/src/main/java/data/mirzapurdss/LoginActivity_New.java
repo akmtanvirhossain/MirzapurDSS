@@ -159,7 +159,7 @@ public class LoginActivity_New extends AppCompatActivity {
             //Need to update date every time whenever shared updated system
             //Format: DDMMYYYY
             //*********************************************************************
-            SystemUpdateDT = "30102024"; //old version date: "09112021"
+            SystemUpdateDT = "24112024"; //old version date: "09112021"
 
             lblSystemDate.setText("Version: 1.0, Built on: "+ SystemUpdateDT);
 
