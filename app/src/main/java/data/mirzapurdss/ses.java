@@ -12,6 +12,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -1620,7 +1621,7 @@ public class ses extends AppCompatActivity {
   		SQLStr+="(case when Q015c is null then '' else Q015c end) Q015c ,";
   		SQLStr+="(case when Q016a is null then '' else Q016a end) Q016a ,";
   		SQLStr+="(case when Q016b is null then '' else Q016b end) Q016b ,";
-  		SQLStr+="(case when Q016c is null then '' else Q016c  end) Q016c ,";
+  		SQLStr+="(case when Q016c is null then '' else Q016c end) Q016c ,";
   		SQLStr+="(case when Q017  is null then '' else Q017  end) Q017 ,";
   		SQLStr+="(case when Q018  is null then '' else Q018  end) Q018 ,";
   		SQLStr+="(case when Q019a is null then '' else Q019a end) Q019a ,";
@@ -1657,7 +1658,7 @@ public class ses extends AppCompatActivity {
   		SQLStr+="(case when Q020f is null then '' else Q020f end) Q020f ,";
   		SQLStr+="(case when Q020g is null then '' else Q020g end) Q020g ,";
   		SQLStr+="(case when Q020h is null then '' else Q020h end) Q020h ,";
-  		SQLStr+="(case when Q021  is null then '' else Q021 end) Q021 ,";
+  		SQLStr+="(case when Q021  is null then '' else Q021  end) Q021 ,";
   		SQLStr+="(case when Q022a is null then '' else Q022a end) Q022a ,";
   		SQLStr+="(case when Q022b is null then '' else Q022b end) Q022b ,";
   		SQLStr+="(case when Q022c is null then '' else Q022c end) Q022c ,";
@@ -1667,7 +1668,7 @@ public class ses extends AppCompatActivity {
   		SQLStr+="(case when Q024b is null then '' else Q024b end) Q024b ,";
   		SQLStr+="(case when Q025a is null then '' else Q025a end) Q025a ,";
   		SQLStr+="(case when Q025b is null then '' else Q025b end) Q025b ,";
-  		SQLStr+="(case when Q026  is null then '' else Q026 end) Q026 ,";
+  		SQLStr+="(case when Q026  is null then '' else Q026  end) Q026 ,";
 
   		SQLStr+="(case when Q027a is null then '' else Q027a end) Q027a ,";
   		SQLStr+="(case when Q027b is null then '' else Q027b end) Q027b ,";
@@ -1687,7 +1688,7 @@ public class ses extends AppCompatActivity {
   		SQLStr+="(case when Q028d is null then '' else Q028d end) Q028d ,";
   		SQLStr+="(case when Q028e is null then '' else Q028e end) Q028e ,";
   		SQLStr+="(case when Q028y is null then '' else Q028y end) Q028y ,";
-  		SQLStr+="(case when Q029  is null then '' else Q029 end) Q029 ,";
+  		SQLStr+="(case when Q029  is null then '' else Q029  end) Q029 ,";
   		SQLStr+="(case when Q030a is null then '' else Q030a end) Q030a ,";
   		SQLStr+="(case when Q030b is null then '' else Q030b end) Q030b ,";
   		SQLStr+="(case when Q030c is null then '' else Q030c end) Q030c ,";
@@ -1697,7 +1698,7 @@ public class ses extends AppCompatActivity {
   		SQLStr+="(case when Q030g is null then '' else Q030g end) Q030g ,";
   		SQLStr+="(case when Q030h is null then '' else Q030h end) Q030h ,";
   		SQLStr+="(case when Q030z is null then '' else Q030z end) Q030z ,";
-  		SQLStr+="(case when Q031 is null then '' else Q031 end) Q031 ,Vdate, Rnd";
+  		SQLStr+="(case when Q031  is null then '' else Q031 end) Q031 ,Vdate, Rnd";
   			
   		SQLStr+=" from tTrans where status='s' and Vill||Bari||HH = '"+ Household +"'";
   		SQLStr+=" and SESNo='"+ SESNo +"'";  		
@@ -1727,7 +1728,7 @@ public class ses extends AppCompatActivity {
 	        		else if(cur.getString(cur.getColumnIndex("Visit")).equals("3"))
 	        			spnVisit.setSelection(3);
 	        		else if(cur.getString(cur.getColumnIndex("Visit")).equals("7"))
-	        			spnVisit.setSelection(7);
+	        			spnVisit.setSelection(4);
 	        		else
 	        			spnVisit.setSelection(0);
 	        		
@@ -2001,10 +2002,11 @@ public class ses extends AppCompatActivity {
 	        		txtQ020h.setText(cur.getString(cur.getColumnIndex("Q020h")));
 	        		
 	        		txtQ021.setText(cur.getString(cur.getColumnIndex("Q021")));
-	        		
-	        		spnQ022a.setSelection(Integer.valueOf(cur.getString(cur.getColumnIndex("Q022a")).length()==0?"0":cur.getString(cur.getColumnIndex("Q022a"))));
-	        		spnQ022b.setSelection(Integer.valueOf(cur.getString(cur.getColumnIndex("Q022b")).length()==0?"0":cur.getString(cur.getColumnIndex("Q022b"))));
-	        		spnQ022c.setSelection(Integer.valueOf(cur.getString(cur.getColumnIndex("Q022c")).length()==0?"0":cur.getString(cur.getColumnIndex("Q022c"))));
+				Log.d("TAG", "MainDataRetrieve: Test: "+cur.getString(cur.getColumnIndex("Q022a")).trim());
+
+				//spnQ022a.setSelection(Integer.parseInt(cur.getString(cur.getColumnIndex("Q022a")).trim().length() == 0 ? "0" : cur.getString(cur.getColumnIndex("Q022a"))));
+				//spnQ022b.setSelection(Integer.parseInt(cur.getString(cur.getColumnIndex("Q022b")).trim().length() == 0 ? "0" : cur.getString(cur.getColumnIndex("Q022b"))));
+				//spnQ022c.setSelection(Integer.parseInt(cur.getString(cur.getColumnIndex("Q022c")).trim().length() == 0 ? "0" : cur.getString(cur.getColumnIndex("Q022c"))));
 	        		
 	        		txtQ023a.setText(cur.getString(cur.getColumnIndex("Q023a")));
 	        		txtQ023b.setText(cur.getString(cur.getColumnIndex("Q023b")));
