@@ -2004,9 +2004,9 @@ public class ses extends AppCompatActivity {
 	        		txtQ021.setText(cur.getString(cur.getColumnIndex("Q021")));
 				Log.d("TAG", "MainDataRetrieve: Test: "+cur.getString(cur.getColumnIndex("Q022a")).trim());
 
-				//spnQ022a.setSelection(Integer.parseInt(cur.getString(cur.getColumnIndex("Q022a")).trim().length() == 0 ? "0" : cur.getString(cur.getColumnIndex("Q022a"))));
-				//spnQ022b.setSelection(Integer.parseInt(cur.getString(cur.getColumnIndex("Q022b")).trim().length() == 0 ? "0" : cur.getString(cur.getColumnIndex("Q022b"))));
-				//spnQ022c.setSelection(Integer.parseInt(cur.getString(cur.getColumnIndex("Q022c")).trim().length() == 0 ? "0" : cur.getString(cur.getColumnIndex("Q022c"))));
+				spnQ022a.setSelection(Integer.parseInt(cur.getString(cur.getColumnIndex("Q022a")).trim().length() == 0 ? "0" : cur.getString(cur.getColumnIndex("Q022a"))));
+				spnQ022b.setSelection(Integer.parseInt(cur.getString(cur.getColumnIndex("Q022b")).trim().length() == 0 ? "0" : cur.getString(cur.getColumnIndex("Q022b"))));
+				spnQ022c.setSelection(Integer.parseInt(cur.getString(cur.getColumnIndex("Q022c")).trim().length() == 0 ? "0" : cur.getString(cur.getColumnIndex("Q022c"))));
 	        		
 	        		txtQ023a.setText(cur.getString(cur.getColumnIndex("Q023a")));
 	        		txtQ023b.setText(cur.getString(cur.getColumnIndex("Q023b")));
