@@ -18,5 +18,5 @@ public class ProjectSetting {
     //public static String Soap_Address    = ProjectSetting.ServerURL + "/"+ ProjectSetting.apiName +"/datasync.asmx";
     //public static String UpdatedSystem   = ProjectSetting.ServerURL + "/"+ ProjectSetting.apiName +"/Update/"+ ProjectSetting.NewVersionName +".txt";
 
-    public static String VersionDate    = "22022021"; //Format: DDMMYYYY
+    public static String VersionDate    = "26022025"; //Format: DDMMYYYY
 }

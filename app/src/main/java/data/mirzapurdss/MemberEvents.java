@@ -7228,7 +7228,8 @@ public class MemberEvents extends AppCompatActivity {
 				C.Save("Delete from Immunization where vill||bari||hh='"+ Household +"'");
 
 				//20 May 2016
-				C.Save("Insert into Immunization Select * from ImmunizationTemp");
+//				C.Save("Insert into Immunization Select * from ImmunizationTemp");
+				C.Save("Insert into Immunization Select * from ImmunizationTemp where vill||bari||hh='"+ Household +"'");
 			}catch(Exception ex)
 			{
 
