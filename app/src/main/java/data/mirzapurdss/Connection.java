@@ -89,6 +89,7 @@ public class Connection extends SQLiteOpenHelper {
 		SQL += "RabiesDT varchar(10),RabiesSource varchar(2),IPV varchar(1),IPVDT varchar(10),IPVSource varchar(2),VitaminA varchar(1),VitaminADT varchar(10),VitaminASource varchar(2),EnDt varchar(20),Upload varchar(1))";
 		*/
 
+/*
 		SQL = "CREATE TABLE Mig_Immunization(";
 		SQL += " Vill varchar(3),Bari varchar(4),HH varchar(2),Sno varchar(2),PNO varchar(8),Status varchar(2),BCG varchar(1),BCGDT varchar(10), BCGDTDk varchar(1),BCGSource varchar(2),Penta1 varchar(1),Penta1DT varchar(10), Penta1DTDK varchar(1),Penta1Source varchar(2),";
 		SQL += "Penta2 varchar(1),Penta2DT varchar(10), Penta2DTDK varchar(1),Penta2Source varchar(2),Penta3 varchar(1),Penta3DT varchar(10), Penta3DTDK varchar(1),Penta3Source varchar(2),PCV1 varchar(1),PCV1DT varchar(10), PCV1DTDK varchar(1),PCV1Source varchar(2),PCV2 varchar(1),PCV2DT varchar(10), PCV2DTDK varchar(1),";
@@ -97,12 +98,13 @@ public class Connection extends SQLiteOpenHelper {
 		SQL += "MR varchar(1),MRDT varchar(10),MRDTDK varchar(1),MRSource varchar(2),Rota varchar(1),RotaDT varchar(10), RotaDTDK varchar(1),RotaSource varchar(2),MMR varchar(1),MMRDT varchar(10), MMRDTDK varchar(1),MMRSource varchar(2),Typhoid varchar(1),TyphoidDT varchar(10),TyphoidDTDK varchar(1),TyphoidSource varchar(2),";
 		SQL += "Influ varchar(1),InfluDT varchar(10), InfluDTDK varchar(1),InfluSource varchar(2),HepaA varchar(1),HepaADT varchar(10), HepaADTDk varchar(1),HepaASource varchar(2),ChickenPox varchar(1),ChickenPoxDT varchar(10), ChickenPoxDTDk varchar(1),ChickenPoxSource varchar(2),Rabies varchar(1),";
 		SQL += "RabiesDT varchar(10), RabiesDTDk varchar(1),RabiesSource varchar(2),IPV varchar(1),IPVDT varchar(10),IPVDTDk varchar(1),IPVSource varchar(2), fIPV1 varchar (1),fIPVDT1 varchar (10), Fipvdt1dk varchar(1),fIPVSource1 varchar (2),fIPV2 varchar (1),fIPVDT2 varchar (10),fIPVSource2 varchar (2),";
-		SQL += "VitaminA varchar(1),VitaminADT varchar(10), VitaminADTDk varchar(1),VitaminASource varchar(2),EnDt varchar(20),Upload varchar(1))";
+		SQL += "VitaminA varchar(1),VitaminADT varchar(10), VitaminADTDk varchar(1),VitaminASource varchar(2),EnDt varchar(20),Upload varchar(1), modifydate datetime)";
 
 		CreateTable("Mig_Immunization",SQL);
-		if(!isFieldExist("Mig_Immunization","modifydate")){
+*/
+		/*if(!isFieldExist("Mig_Immunization","modifydate")){
 			Save("Alter table Mig_Immunization add column modifydate datetime");
-		}
+		}*/
 
 		CreateTable("Death"     ,"CREATE TABLE Death(Vill varchar(3) ,Bari varchar(4) ,HH varchar(2) ,SNo varchar(2) ,PNo varchar(8) ,Status varchar(2) ,DthPlace varchar(2) ,FacName varchar(2) ,FacOther varchar(50) ,Treatment varchar(1) ,WhenTreat varchar(3) ,Facility varchar(2) ,Disp varchar(2) ,WhoDisp varchar(50) ,Type varchar(2) ,Time varchar(2) , EverPreg varchar(1) ,PregonDeath varchar(1) ,LastPregTime varchar(2) ,DMY varchar(1) ,CauseofDeath varchar(2) , StartTime varchar(10) , EndTime varchar(10) ,   Lat varchar(50) ,       Lon varchar(50) ,       UserId varchar(10) ,    EnDt varchar(20) ,      Upload varchar(1) )");
 		CreateTable("Death_Temp","CREATE TABLE Death_Temp(Vill varchar(3) ,Bari varchar(4) ,HH varchar(2) ,SNo varchar(2) ,PNo varchar(8) ,Status varchar(2) ,DthPlace varchar(2) ,FacName varchar(2) ,FacOther varchar(50) ,Treatment varchar(1) ,WhenTreat varchar(3) ,Facility varchar(2) ,Disp varchar(2) ,WhoDisp varchar(50) ,Type varchar(2) ,Time varchar(2) ,    EverPreg varchar(1) ,PregonDeath varchar(1) ,LastPregTime varchar(2) ,DMY varchar(1) ,CauseofDeath varchar(2) , StartTime varchar(10) , EndTime varchar(10) ,   Lat varchar(50) ,       Lon varchar(50) ,       UserId varchar(10) ,    EnDt varchar(20) ,      Upload varchar(1) )");

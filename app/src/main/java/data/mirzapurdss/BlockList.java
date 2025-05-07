@@ -580,6 +580,10 @@ public class BlockList extends AppCompatActivity {
 			            		String SQL = "";
 			            		String S  = "";
 
+								C.Save("Delete from Mig_Immunization");
+								CJson.ExecuteCommandOnServer("Delete from sync_management where TableName='Mig_Immunization' and UserId='"+ CLUSTER +"'");
+								CJson.Sync_Download_Batch("Mig_Immunization",CLUSTER,"");
+
 								//CJson.Sync_Download_Batch("DatabaseTab",CLUSTER,"");
 								SQLStr  = "Select TableName, TableScript, ColumnList, UniqueID, Sync_Upload, Sync_Download, BatchSize, modifyDate from DatabaseTab as t\n" +
 										"where not exists(select * from Sync_Management where\n" +

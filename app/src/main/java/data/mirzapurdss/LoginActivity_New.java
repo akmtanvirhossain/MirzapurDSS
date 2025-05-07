@@ -159,7 +159,7 @@ public class LoginActivity_New extends AppCompatActivity {
             //Need to update date every time whenever shared updated system
             //Format: DDMMYYYY
             //*********************************************************************
-            SystemUpdateDT = "25022025"; //old version date: "09112021"
+            SystemUpdateDT = "26022025"; //old version date: "09112021"
 
             lblSystemDate.setText("Version: 1.0, Built on: "+ SystemUpdateDT);
 
@@ -235,6 +235,7 @@ public class LoginActivity_New extends AppCompatActivity {
                     if (resp1.length() == 0) C.Save("Insert into process_tab(process_id)values(4)");
                 }*/
 
+
                 //08112021
                 if (!C.Existence("Select * from process_tab where process_id=5")) {
                     C.CreateTable("DataCorrectionNote", "Create table DataCorrectionNote(Vill varchar (3),Bari varchar (4),HH varchar (2),Sno varchar (2),Serial int,Note nvarchar(500),Status varchar (1),ClearDate varchar (20),Cluster varchar (2),Block varchar (2),Upload varchar (1),modifyDate datetime,Constraint pk_DataCorrectionNote Primary Key(Vill,Bari,HH,Sno,Serial))");
@@ -246,6 +247,28 @@ public class LoginActivity_New extends AppCompatActivity {
                     C.CreateTable("data_GAge", "Create table data_GAge(Vill varchar (3),Bari varchar (4),HH varchar (2),SNo varchar (2),PNo varchar (10),GAge varchar (2),StartTime varchar (5),EndTime varchar (5),DeviceID varchar (10),EntryUser varchar (10),Lat varchar (20),Lon varchar (20),EnDt datetime,Upload int,modifyDate datetime,Constraint pk_data_GAge Primary Key(Vill,Bari,HH,SNo))");
                     C.Save("Insert into process_tab(process_id)values(6)");
                 }
+
+                if (!C.Existence("Select * from process_tab where process_id=6")) {
+                    C.CreateTable("data_GAge", "Create table data_GAge(Vill varchar (3),Bari varchar (4),HH varchar (2),SNo varchar (2),PNo varchar (10),GAge varchar (2),StartTime varchar (5),EndTime varchar (5),DeviceID varchar (10),EntryUser varchar (10),Lat varchar (20),Lon varchar (20),EnDt datetime,Upload int,modifyDate datetime,Constraint pk_data_GAge Primary Key(Vill,Bari,HH,SNo))");
+                    C.Save("Insert into process_tab(process_id)values(6)");
+                }
+
+                if (!C.Existence("Select * from process_tab where process_id=9")) {
+                C.SaveData("Drop Table Mig_Immunization");
+
+                   String SQL = "Create table Mig_Immunization(Vill varchar (3),Bari varchar (4),HH varchar (2),Sno varchar (2),PNO varchar (8),Status varchar (2),BCG varchar (1),BCGDT varchar (10),BCGSource varchar (2),BCGDTDk varchar (1),Penta1 varchar (1),Penta1DT varchar (10),Penta1Source varchar (2),Penta1DTDK varchar (1),Penta2 varchar (1),Penta2DT varchar (10),Penta2Source varchar (2),Penta2DTDK varchar (1),Penta3 varchar (1),Penta3DT varchar (10),Penta3Source varchar (2),Penta3DTDK varchar (1),PCV1 varchar (1),PCV1DT varchar (10),PCV1Source varchar (2),PCV1DTDK varchar (1),PCV2 varchar (1),PCV2DT varchar (10),PCV2Source varchar (2),PCV2DTDK varchar (1),PCV3 varchar (1),PCV3DT varchar (10),PCV3Source varchar (2),PCV3DTDK varchar (1),OPV0 varchar (1),OPV0DT varchar (10),OPV0Source varchar (2),OPV0DTDK varchar (1),OPV1 varchar (1),OPV1DT varchar (10),OPV1Source varchar (2),OPV1DTDK varchar (1),OPV2 varchar (1),OPV2DT varchar (10),OPV2Source varchar (2),OPV2DTDK varchar (1),OPV3 varchar (1),OPV3DT varchar (10),OPV3Source varchar (2),OPV3DTDK varchar (1),OPV4 varchar (1),OPV4DT varchar (10),OPV4Source varchar (2),OPV4DTDK varchar (1),Measles varchar (1),MeaslesDT varchar (10),MeaslesSource varchar (2),MeaslesDTDK varchar (1),MR varchar (1),MRDT varchar (10),MRSource varchar (2),MRDTDK varchar (1),Rota varchar (1),RotaDT varchar (10),RotaSource varchar (2),RotaDTDK varchar (1),MMR varchar (1),MMRDT varchar (10),MMRSource varchar (2),MMRDTDK varchar (1),Typhoid varchar (1),TyphoidDT varchar (10),TyphoidSource varchar (2),TyphoidDTDK varchar (1),Influ varchar (1),InfluDT varchar (10),InfluSource varchar (2),InfluDTDK varchar (1),HepaA varchar (1),HepaADT varchar (10),HepaASource varchar (2),HepaADTDk varchar (1),ChickenPox varchar (1),ChickenPoxDT varchar (10),ChickenPoxSource varchar (2),ChickenPoxDTDk varchar (1),Rabies varchar (1),RabiesDT varchar (10),RabiesSource varchar (2),RabiesDTDk varchar (1),IPV varchar (1),IPVDT varchar (10),IPVDTDk varchar (1),IPVSource varchar (2),fIPV1 varchar (1),fIPVDT1 varchar (10),Fipvdt1dk varchar (1),fIPVSource1 varchar (2),fIPV2 varchar (1),fIPVDT2 varchar (10),Fipvdt2Dk varchar (1),fIPVSource2 varchar (2),VitaminA varchar (1),VitaminADT varchar (10),VitaminADTDk varchar (1),VitaminASource varchar (2),EnDt varchar (20),Upload varchar (1),modifydate datetime,Constraint pk_Mig_Immunization Primary Key(Vill,Bari,HH,Sno))";
+
+                    C.CreateTable("Mig_Immunization",SQL);
+
+                    C.SaveData("Update DatabaseTab set \n" +
+                            " TableScript='Create table Mig_Immunization(Vill varchar (3),Bari varchar (4),HH varchar (2),Sno varchar (2),PNO varchar (8),Status varchar (2),BCG varchar (1),BCGDT varchar (10),BCGSource varchar (2),BCGDTDk varchar (1),Penta1 varchar (1),Penta1DT varchar (10),Penta1Source varchar (2),Penta1DTDK varchar (1),Penta2 varchar (1),Penta2DT varchar (10),Penta2Source varchar (2),Penta2DTDK varchar (1),Penta3 varchar (1),Penta3DT varchar (10),Penta3Source varchar (2),Penta3DTDK varchar (1),PCV1 varchar (1),PCV1DT varchar (10),PCV1Source varchar (2),PCV1DTDK varchar (1),PCV2 varchar (1),PCV2DT varchar (10),PCV2Source varchar (2),PCV2DTDK varchar (1),PCV3 varchar (1),PCV3DT varchar (10),PCV3Source varchar (2),PCV3DTDK varchar (1),OPV0 varchar (1),OPV0DT varchar (10),OPV0Source varchar (2),OPV0DTDK varchar (1),OPV1 varchar (1),OPV1DT varchar (10),OPV1Source varchar (2),OPV1DTDK varchar (1),OPV2 varchar (1),OPV2DT varchar (10),OPV2Source varchar (2),OPV2DTDK varchar (1),OPV3 varchar (1),OPV3DT varchar (10),OPV3Source varchar (2),OPV3DTDK varchar (1),OPV4 varchar (1),OPV4DT varchar (10),OPV4Source varchar (2),OPV4DTDK varchar (1),Measles varchar (1),MeaslesDT varchar (10),MeaslesSource varchar (2),MeaslesDTDK varchar (1),MR varchar (1),MRDT varchar (10),MRSource varchar (2),MRDTDK varchar (1),Rota varchar (1),RotaDT varchar (10),RotaSource varchar (2),RotaDTDK varchar (1),MMR varchar (1),MMRDT varchar (10),MMRSource varchar (2),MMRDTDK varchar (1),Typhoid varchar (1),TyphoidDT varchar (10),TyphoidSource varchar (2),TyphoidDTDK varchar (1),Influ varchar (1),InfluDT varchar (10),InfluSource varchar (2),InfluDTDK varchar (1),HepaA varchar (1),HepaADT varchar (10),HepaASource varchar (2),HepaADTDk varchar (1),ChickenPox varchar (1),ChickenPoxDT varchar (10),ChickenPoxSource varchar (2),ChickenPoxDTDk varchar (1),Rabies varchar (1),RabiesDT varchar (10),RabiesSource varchar (2),RabiesDTDk varchar (1),IPV varchar (1),IPVDT varchar (10),IPVDTDk varchar (1),IPVSource varchar (2),fIPV1 varchar (1),fIPVDT1 varchar (10),Fipvdt1dk varchar (1),fIPVSource1 varchar (2),fIPV2 varchar (1),fIPVDT2 varchar (10),Fipvdt2Dk varchar (1),fIPVSource2 varchar (2),VitaminA varchar (1),VitaminADT varchar (10),VitaminADTDk varchar (1),VitaminASource varchar (2),EnDt varchar (20),Upload varchar (1),modifydate datetime,Constraint pk_Mig_Immunization Primary Key(Vill,Bari,HH,Sno))',\n" +
+                            " ColumnList='Vill,Bari,HH,Sno,PNO,Status,BCG,BCGDT,BCGSource,BCGDTDk,Penta1,Penta1DT,Penta1Source,Penta1DTDK,Penta2,Penta2DT,Penta2Source,Penta2DTDK,Penta3,Penta3DT,Penta3Source,Penta3DTDK,PCV1,PCV1DT,PCV1Source,PCV1DTDK,PCV2,PCV2DT,PCV2Source,PCV2DTDK,PCV3,PCV3DT,PCV3Source,PCV3DTDK,OPV0,OPV0DT,OPV0Source,OPV0DTDK,OPV1,OPV1DT,OPV1Source,OPV1DTDK,OPV2,OPV2DT,OPV2Source,OPV2DTDK,OPV3,OPV3DT,OPV3Source,OPV3DTDK,OPV4,OPV4DT,OPV4Source,OPV4DTDK,Measles,MeaslesDT,MeaslesSource,MeaslesDTDK,MR,MRDT,MRSource,MRDTDK,Rota,RotaDT,RotaSource,RotaDTDK,MMR,MMRDT,MMRSource,MMRDTDK,Typhoid,TyphoidDT,TyphoidSource,TyphoidDTDK,Influ,InfluDT,InfluSource,InfluDTDK,HepaA,HepaADT,HepaASource,HepaADTDk,ChickenPox,ChickenPoxDT,ChickenPoxSource,ChickenPoxDTDk,Rabies,RabiesDT,RabiesSource,RabiesDTDk,IPV,IPVDT,IPVDTDk,IPVSource,fIPV1,fIPVDT1,Fipvdt1dk,fIPVSource1,fIPV2,fIPVDT2,Fipvdt2Dk,fIPVSource2,VitaminA,VitaminADT,VitaminADTDk,VitaminASource,EnDt,Upload,modifydate'\n" +
+                            " UniqueID='Vill,Bari,HH,Sno'\n" +
+                            " where TableName='Mig_Immunization'");
+//                    C.CreateTable("data_GAge", "Create table data_GAge(Vill varchar (3),Bari varchar (4),HH varchar (2),SNo varchar (2),PNo varchar (10),GAge varchar (2),StartTime varchar (5),EndTime varchar (5),DeviceID varchar (10),EntryUser varchar (10),Lat varchar (20),Lon varchar (20),EnDt datetime,Upload int,modifyDate datetime,Constraint pk_data_GAge Primary Key(Vill,Bari,HH,SNo))");
+                    C.Save("Insert into process_tab(process_id)values(9)");
+                }
+
 
             }catch (Exception ex){
 

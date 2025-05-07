@@ -2367,7 +2367,7 @@ public class Connection extends SQLiteOpenHelper {
             //Calculate batch size
             //------------------------------------------------------------------------------------------
             //0(zero) means all selected data
-            Integer batchSize = Integer.valueOf(ReturnSingleValue("select ifnull(batchsize,0)batchsize from DatabaseTab where TableName='" + TableName + "'"));
+            Integer batchSize = 500; //Integer.valueOf(ReturnSingleValue("select ifnull(batchsize,0)batchsize from DatabaseTab where TableName='" + TableName + "'"));
             Integer totalBatch = 1;
 
             if (batchSize == 0) {
