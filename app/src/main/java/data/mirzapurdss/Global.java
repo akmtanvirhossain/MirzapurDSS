@@ -9,7 +9,8 @@ import android.widget.Spinner;
 public class Global {
 	public static String Namespace       = "http://203.190.254.42/"; 	
 	//public static String Soap_Address    = "http://mchd.icddrb.org/dssjson/datasync.asmx";
-	public static String Soap_Address    = "http://182.160.109.210/dssjson/datasync.asmx";
+	//public static String Soap_Address    = "http://182.160.109.210/dssjson/datasync.asmx";
+	public static String Soap_Address    = "http://103.174.189.131/dssjson/datasync.asmx";
 	public static char VariableSeperator = '^';
 		
 	//Database

@@ -26,11 +26,11 @@ public class Global {
 	public static String Organization    = "ICDDRB, CHRF";
 	public static String Namespace       = "http://203.190.254.42/";
 	//public static String Soap_Address    = "http://mchd.icddrb.org/dssjson/datasync.asmx";
-	public static String Soap_Address    = "http://182.160.109.210/dssjson/datasync.asmx";
+	public static String Soap_Address    = "http://103.174.189.131/dssjson/datasync.asmx";
 
 	//New version
 	//public static String UpdatedSystem   = "http://mchd.icddrb.org/dssjson/Update/"+ Global.NewVersionName +".txt";
-	public static String UpdatedSystem   = "http://182.160.109.210/dssjson/Update/"+ Global.NewVersionName +".txt";
+	public static String UpdatedSystem   = "http://103.174.189.131/dssjson/Update/"+ Global.NewVersionName +".txt";
 
 	//Database
 	public static String DatabaseFolder = "DSSDatabase";
