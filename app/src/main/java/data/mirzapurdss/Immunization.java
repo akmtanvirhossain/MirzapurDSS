@@ -325,6 +325,18 @@ public class Immunization extends AppCompatActivity {
         final Spinner  spnVitaminA = (Spinner)findViewById(R.id.spnVitaminA);
         spnVitaminA.setAdapter(dataSource);
 
+        final CheckBox chkTCV = (CheckBox)findViewById(R.id.chkTCV);
+        final CheckBox chkTCVDTDk = (CheckBox)findViewById(R.id.chkTCVDTDk);
+        final EditText TCVDT = (EditText)findViewById(R.id.TCVDT);
+        final Spinner  spnTCV = (Spinner)findViewById(R.id.spnTCV);
+        spnTCV.setAdapter(dataSource);
+
+        final CheckBox chkMR2 = (CheckBox)findViewById(R.id.chkMR2);
+        final CheckBox chkMR2DTDk = (CheckBox)findViewById(R.id.chkMR2DTDk);
+        final EditText MR2DT = (EditText)findViewById(R.id.MR2DT);
+        final Spinner  spnMR2 = (Spinner)findViewById(R.id.spnMR2);
+        spnMR2.setAdapter(dataSource);
+
         final Button cmdImmSave  = (Button)findViewById(R.id.cmdImmSave);
         final Button cmdImmClose = (Button)findViewById(R.id.cmdImmClose);
         mImageView1 = (ImageButton)findViewById(R.id.imgForm1);
@@ -941,6 +953,35 @@ public class Immunization extends AppCompatActivity {
                     }
                 }
             });
+            chkTCVDTDk.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if (b)
+                    {
+                        TCVDT.setEnabled(false);
+                        TCVDT.setText("");
+                    }
+                    else
+                    {
+                        TCVDT.setEnabled(true);
+                    }
+                }
+            });
+
+            chkMR2DTDk.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if (b)
+                    {
+                        MR2DT.setEnabled(false);
+                        MR2DT.setText("");
+                    }
+                    else
+                    {
+                        MR2DT.setEnabled(true);
+                    }
+                }
+            });
 
            /* BCGDT.setOnTouchListener(new View.OnTouchListener() {
                 @Override
@@ -1033,6 +1074,10 @@ public class Immunization extends AppCompatActivity {
                             chkFipvdt2Dk.setChecked(false);
                             chkVitaminA.setChecked(false);
                             chkVitaminADTDk.setChecked(false);
+                            chkTCV.setChecked(false);
+                            chkTCVDTDk.setChecked(false);
+                            chkMR2.setChecked(false);
+                            chkMR2DTDk.setChecked(false);
 
                             BCGDT.setText("");
                             spnBCG.setSelection(0);
@@ -1109,20 +1154,25 @@ public class Immunization extends AppCompatActivity {
                             VitaminADT.setText("");
                             spnVitaminA.setSelection(0);
 
+                            TCVDT.setText("");
+                            spnTCV.setSelection(0);
+                            MR2DT.setText("");
+                            spnMR2.setSelection(0);
+
                             Cursor cur = null;
                             if (PNoAvailable.equals("1")) {
                                 cur = C.ReadData("Select Vill,Bari,HH,Sno,PNO,Status,BCG,BCGDT,BCGSource,Penta1,Penta1DT,Penta1Source,Penta2,Penta2DT,Penta2Source,Penta3,Penta3DT,Penta3Source,PCV1,PCV1DT,PCV1Source,PCV2,PCV2DT,PCV2Source,PCV3,PCV3DT,PCV3Source,OPV0,OPV0DT,OPV0Source,OPV1,OPV1DT,OPV1Source,OPV2,OPV2DT,OPV2Source,OPV3,OPV3DT,OPV3Source,\n" +
                                         "OPV4,OPV4DT,OPV4Source,Measles,MeaslesDT,MeaslesSource,MR,MRDT,MRSource,Rota,RotaDT,RotaSource,MMR,MMRDT,MMRSource,Typhoid,TyphoidDT,TyphoidSource,Influ,InfluDT,InfluSource,HepaA,HepaADT,HepaASource,ChickenPox,ChickenPoxDT,ChickenPoxSource,Rabies,RabiesDT,RabiesSource,IPV,IPVDT,IPVSource,fIPV1,fIPVDT1,\n" +
-                                        "fIPVSource1,fIPV2,fIPVDT2,fIPVSource2,VitaminA,VitaminADT,VitaminASource,ifnull(BCGDTDk,'')BCGDTDk,ifnull(Penta1DTDK,'')Penta1DTDK,ifnull(Penta2DTDK,'')Penta2DTDK,ifnull(Penta3DTDK,'')Penta3DTDK,ifnull(PCV1DTDK,'')PCV1DTDK,ifnull(PCV2DTDK,'')PCV2DTDK,ifnull(PCV3DTDK,'')PCV3DTDK,ifnull(OPV0DTDK,'')OPV0DTDK,\n" +
+                                        "fIPVSource1,fIPV2,fIPVDT2,fIPVSource2,VitaminA,VitaminADT,VitaminASource,TCV,TCVDT,TCVSource,MR2,MR2DT,MR2Source,ifnull(BCGDTDk,'')BCGDTDk,ifnull(Penta1DTDK,'')Penta1DTDK,ifnull(Penta2DTDK,'')Penta2DTDK,ifnull(Penta3DTDK,'')Penta3DTDK,ifnull(PCV1DTDK,'')PCV1DTDK,ifnull(PCV2DTDK,'')PCV2DTDK,ifnull(PCV3DTDK,'')PCV3DTDK,ifnull(OPV0DTDK,'')OPV0DTDK,\n" +
                                         "ifnull(OPV1DTDK,'')OPV1DTDK, ifnull(OPV2DTDK,'')OPV2DTDK,ifnull(OPV3DTDK,'')OPV3DTDK,ifnull(OPV4DTDK,'')OPV4DTDK,ifnull(MeaslesDTDK,'')MeaslesDTDK,ifnull(MRDTDK,'')MRDTDK,ifnull(RotaDTDK,'')RotaDTDK,ifnull(MMRDTDK,'')MMRDTDK,ifnull(TyphoidDTDK,'')TyphoidDTDK, ifnull(InfluDTDK,'')InfluDTDK,ifnull(HepaADTDk,'')HepaADTDk,\n" +
-                                        "ifnull(ChickenPoxDTDk,'')ChickenPoxDTDk,ifnull(RabiesDTDk,'')RabiesDTDk,ifnull(IPVDTDk,'')IPVDTDk,ifnull(IPVDTDk,'')IPVDTDk,ifnull(Fipvdt1dk,'')Fipvdt1dk,ifnull(Fipvdt2Dk,'')Fipvdt2Dk,ifnull(VitaminADTDk,'')VitaminADTDk\n " +
+                                        "ifnull(ChickenPoxDTDk,'')ChickenPoxDTDk,ifnull(RabiesDTDk,'')RabiesDTDk,ifnull(IPVDTDk,'')IPVDTDk,ifnull(IPVDTDk,'')IPVDTDk,ifnull(Fipvdt1dk,'')Fipvdt1dk,ifnull(Fipvdt2Dk,'')Fipvdt2Dk,ifnull(VitaminADTDk,'')VitaminADTDk,ifnull(TCVDTDk,'')TCVDTDk,ifnull(MR2DTDk,'')MR2DTDk\n " +
                                         " from ImmunizationTemp where PNo='" + PNumber + "'");
                             } else {
                                 cur = C.ReadData("Select Vill,Bari,HH,Sno,PNO,Status,BCG,BCGDT,BCGSource,Penta1,Penta1DT,Penta1Source,Penta2,Penta2DT,Penta2Source,Penta3,Penta3DT,Penta3Source,PCV1,PCV1DT,PCV1Source,PCV2,PCV2DT,PCV2Source,PCV3,PCV3DT,PCV3Source,OPV0,OPV0DT,OPV0Source,OPV1,OPV1DT,OPV1Source,OPV2,OPV2DT,OPV2Source,OPV3,OPV3DT,OPV3Source,\n" +
                                         "OPV4,OPV4DT,OPV4Source,Measles,MeaslesDT,MeaslesSource,MR,MRDT,MRSource,Rota,RotaDT,RotaSource,MMR,MMRDT,MMRSource,Typhoid,TyphoidDT,TyphoidSource,Influ,InfluDT,InfluSource,HepaA,HepaADT,HepaASource,ChickenPox,ChickenPoxDT,ChickenPoxSource,Rabies,RabiesDT,RabiesSource,IPV,IPVDT,IPVSource,fIPV1,fIPVDT1,\n" +
-                                        "fIPVSource1,fIPV2,fIPVDT2,fIPVSource2,VitaminA,VitaminADT,VitaminASource,ifnull(BCGDTDk,'')BCGDTDk,ifnull(Penta1DTDK,'')Penta1DTDK,ifnull(Penta2DTDK,'')Penta2DTDK,ifnull(Penta3DTDK,'')Penta3DTDK,ifnull(PCV1DTDK,'')PCV1DTDK,ifnull(PCV2DTDK,'')PCV2DTDK,ifnull(PCV3DTDK,'')PCV3DTDK,ifnull(OPV0DTDK,'')OPV0DTDK,\n" +
+                                        "fIPVSource1,fIPV2,fIPVDT2,fIPVSource2,VitaminA,VitaminADT,VitaminASource,TCV,TCVDT,TCVSource,MR2,MR2DT,MR2Source,ifnull(BCGDTDk,'')BCGDTDk,ifnull(Penta1DTDK,'')Penta1DTDK,ifnull(Penta2DTDK,'')Penta2DTDK,ifnull(Penta3DTDK,'')Penta3DTDK,ifnull(PCV1DTDK,'')PCV1DTDK,ifnull(PCV2DTDK,'')PCV2DTDK,ifnull(PCV3DTDK,'')PCV3DTDK,ifnull(OPV0DTDK,'')OPV0DTDK,\n" +
                                         "ifnull(OPV1DTDK,'')OPV1DTDK, ifnull(OPV2DTDK,'')OPV2DTDK,ifnull(OPV3DTDK,'')OPV3DTDK,ifnull(OPV4DTDK,'')OPV4DTDK,ifnull(MeaslesDTDK,'')MeaslesDTDK,ifnull(MRDTDK,'')MRDTDK,ifnull(RotaDTDK,'')RotaDTDK,ifnull(MMRDTDK,'')MMRDTDK,ifnull(TyphoidDTDK,'')TyphoidDTDK, ifnull(InfluDTDK,'')InfluDTDK,ifnull(HepaADTDk,'')HepaADTDk,\n" +
-                                        "ifnull(ChickenPoxDTDk,'')ChickenPoxDTDk,ifnull(RabiesDTDk,'')RabiesDTDk,ifnull(IPVDTDk,'')IPVDTDk,ifnull(IPVDTDk,'')IPVDTDk,ifnull(Fipvdt1dk,'')Fipvdt1dk,ifnull(Fipvdt2Dk,'')Fipvdt2Dk,ifnull(VitaminADTDk,'')VitaminADTDk\n" +
+                                        "ifnull(ChickenPoxDTDk,'')ChickenPoxDTDk,ifnull(RabiesDTDk,'')RabiesDTDk,ifnull(IPVDTDk,'')IPVDTDk,ifnull(IPVDTDk,'')IPVDTDk,ifnull(Fipvdt1dk,'')Fipvdt1dk,ifnull(Fipvdt2Dk,'')Fipvdt2Dk,ifnull(VitaminADTDk,'')VitaminADTDk,ifnull(TCVDTDk,'')TCVDTDk,ifnull(MR2DTDk,'')MR2DTDk\n" +
                                         " from ImmunizationTemp where Vill||Bari||HH='" + Vill + Bari + HH + "' and SNo='" + SN + "'");
                             }
                             //Cursor cur=C.ReadData("Select * from ImmunizationTemp where Vill||Bari||HH='"+ Vill+Bari+HH +"' and SNo='"+ SN +"'");
@@ -1389,6 +1439,28 @@ public class Immunization extends AppCompatActivity {
                                     }
                                 }
 
+                                if (cur.getString(cur.getColumnIndex("TCV")).equals("1")) {
+                                    chkTCV.setChecked(true);
+                                    TCVDT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("TCVDT"))));
+                                    spnTCV.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("TCVSource"))));
+                                    if (cur.getString(cur.getColumnIndex("TCVDTDk")).equals("1")) {
+                                        chkTCVDTDk.setChecked(true);
+                                    } else {
+                                        chkTCVDTDk.setChecked(false);
+                                    }
+                                }
+
+                                if (cur.getString(cur.getColumnIndex("MR2")).equals("1")) {
+                                    chkMR2.setChecked(true);
+                                    MR2DT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("MR2DT"))));
+                                    spnMR2.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("MR2Source"))));
+                                    if (cur.getString(cur.getColumnIndex("MR2DTDk")).equals("1")) {
+                                        chkMR2DTDk.setChecked(true);
+                                    } else {
+                                        chkMR2DTDk.setChecked(false);
+                                    }
+                                }
+
                                 cur.moveToNext();
                             }
                             cur.close();
@@ -1483,6 +1555,10 @@ public class Immunization extends AppCompatActivity {
                             chkFipvdt2Dk.setChecked(false);
                             chkVitaminA.setChecked(false);
                             chkVitaminADTDk.setChecked(false);
+                            chkTCV.setChecked(false);
+                            chkTCVDTDk.setChecked(false);
+                            chkMR2.setChecked(false);
+                            chkMR2DTDk.setChecked(false);
 
                             secVaccine.setVisibility(View.GONE);
                             for ( int i = 0; i < secVaccine.getChildCount();  i++ ){
@@ -2610,6 +2686,92 @@ public class Immunization extends AppCompatActivity {
                         SQL +="VitaminADTDk='',";
                     }
 
+                    if(chkTCV.isChecked()==true)
+                    {
+                            EDT = Global.DateValidate(TCVDT.getText().toString());
+                            if(EDT.length()!=0 & !chkTCVDTDk.isChecked())
+                                    {
+                                            Connection.MessageBox(Immunization.this, EDT);
+                                            TCVDT.requestFocus();
+                                            return;
+                                    }
+                            else if(spnTCV.getSelectedItemPosition()==0)
+                            {
+                                    Connection.MessageBox(Immunization.this, "Select a valid vaccination center.");
+                                    spnTCV.requestFocus();
+                                    return;
+                            }
+
+                        if (!TCVDT.getText().toString().isEmpty()) {
+                            VacD = sdf.parse(Global.DateConvertYMD(TCVDT.getText().toString()));
+                            if (BD.after(VacD)) {
+                                Connection.MessageBox(Immunization.this, "Vaccination date should be greater than date of birth[" + Global.DateConvertDMY(DOB) + "].");
+                                TCVDT.requestFocus();
+                                return;
+                            }
+                            SQL += "TCV='1',";
+                            SQL += "TCVDT='" + Global.DateConvertYMD(TCVDT.getText().toString()) + "',";
+                            SQL += "TCVSource='" + Global.Left(spnTCV.getSelectedItem().toString(), 2) + "',";
+                            SQL += "TCVDTDk='',";
+                        }else
+                        {
+                            SQL += "TCV='1',";
+                            SQL += "TCVDT='',";
+                            SQL += "TCVSource='" + Global.Left(spnTCV.getSelectedItem().toString(), 2) + "',";
+                            SQL += "TCVDTDk='1',";
+                        }
+                    }
+                    else
+                    {
+                        SQL +="TCV='',";
+                        SQL +="TCVDT='',";
+                        SQL +="TCVSource='',";
+                        SQL +="TCVDTDk='',";
+                    }
+
+                    if(chkMR2.isChecked()==true)
+                    {
+                            EDT = Global.DateValidate(MR2DT.getText().toString());
+                            if(EDT.length()!=0 & !chkMR2DTDk.isChecked())
+                                    {
+                                            Connection.MessageBox(Immunization.this, EDT);
+                                            MR2DT.requestFocus();
+                                            return;
+                                    }
+                            else if(spnMR2.getSelectedItemPosition()==0)
+                            {
+                                    Connection.MessageBox(Immunization.this, "Select a valid vaccination center.");
+                                    spnMR2.requestFocus();
+                                    return;
+                            }
+
+                        if (!MR2DT.getText().toString().isEmpty()) {
+                            VacD = sdf.parse(Global.DateConvertYMD(MR2DT.getText().toString()));
+                            if (BD.after(VacD)) {
+                                Connection.MessageBox(Immunization.this, "Vaccination date should be greater than date of birth[" + Global.DateConvertDMY(DOB) + "].");
+                                MR2DT.requestFocus();
+                                return;
+                            }
+                            SQL += "MR2='1',";
+                            SQL += "MR2DT='" + Global.DateConvertYMD(MR2DT.getText().toString()) + "',";
+                            SQL += "MR2Source='" + Global.Left(spnMR2.getSelectedItem().toString(), 2) + "',";
+                            SQL += "MR2DTDk='',";
+                        }else
+                        {
+                            SQL += "MR2='1',";
+                            SQL += "MR2DT='',";
+                            SQL += "MR2Source='" + Global.Left(spnMR2.getSelectedItem().toString(), 2) + "',";
+                            SQL += "MR2DTDk='1',";
+                        }
+                    }
+                    else
+                    {
+                        SQL +="MR2='',";
+                        SQL +="MR2DT='',";
+                        SQL +="MR2Source='',";
+                        SQL +="MR2DTDk='',";
+                    }
+
                     
             if(PNoAvailable.equals("1"))
             {
@@ -2803,6 +2965,16 @@ public class Immunization extends AppCompatActivity {
             final EditText VitaminADT = (EditText)findViewById(R.id.VitaminADT);
             final Spinner  spnVitaminA = (Spinner)findViewById(R.id.spnVitaminA);
 
+            final CheckBox chkTCV = (CheckBox)findViewById(R.id.chkTCV);
+            final CheckBox chkTCVDTDk = (CheckBox)findViewById(R.id.chkTCVDTDk);
+            final EditText TCVDT = (EditText)findViewById(R.id.TCVDT);
+            final Spinner  spnTCV = (Spinner)findViewById(R.id.spnTCV);
+
+            final CheckBox chkMR2 = (CheckBox)findViewById(R.id.chkMR2);
+            final CheckBox chkMR2DTDk = (CheckBox)findViewById(R.id.chkMR2DTDk);
+            final EditText MR2DT = (EditText)findViewById(R.id.MR2DT);
+            final Spinner  spnMR2 = (Spinner)findViewById(R.id.spnMR2);
+
             String SN = Global.Left(spnMemList.getSelectedItem().toString(),2);
             String PNoAvailable="1";
             if(C.Existence("Select Vill from tTrans Where status='m' and Vill||Bari||HH='"+ (Vill+Bari+HH) +"' and SNo='"+ Global.Left(spnMemList.getSelectedItem().toString(),2) +"' and (length(pno)=0 or pno is null)"))
@@ -2874,6 +3046,11 @@ public class Immunization extends AppCompatActivity {
 
             chkVitaminA.setChecked( false );
             chkVitaminADTDk.setChecked( false );
+
+            chkTCV.setChecked( false );
+            chkTCVDTDk.setChecked( false );
+            chkMR2.setChecked( false );
+            chkMR2DTDk.setChecked( false );
 
             BCGDT.setText("");
             spnBCG.setSelection(0);
@@ -2949,6 +3126,12 @@ public class Immunization extends AppCompatActivity {
 
             VitaminADT.setText("");
             spnVitaminA.setSelection(0);
+
+            TCVDT.setText("");
+            spnTCV.setSelection(0);
+
+            MR2DT.setText("");
+            spnMR2.setSelection(0);
 
             Cursor cur = null;
             if(PNoAvailable.equals("1"))
@@ -3125,6 +3308,20 @@ public class Immunization extends AppCompatActivity {
                     chkVitaminA.setChecked(true);
                     VitaminADT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("VitaminADT"))));
                     spnVitaminA.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("VitaminASource"))));
+                }
+
+                if(cur.getString(cur.getColumnIndex("TCV")).equals("1"))
+                {
+                    chkTCV.setChecked(true);
+                    TCVDT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("TCVDT"))));
+                    spnTCV.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("TCVSource"))));
+                }
+
+                if(cur.getString(cur.getColumnIndex("MR2")).equals("1"))
+                {
+                    chkMR2.setChecked(true);
+                    MR2DT.setText(Global.DateConvertDMY(cur.getString(cur.getColumnIndex("MR2DT"))));
+                    spnMR2.setSelection(SpinnerSelection(cur.getString(cur.getColumnIndex("MR2Source"))));
                 }
 
                 cur.moveToNext();
